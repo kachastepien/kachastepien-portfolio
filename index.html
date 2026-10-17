@@ -123,7 +123,7 @@
 if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.documentElement.classList.add('js');
 try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610171630">
+<link rel="stylesheet" href="assets/site.css?v=202610171634">
 </head>
 <body>
 <div class="intro-ov" aria-hidden="true">
@@ -161,14 +161,13 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   <canvas id="signal" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="hero-id">
-      <img src="assets/katarzyna-stepien.jpg" width="320" height="320" alt="Portrait of Katarzyna Stępień">
-      <p class="muted" style="font-size:.95rem">Kacha · Warsaw<br><span style="color:var(--fg);font-weight:500">Product design × Data science</span></p>
+      <span class="pf"><img class="pf-d" src="assets/katarzyna-stepien.jpg" width="320" height="320" alt="Portrait of Katarzyna Stępień"><img class="pf-a" src="assets/katarzyna-stepien-data.jpg" width="320" height="320" alt="" aria-hidden="true"></span>
+      <p class="muted" style="font-size:.95rem">Kacha · Warsaw</p>
     </div>
     <h1 id="name"><span class="line" data-split>Katarzyna</span><span class="line" data-split>Stępień</span></h1>
 
     <div data-for="design">
       <p class="statement">I design telecare software for <em>the people who wear the devices</em>, the carers who visit them and the municipalities that pay for it.</p>
-      <p class="sub">Sole designer at <b>SiDLY Healthcare</b>, from research to coded prototype.</p>
       <div class="stats">
         <div><b data-count="70000" data-suffix="+">70,000+</b><span>people using SiDLY technology</span></div>
         <div><b data-count="16">16</b><span>European countries</span></div>
@@ -177,7 +176,6 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     </div>
     <div data-for="data">
       <p class="statement">I build models and pipelines for the human side of products: <em>the copy that manipulates</em>, the clicks that show frustration, the health data nobody reads.</p>
-      <p class="sub">M.Sc. Data Science at PJAIT, alongside management at SGH.</p>
       <div class="stats">
         <div><b data-count="0.936" data-decimals="3">0.936</b><span>F1, dark-pattern detection</span></div>
         <div><b data-count="0.976" data-decimals="3">0.976</b><span>ROC AUC on the same task</span></div>
@@ -189,7 +187,6 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
       <a class="btn solid" href="#work">See the work
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a>
       <a class="btn" href="#contact">Get in touch</a>
-      <a class="btn" href="https://www.linkedin.com/in/kachastepien">LinkedIn</a>
     </div>
   </div>
   <div class="scroll-hint" aria-hidden="true"><i></i></div>
@@ -201,7 +198,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
 <!-- ================= PRODUCT DESIGN ================= -->
 <div data-for="design" class="view">
 
-<section class="index" aria-labelledby="idx-d">
+<section class="index" id="work-d" data-rail="Selected work" aria-labelledby="idx-d">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">↓</span><h2 id="idx-d">Selected work</h2></div>
     <div class="tiles">
@@ -305,7 +302,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   </div>
 </section>
 
-<section class="block" id="erp" data-rail="ERP" aria-labelledby="erp-h">
+<section class="block" id="erp" data-rail="SiDLY ERP" aria-labelledby="erp-h">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">02</span><h2>Case study</h2></div>
     <h2 class="case-title reveal" id="erp-h">Redesigning the ERP that runs public telecare</h2>
@@ -417,7 +414,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
 <!-- ================= DATA SCIENCE ================= -->
 <div data-for="data" class="view">
 
-<section class="index" aria-labelledby="idx-a">
+<section class="index" id="work-a" data-rail="Selected projects" aria-labelledby="idx-a">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">↓</span><h2 id="idx-a">Selected projects</h2></div>
     <div class="tiles six">
@@ -661,7 +658,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
 </section>
 </main>
 
-<footer class="end" id="contact">
+<footer class="end" id="contact" data-rail="Contact">
   <div class="wrap">
    <div class="contact-grid">
     <div>
@@ -704,17 +701,12 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
 </footer>
 
 <button class="chat-btn glass" type="button" aria-expanded="false" aria-controls="chat"><span class="venn" aria-hidden="true"><i></i><i></i></span><span class="q" aria-hidden="true">?</span><span class="txt"><b>Have a question?</b><small>Ask Venn, my assistant</small></span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Open Venn, the portfolio assistant</span></button>
-<section class="welcome glass" id="welcome" role="dialog" aria-labelledby="wl-h" aria-modal="false" hidden>
+<div class="welcome glass" id="welcome" role="dialog" aria-label="Choose a perspective" hidden>
+  <span class="wl-q">Hiring? Pick a view</span>
+  <button type="button" data-pick="design"><i class="d"></i>Product design</button>
+  <button type="button" data-pick="data"><i class="a"></i>Data science</button>
   <button type="button" class="wl-x" aria-label="Close">×</button>
-  <span class="venn-av" aria-hidden="true"><i></i><i></i></span>
-  <h2 id="wl-h">Hi, I'm Kacha.</h2>
-  <p>I work where design and data meet. What brings you here?</p>
-  <div class="wl-opts">
-    <button type="button" data-pick="design"><b>Hiring for product design</b><span>UX/UI, research, prototypes</span></button>
-    <button type="button" data-pick="data"><b>Hiring for data science</b><span>NLP, pipelines, applied AI</span></button>
-    <button type="button" data-pick="explore"><b>Just exploring</b><span>Show me around</span></button>
-  </div>
-</section>
+</div>
 <div class="chat-teaser glass" id="chat-teaser" hidden><button type="button" class="tz-open">Curious about my work? <b>Venn can tell you</b></button><button type="button" class="tz-x" aria-label="Dismiss">×</button></div>
 <section class="chat glass" id="chat" role="dialog" aria-modal="false" aria-labelledby="chat-h" hidden>
   <div class="chat-head"><span class="venn-av" aria-hidden="true"><i></i><i></i></span><div><b id="chat-h">Venn</b><span>Katarzyna's portfolio assistant</span></div><button type="button" class="chat-x" aria-label="Close assistant">×</button></div>
@@ -821,14 +813,16 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   /* ---------- chapter rail follows the visible perspective ---------- */
   var rail=document.querySelector('.rail'),spy=null;
   function buildRail(){
-    var secs=Array.from(document.querySelectorAll('section[data-rail]')).filter(function(s){return s.offsetParent!==null});
-    rail.innerHTML=secs.map(function(s,k){return '<a href="#'+s.id+'" data-id="'+s.id+'"><i></i><span>'+(k<secs.length-1?String(k+1).padStart(2,'0')+' · ':'')+s.dataset.rail+'</span></a>'}).join('');
+    var secs=Array.from(document.querySelectorAll('[data-rail]')).filter(function(s){return s.offsetParent!==null});
+    rail.innerHTML=secs.map(function(s){return '<a href="#'+s.id+'" data-id="'+s.id+'"><i></i><span>'+s.dataset.rail+'</span></a>'}).join('');
     if(spy)spy.disconnect();
     if(!('IntersectionObserver' in window))return;
     spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){rail.querySelectorAll('a').forEach(function(a){a.classList.toggle('on',a.dataset.id===e.target.id)})}})},{rootMargin:'-45% 0px -50% 0px'});
     secs.forEach(function(s){spy.observe(s)});
   }
   buildRail();
+
+  addEventListener('scroll',function(){rail.classList.toggle('show',scrollY>innerHeight*.6)},{passive:true});
 
   /* ---------- back to top ---------- */
   var tt=document.querySelector('.totop');
@@ -971,7 +965,8 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     if(v!=='explore'){setView(v);setTimeout(function(){document.getElementById('work').scrollIntoView({behavior:reduce?'auto':'smooth'})},180)}
   })});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeWl()});
-  if(root.classList.contains('intro'))addEventListener('introdone',function(){setTimeout(openWl,450)},{once:true});else setTimeout(openWl,1400);
+  function armWl(){addEventListener('scroll',function h(){if(scrollY>innerHeight*.45){removeEventListener('scroll',h);setTimeout(openWl,300)}},{passive:true})}
+  if(root.classList.contains('intro'))addEventListener('introdone',armWl,{once:true});else armWl();
 
   /* ---------- story: the venn follows the step you are reading ---------- */
   var sv=document.querySelector('.sv'),sts=document.querySelectorAll('.st');
@@ -999,6 +994,24 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
       el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.classList.add('tilting');el.style.transform='perspective(900px) rotateY('+(x*10)+'deg) rotateX('+(-y*10)+'deg) translateY(-3px)'});
       el.addEventListener('pointerleave',function(){el.classList.remove('tilting');el.style.transform=''});
     });
+  }
+
+  /* ---------- motion: titles rise word by word, buttons lean toward the cursor, the hero drifts on scroll ---------- */
+  document.querySelectorAll('.case-title').forEach(function(h){
+    if(h.querySelector('.w'))return;
+    var k=0;(function walk(n){Array.from(n.childNodes).forEach(function(c){
+      if(c.nodeType===3){var f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(function(p){if(!p)return;if(/^\s+$/.test(p)){f.appendChild(document.createTextNode(p));return}var s=document.createElement('span');s.className='w';s.style.setProperty('--k',k++);s.textContent=p;f.appendChild(s)});c.replaceWith(f)}
+      else if(c.nodeType===1)walk(c)})})(h);
+    if(!h.classList.contains('reveal')){h.classList.add('reveal');io?io.observe(h):h.classList.add('in')}
+  });
+  if(!reduce&&matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.btn.solid,.chat-btn,.switch').forEach(function(el){
+      el.classList.add('mag');
+      el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;el.style.transform='translate('+(x*.18)+'px,'+(y*.28)+'px)'});
+      el.addEventListener('pointerleave',function(){el.style.transform=''});
+    });
+    var hw=document.querySelector('.hero .wrap'),sg=document.getElementById('signal'),hz=false;
+    addEventListener('scroll',function(){if(hz)return;hz=true;requestAnimationFrame(function(){hz=false;var y=Math.min(scrollY,innerHeight);hw.style.transform='translateY('+(y*.18)+'px)';hw.style.opacity=String(1-y/innerHeight*.7);sg.style.transform='translateY('+(y*.32)+'px)'})},{passive:true});
   }
 
   /* ---------- copy email ---------- */
