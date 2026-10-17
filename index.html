@@ -117,7 +117,8 @@
 <script>
 /* Pick the perspective before first paint so the page never flashes the wrong one. */
 (function(){var v=null;try{var q=new URLSearchParams(location.search).get('view');if(q==='data'||q==='design')v=q;else if(location.hash==='#data')v='data';else v=localStorage.getItem('ks-view')}catch(e){}
-if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.documentElement.classList.add('js')})();
+if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.documentElement.classList.add('js');
+try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
 <style>
 /* Two perspectives on one person: the same page re-tunes its accent, hero and work list
@@ -691,9 +692,50 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
 @keyframes vt-out{to{opacity:0;filter:blur(8px)}}
 @keyframes vt-in{from{opacity:0;filter:blur(8px);transform:translateY(8px)}}
 @media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+
+/* ---- intro: design and data overlap, Katarzyna is the intersection, then it flies into the logo ---- */
+.intro-ov{display:none}
+.intro .intro-ov{display:grid;place-items:center;position:fixed;inset:0;z-index:200;background:var(--bg);animation:introFail .01s 4.5s forwards}
+@keyframes introFail{to{visibility:hidden;opacity:0}}
+.intro-ov .iv{width:min(78vw,560px);overflow:visible}
+.intro-ov .ia{fill:#c9a47e;opacity:0}
+.intro-ov .ib{fill:#a6a8ff;opacity:0}
+.intro-ov .il{fill:#161718;opacity:0}
+.intro-ov .it{font:600 24px var(--body);fill:#161718;opacity:0;letter-spacing:-.02em}
+.intro-ov .in{font:600 21px var(--body);fill:#fff;opacity:0;letter-spacing:-.02em}
+.intro .mark{opacity:0}
+.intro .hero h1 .ch{animation-play-state:paused}
+
+/* ---- about: the same venn, with skills in each region ---- */
+.venn-about{position:relative;margin:2.5rem auto 0;max-width:720px;aspect-ratio:600/360}
+.venn-about svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.venn-about .va-a{fill:color-mix(in srgb,#c9a47e 30%,transparent);stroke:#c9a47e;stroke-width:1.2;transform-box:fill-box;transform-origin:center;transform:translateX(-14%);transition:transform 1.2s var(--ease)}
+.venn-about .va-b{fill:color-mix(in srgb,#a6a8ff 30%,transparent);stroke:#a6a8ff;stroke-width:1.2;transform-box:fill-box;transform-origin:center;transform:translateX(14%);transition:transform 1.2s var(--ease)}
+.venn-about .va-l{fill:#161718;opacity:0;transition:opacity .6s .9s var(--ease)}
+.venn-about.in .va-a,.venn-about.in .va-b{transform:none}
+.venn-about.in .va-l{opacity:1}
+.vt{position:absolute;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:.15rem;text-align:center;font-size:clamp(.62rem,1.7vw,.9rem);line-height:1.35;color:var(--fg)}
+.vt b{font-size:1.25em;font-weight:600;margin-bottom:.2rem;letter-spacing:-.02em}
+.vt-a{left:4%;width:28%}.vt-b{right:4%;width:28%}
+.vt-m{left:50%;transform:translate(-50%,-50%);width:26%;color:#fff;opacity:0;transition:opacity .6s 1.1s var(--ease)}
+.venn-about.in .vt-m{opacity:1}
+.vt-m span{color:rgba(255,255,255,.75)}
+@media (max-width:520px){.vt span:nth-of-type(n+4){display:none}.vt-m span:nth-of-type(n+3){display:none}}
+@media (prefers-reduced-motion:reduce){.venn-about .va-a,.venn-about .va-b{transform:none}.venn-about .va-l,.vt-m{opacity:1}}
 </style>
 </head>
 <body>
+<div class="intro-ov" aria-hidden="true">
+  <svg class="iv" viewBox="0 0 600 360">
+    <circle class="ia" cx="220" cy="180" r="170"/>
+    <circle class="ib" cx="380" cy="180" r="170"/>
+    <path class="il" d="M300,30 A170,170 0 0,1 300,330 A170,170 0 0,1 300,30 Z"/>
+    <text class="it" x="125" y="188" text-anchor="middle">Design</text>
+    <text class="it" x="475" y="188" text-anchor="middle">Data</text>
+    <text class="in" x="300" y="174" text-anchor="middle">Katarzyna</text>
+    <text class="in" x="300" y="200" text-anchor="middle">Stępień</text>
+  </svg>
+</div>
 <a class="skip" href="#work">Skip to work</a>
 <nav class="rail" aria-label="Chapters"></nav>
 <button class="totop glass" type="button" aria-label="Back to top"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg></button>
@@ -1171,11 +1213,17 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
       </ul>
       <p class="note">Stanford Code in Place (2026) · Google UX Design Certificate</p></div>
     </div>
-    <div class="skills">
-      <div class="reveal"><h4>Design &amp; research</h4><div class="chips"><span class="chip on">Product &amp; UX/UI design</span><span class="chip">Prototyping</span><span class="chip">User research</span><span class="chip">Usability testing</span><span class="chip">Accessible design</span><span class="chip">Brand identity</span></div></div>
-      <div class="reveal d1"><h4>AI &amp; data</h4><div class="chips"><span class="chip on">Python</span><span class="chip on">NLP</span><span class="chip">scikit-learn</span><span class="chip">LLM APIs &amp; agents</span><span class="chip">Kafka · Spark</span><span class="chip">SQL</span></div></div>
-      <div class="reveal d2"><h4>Tools &amp; languages</h4><div class="chips"><span class="chip on">Figma</span><span class="chip on">React · TypeScript</span><span class="chip">Flutter</span><span class="chip">n8n</span><span class="chip">Polish · native</span><span class="chip">English · C1</span></div></div>
-    </div>
+    <figure class="venn-about reveal" aria-label="Design skills, data skills, and where they meet">
+      <svg viewBox="0 0 600 360" aria-hidden="true">
+        <circle class="va-a" cx="220" cy="180" r="170"/>
+        <circle class="va-b" cx="380" cy="180" r="170"/>
+        <path class="va-l" d="M300,30 A170,170 0 0,1 300,330 A170,170 0 0,1 300,30 Z"/>
+      </svg>
+      <div class="vt vt-a"><b>Design</b><span>UX/UI design</span><span>User research</span><span>Prototyping</span><span>Accessible design</span><span>Brand identity</span></div>
+      <div class="vt vt-m"><b>Me</b><span>AI products</span><span>Coded prototypes</span><span>Dark patterns</span><span>Health tech</span></div>
+      <div class="vt vt-b"><b>Data</b><span>Python · NLP</span><span>Machine learning</span><span>LLMs &amp; agents</span><span>Kafka · Spark</span><span>SQL</span></div>
+    </figure>
+    <div class="chips reveal" style="justify-content:center;margin-top:1.4rem"><span class="chip on">Figma</span><span class="chip on">React · TypeScript</span><span class="chip">Flutter</span><span class="chip">n8n</span><span class="chip">Polish · native</span><span class="chip">English · C1</span></div>
   </div>
 </section>
 </main>
@@ -1236,6 +1284,31 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
 (function(){
   var root=document.documentElement;
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- intro: play once per visit, skippable ---------- */
+  (function(){
+    var ov=document.querySelector('.intro-ov');if(!ov)return;
+    if(!root.classList.contains('intro')){ov.remove();return}
+    var sv=ov.querySelector('.iv'),q=function(s){return ov.querySelector(s)},all=function(s){return ov.querySelectorAll(s)},E='cubic-bezier(.2,.7,.2,1)',done=false;
+    function anim(el,kf,o){return el.animate(kf,Object.assign({fill:'both',easing:E},o))}
+    anim(q('.ia'),[{transform:'translateX(-180px)',opacity:0},{transform:'none',opacity:.92}],{duration:850});
+    anim(q('.ib'),[{transform:'translateX(180px)',opacity:0},{transform:'none',opacity:.92}],{duration:850});
+    all('.it').forEach(function(el,k){anim(el,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:500,delay:380+k*90})});
+    anim(q('.il'),[{opacity:0},{opacity:1}],{duration:450,delay:820});
+    all('.in').forEach(function(el,k){anim(el,[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:450,delay:980+k*80})});
+    function finish(fast){
+      if(done)return;done=true;
+      var m=document.querySelector('.mark').getBoundingClientRect(),r=sv.getBoundingClientRect();
+      var s=m.width/(r.width*500/600),dx=(m.left+m.width/2)-(r.left+r.width/2),dy=(m.top+m.height/2)-(r.top+r.height/2);
+      all('.it,.in').forEach(function(el){anim(el,[{opacity:1},{opacity:0}],{duration:fast?120:220})});
+      anim(sv,[{transform:'none'},{transform:'translate('+dx+'px,'+dy+'px) scale('+s+')'}],{duration:fast?300:700,delay:fast?0:120,easing:'cubic-bezier(.7,0,.2,1)'});
+      anim(ov,[{backgroundColor:getComputedStyle(ov).backgroundColor},{backgroundColor:'rgba(0,0,0,0)'}],{duration:fast?300:600,delay:fast?0:300}).onfinish=function(){
+        root.classList.remove('intro');ov.remove();try{sessionStorage.setItem('ks-intro','1')}catch(e){}
+      };
+    }
+    var tm=setTimeout(function(){finish(false)},1900);
+    ['pointerdown','keydown','wheel','touchstart'].forEach(function(ev){addEventListener(ev,function h(){removeEventListener(ev,h);clearTimeout(tm);finish(true)},{passive:true,once:true})});
+  })();
 
   /* ---------- split hero name into letters ---------- */
   var i=0,lastH=null;
