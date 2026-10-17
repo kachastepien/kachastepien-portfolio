@@ -49,7 +49,7 @@
  "image": "https://kachastepien.com/assets/katarzyna-stepien.jpg",
  "jobTitle": "Product Designer (UX/UI) & Data Scientist",
  "description": "Product designer and data scientist in Warsaw. Sole designer at SiDLY Healthcare, building telecare products, NLP for dark patterns and AI health tools.",
- "email": "mailto:trafficjam027@gmail.com",
+ "email": "mailto:hello@kachastepien.com",
  "address": {
   "@type": "PostalAddress",
   "addressLocality": "Warsaw",
@@ -647,7 +647,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
       <h2 class="reveal">Let's build<br>something <em>useful</em>.</h2>
       <p class="lede reveal d1" style="max-width:30rem">Hiring for product design or data science? Tell me about the role.</p>
       <div class="row reveal d1">
-        <span id="email">trafficjam027@gmail.com</span>
+        <span id="email">hello@kachastepien.com</span>
         <button class="copy" type="button" id="copy-email">Copy email</button>
         <a href="https://www.linkedin.com/in/kachastepien">LinkedIn</a>
         <a href="https://github.com/kachastepien">GitHub</a>
@@ -843,8 +843,8 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   var EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   function sendMessage(d,via){
     var subj='Portfolio'+(via?' via '+via:'')+': '+d.topic+' from '+d.name;
-    var mailto='mailto:trafficjam027@gmail.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(d.message+'\n\n'+d.name+' <'+d.email+'>');
-    return fetch('https://formsubmit.co/ajax/trafficjam027@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    var mailto='mailto:hello@kachastepien.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(d.message+'\n\n'+d.name+' <'+d.email+'>');
+    return fetch('https://formsubmit.co/ajax/hello@kachastepien.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({name:d.name,email:d.email,topic:d.topic,message:d.message,_subject:subj,_template:'table',_captcha:'false',_replyto:d.email})})
     .then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(r.ok&&String(j.success)==='true')return true;throw new Error('failed')})})
     .catch(function(){throw mailto});
@@ -878,7 +878,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     {k:'design skills figma ux ui research usability testing prototyping accessibility tools umiejetnosci projektowanie badania dostepnosc',a:"Design and research: product and UX/UI design, interaction design, prototyping, information architecture, accessible design for older adults, conversational UX, user research, usability testing, behavioural psychology, brand identity and packaging.",x:[['All skills','design','about']]},
     {k:'tech stack code coding programming react typescript javascript python sql flutter pandas scikit technologie programowanie jezyki programowania',a:"Code and data: Python (pandas, scikit-learn), NLP and machine learning, LLM APIs, AI agents in n8n, RAG, Kafka, Spark, SQL and DuckDB, plus React, TypeScript, JavaScript, HTML/CSS and Flutter. Her prototypes are built in React and TypeScript.",x:[['All skills','design','about']]},
     {k:'education studies study studying university degree master masters bachelor sgh pjatk pjait swps school studia uczelnia wyksztalcenie magister licencjat',a:"Now, in parallel: an M.Sc. in Data Science at the Polish-Japanese Academy of IT (2025–2027) and managerial studies at SGH Warsaw School of Economics (2026–2028). Before: a B.A. in Psychology &amp; CS at SWPS University and a B.Eng. in Computer Science (Data Science) at the Warsaw School of Computer Science.",x:[['Education','design','about']]},
-    {k:'contact email mail reach hire hiring write message talk call kontakt napisac zatrudnic linkedin wiadomosc',a:"I can pass a message to her right here; it lands straight in her inbox. Or email <a href='mailto:trafficjam027@gmail.com'>trafficjam027@gmail.com</a>, or find her on LinkedIn.",x:[['Leave her a message','__msg'],['LinkedIn','https://www.linkedin.com/in/kachastepien']]},
+    {k:'contact email mail reach hire hiring write message talk call kontakt napisac zatrudnic linkedin wiadomosc',a:"I can pass a message to her right here; it lands straight in her inbox. Or email <a href='mailto:hello@kachastepien.com'>hello@kachastepien.com</a>, or find her on LinkedIn.",x:[['Leave her a message','__msg'],['LinkedIn','https://www.linkedin.com/in/kachastepien']]},
     {k:'available availability open to work job offer offers hiring freelance contract remote hybrid relocation salary rate money dostepna oferta oferty wynagrodzenie stawka zdalnie praca',a:"That one is best answered by her. Tell me about the role, the team and the location, and I'll send it to her inbox.",x:[['Leave her a message','__msg']]},
     {k:'languages language speak english polish jezyk jezyki angielski polski',a:"Polish (native) and English (C1)."},
     {k:'where based location warsaw warszawa poland polska city gdzie mieszka miasto',a:"She is based in Warsaw, Poland."},
