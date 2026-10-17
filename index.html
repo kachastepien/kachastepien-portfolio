@@ -180,7 +180,13 @@ p{margin:0}
 .top.scrolled .wrap{--glass:color-mix(in srgb,var(--bg) 70%,transparent)}
 @media (max-width:420px){.top .wrap{padding-left:.9rem}}
 .brand{font:700 1rem/1 var(--display);letter-spacing:-.01em;text-decoration:none;display:flex;align-items:center;gap:.55rem;white-space:nowrap}
-.brand i{width:.6rem;height:.6rem;border-radius:50%;background:var(--accent);display:inline-block;transition:background-color .4s;box-shadow:0 0 0 4px var(--accent-soft)}
+.mark{position:relative;display:inline-block;width:27px;height:18px;flex:none}
+.mark i{position:absolute;top:1px;width:16px;height:16px;border-radius:50%;transition:transform .6s var(--ease),opacity .6s var(--ease)}
+.mark i:first-child{left:0;background:#c9a47e}
+.mark i+i{left:10px;background:#a6a8ff;mix-blend-mode:multiply}
+:root[data-view="design"] .mark i+i{opacity:.45;transform:scale(.8)}
+:root[data-view="data"] .mark i:first-child{opacity:.45;transform:scale(.8)}
+.brand:hover .mark i:first-child{transform:translateX(-2px)}.brand:hover .mark i+i{transform:translateX(2px)}
 .switch{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;background:color-mix(in srgb,var(--surface) 70%,transparent);border:1px solid color-mix(in srgb,var(--line) 70%,transparent);border-radius:999px;padding:3px}
 .switch button{position:relative;z-index:1;appearance:none;border:0;background:none;color:var(--muted);font:500 .8rem/1 var(--body);padding:.6rem 1rem;border-radius:999px;cursor:pointer;white-space:nowrap;transition:color .3s}
 .switch button[aria-pressed="true"]{color:var(--bg)}
@@ -578,15 +584,34 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 .chat-btn:hover{transform:translateY(-2px)}
 .chat-btn .venn{display:flex}.chat-btn .venn i{width:20px;height:20px;border-radius:50%;background:var(--design)}.chat-btn .venn i+i{background:var(--data);margin-left:-8px;opacity:.9}
 :root[data-view="data"] .chat-btn .venn i:first-child{background:#c9a47e}
-.chat-btn .ping{position:absolute;top:8px;left:30px;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 var(--accent);animation:ping 2.4s infinite}
-@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}80%,100%{box-shadow:0 0 0 10px transparent}}
-.chat-btn[aria-expanded="true"] .ping{display:none}
+.chat-btn .q{position:absolute;top:7px;left:29px;width:17px;height:17px;border-radius:50%;background:var(--fg);color:var(--bg);font:700 .66rem/17px var(--body);text-align:center;box-shadow:0 0 0 2px var(--bg);animation:nudge 5s var(--ease) infinite}
+@keyframes nudge{0%,82%,100%{transform:none}86%{transform:translateY(-4px) rotate(-12deg)}90%{transform:none}94%{transform:translateY(-2px) rotate(8deg)}}
+.chat-btn[aria-expanded="true"] .q{opacity:0;transform:scale(.4);animation:none;transition:opacity .2s,transform .2s}
+.chat-teaser{position:fixed;right:clamp(14px,2vw,28px);bottom:calc(clamp(14px,2vw,28px) + 64px);z-index:69;display:flex;align-items:center;gap:.2rem;padding:.3rem .3rem .3rem .2rem;border-radius:18px 18px 6px 18px;animation:tz .5s var(--ease) both}
+.chat-teaser[hidden]{display:none}
+.chat-teaser > *{position:relative;z-index:1}
+.chat-teaser .tz-open{appearance:none;border:0;background:none;color:var(--fg);font:400 .86rem/1.3 var(--body);padding:.55rem .6rem;cursor:pointer;text-align:left}
+.chat-teaser .tz-open b{font-weight:600}
+.chat-teaser .tz-x{appearance:none;border:0;background:none;color:var(--muted);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:1.05rem}
+.chat-teaser .tz-x:hover{background:color-mix(in srgb,var(--fg) 7%,transparent);color:var(--fg)}
+@keyframes tz{from{opacity:0;transform:translateY(8px) scale(.97)}}
+.msg .sum{margin-top:.55rem;padding:.65rem .75rem;border-radius:12px;background:color-mix(in srgb,var(--fg) 4%,transparent);border:1px solid var(--line);font-size:.85rem}
+.msg .sum span{color:var(--muted)}
+.msg .sum p{margin-top:.35rem;white-space:pre-wrap}
+@media (prefers-reduced-motion:reduce){.chat-btn .q{animation:none}}
 @media (max-width:520px){.chat-btn .txt{display:none}.chat-btn{width:54px;padding:0;justify-content:center}}
 .chat{position:fixed;right:clamp(14px,2vw,28px);bottom:calc(clamp(14px,2vw,28px) + 66px);z-index:70;width:min(390px,calc(100vw - 28px));height:min(600px,calc(100vh - 120px));border-radius:24px;display:flex;flex-direction:column;overflow:hidden;transform-origin:bottom right;transition:opacity .3s var(--ease),transform .4s var(--ease),visibility .3s}
 .chat[hidden]{display:flex;visibility:hidden;opacity:0;transform:translateY(12px) scale(.96);pointer-events:none}
 .chat > *{position:relative;z-index:1}
 .chat-head{display:flex;align-items:center;gap:.7rem;padding:.9rem 1rem;border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
-.chat-head img{width:36px;height:36px;border-radius:50%;object-fit:cover}
+.venn-av{position:relative;flex:none;width:38px;height:38px;border-radius:12px;background:#161718;display:grid;place-items:center;overflow:hidden}
+.venn-av i{position:absolute;width:17px;height:17px;border-radius:50%;top:10.5px;transition:transform .5s var(--ease)}
+.venn-av i:first-child{left:7px;background:#c9a47e}
+.venn-av i+i{left:14px;background:#a6a8ff;opacity:.88}
+.chat.busy .venn-av i:first-child{animation:vennL 1s ease-in-out infinite}
+.chat.busy .venn-av i+i{animation:vennR 1s ease-in-out infinite}
+@keyframes vennL{50%{transform:translateX(-3px)}}
+@keyframes vennR{50%{transform:translateX(3px)}}
 .chat-head b{display:block;font:600 .95rem/1.2 var(--display)}
 .chat-head span{font-size:.75rem;color:var(--muted)}
 .chat-head button{margin-left:auto;appearance:none;border:0;background:none;color:var(--muted);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1.3rem;line-height:1}
@@ -676,7 +701,7 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
 
 <header class="top">
   <div class="wrap glass">
-    <a class="brand" href="#top" aria-label="Katarzyna Stępień, back to top"><i></i><span>Katarzyna Stępień</span></a>
+    <a class="brand" href="#top" aria-label="Katarzyna Stępień, back to top"><span class="mark" aria-hidden="true"><i></i><i></i></span><span>Katarzyna Stępień</span></a>
     <nav class="nav" aria-label="Sections">
       <a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a>
     </nav>
@@ -1197,13 +1222,14 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
   </div>
 </footer>
 
-<button class="chat-btn glass" type="button" aria-expanded="false" aria-controls="chat"><span class="venn" aria-hidden="true"><i></i><i></i></span><span class="ping" aria-hidden="true"></span><span class="txt">Ask about my work</span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Open the portfolio assistant</span></button>
+<button class="chat-btn glass" type="button" aria-expanded="false" aria-controls="chat"><span class="venn" aria-hidden="true"><i></i><i></i></span><span class="q" aria-hidden="true">?</span><span class="txt">Ask Venn</span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Open Venn, the portfolio assistant</span></button>
+<div class="chat-teaser glass" id="chat-teaser" hidden><button type="button" class="tz-open">Got a question about my work? <b>Ask Venn</b></button><button type="button" class="tz-x" aria-label="Dismiss">×</button></div>
 <section class="chat glass" id="chat" role="dialog" aria-modal="false" aria-labelledby="chat-h" hidden>
-  <div class="chat-head"><img src="assets/katarzyna-stepien.jpg" alt="" width="36" height="36"><div><b id="chat-h">Portfolio assistant</b><span>Answers come from this page</span></div><button type="button" class="chat-x" aria-label="Close assistant">×</button></div>
+  <div class="chat-head"><span class="venn-av" aria-hidden="true"><i></i><i></i></span><div><b id="chat-h">Venn</b><span>Katarzyna's portfolio assistant</span></div><button type="button" class="chat-x" aria-label="Close assistant">×</button></div>
   <div class="chat-log" id="chat-log" aria-live="polite"></div>
   <div class="chat-sugg" id="chat-sugg"></div>
-  <form class="chat-form" id="chat-form" autocomplete="off"><label for="chat-in" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Your question</label><input id="chat-in" placeholder="Ask about projects, skills, contact…" maxlength="300"><button type="submit" aria-label="Send"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></button></form>
-  <p class="chat-note">Runs in your browser. Nothing you type is sent anywhere.</p>
+  <form class="chat-form" id="chat-form" autocomplete="off" novalidate><label for="chat-in" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Your question</label><input id="chat-in" placeholder="Ask about projects, skills, contact…" maxlength="300"><button type="submit" aria-label="Send"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></button></form>
+  <p class="chat-note">Venn runs in your browser. Only messages you choose to send reach Katarzyna.</p>
 </section>
 
 <script>
@@ -1297,30 +1323,31 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
     list.forEach(function(d){d.open=open});b.textContent=open?'Close all':'Open all';
   })});
 
-  /* ---------- contact form: FormSubmit sends it to my inbox, mailto is the fallback ---------- */
+  /* ---------- sending a message: FormSubmit delivers it to my inbox, mailto is the fallback ---------- */
+  var EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function sendMessage(d,via){
+    var subj='Portfolio'+(via?' via '+via:'')+': '+d.topic+' from '+d.name;
+    var mailto='mailto:trafficjam027@gmail.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(d.message+'\n\n'+d.name+' <'+d.email+'>');
+    return fetch('https://formsubmit.co/ajax/trafficjam027@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name:d.name,email:d.email,topic:d.topic,message:d.message,_subject:subj,_template:'table',_captcha:'false',_replyto:d.email})})
+    .then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(r.ok&&String(j.success)==='true')return true;throw new Error('failed')})})
+    .catch(function(){throw mailto});
+  }
   var cf=document.getElementById('contact-form'),st=document.getElementById('form-status');
   cf.addEventListener('submit',function(e){
     e.preventDefault();
-    var d=new FormData(cf),name=(d.get('name')||'').trim(),mail=(d.get('email')||'').trim(),msg=(d.get('message')||'').trim(),topic=d.get('topic')||'Hello';
+    var f=new FormData(cf),d={name:(f.get('name')||'').trim(),email:(f.get('email')||'').trim(),message:(f.get('message')||'').trim(),topic:f.get('topic')||'Hello'};
     st.className='form-status';
-    if(!name||!msg||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)){st.textContent='Please add your name, a valid email and a message.';st.classList.add('err');(!name?cf.name:!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)?cf.email:cf.message).focus();return}
-    if(d.get('_honey'))return;
+    if(!d.name||!d.message||!EMAIL_RE.test(d.email)){st.textContent='Please add your name, a valid email and a message.';st.classList.add('err');(!d.name?cf.name:!EMAIL_RE.test(d.email)?cf.email:cf.message).focus();return}
+    if(f.get('_honey'))return;
     var btn=cf.querySelector('.send');btn.disabled=true;st.textContent='Sending…';
-    var mailto='mailto:trafficjam027@gmail.com?subject='+encodeURIComponent('Portfolio: '+topic+' from '+name)+'&body='+encodeURIComponent(msg+'\n\n'+name+' <'+mail+'>');
-    fetch('https://formsubmit.co/ajax/trafficjam027@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({name:name,email:mail,topic:topic,message:msg,_subject:'Portfolio: '+topic+' from '+name,_template:'table',_captcha:'false',_replyto:mail})})
-    .then(function(r){return r.json().catch(function(){return {}}).then(function(j){return {ok:r.ok,j:j}})})
-    .then(function(res){
-      if(res.ok&&String(res.j.success)==='true'){cf.classList.add('done');cf.querySelector('.sent').focus();cf.reset()}
-      else throw new Error(res.j.message||'failed');
-    }).catch(function(){
-      btn.disabled=false;st.classList.add('err');st.innerHTML='That didn\'t go through. <a href="'+mailto+'">Send it by email instead</a>.';
-    });
+    sendMessage(d).then(function(){cf.classList.add('done');cf.querySelector('.sent').focus();cf.reset()})
+    .catch(function(mailto){btn.disabled=false;st.classList.add('err');st.innerHTML='That didn\'t go through. <a href="'+mailto+'">Send it by email instead</a>.'});
   });
 
   /* ---------- portfolio assistant: TF-IDF style retrieval over notes about my work, all in the browser ---------- */
   var KB=[
-    {k:'hi hello hey hej czesc siema dzien dobry witam yo good morning',a:"Hi! I'm a small assistant built into this portfolio. Ask me about Katarzyna's work, skills or how to reach her.",s:1},
+    {k:'hi hello hey hej czesc siema dzien dobry witam yo good morning venn',a:"Hi, I'm Venn, the assistant on Katarzyna's portfolio. Ask me about her work, skills or how to reach her.",s:1},
     {k:'who is katarzyna kasia about her summary introduce job zajmuje robi kim jest o niej opowiedz przedstaw',a:"Katarzyna Stępień is a product designer (UX/UI) and data scientist in Warsaw. She is the sole designer at <b>SiDLY Healthcare</b>, taking telecare products from research to coded prototypes, and she builds NLP models and data pipelines too. She studied psychology and computer science in parallel, and is now doing a master's in data science alongside managerial studies at SGH.",x:[['About her','design','about']]},
     {k:'sidly job work current role company employer position praca firma obecnie stanowisko healthcare telecare teleopieka sole designer',a:"She is the sole designer at <b>SiDLY Healthcare</b>, a telecare company whose technology is used by 70,000+ people in 16 European countries and 1,000+ municipalities and institutions. She leads UX/UI for SiDLY Health (mobile apps and a web platform), is redesigning the ERP that runs public telecare, designed and coded sidly.eu, and led the rebrand.",x:[['SiDLY Health case','design','health'],['ERP case','design','erp']]},
     {k:'sidly health planner app carer manager resident visit nfc scan care card opiekun podopieczny wizyta aplikacja mobile web platform screens ekrany',a:"SiDLY Health connects the care manager who plans a visit, the carer who makes it and the resident who receives it. A few signature decisions: a visit starts and ends with an <b>NFC scan</b>, so hours are settled from real time; the care card is the plan before a visit and a locked record after it; the resident's home screen answers <i>am I all right, what do I do today, when is someone coming</i>.",x:[['See the screens','design','health']]},
@@ -1335,15 +1362,15 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
     {k:'design skills figma ux ui research usability testing prototyping accessibility tools umiejetnosci projektowanie badania dostepnosc',a:"Design and research: product and UX/UI design, interaction design, prototyping, information architecture, accessible design for older adults, conversational UX, user research, usability testing, behavioural psychology, brand identity and packaging.",x:[['All skills','design','about']]},
     {k:'tech stack code coding programming react typescript javascript python sql flutter pandas scikit technologie programowanie jezyki programowania',a:"Code and data: Python (pandas, scikit-learn), NLP and machine learning, LLM APIs, AI agents in n8n, RAG, Kafka, Spark, SQL and DuckDB, plus React, TypeScript, JavaScript, HTML/CSS and Flutter. Her prototypes are built in React and TypeScript.",x:[['All skills','design','about']]},
     {k:'education studies study studying university degree master masters bachelor sgh pjatk pjait swps school studia uczelnia wyksztalcenie magister licencjat',a:"Now, in parallel: an M.Sc. in Data Science at the Polish-Japanese Academy of IT (2025–2027) and managerial studies at SGH Warsaw School of Economics (2026–2028). Before: a B.A. in Psychology &amp; CS at SWPS University and a B.Eng. in Computer Science (Data Science) at the Warsaw School of Computer Science.",x:[['Education','design','about']]},
-    {k:'contact email mail reach hire hiring write message talk call kontakt napisac zatrudnic linkedin wiadomosc',a:"The quickest way is the form at the bottom of this page; it goes straight to her inbox. You can also email <a href='mailto:trafficjam027@gmail.com'>trafficjam027@gmail.com</a> or find her on LinkedIn.",x:[['Open the form','#contact'],['LinkedIn','https://www.linkedin.com/in/kachastepien']]},
-    {k:'available availability open to work job offer offers hiring freelance contract remote hybrid relocation salary rate money dostepna oferta oferty wynagrodzenie stawka zdalnie praca',a:"That one is best answered by her. Send a note through the form with the role, the team and the location, and it will land in her inbox.",x:[['Open the form','#contact']]},
+    {k:'contact email mail reach hire hiring write message talk call kontakt napisac zatrudnic linkedin wiadomosc',a:"I can pass a message to her right here; it lands straight in her inbox. Or email <a href='mailto:trafficjam027@gmail.com'>trafficjam027@gmail.com</a>, or find her on LinkedIn.",x:[['Leave her a message','__msg'],['LinkedIn','https://www.linkedin.com/in/kachastepien']]},
+    {k:'available availability open to work job offer offers hiring freelance contract remote hybrid relocation salary rate money dostepna oferta oferty wynagrodzenie stawka zdalnie praca',a:"That one is best answered by her. Tell me about the role, the team and the location, and I'll send it to her inbox.",x:[['Leave her a message','__msg']]},
     {k:'languages language speak english polish jezyk jezyki angielski polski',a:"Polish (native) and English (C1)."},
     {k:'where based location warsaw warszawa poland polska city gdzie mieszka miasto',a:"She is based in Warsaw, Poland."},
     {k:'psychology psychologia why background behaviour behavior people both two dwa kierunki',a:"She studied psychology and computer science at the same time. It shapes how she works: start from what people actually do, test it with them, and build prototypes real enough to argue with. Her NLP thesis on dark patterns sits right where the two meet."},
     {k:'certificates certificate courses course google stanford code in place certyfikaty kursy',a:"Stanford Code in Place (2026) and the Google UX Design Professional Certificate (7 courses)."},
-    {k:'sidly.eu website rebrand brand vital care packaging identity strona marka opakowania',a:"She designed and built sidly.eu end to end, from information architecture to a React/TypeScript front-end published with Figma Sites, in seven languages. She also led SiDLY's rebrand across the apps, website, the Vital Care smartwatch packaging and event materials.",x:[['More work','design','more'],['sidly.eu','https://www.sidly.eu']]},
-    {k:'this site website portfolio built made how bot you assistant work how do you work jak dziala strona chatbot',a:"This page is hand-built in HTML, CSS and vanilla JavaScript. I'm a small retrieval bot: your question is matched against short notes about her work with TF-IDF-style scoring, right in your browser. Nothing you type is sent anywhere."},
-    {k:'thanks thank you thx dzieki dziekuje super great cool',a:"Any time. If you'd like to talk to her, the form is at the bottom of the page.",x:[['Open the form','#contact']]}
+    {k:'sidlyeu website www rebrand brand vital care packaging identity strona marka opakowania',a:"She designed and built sidly.eu end to end, from information architecture to a React/TypeScript front-end published with Figma Sites, in seven languages. She also led SiDLY's rebrand across the apps, website, the Vital Care smartwatch packaging and event materials.",x:[['More work','design','more'],['sidly.eu','https://www.sidly.eu']]},
+    {k:'this site website portfolio built made how bot you assistant venn name who are you work how do you work jak dziala strona chatbot kim jestes',a:"I'm Venn, named after the two overlapping circles in the logo: design and data. The page is hand-built in HTML, CSS and vanilla JavaScript, and I'm a small retrieval bot: your question is matched against short notes about her work with TF-IDF-style scoring, right in your browser. Nothing leaves your browser unless you ask me to send her a message."},
+    {k:'thanks thank you thx dzieki dziekuje super great cool',a:"Any time. If you'd like to talk to her, I can pass a message on.",x:[['Leave her a message','__msg']]}
   ];
   var STOP='a an the is are was of to in on for and or with what which who how where does do did can she her it its me my you your about tell show please czy co jak jest sa to na w z i o mi sie ten ta ja ona jej gdzie'.split(' ');
   function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ł/g,'l')}
@@ -1353,38 +1380,75 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
   docs.forEach(function(d){d.filter(function(w,i){return d.indexOf(w)===i}).forEach(function(w){df[w]=(df[w]||0)+1})});
   function idf(w){return Math.log(1+KB.length/(df[w]||1))}
   function answer(q){
-    if(/\bwhat (does|do) (she|katarzyna|kasia) do\b|czym sie zajmuje|co (ona )?robi/.test(norm(q)))return KB[1];
-    var qt=toks(q),best=-1,bs=0;
-    docs.forEach(function(d,i){var s=0;qt.forEach(function(w){for(var j=0;j<d.length;j++){if(same(w,d[j])){s+=idf(d[j]);break}}});s=s/Math.sqrt(d.length);if(s>bs){bs=s;best=i}});
+    var qt=toks(q),best=-1,bs=0,nq=norm(q);
+    if(!qt.length){
+      if(/who are you|what are you|your name|kim jestes|jak masz na imie/.test(nq))return KB.filter(function(e){return e.k.indexOf('venn name')>-1})[0];
+      if(/\bwhat (does|do) (she|katarzyna|kasia) do\b|czym sie zajmuje|co (ona )?robi|who is she/.test(nq))return KB[1];
+      return null;
+    }
+    docs.forEach(function(d,i){var s=0;qt.forEach(function(w){var ex=d.indexOf(w);if(ex>-1){s+=idf(w);return}for(var j=0;j<d.length;j++){if(same(w,d[j])){s+=idf(d[j])*.5;break}}});s=s/Math.sqrt(d.length);if(s>bs){bs=s;best=i}});
     return bs>0.25?KB[best]:null;
   }
   var chat=document.getElementById('chat'),cbtn=document.querySelector('.chat-btn'),log=document.getElementById('chat-log'),sugg=document.getElementById('chat-sugg'),cin=document.getElementById('chat-in'),started=false;
-  var SUG=["What does she do at SiDLY?","Show data science projects","Tell me about the hackathon win","What's her tech stack?","How can I contact her?"];
+  var MSG="Leave her a message",flow=null;
+  var SUG=[MSG,"What does she do at SiDLY?","Show data science projects","Tell me about the hackathon win","What's her tech stack?"];
   function escH(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function add(html,who,acts){
     var m=document.createElement('div');m.className='msg '+who;m.innerHTML=html;
     if(acts&&acts.length){var a=document.createElement('div');a.className='acts';acts.forEach(function(x){
-      var b;if(x.length===2){b=document.createElement('a');b.href=x[1];b.textContent=x[0];if(/^https?:/.test(x[1])){b.target='_blank';b.rel='noopener'}else b.addEventListener('click',function(){if(innerWidth<560)toggle(false)})}
+      var b;if(x[1]&&x[1].indexOf('__')===0){b=document.createElement('button');b.type='button';b.textContent=x[0];b.addEventListener('click',function(){if(x[1]==='__msg')startFlow();else if(x[1]==='__send'&&flow&&flow.step==='confirm')sendFromChat();else if(x[1]==='__restart')startFlow()})}
+      else if(x.length===2){b=document.createElement('a');b.href=x[1];b.textContent=x[0];if(/^https?:/.test(x[1])){b.target='_blank';b.rel='noopener'}else b.addEventListener('click',function(){if(innerWidth<560)toggle(false)})}
       else{b=document.createElement('button');b.type='button';b.textContent=x[0];b.addEventListener('click',function(){setView(x[1]);if(innerWidth<560)toggle(false);var el=document.getElementById(x[2]);if(el)setTimeout(function(){el.scrollIntoView({behavior:reduce?'auto':'smooth'})},120)})}
       a.appendChild(b)});m.appendChild(a)}
     log.appendChild(m);log.scrollTop=log.scrollHeight;return m;
   }
-  function chips(list){sugg.innerHTML='';list.forEach(function(s){var b=document.createElement('button');b.type='button';b.textContent=s;b.addEventListener('click',function(){ask(s)});sugg.appendChild(b)})}
+  function chips(list){sugg.innerHTML='';list.forEach(function(s){var b=document.createElement('button');b.type='button';b.textContent=s;b.addEventListener('click',function(){s===MSG&&!flow?startFlow():ask(s)});sugg.appendChild(b)})}
+  function botSay(html,acts,after){
+    var ty=add('<span class="typing" aria-label="Venn is typing"><i></i><i></i><i></i></span>','bot');ty.style.padding='0';chat.classList.add('busy');
+    setTimeout(function(){ty.remove();chat.classList.remove('busy');var m=add(html,'bot',acts);if(after)after(m)},reduce?0:420+Math.random()*300);
+  }
+  function setInput(ph,type){cin.placeholder=ph;cin.type=type||'text';cin.focus()}
+  function startFlow(){flow={step:'name',d:{}};chips(['Cancel']);botSay("Happy to pass it on. What's your name?",null,function(){setInput('Your name')})}
+  function endFlow(){flow=null;setInput('Ask about projects, skills, contact…');chips(SUG)}
+  function handleFlow(q){
+    var d=flow.d;
+    if(/^(cancel|anuluj|stop|never ?mind)$/i.test(q)){endFlow();botSay("No problem. Anything else you'd like to know?");return}
+    if(flow.step==='name'){d.name=q.slice(0,120);flow.step='email';botSay('Nice to meet you, '+escH(d.name.split(' ')[0])+'. Which email should she reply to?',null,function(){setInput('you@company.com','email')});return}
+    if(flow.step==='email'){if(!EMAIL_RE.test(q)){botSay("That doesn't look like an email address. Could you check it?");return}d.email=q;flow.step='topic';botSay("Thanks. What's it about?",null,function(){setInput('Pick one or type your own');chips(['A role','A project','Research or a talk','Just saying hi','Cancel'])});return}
+    if(flow.step==='topic'){d.topic=q.slice(0,60);flow.step='message';chips(['Cancel']);botSay('And your message? A few lines about the role or project is perfect.',null,function(){setInput('Your message')});return}
+    if(flow.step==='message'){if(q.length<5){botSay('Could you add a little more detail?');return}d.message=q.slice(0,5000);flow.step='confirm';
+      botSay('Here is what I\'ll send:<div class="sum"><b>'+escH(d.name)+'</b> · '+escH(d.email)+'<br><span>'+escH(d.topic)+'</span><p>'+escH(d.message)+'</p></div>',[['Send it','__send'],['Start over','__restart']],function(){setInput('Type "send", or "cancel"');chips(['Cancel'])});return}
+    if(flow.step==='confirm'){if(/^(send|yes|ok|tak|wyslij|wyślij)$/i.test(q))sendFromChat();else if(/start over|restart|edit/i.test(q))startFlow();else botSay('Type "send" to send it, or "cancel" to stop.');return}
+  }
+  function sendFromChat(){
+    var d=flow.d;flow.step='sending';sugg.innerHTML='';
+    botSay('Sending…',null,function(m){
+      sendMessage(d,'Venn').then(function(){m.innerHTML='Sent. She\'ll reply to <b>'+escH(d.email)+'</b>. Thanks for reaching out!';endFlow()})
+      .catch(function(mailto){m.innerHTML='That didn\'t go through. <a href="'+mailto+'">Send it by email instead</a>.';endFlow()});
+    });
+  }
   function ask(q){
     q=q.trim();if(!q)return;add(escH(q),'me');cin.value='';
-    var ty=add('<span class="typing" aria-label="Typing"><i></i><i></i><i></i></span>','bot');ty.style.padding='0';
+    if(flow&&flow.step!=='sending'){handleFlow(q);return}
+    var ty=add('<span class="typing" aria-label="Venn is typing"><i></i><i></i><i></i></span>','bot');ty.style.padding='0';chat.classList.add('busy');
     setTimeout(function(){
-      ty.remove();var e=answer(q);
+      ty.remove();chat.classList.remove('busy');var e=answer(q);
       if(e){add(e.a,'bot',e.x);chips(SUG.filter(function(s){return s!==q}).slice(0,4))}
-      else{add("I don't know that one yet; I only know what's on this page. Try one of these, or ask her directly through the form.",'bot',[['Open the form','#contact']]);chips(SUG)}
+      else{add("I don't know that one yet; I only know what's on this page. Try one of these, or leave her a message.",'bot',[['Leave her a message','__msg']]);chips(SUG)}
     },reduce?0:550+Math.random()*450);
   }
   function toggle(open){
     if(open===undefined)open=chat.hidden;chat.hidden=!open;cbtn.setAttribute('aria-expanded',open);
-    if(open){if(!started){started=true;add("Hi! I'm a small assistant for Katarzyna's portfolio. Ask me about her work, skills or how to reach her.",'bot');chips(SUG)}setTimeout(function(){cin.focus()},250)}
+    if(open){if(!started){started=true;add("Hi, I'm Venn. I know Katarzyna's work inside out: projects, skills, studies, and how to reach her. What would you like to know?",'bot');chips(SUG)}setTimeout(function(){cin.focus()},250)}
     else cbtn.focus();
   }
-  cbtn.addEventListener('click',function(){toggle()});
+  var tz=document.getElementById('chat-teaser'),tzT;
+  function hideTz(){tz.hidden=true;clearTimeout(tzT);try{sessionStorage.setItem('venn-tz','1')}catch(e){}}
+  var seen=false;try{seen=sessionStorage.getItem('venn-tz')==='1'}catch(e){}
+  if(!seen)setTimeout(function(){if(chat.hidden&&!started){tz.hidden=false;tzT=setTimeout(hideTz,12000)}},6000);
+  tz.querySelector('.tz-open').addEventListener('click',function(){hideTz();toggle(true)});
+  tz.querySelector('.tz-x').addEventListener('click',hideTz);
+  cbtn.addEventListener('click',function(){hideTz();toggle()});
   chat.querySelector('.chat-x').addEventListener('click',function(){toggle(false)});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!chat.hidden)toggle(false)});
   document.getElementById('chat-form').addEventListener('submit',function(e){e.preventDefault();ask(cin.value)});
