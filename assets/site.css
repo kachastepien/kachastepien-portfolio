@@ -725,10 +725,10 @@ code{font:500 .86em ui-monospace,SFMono-Regular,Menlo,monospace;background:color
 
 /* ---- kinetic line ---- */
 .kin{overflow:hidden;padding:clamp(2.5rem,6vw,4.5rem) 0 0;pointer-events:none}
-.kin-t{display:flex;align-items:center;gap:clamp(1.5rem,3vw,3rem);width:max-content;will-change:transform;padding-left:6vw}
-.kin-t span{font:700 clamp(3rem,9vw,8rem)/1 var(--body);letter-spacing:-.055em;white-space:nowrap;color:color-mix(in srgb,var(--fg) 10%,var(--bg))}
-.kin-t span:nth-child(4n+1){color:var(--fg)}
-.kin-t em{font:300 clamp(2.4rem,7vw,6rem)/1 var(--body);font-style:normal;color:var(--accent)}
+.kin-t{display:flex;align-items:center;justify-content:center;gap:clamp(.8rem,2vw,1.8rem);padding:0 16px}
+.kin-t span{will-change:transform}
+.kin-t span{font:700 clamp(1.55rem,4.6vw,3.6rem)/1 var(--body);letter-spacing:-.04em;white-space:nowrap;color:var(--fg)}
+.kin-t em{font:300 clamp(1.3rem,3.6vw,3rem)/1 var(--body);font-style:normal;color:var(--accent)}
 .kin-t i{flex:none;width:clamp(28px,5vw,64px);height:clamp(28px,5vw,64px);border-radius:50%;background:#c9a47e;position:relative}
 .kin-t i::after{content:"";position:absolute;inset:0;left:45%;border-radius:50%;background:#a6a8ff;mix-blend-mode:multiply}
 
