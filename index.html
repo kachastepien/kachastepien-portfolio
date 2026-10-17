@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-view="design">
+<html lang="en" data-view="design" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -110,8 +110,7 @@
  ]
 }
 </script>
-<meta name="theme-color" content="#121413" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#fbfbfa">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -126,7 +125,7 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 :root{
   --bg:#fbfbfa; --surface:#f1f2f0; --surface-2:#e7e9e5; --fg:#18191a; --muted:#5d625f; --line:#d9dcd8;
   --design:#2c6b5a; --data:#4446c9; --warn:#b4472f;
-  --accent:var(--design);
+  --accent:var(--design);color-scheme:light;
   --display:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
   --body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -162,17 +161,30 @@ p{margin:0}
 .skip{position:absolute;left:-999px;top:0;background:var(--fg);color:var(--bg);padding:.5rem .8rem;z-index:100}
 .skip:focus{left:8px;top:8px}
 
+/* ---- ambient gradients: three slow blobs that take the perspective's colours ---- */
+.bgfx{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bgfx i{position:absolute;width:52vmax;height:52vmax;border-radius:50%;filter:blur(70px);opacity:.55;transition:background-color 1s var(--ease);animation:drift 28s ease-in-out infinite alternate}
+.bgfx i:nth-child(1){left:-14vmax;top:-18vmax;background:var(--blob1)}
+.bgfx i:nth-child(2){right:-18vmax;top:22vh;background:var(--blob2);animation-duration:34s;animation-delay:-9s}
+.bgfx i:nth-child(3){left:20vw;bottom:-30vmax;background:var(--blob3);animation-duration:40s;animation-delay:-17s}
+:root{--blob1:#f1e4d5;--blob2:#eef0f6;--blob3:#f6ece6}
+:root[data-view="data"]{--blob1:#e7e8fb;--blob2:#eef3f8;--blob3:#efe9fa}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(6vmax,4vmax) scale(1.08)}100%{transform:translate(-4vmax,8vmax) scale(.96)}}
+@media (prefers-reduced-motion:reduce){.bgfx i{animation:none}}
+body{background:transparent}
+html{background:var(--bg);transition:background-color .5s}
+
 /* ---- header + perspective switch ---- */
 .progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--accent);transform-origin:0 50%;transform:scaleX(0);z-index:60;transition:background-color .4s}
 /* Liquid glass: translucent fill, heavy blur with saturation, a bright top edge and a soft specular sheen. */
-:root{--glass:color-mix(in srgb,var(--bg) 56%,transparent);--glass-edge:rgba(255,255,255,.75);
-  --glass-shade:0 12px 40px -16px rgba(20,20,20,.30),inset 0 1px 0 rgba(255,255,255,.85),inset 0 -1px 1px rgba(255,255,255,.3)}
+:root{--glass:color-mix(in srgb,var(--bg) 66%,transparent);--glass-edge:rgba(255,255,255,.55);
+  --glass-shade:0 8px 28px -18px rgba(20,20,20,.22),inset 0 1px 0 rgba(255,255,255,.7)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--glass:color-mix(in srgb,var(--bg) 50%,transparent);--glass-edge:rgba(255,255,255,.13);
   --glass-shade:0 12px 40px -16px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.16),inset 0 -1px 1px rgba(255,255,255,.04)}}
 :root[data-theme="dark"]{--glass:color-mix(in srgb,var(--bg) 50%,transparent);--glass-edge:rgba(255,255,255,.13);
   --glass-shade:0 12px 40px -16px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.16),inset 0 -1px 1px rgba(255,255,255,.04)}
-.glass{position:relative;background:var(--glass);-webkit-backdrop-filter:blur(22px) saturate(1.9);backdrop-filter:blur(22px) saturate(1.9);border:1px solid var(--glass-edge);box-shadow:var(--glass-shade)}
-.glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.42),rgba(255,255,255,0) 36%,rgba(255,255,255,0) 72%,rgba(255,255,255,.14));mix-blend-mode:soft-light}
+.glass{position:relative;background:var(--glass);-webkit-backdrop-filter:blur(14px) saturate(1.35);backdrop-filter:blur(14px) saturate(1.35);border:1px solid var(--glass-edge);box-shadow:var(--glass-shade)}
+.glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.2),rgba(255,255,255,0) 40%);mix-blend-mode:soft-light}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass{background:color-mix(in srgb,var(--bg) 94%,transparent)}}
 .top{position:sticky;top:0;z-index:50;padding:10px clamp(8px,2vw,24px) 0;pointer-events:none}
 .top .wrap{pointer-events:auto;display:flex;align-items:center;gap:1.4rem;height:3.6rem;border-radius:999px;width:fit-content;max-width:calc(100vw - 16px);margin:0 auto;padding:0 .4rem 0 1.15rem;transition:height .35s var(--ease),box-shadow .3s,background-color .3s}
@@ -630,6 +642,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 </style>
 </head>
 <body>
+<div class="bgfx" aria-hidden="true"><i></i><i></i><i></i></div>
 <a class="skip" href="#work">Skip to work</a>
 <nav class="rail" aria-label="Chapters"></nav>
 <button class="totop glass" type="button" aria-label="Back to top"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg></button>
@@ -664,7 +677,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 
     <div data-for="design">
       <p class="statement">I design telecare software for <em>the people who wear the devices</em>, the carers who visit them and the municipalities that pay for it.</p>
-      <p class="sub">Sole designer at <b>SiDLY Healthcare</b>. I take products from research to a coded React prototype, with a background in psychology, computer science and data science.</p>
+      <p class="sub">Sole designer at <b>SiDLY Healthcare</b>, from research to coded prototype.</p>
       <div class="stats">
         <div><b data-count="70000" data-suffix="+">70,000+</b><span>people using SiDLY technology</span></div>
         <div><b data-count="16">16</b><span>European countries</span></div>
@@ -673,7 +686,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
     </div>
     <div data-for="data">
       <p class="statement">I build models and pipelines for the human side of products: <em>the copy that manipulates</em>, the clicks that show frustration, the health data nobody reads.</p>
-      <p class="sub">B.Eng. in Computer Science (Data Science). Now an M.Sc. in Data Science at the Polish-Japanese Academy of IT, alongside managerial studies at SGH. My two theses joined psychology with NLP, and wearables with AI.</p>
+      <p class="sub">M.Sc. Data Science at PJAIT, alongside management at SGH.</p>
       <div class="stats">
         <div><b data-count="0.936" data-decimals="3">0.936</b><span>F1, dark-pattern detection</span></div>
         <div><b data-count="0.976" data-decimals="3">0.976</b><span>ROC AUC on the same task</span></div>
@@ -684,8 +697,8 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
     <div class="cta">
       <a class="btn solid" href="#work">See the work
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a>
+      <a class="btn" href="#contact">Get in touch</a>
       <a class="btn" href="https://www.linkedin.com/in/kachastepien">LinkedIn</a>
-      <a class="btn" href="https://github.com/kachastepien">GitHub</a>
     </div>
   </div>
   <div class="scroll-hint" aria-hidden="true"><i></i></div>
@@ -737,7 +750,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
     <div class="feature">
       <div>
         <h2 class="case-title reveal" id="health-h">SiDLY Health: one record, three people</h2>
-        <p class="lede reveal d1">SiDLY Health connects the people around a single visit: the care manager who plans it, the carer who makes it and the resident who receives it. I lead its UX/UI across the mobile apps and the web platform.</p>
+        <p class="lede reveal d1">One visit, three people: the manager who plans it, the carer who makes it, the resident who receives it. I lead UX/UI across mobile and web.</p>
         <div class="tldr reveal d2" style="grid-template-columns:1fr">
           <div><p class="label">The challenge</p><p>One visit, three people, three apps that have to agree on the same data.</p></div>
           <div><p class="label">What I did</p><p>Led UX/UI for the mobile apps and the web platform, prototyped in React/TypeScript.</p></div>
@@ -755,7 +768,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
     </div>
 
     <h3 class="sub-h reveal">A visit belongs to all three</h3>
-    <p class="prose reveal">When the carer finishes a visit, it appears in the resident's history, ready to be rated, and in the manager's record of work. An alarm handled by the manager disappears from every view.</p>
+    <p class="prose reveal muted">When the carer finishes, the resident can rate it and the manager sees it in the record.</p>
     <div class="loop reveal">
       <svg viewBox="0 0 760 170" role="img" aria-labelledby="loop-t">
         <title id="loop-t">A visit moves from the care manager who plans it, to the carer who makes it, to the resident who rates it, and back into the manager's record</title>
@@ -777,7 +790,6 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
       <button role="tab" id="t-web" aria-controls="p-web" aria-selected="false" tabindex="-1">Web platform</button>
     </div>
     <div class="panel" id="p-mgr" role="tabpanel" aria-labelledby="t-mgr">
-      <p class="prose">Care managers run their team from the phone as much as from the desk. This flow covers the carers: who they look after, when they work and what they can access.</p>
       <div class="phones">
         <figure class="phone"><div class="device"><img src="assets/health/mgr-carers.jpg" width="405" height="877" alt="Carers screen of the care manager app" loading="lazy"></div><figcaption><b>Carers</b>Who is on the team, who is active and when each person works today.</figcaption></figure>
         <figure class="phone"><div class="device"><img src="assets/health/mgr-profile.jpg" width="423" height="916" alt="Carer profile screen of the care manager app" loading="lazy"></div><figcaption><b>Carer profile</b>Residents, today's hours, today's visits and access, on one screen.</figcaption></figure>
@@ -786,7 +798,6 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
       </div>
     </div>
     <div class="panel" id="p-carer" role="tabpanel" aria-labelledby="t-carer" hidden>
-      <p class="prose">Carers use the Planner on their phone during the visit. The flow is built around the scan: a visit starts when the phone touches the resident's tag and ends the same way.</p>
       <div class="phones">
         <figure class="phone"><div class="device"><img src="assets/health/carer-home.jpg" width="393" height="851" alt="Home screen of the carer's Planner app" loading="lazy"></div><figcaption><b>Today</b>Time worked so far, filled-in care cards and today's visits.</figcaption></figure>
         <figure class="phone"><div class="device"><img src="assets/health/carer-start.jpg" width="393" height="851" alt="Start visit sheet in the Planner app" loading="lazy"></div><figcaption><b>Start a visit</b>Scan the resident's QR code or NFC tag. There is no other way in.</figcaption></figure>
@@ -795,7 +806,6 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
       </div>
     </div>
     <div class="panel" id="p-res" role="tabpanel" aria-labelledby="t-res" hidden>
-      <p class="prose">The resident sees the same visits from the other side: who came, what was done, and a place to say how it went.</p>
       <div class="phones">
         <figure class="phone"><div class="device"><img src="assets/health/res-home.jpg" width="393" height="883" alt="Home screen of the resident's app" loading="lazy"></div><figcaption><b>Home</b>The band, recent visits and today's readings on one screen.</figcaption></figure>
         <figure class="phone"><div class="device"><img src="assets/health/res-history.jpg" width="393" height="860" alt="Visit history screen of the resident's app" loading="lazy"></div><figcaption><b>Visit history</b>Every visit with its carer, tasks done and rating.</figcaption></figure>
@@ -804,7 +814,6 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
       </div>
     </div>
     <div class="panel" id="p-web" role="tabpanel" aria-labelledby="t-web" hidden>
-      <p class="prose">At the desk the same data gets more room. The manager plans and settles the team's work, carers can follow their visits from a laptop, and residents see their own record.</p>
       <div class="shots">
         <figure class="shot"><div class="browser"><img src="assets/health/web-dashboard.jpg" width="865" height="877" alt="Care manager's dashboard on the web platform" loading="lazy"></div><figcaption><b>Manager's dashboard</b>What needs a reaction comes first, then the carers in the field today and the week's visits.</figcaption></figure>
         <figure class="shot"><div class="browser"><img src="assets/health/web-schedule.jpg" width="1024" height="919" alt="Weekly visit schedule on the web platform" loading="lazy"></div><figcaption><b>Schedule</b>A week per carer, with the residents who have no visit this week listed underneath.</figcaption></figure>
@@ -830,7 +839,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">02</span><h2>Case study</h2><span class="label">SiDLY Healthcare · in progress</span></div>
     <h2 class="case-title reveal" id="erp-h">Redesigning the ERP that runs public telecare</h2>
-    <p class="lede reveal d1">Municipalities, public institutions and care providers use the SiDLY ERP to order telecare bands, assign them to residents, keep consent documents in order and renew contracts. I am leading its redesign.</p>
+    <p class="lede reveal d1">The platform municipalities and care providers use to order telecare bands, assign them and keep consent in order. I lead its redesign.</p>
     <div class="tldr reveal d2">
       <div><p class="label">The challenge</p><p>Routine tasks where mistakes are easy to make and hard to notice, for very different clients.</p></div>
       <div><p class="label">What I did</p><p>Research with municipal and foreign clients, then a clickable React/TypeScript prototype.</p></div>
@@ -859,7 +868,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
     </ol>
     <div class="lock reveal">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg>
-      <p>The interface is unreleased and confidential, so this case study describes the process and decisions without screens. I am happy to walk through the prototype in an interview.</p>
+      <p>Unreleased and confidential, so no screens here. Happy to walk you through the prototype in an interview.</p>
     </div>
   </div>
 </section>
@@ -884,27 +893,27 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
       <div>
         <p class="label reveal">HackYeah 2026 · Sport &amp; Healthcare challenge</p>
         <h2 class="case-title reveal" style="margin-top:.5rem">Lemi: health care without the stress</h2>
-        <p class="lede reveal d1">A health guide with a friendly lemur. It helps every day and at every doctor's visit: it joins mood, movement, medication, measurements and test results, and turns them into one small step for today.</p>
+        <p class="lede reveal d1">A health guide with a friendly lemur, for before, during and after a doctor's visit.</p>
         <div class="tldr reveal d2" style="grid-template-columns:1fr">
           <div><p class="label">The problem</p><p>People put off the doctor because of the phone call, the ten minutes and the advice they forget.</p></div>
           <div><p class="label">What I built</p><p>A web app and a Flutter app on the Claude API and ElevenLabs, designed and coded at the hackathon.</p></div>
           <div><p class="label">Signature move</p><p>One recorded visit becomes three summaries: for you, for family, for the doctor.</p></div>
         </div>
-        <details class="more reveal"><summary><span class="when-closed">Why I built it, and the numbers behind it</span><span class="when-open">Hide</span></summary><div class="more-body">
+        <details class="more reveal"><summary><span class="when-closed">Why I built it, and what it does</span><span class="when-open">Hide</span></summary><div class="more-body">
         <p class="prose">It started with me. I'm a student and I put off calling the doctor, not because I don't know what is wrong, but because I have to call, explain myself, remember everything in ten minutes and then keep track of the advice. At the hackathon I asked other people whether they felt the same. It was far more common than I thought, and each conversation added a group the app could help: people for whom Polish is not a first language, people with disabilities, neurodivergent people, seniors and their families, people with health anxiety.</p>
         <div class="facts">
           <div class="fact"><b>47.6%</b><span>of Europeans have trouble understanding health information <small>HLS-EU survey, 2015</small></span></div>
           <div class="fact"><b>40–80%</b><span>of medical advice is forgotten right after the visit <small>Kessels, 2003</small></span></div>
           <div class="fact"><b>81%</b><span>of young adults feel stressed before a phone call <small>BankMyCell, 1,200+ people</small></span></div>
         </div>
-        </div></details>
-        <ul class="feat reveal">
+        <ul class="feat">
           <li>Mood in one tap, with Lemi reacting across the app.</li>
           <li>Measurements from a photo: point the camera at a blood pressure monitor, glucometer or scale, AI reads the display and you confirm the value.</li>
           <li>Record the visit with the doctor's consent and get a summary in three versions: for you, for someone close to you, and for the doctor.</li>
           <li>Test results from a PDF or photo, with every parameter explained in plain language.</li>
           <li>"Call for me" with AI, a simple mode with large text for people 50+, and a calm mode.</li>
         </ul>
+        </div></details>
         <div class="chips reveal"><span class="chip on">Claude API</span><span class="chip on">ElevenLabs Scribe</span><span class="chip">TypeScript web app</span><span class="chip">Flutter (iOS, Android)</span><span class="chip">Health data stays on the phone</span></div>
         <div class="links reveal"><a class="btn solid" href="https://pekao.vercel.app">Try the demo
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a></div>
@@ -924,10 +933,10 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">04</span><h2 id="more-h">More work</h2><span class="label">Web · brand · research</span></div>
     <div class="cards">
-      <article class="card reveal"><p class="label">Design + code · Live</p><h3>sidly.eu</h3><p>I designed and built the company website end to end, from information architecture and UI to a custom React/TypeScript front-end published with Figma Sites. It presents SiDLY's devices, apps and 24/7 telecare centre to municipalities, partners and individual customers, in seven languages.</p><div class="links"><a class="btn" href="https://www.sidly.eu">Visit sidly.eu</a></div></article>
-      <article class="card reveal d1"><p class="label">Brand · Packaging</p><h3>Rebrand &amp; Vital Care</h3><p>I led the company rebrand and rolled the new identity out across the apps, the website, the packaging for the SiDLY Vital Care smartwatch and event materials. I started on Vital Care as an intern, as the only designer on the team, taking it from first concepts to packaging and launch assets.</p></article>
-      <article class="card reveal"><p class="label">Research · B.A. thesis</p><h3>Dark patterns, measured</h3><p>NLP-based detection of manipulative UX patterns, at SWPS University. The design side asks why the copy works on people; the data side is in the other perspective.</p><div class="links"><button class="btn" type="button" data-goto="data" data-target="unmasked">See the model</button></div></article>
-      <article class="card reveal d1"><p class="label">Research · B.Eng. thesis</p><h3>Health insights from wearables</h3><p>A system that summarises a person's physical health from a medical wristband, with an AI assistant on top. Built at the Warsaw School of Computer Science.</p><div class="links"><button class="btn" type="button" data-goto="data" data-target="healthplatform">See the system</button></div></article>
+      <article class="card reveal"><p class="label">Design + code · Live</p><h3>sidly.eu</h3><p>Designed and built end to end: information architecture, UI and a React/TypeScript front-end, in seven languages.</p><div class="links"><a class="btn" href="https://www.sidly.eu">Visit sidly.eu</a></div></article>
+      <article class="card reveal d1"><p class="label">Brand · Packaging</p><h3>Rebrand &amp; Vital Care</h3><p>Led the rebrand across the apps, the website, the Vital Care smartwatch packaging and events.</p></article>
+      <article class="card reveal"><p class="label">Research · B.A. thesis</p><h3>Dark patterns, measured</h3><p>NLP that detects manipulative UX copy. B.A. thesis, SWPS University.</p><div class="links"><button class="btn" type="button" data-goto="data" data-target="unmasked">See the model</button></div></article>
+      <article class="card reveal d1"><p class="label">Research · B.Eng. thesis</p><h3>Health insights from wearables</h3><p>An AI health summary from a medical wristband. B.Eng. thesis.</p><div class="links"><button class="btn" type="button" data-goto="data" data-target="healthplatform">See the system</button></div></article>
     </div>
   </div>
 </section>
@@ -956,7 +965,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
     <div class="feature" style="align-items:start">
       <div>
         <h2 class="case-title reveal" id="un-h">Unmasked: catching manipulative UX copy with NLP</h2>
-        <p class="lede reveal d1">"Only 2 left!", "43 people are viewing this", "No thanks, I don't like saving money." Dark patterns live in the words. I trained a classifier to spot them and shipped it as a Chrome extension that warns you before you buy.</p>
+        <p class="lede reveal d1">Dark patterns live in the words: "Only 2 left!", "43 people are viewing this". I trained a classifier to spot them and shipped it as a Chrome extension.</p>
         <div class="tldr reveal d2" style="grid-template-columns:1fr">
           <div><p class="label">The problem</p><p>Manipulative copy is everywhere in e-commerce, and people rarely notice it.</p></div>
           <div><p class="label">What I did</p><p>Trained and compared five classifiers on 2,356 labelled texts, then shipped the best as a Chrome extension.</p></div>
@@ -1003,7 +1012,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">02</span><h2>Applied AI</h2><span class="label">B.Eng. thesis · 2024/25</span></div>
     <h2 class="case-title reveal" id="hp-h">HealthPlatform: a health summary from a medical wearable</h2>
-    <p class="lede reveal d1">An AI system that takes biometric data from the SiDLY medical wristband and the user's own medical documents, and turns them into a readable summary and personal recommendations.</p>
+    <p class="lede reveal d1">Wristband data and medical documents in; a readable health summary and recommendations out.</p>
     <div class="arch reveal" aria-label="System architecture, simplified">
       <div><b>SiDLY band</b><span>biometric data from the medical IoT wristband</span></div>
       <div><b>Supabase</b><span>PostgreSQL, auth and storage for medical documents</span></div>
@@ -1021,7 +1030,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
     </ul>
     <div class="chips"><span class="chip on">React 18</span><span class="chip on">TypeScript</span><span class="chip">Vite</span><span class="chip">Tailwind</span><span class="chip">shadcn/ui</span><span class="chip">Supabase</span><span class="chip">Langflow</span><span class="chip">AstraDB</span><span class="chip">OpenAI</span><span class="chip">Groq</span><span class="chip">ElevenLabs</span></div>
     </div></details>
-    <p class="note">Supervised by Andrzej Ptasznik, M.Sc.Eng., Warsaw School of Computer Science. The code is private; happy to show it in an interview.</p>
+    <p class="note">The code is private; happy to show it in an interview.</p>
   </div>
 </section>
 
@@ -1029,7 +1038,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">03</span><h2>Data engineering</h2><span class="label">Streaming · CDC · lakehouse</span></div>
     <h2 class="case-title reveal" id="fr-h">UX friction detection, in real time</h2>
-    <p class="lede reveal d1">A data platform that watches how people use an app and flags friction as it happens: rage clicks, abandoned sessions, screens people get stuck on. Every interaction is captured from the database with change data capture and processed as a stream.</p>
+    <p class="lede reveal d1">Rage clicks, abandoned sessions and stuck screens, flagged as they happen.</p>
     <div class="pipe reveal">
       <svg viewBox="0 0 900 170" role="img" aria-labelledby="pipe-t">
         <title id="pipe-t">UX events flow from a Python simulator into PostgreSQL, are captured by Debezium, streamed through Kafka, processed by Spark Structured Streaming, and stored in Delta Lake on MinIO, with friction signals flagged</title>
@@ -1052,8 +1061,8 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
       </svg>
     </div>
     <div class="cards" style="margin-top:1.5rem">
-      <div class="card reveal"><p class="label">Data model</p><p><b>users</b>, <b>screens</b> (with a UX goal, expected time and whether they sit on the critical path), <b>sessions</b> (converted, abandoned, total friction score) and <b>ux_interactions</b>, where each event can be marked as friction.</p><div class="links"><a class="btn" href="https://github.com/kachastepien/ux-friction-detection-platform">Code on GitHub</a></div></div>
-      <div class="card reveal d1"><p class="label">Mini data platform</p><p>The same stack as a reusable template: CSV-driven activity in PostgreSQL, Debezium into Kafka in KRaft mode, Spark Structured Streaming into a bronze, silver and gold Delta Lake on MinIO. One command starts it.</p>
+      <div class="card reveal"><p class="label">Data model</p><p>Users, screens, sessions and interactions, with every event scored for friction.</p><div class="links"><a class="btn" href="https://github.com/kachastepien/ux-friction-detection-platform">Code on GitHub</a></div></div>
+      <div class="card reveal d1"><p class="label">Mini data platform</p><p>The same stack as a one-command template, with bronze, silver and gold layers on MinIO.</p>
         <div class="medallion" aria-hidden="true"><span class="b">bronze</span><span class="s">silver</span><span class="g">gold</span></div>
         <div class="links"><a class="btn" href="https://github.com/kachastepien/mini-data-platform">Code on GitHub</a></div></div>
     </div>
@@ -1066,8 +1075,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
     <div class="feature" style="align-items:start">
       <div>
         <h2 class="case-title reveal" id="elt-h">Where do users drop off?</h2>
-        <p class="lede reveal d1">A reproducible SQL ELT for product funnel analytics. Raw tracker events go in; clean, explained UX metrics come out, ready for a dashboard.</p>
-        <p class="prose reveal d2" style="margin-top:1rem">Bronze keeps the raw JSON as it arrived. Silver applies explicit data-quality rules. Gold joins sessions to funnel steps and produces conversion per step and CTR and conversion per device, so a product team can answer which step loses the most people, which device converts best and how much of the traffic is bots.</p>
+        <p class="lede reveal d1">Raw tracker events in, clean funnel metrics out. SQL on DuckDB.</p>
         <div class="links reveal"><a class="btn" href="https://github.com/kachastepien/ELT-processes">Code on GitHub</a></div>
       </div>
       <div class="card reveal">
@@ -1090,10 +1098,10 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">05</span><h2 id="aid-h">AI in shipped products</h2><span class="label">Agents · LLM APIs · speech</span></div>
     <div class="cards">
-      <article class="card reveal"><p class="label">1st place · AI Place Challenge · Mar 2025</p><h3>GovBot</h3><p>At the Econverse Smart Cities Hackathon, in a challenge set by the Polish Ministry of Digital Affairs, I led our team and built the core of our solution in n8n: an AI assistant that helps citizens reach local public services without unnecessary bureaucracy.</p><div class="chips"><span class="chip on">n8n</span><span class="chip">AI agents</span><span class="chip">LLM APIs</span></div></article>
-      <article class="card reveal d1"><p class="label">HackYeah 2026</p><h3>Lemi</h3><p>Reads blood pressure monitors and glucometers from a photo, explains test results in plain language, and turns a recorded visit into three summaries. Built on the Claude API with ElevenLabs Scribe for speech to text.</p><div class="links"><button class="btn" type="button" data-goto="design" data-target="ai">See the product</button><a class="btn" href="https://pekao.vercel.app">Demo</a></div></article>
+      <article class="card reveal"><p class="label">1st place · AI Place Challenge · Mar 2025</p><h3>GovBot</h3><p>Led the team and built the core in n8n: an AI assistant that helps citizens reach local public services.</p><div class="chips"><span class="chip on">n8n</span><span class="chip">AI agents</span><span class="chip">LLM APIs</span></div></article>
+      <article class="card reveal d1"><p class="label">HackYeah 2026</p><h3>Lemi</h3><p>Reads health devices from a photo and turns a recorded visit into three summaries. Claude API and ElevenLabs.</p><div class="links"><button class="btn" type="button" data-goto="design" data-target="ai">See the product</button><a class="btn" href="https://pekao.vercel.app">Demo</a></div></article>
       <article class="card reveal"><p class="label">Internship · 2025</p><h3>Conversational AI at PerfectBot</h3><p>Improving conversational AI chatbots for IKEA, LPP, x-kom and US creator stores.</p></article>
-      <article class="card reveal d1"><p class="label">Product design side</p><h3>SiDLY Health</h3><p>Where the data is real: 70,000+ people using SiDLY technology across 16 countries. The design perspective shows the apps around it.</p><div class="links"><button class="btn" type="button" data-goto="design" data-target="health">See the case study</button></div></article>
+      <article class="card reveal d1"><p class="label">Product design side</p><h3>SiDLY Health</h3><p>70,000+ people across 16 countries. The apps are in the design view.</p><div class="links"><button class="btn" type="button" data-goto="design" data-target="health">See the case study</button></div></article>
     </div>
   </div>
 </section>
@@ -1119,20 +1127,27 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
     <div class="sec-head reveal"><span class="num">—</span><h2 id="about-h">About</h2><span class="label">Psychology × CS × data</span></div>
     <div class="about">
       <div>
-        <p class="big reveal">I studied psychology and computer science at the same time, and I am doing it again: a master's in data science at the Polish-Japanese Academy of IT and managerial studies at SGH, in parallel. It shapes how I work: I start from what people actually do, test it with them, and build prototypes real enough to argue with.</p>
-        <p class="prose muted reveal d1" style="margin-top:1rem">In 2025 I also interned at PerfectBot, improving conversational AI chatbots for IKEA, LPP, x-kom and US creator stores. Certificates: Stanford Code in Place (2026) and the Google UX Design Professional Certificate (7 courses).</p>
+        <p class="big reveal">Psychology and computer science, studied in parallel; now data science alongside management. I start from what people actually do and build prototypes real enough to argue with.</p>
+        <h4 class="label reveal" style="margin:2rem 0 .4rem">Experience</h4>
+        <ul class="edu reveal d1">
+          <li><span class="when">2023 – now</span><div><b>UX/UI Designer &amp; Researcher</b><span>SiDLY Healthcare · sole designer</span></div></li>
+          <li><span class="when">2025</span><div><b>Chatbot Developer Intern</b><span>PerfectBot · IKEA, LPP, x-kom</span></div></li>
+          <li><span class="when">2023</span><div><b>UX/UI Design Intern</b><span>SiDLY Healthcare</span></div></li>
+        </ul>
       </div>
+      <div><h4 class="label reveal" style="margin:0 0 .4rem">Education</h4>
       <ul class="edu reveal">
         <li><span class="when">2026 – 2028<br><span class="chip on" style="display:inline-block;margin-top:.35rem">now</span></span><div><b>SGH Warsaw School of Economics</b><span>M.Sc. Business / Managerial Economics</span></div></li>
         <li><span class="when">2025 – 2027<br><span class="chip on" style="display:inline-block;margin-top:.35rem">now</span></span><div><b>Polish-Japanese Academy of IT</b><span>M.Sc. Computer Science, Data Science</span></div></li>
         <li><span class="when">2021 – 2026</span><div><b>SWPS University</b><span>B.A. Psychology &amp; CS, UX/UI Research &amp; Design</span></div></li>
         <li><span class="when">2021 – 2025</span><div><b>Warsaw School of Computer Science</b><span>B.Eng. Computer Science, Data Science</span></div></li>
       </ul>
+      <p class="note">Stanford Code in Place (2026) · Google UX Design Certificate</p></div>
     </div>
     <div class="skills">
-      <div class="reveal"><h4>Design &amp; research</h4><div class="chips"><span class="chip on">Product &amp; UX/UI design</span><span class="chip">Interaction design</span><span class="chip">Prototyping</span><span class="chip">Information architecture</span><span class="chip">Accessible design for older adults</span><span class="chip">Conversational UX</span><span class="chip">User research</span><span class="chip">Usability testing</span><span class="chip">Behavioural psychology</span><span class="chip">Brand identity</span><span class="chip">Packaging</span></div></div>
-      <div class="reveal d1"><h4>AI &amp; data</h4><div class="chips"><span class="chip on">Python</span><span class="chip">pandas</span><span class="chip">scikit-learn</span><span class="chip on">NLP</span><span class="chip">Machine learning</span><span class="chip">LLM APIs</span><span class="chip">AI agents (n8n)</span><span class="chip">RAG</span><span class="chip">Kafka</span><span class="chip">Spark</span><span class="chip">SQL · DuckDB</span><span class="chip">Data analysis</span></div></div>
-      <div class="reveal d2"><h4>Code &amp; languages</h4><div class="chips"><span class="chip on">React</span><span class="chip on">TypeScript</span><span class="chip">JavaScript</span><span class="chip">HTML/CSS</span><span class="chip">Flutter</span><span class="chip">Figma Sites</span><span class="chip">Polish (native)</span><span class="chip">English (C1)</span></div></div>
+      <div class="reveal"><h4>Design &amp; research</h4><div class="chips"><span class="chip on">Product &amp; UX/UI design</span><span class="chip">Prototyping</span><span class="chip">User research</span><span class="chip">Usability testing</span><span class="chip">Accessible design</span><span class="chip">Brand identity</span></div></div>
+      <div class="reveal d1"><h4>AI &amp; data</h4><div class="chips"><span class="chip on">Python</span><span class="chip on">NLP</span><span class="chip">scikit-learn</span><span class="chip">LLM APIs &amp; agents</span><span class="chip">Kafka · Spark</span><span class="chip">SQL</span></div></div>
+      <div class="reveal d2"><h4>Tools &amp; languages</h4><div class="chips"><span class="chip on">Figma</span><span class="chip on">React · TypeScript</span><span class="chip">Flutter</span><span class="chip">n8n</span><span class="chip">Polish · native</span><span class="chip">English · C1</span></div></div>
     </div>
   </div>
 </section>
@@ -1143,7 +1158,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
    <div class="contact-grid">
     <div>
       <h2 class="reveal">Let's build<br>something <em>useful</em>.</h2>
-      <p class="lede reveal d1" style="max-width:30rem">Product design, data science, or a bit of both. Tell me about the team and the problem; the message lands straight in my inbox.</p>
+      <p class="lede reveal d1" style="max-width:30rem">Hiring for product design or data science? Tell me about the role.</p>
       <div class="row reveal d1">
         <span id="email">trafficjam027@gmail.com</span>
         <button class="copy" type="button" id="copy-email">Copy email</button>
