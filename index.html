@@ -113,7 +113,7 @@
 <meta name="theme-color" content="#fbfbfa">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
 <script>
 /* Pick the perspective before first paint so the page never flashes the wrong one. */
 (function(){var v=null;try{var q=new URLSearchParams(location.search).get('view');if(q==='data'||q==='design')v=q;else if(location.hash==='#data')v='data';else v=localStorage.getItem('ks-view')}catch(e){}
@@ -126,9 +126,9 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
   --bg:#fbfbfa; --surface:#f1f2f0; --surface-2:#e7e9e5; --fg:#18191a; --muted:#5d625f; --line:#d9dcd8;
   --design:#2c6b5a; --data:#4446c9; --warn:#b4472f;
   --accent:var(--design);color-scheme:light;
-  --display:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
-  --body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --display:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --col:44rem; --wide:74rem; --ease:cubic-bezier(.2,.7,.2,1);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
@@ -139,8 +139,8 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 :root[data-view="data"]{--accent:var(--data)}
 /* Design perspective keeps neutral surfaces; beige from the portrait's backdrop is only an accent.
    --accent fills and strokes, --ink is the accent for small text, dark enough to read. */
-:root{--ink:var(--accent)}
-:root[data-view="design"]{--design:#c9a47e; --ink:#86664a}
+:root{--ink:var(--fg)}
+:root[data-view="design"]{--design:#c9a47e}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"])[data-view="design"]{--design:#d6b591; --ink:#d6b591}}
 :root[data-theme="dark"][data-view="design"]{--design:#d6b591; --ink:#d6b591}
 :root{--accent-soft:color-mix(in srgb,var(--accent) 13%,transparent);--accent-line:color-mix(in srgb,var(--accent) 40%,var(--line))}
@@ -161,18 +161,6 @@ p{margin:0}
 .skip{position:absolute;left:-999px;top:0;background:var(--fg);color:var(--bg);padding:.5rem .8rem;z-index:100}
 .skip:focus{left:8px;top:8px}
 
-/* ---- ambient gradients: three slow blobs that take the perspective's colours ---- */
-.bgfx{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-.bgfx i{position:absolute;width:52vmax;height:52vmax;border-radius:50%;filter:blur(70px);opacity:.55;transition:background-color 1s var(--ease);animation:drift 28s ease-in-out infinite alternate}
-.bgfx i:nth-child(1){left:-14vmax;top:-18vmax;background:var(--blob1)}
-.bgfx i:nth-child(2){right:-18vmax;top:22vh;background:var(--blob2);animation-duration:34s;animation-delay:-9s}
-.bgfx i:nth-child(3){left:20vw;bottom:-30vmax;background:var(--blob3);animation-duration:40s;animation-delay:-17s}
-:root{--blob1:#f1e4d5;--blob2:#eef0f6;--blob3:#f6ece6}
-:root[data-view="data"]{--blob1:#e7e8fb;--blob2:#eef3f8;--blob3:#efe9fa}
-@keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(6vmax,4vmax) scale(1.08)}100%{transform:translate(-4vmax,8vmax) scale(.96)}}
-@media (prefers-reduced-motion:reduce){.bgfx i{animation:none}}
-body{background:transparent}
-html{background:var(--bg);transition:background-color .5s}
 
 /* ---- header + perspective switch ---- */
 .progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--accent);transform-origin:0 50%;transform:scaleX(0);z-index:60;transition:background-color .4s}
@@ -207,7 +195,6 @@ html{background:var(--bg);transition:background-color .5s}
 /* ---- hero ---- */
 .hero{position:relative;min-height:min(88vh,860px);display:flex;align-items:center;padding:4rem 0 3rem;overflow:hidden}
 #signal{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.9}
-.hero::before{content:"";position:absolute;inset:-20% -10% auto -10%;height:120%;background:radial-gradient(60% 55% at 18% 30%,var(--accent-soft),transparent 70%);pointer-events:none;transition:background .5s}
 .hero .wrap{position:relative}
 .hero-id{display:flex;align-items:center;gap:1rem;margin-bottom:1.75rem}
 .hero-id img{width:64px;height:64px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--accent-line)}
@@ -220,7 +207,7 @@ html{background:var(--bg);transition:background-color .5s}
 .statement{margin-top:1.75rem;max-width:40rem;font-size:clamp(1.12rem,2.2vw,1.38rem);line-height:1.5;color:var(--fg)}
 .statement b{font-weight:600}
 .statement em{font-style:normal;color:var(--ink);transition:color .4s}
-:root[data-view="design"] .statement em{color:var(--fg);font-weight:600}
+.statement em{color:var(--fg);font-weight:600}
 .sub{margin-top:.9rem;max-width:36rem;color:var(--muted)}
 .stats{margin-top:2.25rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:46rem;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .stats div{padding:1rem 1rem 1rem 0}
@@ -406,6 +393,7 @@ h3.sub-h{font-size:1.25rem;margin:3rem 0 .8rem}
 .decisions details p{font-size:.92rem;color:var(--muted);padding:0 1.2rem 1.2rem 3.7rem;margin-top:-.3rem;animation:viewIn .35s var(--ease) both}
 .dec-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;max-width:none}
 .dec-head .copy{white-space:nowrap}
+.dec-head.sub-h{margin:3rem 0 .9rem}
 @media (max-width:700px){.decisions{grid-template-columns:1fr}}
 
 /* ERP flow */
@@ -639,10 +627,48 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   .hero h1 .ch{transform:none;opacity:1}
   .marquee .track{animation:none;flex-wrap:wrap;width:auto}
 }
+
+/* ---- type system: one family, hierarchy from size and weight only ---- */
+body{font-size:1.02rem;letter-spacing:-.006em;font-feature-settings:"ss01","cv11"}
+h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
+.hero h1{font-weight:700;letter-spacing:-.055em;line-height:.95}
+.case-title{font-weight:600;letter-spacing:-.045em;line-height:1.02}
+.label,.copy,.tile .txt em,.tile .vis .big small,.medallion span,.skills h4,.rail a,.demo-top,.sec-head .num,.finding,.chip,.repo .rm,.agent,.fact small,.tldr .label,.meta .label,.dq b,.chat-sugg button{font-family:var(--body);text-transform:none;letter-spacing:0}
+.label{font-size:.82rem;font-weight:500;color:var(--muted)}
+.tldr .label{color:var(--muted)}
+.chip{font-size:.78rem;font-weight:500;padding:.45rem .7rem;border-radius:999px}
+.chip.on{color:var(--fg);background:var(--accent-soft);border-color:var(--accent-line)}
+.stats b,.metric b,.fact b,.tile .vis .big,.repo b,#email{font-family:var(--body);font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.stats b{font-weight:600}
+.fact b,.metric b{color:var(--fg);font-weight:600}
+.tile .vis .big{color:var(--fg);font-weight:600;letter-spacing:-.04em}
+.tile .txt em{font-size:.78rem;color:var(--muted)}
+.repo b{font-weight:600;letter-spacing:-.01em}
+.copy{font-size:.78rem;font-weight:500;border-radius:999px;padding:.5rem .8rem}
+.sec-head{border-bottom:0;padding-bottom:0;margin-bottom:1.6rem;gap:.8rem}
+.sec-head .num{color:var(--muted);font-size:.85rem;font-weight:500}
+.sec-head h2{font-size:clamp(1.3rem,2.4vw,1.6rem);font-weight:600}
+.rail a{font-size:.78rem}
+.medallion span{font-size:.75rem;font-weight:500}
+.end h2 em{color:color-mix(in srgb,var(--fg) 32%,var(--bg))}
+.decisions summary::before{color:var(--muted)}
+.dq b{color:var(--muted)}
+.card,.tile,.decisions,.tldr,.demo,.pipe,.flow,.loop,.browser,.award{border-radius:18px}
+.flow svg .lane,.pipe .ps,.pipe .tt{font-family:var(--body)}
+
+/* ---- smooth perspective change: the page dissolves into the other view ---- */
+@view-transition{navigation:none}
+.top{view-transition-name:topbar}
+#signal{view-transition-name:signal}
+::view-transition-old(root){animation:vt-out .32s var(--ease) both}
+::view-transition-new(root){animation:vt-in .6s var(--ease) both}
+::view-transition-group(signal){animation-duration:.6s}
+@keyframes vt-out{to{opacity:0;filter:blur(8px)}}
+@keyframes vt-in{from{opacity:0;filter:blur(8px);transform:translateY(8px)}}
+@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
 </style>
 </head>
 <body>
-<div class="bgfx" aria-hidden="true"><i></i><i></i><i></i></div>
 <a class="skip" href="#work">Skip to work</a>
 <nav class="rail" aria-label="Chapters"></nav>
 <button class="totop glass" type="button" aria-label="Back to top"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg></button>
@@ -669,10 +695,8 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   <div class="wrap">
     <div class="hero-id">
       <img src="assets/katarzyna-stepien.jpg" width="320" height="320" alt="Portrait of Katarzyna Stępień">
-      <p class="label">Warsaw · Product design × Data science</p>
+      <p class="muted" style="font-size:.95rem">Warsaw<br><span style="color:var(--fg);font-weight:500">Product design × Data science</span></p>
     </div>
-    <p class="kicker label" data-for="design">Product designer · UX/UI &amp; research</p>
-    <p class="kicker label" data-for="data">Data science · NLP, streaming, applied AI</p>
     <h1 id="name"><span class="line" data-split>Katarzyna</span><span class="line" data-split>Stępień</span></h1>
 
     <div data-for="design">
@@ -704,28 +728,6 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   <div class="scroll-hint" aria-hidden="true"><i></i></div>
 </section>
 
-<div class="marquee" aria-label="Highlights">
-  <div class="track">
-    <span><b>1st place</b> AI Place Challenge 2025</span>
-    <span>Sole designer · <b>SiDLY Healthcare</b></span>
-    <span><b>HackYeah 2026</b> · Lemi</span>
-    <span>Thesis · <b>NLP detection of dark patterns</b></span>
-    <span>Thesis · <b>health insights from wearables</b></span>
-    <span><b>Stanford</b> Code in Place 2026</span>
-    <span><b>Google</b> UX Design Certificate</span>
-    <span>Psychology <b>×</b> Computer Science</span>
-    <span>Now · <b>Data science</b> at PJAIT <b>+</b> <b>management</b> at SGH</span>
-    <span aria-hidden="true"><b>1st place</b> AI Place Challenge 2025</span>
-    <span aria-hidden="true">Sole designer · <b>SiDLY Healthcare</b></span>
-    <span aria-hidden="true"><b>HackYeah 2026</b> · Lemi</span>
-    <span aria-hidden="true">Thesis · <b>NLP detection of dark patterns</b></span>
-    <span aria-hidden="true">Thesis · <b>health insights from wearables</b></span>
-    <span aria-hidden="true"><b>Stanford</b> Code in Place 2026</span>
-    <span aria-hidden="true"><b>Google</b> UX Design Certificate</span>
-    <span aria-hidden="true">Psychology <b>×</b> Computer Science</span>
-    <span aria-hidden="true">Now · <b>Data science</b> at PJAIT <b>+</b> <b>management</b> at SGH</span>
-  </div>
-</div>
 
 <div id="work"></div>
 
@@ -734,7 +736,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 
 <section class="index" aria-labelledby="idx-d">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">↓</span><h2 id="idx-d">Selected work</h2><span class="label">Pick one · about 2 min each</span></div>
+    <div class="sec-head reveal"><span class="num">↓</span><h2 id="idx-d">Selected work</h2></div>
     <div class="tiles">
       <a class="tile reveal" href="#health"><div class="vis"><img class="l" src="assets/health/carer-home.jpg" alt="" loading="lazy"><img class="r" src="assets/health/res-rate.jpg" alt="" loading="lazy"><img src="assets/health/res-home.jpg" alt="" loading="lazy" style="z-index:1"></div><div class="txt"><b>SiDLY Health</b><span>Mobile and web apps for care managers, carers and residents.</span><em>Case study · 3 min</em></div></a>
       <a class="tile reveal d1" href="#erp"><div class="vis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></svg></div><div class="txt"><b>SiDLY ERP redesign</b><span>The platform 1,000+ municipalities use to run telecare.</span><em>Confidential · 2 min</em></div></a>
@@ -746,7 +748,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 
 <section class="block" id="health" data-rail="SiDLY Health" aria-labelledby="health-h">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">01</span><h2>Featured case study</h2><span class="label">SiDLY Healthcare · ongoing</span></div>
+    <div class="sec-head reveal"><span class="num">01</span><h2>Featured case study</h2></div>
     <div class="feature">
       <div>
         <h2 class="case-title reveal" id="health-h">SiDLY Health: one record, three people</h2>
@@ -837,7 +839,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 
 <section class="block" id="erp" data-rail="ERP" aria-labelledby="erp-h">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">02</span><h2>Case study</h2><span class="label">SiDLY Healthcare · in progress</span></div>
+    <div class="sec-head reveal"><span class="num">02</span><h2>Case study</h2></div>
     <h2 class="case-title reveal" id="erp-h">Redesigning the ERP that runs public telecare</h2>
     <p class="lede reveal d1">The platform municipalities and care providers use to order telecare bands, assign them and keep consent in order. I lead its redesign.</p>
     <div class="tldr reveal d2">
@@ -875,7 +877,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 
 <section class="block" id="ai" data-rail="AI & hackathons" aria-labelledby="ai-h">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">03</span><h2 id="ai-h">AI products &amp; hackathons</h2><span class="label">2025 – 2026</span></div>
+    <div class="sec-head reveal"><span class="num">03</span><h2 id="ai-h">AI products &amp; hackathons</h2></div>
 
     <div class="award reveal">
       <div class="medal" aria-hidden="true"><b>1<sup>st</sup></b></div>
@@ -931,7 +933,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 
 <section class="block" id="more" data-rail="More work" aria-labelledby="more-h">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">04</span><h2 id="more-h">More work</h2><span class="label">Web · brand · research</span></div>
+    <div class="sec-head reveal"><span class="num">04</span><h2 id="more-h">More work</h2></div>
     <div class="cards">
       <article class="card reveal"><p class="label">Design + code · Live</p><h3>sidly.eu</h3><p>Designed and built end to end: information architecture, UI and a React/TypeScript front-end, in seven languages.</p><div class="links"><a class="btn" href="https://www.sidly.eu">Visit sidly.eu</a></div></article>
       <article class="card reveal d1"><p class="label">Brand · Packaging</p><h3>Rebrand &amp; Vital Care</h3><p>Led the rebrand across the apps, the website, the Vital Care smartwatch packaging and events.</p></article>
@@ -947,7 +949,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 
 <section class="index" aria-labelledby="idx-a">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">↓</span><h2 id="idx-a">Selected projects</h2><span class="label">Pick one · about 1–2 min each</span></div>
+    <div class="sec-head reveal"><span class="num">↓</span><h2 id="idx-a">Selected projects</h2></div>
     <div class="tiles six">
       <a class="tile reveal" href="#unmasked"><div class="vis"><span class="big">0.936<small>F1 · NLP classifier</small></span></div><div class="txt"><b>Unmasked</b><span>Catching manipulative UX copy, with a live demo you can try.</span><em>Thesis · 2 min</em></div></a>
       <a class="tile reveal d1" href="#healthplatform"><div class="vis"><span class="big">RAG<small>wearable + documents</small></span></div><div class="txt"><b>HealthPlatform</b><span>An AI health summary from a medical wristband.</span><em>Thesis · 1 min</em></div></a>
@@ -961,7 +963,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 
 <section class="block" id="unmasked" data-rail="Unmasked" aria-labelledby="un-h">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">01</span><h2>Featured project</h2><span class="label">NLP · B.A. thesis · 2026</span></div>
+    <div class="sec-head reveal"><span class="num">01</span><h2>Featured project</h2></div>
     <div class="feature" style="align-items:start">
       <div>
         <h2 class="case-title reveal" id="un-h">Unmasked: catching manipulative UX copy with NLP</h2>
@@ -1010,7 +1012,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 
 <section class="block" id="healthplatform" data-rail="HealthPlatform" aria-labelledby="hp-h">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">02</span><h2>Applied AI</h2><span class="label">B.Eng. thesis · 2024/25</span></div>
+    <div class="sec-head reveal"><span class="num">02</span><h2>Applied AI</h2></div>
     <h2 class="case-title reveal" id="hp-h">HealthPlatform: a health summary from a medical wearable</h2>
     <p class="lede reveal d1">Wristband data and medical documents in; a readable health summary and recommendations out.</p>
     <div class="arch reveal" aria-label="System architecture, simplified">
@@ -1036,7 +1038,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 
 <section class="block" id="friction" data-rail="UX friction" aria-labelledby="fr-h">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">03</span><h2>Data engineering</h2><span class="label">Streaming · CDC · lakehouse</span></div>
+    <div class="sec-head reveal"><span class="num">03</span><h2>Data engineering</h2></div>
     <h2 class="case-title reveal" id="fr-h">UX friction detection, in real time</h2>
     <p class="lede reveal d1">Rage clicks, abandoned sessions and stuck screens, flagged as they happen.</p>
     <div class="pipe reveal">
@@ -1071,7 +1073,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 
 <section class="block" id="elt" data-rail="Funnel ELT" aria-labelledby="elt-h">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">04</span><h2>Analytics engineering</h2><span class="label">SQL · DuckDB</span></div>
+    <div class="sec-head reveal"><span class="num">04</span><h2>Analytics engineering</h2></div>
     <div class="feature" style="align-items:start">
       <div>
         <h2 class="case-title reveal" id="elt-h">Where do users drop off?</h2>
@@ -1096,7 +1098,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 
 <section class="block" id="ai-data" data-rail="AI in products" aria-labelledby="aid-h">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">05</span><h2 id="aid-h">AI in shipped products</h2><span class="label">Agents · LLM APIs · speech</span></div>
+    <div class="sec-head reveal"><span class="num">05</span><h2 id="aid-h">AI in shipped products</h2></div>
     <div class="cards">
       <article class="card reveal"><p class="label">1st place · AI Place Challenge · Mar 2025</p><h3>GovBot</h3><p>Led the team and built the core in n8n: an AI assistant that helps citizens reach local public services.</p><div class="chips"><span class="chip on">n8n</span><span class="chip">AI agents</span><span class="chip">LLM APIs</span></div></article>
       <article class="card reveal d1"><p class="label">HackYeah 2026</p><h3>Lemi</h3><p>Reads health devices from a photo and turns a recorded visit into three summaries. Claude API and ElevenLabs.</p><div class="links"><button class="btn" type="button" data-goto="design" data-target="ai">See the product</button><a class="btn" href="https://pekao.vercel.app">Demo</a></div></article>
@@ -1124,7 +1126,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 <!-- ================= ABOUT (shared) ================= -->
 <section class="block" id="about" data-rail="About" aria-labelledby="about-h">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">—</span><h2 id="about-h">About</h2><span class="label">Psychology × CS × data</span></div>
+    <div class="sec-head reveal"><span class="num">—</span><h2 id="about-h">About</h2></div>
     <div class="about">
       <div>
         <p class="big reveal">Psychology and computer science, studied in parallel; now data science alongside management. I start from what people actually do and build prototypes real enough to argue with.</p>
@@ -1241,18 +1243,19 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   function setView(v,opts){
     opts=opts||{};
     if(root.dataset.view===v&&!opts.force)return;
+    if(document.startViewTransition&&!reduce&&!opts.inner){document.startViewTransition(function(){setView(v,{inner:true,force:true})});return}
     root.dataset.view=v;
     btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.view===v?'true':'false')});
     try{localStorage.setItem('ks-view',v)}catch(e){}
     try{var u=new URL(location.href);u.searchParams.set('view',v);u.hash='';history.replaceState(null,'',u)}catch(e){}
-    document.querySelectorAll('.view[data-for="'+v+'"], .hero [data-for="'+v+'"]').forEach(function(el){el.classList.remove('view-enter');void el.offsetWidth;el.classList.add('view-enter')});
+    if(!opts.inner)document.querySelectorAll('.view[data-for="'+v+'"], .hero [data-for="'+v+'"]').forEach(function(el){el.classList.remove('view-enter');void el.offsetWidth;el.classList.add('view-enter')});
     watch(); countUp(document); signal.morph(v); if(typeof buildRail==='function')buildRail();
   }
   btns.forEach(function(b){b.addEventListener('click',function(){setView(b.dataset.view)})});
   btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.view===root.dataset.view?'true':'false')});
   document.querySelectorAll('[data-goto]').forEach(function(b){b.addEventListener('click',function(){
     setView(b.dataset.goto); var t=document.getElementById(b.dataset.target);
-    if(t)requestAnimationFrame(function(){t.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'})});
+    if(t)setTimeout(function(){t.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'})},120);
   })});
 
   /* ---------- header state + progress ---------- */
@@ -1362,7 +1365,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
     var m=document.createElement('div');m.className='msg '+who;m.innerHTML=html;
     if(acts&&acts.length){var a=document.createElement('div');a.className='acts';acts.forEach(function(x){
       var b;if(x.length===2){b=document.createElement('a');b.href=x[1];b.textContent=x[0];if(/^https?:/.test(x[1])){b.target='_blank';b.rel='noopener'}else b.addEventListener('click',function(){if(innerWidth<560)toggle(false)})}
-      else{b=document.createElement('button');b.type='button';b.textContent=x[0];b.addEventListener('click',function(){setView(x[1]);if(innerWidth<560)toggle(false);var el=document.getElementById(x[2]);if(el)requestAnimationFrame(function(){el.scrollIntoView({behavior:reduce?'auto':'smooth'})})})}
+      else{b=document.createElement('button');b.type='button';b.textContent=x[0];b.addEventListener('click',function(){setView(x[1]);if(innerWidth<560)toggle(false);var el=document.getElementById(x[2]);if(el)setTimeout(function(){el.scrollIntoView({behavior:reduce?'auto':'smooth'})},120)})}
       a.appendChild(b)});m.appendChild(a)}
     log.appendChild(m);log.scrollTop=log.scrollHeight;return m;
   }
