@@ -587,6 +587,9 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 /* chat */
 .chat-btn{position:fixed;right:clamp(14px,2vw,28px);bottom:clamp(14px,2vw,28px);z-index:70;display:flex;align-items:center;gap:.6rem;height:54px;padding:0 1.1rem 0 .8rem;border-radius:999px;color:var(--fg);font:600 .88rem/1 var(--body);cursor:pointer;transition:transform .3s var(--ease)}
 .chat-btn:hover{transform:translateY(-2px)}
+.chat-btn .txt{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;text-align:left}
+.chat-btn .txt b{font-weight:600;font-size:.88rem}
+.chat-btn .txt small{font-weight:400;font-size:.74rem;color:var(--muted)}
 .chat-btn .venn{display:flex}.chat-btn .venn i{width:20px;height:20px;border-radius:50%;background:var(--design)}.chat-btn .venn i+i{background:var(--data);margin-left:-8px;opacity:.9}
 :root[data-view="data"] .chat-btn .venn i:first-child{background:#c9a47e}
 .chat-btn .q{position:absolute;top:7px;left:29px;width:17px;height:17px;border-radius:50%;background:var(--fg);color:var(--bg);font:700 .66rem/17px var(--body);text-align:center;box-shadow:0 0 0 2px var(--bg);animation:nudge 5s var(--ease) infinite}
@@ -1281,8 +1284,8 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
   </div>
 </footer>
 
-<button class="chat-btn glass" type="button" aria-expanded="false" aria-controls="chat"><span class="venn" aria-hidden="true"><i></i><i></i></span><span class="q" aria-hidden="true">?</span><span class="txt">Ask Venn</span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Open Venn, the portfolio assistant</span></button>
-<div class="chat-teaser glass" id="chat-teaser" hidden><button type="button" class="tz-open">Got a question about my work? <b>Ask Venn</b></button><button type="button" class="tz-x" aria-label="Dismiss">×</button></div>
+<button class="chat-btn glass" type="button" aria-expanded="false" aria-controls="chat"><span class="venn" aria-hidden="true"><i></i><i></i></span><span class="q" aria-hidden="true">?</span><span class="txt"><b>Have a question?</b><small>Ask Venn, my assistant</small></span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Open Venn, the portfolio assistant</span></button>
+<div class="chat-teaser glass" id="chat-teaser" hidden><button type="button" class="tz-open">Curious about my work? <b>Venn can tell you</b></button><button type="button" class="tz-x" aria-label="Dismiss">×</button></div>
 <section class="chat glass" id="chat" role="dialog" aria-modal="false" aria-labelledby="chat-h" hidden>
   <div class="chat-head"><span class="venn-av" aria-hidden="true"><i></i><i></i></span><div><b id="chat-h">Venn</b><span>Katarzyna's portfolio assistant</span></div><button type="button" class="chat-x" aria-label="Close assistant">×</button></div>
   <div class="chat-log" id="chat-log" aria-live="polite"></div>
