@@ -819,3 +819,6 @@ kbd{font:500 .68rem/1 var(--body);padding:.22rem .38rem;border-radius:6px;border
 @media (hover:none){.cmd-btn kbd{display:none}}
 @media (max-width:760px){.nav{display:flex!important;padding-left:.6rem;border-left:0;gap:0}.nav a{display:none}.cmd-btn{font-size:0;gap:0;width:34px;height:34px;justify-content:center;border-radius:50%;border:1px solid var(--line)}.cmd-btn svg{width:16px;height:16px}.cmd-btn kbd{display:none}}
 @media (max-width:420px){.chk-btn .chk-n{display:none}}
+.skills{display:grid;grid-template-columns:1.3fr 1fr .6fr;gap:2rem;margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--line)}
+.skills .label{margin:0 0 .8rem}
+@media (max-width:900px){.skills{grid-template-columns:1fr;gap:1.4rem}}
