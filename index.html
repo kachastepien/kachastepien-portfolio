@@ -123,7 +123,7 @@
 if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.documentElement.classList.add('js');
 try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610171745">
+<link rel="stylesheet" href="assets/site.css?v=202610171830">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -145,11 +145,9 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
 <header class="top">
   <div class="wrap glass">
     <a class="brand" href="#top" aria-label="Katarzyna Stępień, back to top"><span class="mark" aria-hidden="true"><i></i><i></i></span><span>Katarzyna Stępień</span></a>
-    <nav class="nav" aria-label="Sections">
-      <button type="button" class="cmd-btn" aria-haspopup="dialog" aria-controls="cmd"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg>Projects<kbd>⌘K</kbd></button><a href="#about">About</a><a href="#contact">Contact</a>
-      <a href="assets/katarzyna-stepien-cv.pdf" target="_blank" rel="noopener" data-goatcounter-click="cv-open-nav">CV</a>
-    </nav>
-    <button type="button" class="chk-btn" aria-expanded="false" aria-controls="chk"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg><span class="chk-n">0/7</span><span class="sr-only"> recruiter checklist</span></button>
+    <nav class="nav" aria-label="Sections"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a><a href="assets/katarzyna-stepien-cv.pdf" target="_blank" rel="noopener" data-goatcounter-click="cv-open-nav">CV</a></nav>
+    <button type="button" class="cmd-btn" aria-haspopup="dialog" aria-controls="cmd"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="cmd-l">Search projects</span><kbd>⌘K</kbd></button>
+    <button type="button" class="chk-btn" aria-expanded="false" aria-controls="chk" title="Recruiter checklist"><svg class="ring" viewBox="0 0 20 20" aria-hidden="true"><circle class="tr" cx="10" cy="10" r="8"/><circle class="pr" cx="10" cy="10" r="8" pathLength="7"/><path class="ok" d="M6.5 10.3l2.3 2.3 4.7-4.9"/></svg><span class="chk-n">0/7</span><span class="sr-only"> recruiter checklist</span></button>
     <div class="switch" role="group" aria-label="Perspective">
       <span class="pill" aria-hidden="true"></span>
       <button type="button" data-view="design" aria-pressed="true">Product design</button>
@@ -680,7 +678,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   </div>
 </footer>
 
-<button class="chat-btn glass" type="button" aria-expanded="false" aria-controls="chat"><span class="venn" aria-hidden="true"><i></i><i></i></span><span class="q" aria-hidden="true">?</span><span class="txt"><b>Have a question?</b><small>Ask Venn, my assistant</small></span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Open Venn, the portfolio assistant</span></button>
+<button class="chat-btn glass" type="button" aria-expanded="false" aria-controls="chat"><span class="q" aria-hidden="true">?</span><span class="txt"><b>Have a question?</b><small>Ask Venn, my assistant</small></span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Open Venn, the portfolio assistant</span></button>
 <div class="cmd-ov" id="cmd" role="dialog" aria-modal="true" aria-label="Find a project" hidden>
   <div class="cmd glass">
     <div class="cmd-in"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><input id="cmd-q" placeholder="Search projects, skills or sections…" autocomplete="off" spellcheck="false" aria-controls="cmd-list"><kbd>esc</kbd></div>
@@ -721,6 +719,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
 <script>
 (function(){
   var root=document.documentElement;
+  addEventListener('pointerdown',function(e){window.__pt={x:e.clientX,y:e.clientY,t:Date.now()}},{passive:true,capture:true});
   function track(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:n,title:n,event:true})}catch(e){}}
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -783,7 +782,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     opts=opts||{};
     if(root.dataset.view===v&&!opts.force)return;
     if(!opts.inner)track('view-'+v);
-    if(document.startViewTransition&&!reduce&&!opts.inner){document.startViewTransition(function(){setView(v,{inner:true,force:true})});return}
+    if(document.startViewTransition&&!reduce&&!opts.inner){var pt=window.__pt&&Date.now()-window.__pt.t<1500?window.__pt:{x:innerWidth/2,y:60};root.style.setProperty('--vx',pt.x+'px');root.style.setProperty('--vy',pt.y+'px');document.startViewTransition(function(){setView(v,{inner:true,force:true})});return}
     root.dataset.view=v;
     btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.view===v?'true':'false')});
     try{localStorage.setItem('ks-view',v)}catch(e){}
@@ -1024,7 +1023,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     try{done=JSON.parse(localStorage.getItem('ks-checks')||'{}')||{}}catch(e){}
     var LINES=['Due diligence starts here.','Off to a good start.','Looking thorough.','Halfway to a decision.','This is going well.','Almost there.','One step from a verdict.','Verdict: hire her.'];
     function n(){return KEYS.filter(function(k){return done[k]}).length}
-    function paint(){var c=n();btn.querySelector('.chk-n').textContent=c+'/7';btn.classList.toggle('full',c===7);
+    function paint(){var c=n();btn.querySelector('.chk-n').textContent=c+'/7';btn.style.setProperty('--c',c);btn.classList.toggle('full',c===7);
       panel.querySelectorAll('li').forEach(function(li){li.classList.toggle('on',!!done[li.dataset.k])});
       panel.querySelector('.chk-bar i').style.width=(c/7*100)+'%';panel.querySelector('.chk-s').textContent=LINES[c]}
     function confetti(){if(reduce)return;var r=btn.getBoundingClientRect();for(var i=0;i<26;i++){var d=document.createElement('i');d.className='cf';d.style.left=(r.left+r.width/2)+'px';d.style.top=(r.top+r.height/2)+'px';d.style.background=i%2?'#c9a47e':'#a6a8ff';document.body.appendChild(d);
