@@ -32,7 +32,7 @@ A = "../../assets/"
 # ---------- building blocks ----------
 def phones(items):
     figs = "".join(
-        f'<figure class="phone reveal"><div class="device"><img src="{A}{src}" alt="{html.escape(alt)}" loading="lazy" width="393" height="851"></div>'
+        f'<figure class="phone reveal"><div class="device"><img decoding="async" src="{A}{src.replace('.jpg', '.webp')}" alt="{html.escape(alt)}" loading="lazy" width="393" height="851"></div>'
         f"<figcaption><b>{t}</b>{c}</figcaption></figure>"
         for src, alt, t, c in items
     )
@@ -41,7 +41,7 @@ def phones(items):
 
 def shots(items):
     figs = "".join(
-        f'<figure class="shot reveal"><div class="browser"><img src="{A}{src}" alt="{html.escape(alt)}" loading="lazy"></div>'
+        f'<figure class="shot reveal"><div class="browser"><img decoding="async" src="{A}{src.replace('.jpg', '.webp')}" alt="{html.escape(alt)}" loading="lazy"></div>'
         f"<figcaption><b>{t}</b>{c}</figcaption></figure>"
         for src, alt, t, c in items
     )
@@ -398,6 +398,7 @@ def page(pr, nxt):
 <link rel="stylesheet" href="../../assets/site.css?v={VER}">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
+<script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body class="cp">
 <a class="skip" href="#main">Skip to content</a>
@@ -433,8 +434,9 @@ def page(pr, nxt):
       <button class="copy" type="button" id="copy-email">Copy email</button>
       <a href="https://www.linkedin.com/in/kachastepien">LinkedIn</a>
       <a href="https://github.com/kachastepien">GitHub</a>
+      <a href="{A}katarzyna-stepien-cv.pdf" download="Katarzyna-Stepien-CV.pdf" data-goatcounter-click="cv-download-project">CV (PDF)</a>
     </div>
-    <div class="fine"><span>Katarzyna Stępień · Warsaw</span><span>Hand-built. No trackers.</span></div>
+    <div class="fine"><span>Katarzyna Stępień · Warsaw</span><span>Hand-built. No cookies.</span></div>
   </div>
 </footer>
 <script>
