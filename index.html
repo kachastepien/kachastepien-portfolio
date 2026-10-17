@@ -6,7 +6,7 @@
 <title>Katarzyna Stępień · Product Designer &amp; Data Scientist, Warsaw</title>
 <meta name="description" content="Portfolio of Katarzyna Stępień, product designer (UX/UI) and data scientist in Warsaw. Telecare apps at SiDLY Healthcare, NLP for dark patterns, streaming data platforms and award-winning AI projects.">
 <meta name="author" content="Katarzyna Stępień">
-<meta name="keywords" content="Katarzyna Stępień, Katarzyna Stepien, Kasia Stępień, product designer, UX designer, UI designer, data scientist, Warsaw, SiDLY Healthcare, portfolio">
+<meta name="keywords" content="Katarzyna Stępień, Katarzyna Stepien, Kacha Stępień, Kacha, Kasia Stępień, product designer, UX designer, UI designer, data scientist, Warsaw, SiDLY Healthcare, portfolio">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://kachastepien.com/">
 <meta property="og:type" content="profile">
@@ -35,6 +35,9 @@
  "@type": "Person",
  "name": "Katarzyna Stępień",
  "alternateName": [
+  "Kacha",
+  "Kacha Stępień",
+  "Kacha Stepien",
   "Katarzyna Stepien",
   "Kasia Stępień",
   "Kasia Stepien",
@@ -105,6 +108,7 @@
   "en"
  ],
  "sameAs": [
+  "https://www.instagram.com/kachastepien/",
   "https://www.linkedin.com/in/kachastepien",
   "https://github.com/kachastepien"
  ]
@@ -181,10 +185,10 @@ p{margin:0}
 .top.scrolled .wrap{--glass:color-mix(in srgb,var(--bg) 70%,transparent)}
 @media (max-width:420px){.top .wrap{padding-left:.9rem}}
 .brand{font:700 1rem/1 var(--display);letter-spacing:-.01em;text-decoration:none;display:flex;align-items:center;gap:.55rem;white-space:nowrap}
-.mark{position:relative;display:inline-block;width:27px;height:18px;flex:none}
+.mark{position:relative;display:inline-block;width:24px;height:18px;flex:none}
 .mark i{position:absolute;top:1px;width:16px;height:16px;border-radius:50%;transition:transform .6s var(--ease),opacity .6s var(--ease)}
 .mark i:first-child{left:0;background:#c9a47e}
-.mark i+i{left:10px;background:#a6a8ff;mix-blend-mode:multiply}
+.mark i+i{left:7.5px;background:#a6a8ff;mix-blend-mode:multiply}
 :root[data-view="design"] .mark i+i{opacity:.45;transform:scale(.8)}
 :root[data-view="data"] .mark i:first-child{opacity:.45;transform:scale(.8)}
 .brand:hover .mark i:first-child{transform:translateX(-2px)}.brand:hover .mark i+i{transform:translateX(2px)}
@@ -695,14 +699,19 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
 
 /* ---- intro: design and data overlap, Katarzyna is the intersection, then it flies into the logo ---- */
 .intro-ov{display:none}
-.intro .intro-ov{display:grid;place-items:center;position:fixed;inset:0;z-index:200;background:var(--bg);animation:introFail .01s 4.5s forwards}
+.intro .intro-ov{display:grid;place-items:center;position:fixed;inset:0;z-index:200;animation:introFail .01s 5s forwards}
+.intro-ov .ibg{position:absolute;inset:0;background:var(--bg)}
+.intro-ov .iv{position:relative}
 @keyframes introFail{to{visibility:hidden;opacity:0}}
 .intro-ov .iv{width:min(78vw,560px);overflow:visible}
 .intro-ov .ia{fill:#c9a47e;opacity:0}
 .intro-ov .ib{fill:#a6a8ff;opacity:0}
-.intro-ov .il{fill:#161718;opacity:0}
+.intro-ov .il{fill:#161718;opacity:0;transform-box:fill-box;transform-origin:center}
+.intro-ov .ia,.intro-ov .ib{transform-box:fill-box;transform-origin:center}
 .intro-ov .it{font:600 24px var(--body);fill:#161718;opacity:0;letter-spacing:-.02em}
-.intro-ov .in{font:600 21px var(--body);fill:#fff;opacity:0;letter-spacing:-.02em}
+.intro-ov .in{fill:#fff;opacity:0}
+.intro-ov .in1{font:600 38px var(--body);letter-spacing:-.04em}
+.intro-ov .in2{font:500 13px var(--body);fill:rgba(255,255,255,.7)}
 .intro .mark{opacity:0}
 .intro .hero h1 .ch{animation-play-state:paused}
 
@@ -726,14 +735,15 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
 </head>
 <body>
 <div class="intro-ov" aria-hidden="true">
+  <div class="ibg"></div>
   <svg class="iv" viewBox="0 0 600 360">
     <circle class="ia" cx="220" cy="180" r="170"/>
     <circle class="ib" cx="380" cy="180" r="170"/>
     <path class="il" d="M300,30 A170,170 0 0,1 300,330 A170,170 0 0,1 300,30 Z"/>
     <text class="it" x="125" y="188" text-anchor="middle">Design</text>
     <text class="it" x="475" y="188" text-anchor="middle">Data</text>
-    <text class="in" x="300" y="174" text-anchor="middle">Katarzyna</text>
-    <text class="in" x="300" y="200" text-anchor="middle">Stępień</text>
+    <text class="in in1" x="300" y="186" text-anchor="middle">Kacha</text>
+    <text class="in in2" x="300" y="214" text-anchor="middle">Katarzyna Stępień</text>
   </svg>
 </div>
 <a class="skip" href="#work">Skip to work</a>
@@ -762,7 +772,7 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
   <div class="wrap">
     <div class="hero-id">
       <img src="assets/katarzyna-stepien.jpg" width="320" height="320" alt="Portrait of Katarzyna Stępień">
-      <p class="muted" style="font-size:.95rem">Warsaw<br><span style="color:var(--fg);font-weight:500">Product design × Data science</span></p>
+      <p class="muted" style="font-size:.95rem">Kacha · Warsaw<br><span style="color:var(--fg);font-weight:500">Product design × Data science</span></p>
     </div>
     <h1 id="name"><span class="line" data-split>Katarzyna</span><span class="line" data-split>Stępień</span></h1>
 
@@ -1239,6 +1249,7 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
         <button class="copy" type="button" id="copy-email">Copy email</button>
         <a href="https://www.linkedin.com/in/kachastepien">LinkedIn</a>
         <a href="https://github.com/kachastepien">GitHub</a>
+        <a href="https://www.instagram.com/kachastepien/">Instagram</a>
       </div>
     </div>
     <form class="contact glass reveal d2" id="contact-form" novalidate aria-labelledby="cf-h">
@@ -1285,28 +1296,33 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
   var root=document.documentElement;
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- intro: play once per visit, skippable ---------- */
+  /* ---------- intro: two dots grow into design and data, Kacha is the overlap, then it all folds into the logo ---------- */
   (function(){
     var ov=document.querySelector('.intro-ov');if(!ov)return;
     if(!root.classList.contains('intro')){ov.remove();return}
-    var sv=ov.querySelector('.iv'),q=function(s){return ov.querySelector(s)},all=function(s){return ov.querySelectorAll(s)},E='cubic-bezier(.2,.7,.2,1)',done=false;
-    function anim(el,kf,o){return el.animate(kf,Object.assign({fill:'both',easing:E},o))}
-    anim(q('.ia'),[{transform:'translateX(-180px)',opacity:0},{transform:'none',opacity:.92}],{duration:850});
-    anim(q('.ib'),[{transform:'translateX(180px)',opacity:0},{transform:'none',opacity:.92}],{duration:850});
-    all('.it').forEach(function(el,k){anim(el,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:500,delay:380+k*90})});
-    anim(q('.il'),[{opacity:0},{opacity:1}],{duration:450,delay:820});
-    all('.in').forEach(function(el,k){anim(el,[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:450,delay:980+k*80})});
+    var sv=ov.querySelector('.iv'),bg=ov.querySelector('.ibg'),q=function(s){return ov.querySelector(s)},all=function(s){return ov.querySelectorAll(s)},done=false;
+    var OUT='cubic-bezier(.2,.7,.2,1)',SPRING='cubic-bezier(.34,1.45,.5,1)';
+    function anim(el,kf,o){return el.animate(kf,Object.assign({fill:'both',easing:OUT},o))}
+    anim(q('.ia'),[{transform:'translateX(-150px) scale(.08)',opacity:0},{transform:'translateX(-150px) scale(.08)',opacity:.95,offset:.15},{transform:'none',opacity:.92}],{duration:950,easing:SPRING});
+    anim(q('.ib'),[{transform:'translateX(150px) scale(.08)',opacity:0},{transform:'translateX(150px) scale(.08)',opacity:.95,offset:.15},{transform:'none',opacity:.92}],{duration:950,delay:90,easing:SPRING});
+    all('.it').forEach(function(el,k){anim(el,[{opacity:0,transform:'translateX('+(k?-14:14)+'px)'},{opacity:1,transform:'none'}],{duration:520,delay:560+k*70})});
+    anim(sv,[{transform:'scale(1)'},{transform:'scale(1.035)'},{transform:'scale(1)'}],{duration:420,delay:860,easing:'ease-in-out',fill:'none'});
+    anim(q('.il'),[{opacity:1,transform:'scale(0)'},{opacity:1,transform:'none'}],{duration:520,delay:900,easing:SPRING});
+    anim(q('.in1'),[{opacity:0,transform:'translateY(10px)',filter:'blur(6px)'},{opacity:1,transform:'none',filter:'blur(0)'}],{duration:520,delay:1080});
+    anim(q('.in2'),[{opacity:0},{opacity:1}],{duration:420,delay:1260});
     function finish(fast){
       if(done)return;done=true;
       var m=document.querySelector('.mark').getBoundingClientRect(),r=sv.getBoundingClientRect();
-      var s=m.width/(r.width*500/600),dx=(m.left+m.width/2)-(r.left+r.width/2),dy=(m.top+m.height/2)-(r.top+r.height/2);
-      all('.it,.in').forEach(function(el){anim(el,[{opacity:1},{opacity:0}],{duration:fast?120:220})});
-      anim(sv,[{transform:'none'},{transform:'translate('+dx+'px,'+dy+'px) scale('+s+')'}],{duration:fast?300:700,delay:fast?0:120,easing:'cubic-bezier(.7,0,.2,1)'});
-      anim(ov,[{backgroundColor:getComputedStyle(ov).backgroundColor},{backgroundColor:'rgba(0,0,0,0)'}],{duration:fast?300:600,delay:fast?0:300}).onfinish=function(){
+      var mx=m.left+m.width/2,my=m.top+m.height/2,s=m.width/(r.width*500/600),dx=mx-(r.left+r.width/2),dy=my-(r.top+r.height/2);
+      var D=fast?380:820,R=Math.hypot(Math.max(mx,innerWidth-mx),Math.max(my,innerHeight-my));
+      all('.it,.in').forEach(function(el){anim(el,[{opacity:1},{opacity:0}],{duration:fast?100:200})});
+      anim(q('.il'),[{opacity:1},{opacity:0}],{duration:D*.6,delay:D*.25});
+      anim(sv,[{transform:'none'},{transform:'translate('+dx+'px,'+dy+'px) scale('+s+')'}],{duration:D,easing:'cubic-bezier(.65,0,.25,1)'});
+      anim(bg,[{clipPath:'circle('+R+'px at '+mx+'px '+my+'px)'},{clipPath:'circle(0px at '+mx+'px '+my+'px)'}],{duration:D,delay:fast?0:60,easing:'cubic-bezier(.7,0,.25,1)'}).onfinish=function(){
         root.classList.remove('intro');ov.remove();try{sessionStorage.setItem('ks-intro','1')}catch(e){}
       };
     }
-    var tm=setTimeout(function(){finish(false)},1900);
+    var tm=setTimeout(function(){finish(false)},2250);
     ['pointerdown','keydown','wheel','touchstart'].forEach(function(ev){addEventListener(ev,function h(){removeEventListener(ev,h);clearTimeout(tm);finish(true)},{passive:true,once:true})});
   })();
 
@@ -1443,6 +1459,7 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
     {k:'certificates certificate courses course google stanford code in place certyfikaty kursy',a:"Stanford Code in Place (2026) and the Google UX Design Professional Certificate (7 courses)."},
     {k:'sidlyeu website www rebrand brand vital care packaging identity strona marka opakowania',a:"She designed and built sidly.eu end to end, from information architecture to a React/TypeScript front-end published with Figma Sites, in seven languages. She also led SiDLY's rebrand across the apps, website, the Vital Care smartwatch packaging and event materials.",x:[['More work','design','more'],['sidly.eu','https://www.sidly.eu']]},
     {k:'this site website portfolio built made how bot you assistant venn name who are you work how do you work jak dziala strona chatbot kim jestes',a:"I'm Venn, named after the two overlapping circles in the logo: design and data. The page is hand-built in HTML, CSS and vanilla JavaScript, and I'm a small retrieval bot: your question is matched against short notes about her work with TF-IDF-style scoring, right in your browser. Nothing leaves your browser unless you ask me to send her a message."},
+    {k:'kacha nickname nick why name kachastepien instagram ig social pseudonim ksywka',a:"Most people call her <b>Kacha</b>, hence kachastepien.com. She's @kachastepien on Instagram, GitHub and LinkedIn too.",x:[['Instagram','https://www.instagram.com/kachastepien/'],['LinkedIn','https://www.linkedin.com/in/kachastepien']]},
     {k:'thanks thank you thx dzieki dziekuje super great cool',a:"Any time. If you'd like to talk to her, I can pass a message on.",x:[['Leave her a message','__msg']]}
   ];
   var STOP='a an the is are was of to in on for and or with what which who how where does do did can she her it its me my you your about tell show please czy co jak jest sa to na w z i o mi sie ten ta ja ona jej gdzie'.split(' ');
