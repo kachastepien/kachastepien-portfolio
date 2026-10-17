@@ -663,9 +663,9 @@ code{font:500 .86em ui-monospace,SFMono-Regular,Menlo,monospace;background:color
 .sv svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .sv .sa,.sv .sb{transition:fill-opacity .7s var(--ease),stroke-opacity .7s var(--ease),transform .8s var(--ease);transform-box:fill-box;transform-origin:center;stroke-width:1.2}
 .sv .sa{fill:#c9a47e;stroke:#c9a47e}.sv .sb{fill:#a6a8ff;stroke:#a6a8ff}
-.sv .sl{fill:#fff;fill-opacity:0;stroke:#fff;stroke-opacity:0;stroke-width:1.6;transition:fill-opacity .7s var(--ease),stroke-opacity .7s var(--ease);filter:drop-shadow(0 14px 22px rgba(60,40,90,.18))}
+.sv .sl{fill:#161718;fill-opacity:0;transform-box:fill-box;transform-origin:center;transform:scaleY(.6);transition:fill-opacity .6s var(--ease),transform .7s var(--ease)}
 .svt{position:absolute;top:50%;transform:translate(-50%,-50%);font:600 clamp(.95rem,1.7vw,1.3rem)/1 var(--body);letter-spacing:-.035em;color:var(--fg);transition:opacity .6s var(--ease)}
-.svt-a{left:21%}.svt-b{left:79%}.svt-m{left:50%;font-size:clamp(1.5rem,3vw,2.4rem);font-weight:800;letter-spacing:-.06em;opacity:0;background:linear-gradient(100deg,#3b2a1d 0%,#3a2f63 55%,#2c2d8c 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.svt-a{left:21%}.svt-b{left:79%}.svt-m{left:50%;font-size:clamp(1.4rem,2.8vw,2.2rem);font-weight:800;letter-spacing:-.06em;color:#fff;opacity:0;transform:translate(-50%,-40%);transition:opacity .5s .15s var(--ease),transform .6s .15s var(--ease)}
 .sv[data-step="1"] .sa,.sv[data-step="2"] .sa{fill-opacity:.42;stroke-opacity:1}
 .sv[data-step="1"] .sb,.sv[data-step="2"] .sb{fill-opacity:.08;stroke-opacity:.35}
 .sv[data-step="2"] .sa{transform:scale(1.04)}
@@ -674,8 +674,8 @@ code{font:500 .86em ui-monospace,SFMono-Regular,Menlo,monospace;background:color
 .sv[data-step="3"] .sa{fill-opacity:.08;stroke-opacity:.35}
 .sv[data-step="3"] .svt-a{opacity:.35}
 .sv[data-step="4"] .sa,.sv[data-step="4"] .sb{fill-opacity:.3;stroke-opacity:.9}
-.sv[data-step="4"] .sl{fill-opacity:.62;stroke-opacity:.95}
-.sv[data-step="4"] .svt-m{opacity:1}
+.sv[data-step="4"] .sl{fill-opacity:1;transform:none}
+.sv[data-step="4"] .svt-m{opacity:1;transform:translate(-50%,-50%)}
 .story-steps{list-style:none;margin:0;padding:0}
 .st{min-height:62vh;display:flex;flex-direction:column;justify-content:center;gap:.5rem;opacity:.3;transition:opacity .5s var(--ease)}
 .st.on{opacity:1}
