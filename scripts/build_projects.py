@@ -92,9 +92,14 @@ def metrics(items):
     ) + "</div>"
 
 
+def slugify(t):
+    return re.sub(r"[^a-z0-9]+", "-", html.unescape(re.sub(r"<[^>]+>", "", t)).lower()).strip("-")
+
+
 def section(title, *body, lead=None):
     lead_html = f'<p class="cp-lead reveal">{lead}</p>' if lead else ""
-    return f'<section class="cp-sec"><h2 class="reveal">{title}</h2>{lead_html}{"".join(body)}</section>'
+    return (f'<section class="cp-sec" id="{slugify(title)}" data-rail="{html.escape(html.unescape(re.sub(r"<[^>]+>", "", title)))}">'
+            f'<h2 class="reveal">{title}</h2>{lead_html}{"".join(body)}</section>')
 
 
 def p(*texts):
@@ -366,7 +371,32 @@ import time
 VER = time.strftime("%Y%m%d%H%M")
 
 
-def page(pr, nxt):
+SHORT = {"sidly-health": "SiDLY Health", "sidly-erp": "SiDLY ERP", "lemi": "Lemi", "unmasked": "Unmasked",
+         "healthplatform": "HealthPlatform", "ux-friction": "UX friction detection", "funnel-elt": "Funnel ELT"}
+CHEV = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 4.5 6 7.5l3-3"/></svg>'
+LEFT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7.5 3.5 3 8l4.5 4.5"/></svg>'
+
+
+def project_menu(cur):
+    out = []
+    for view, label in (("design", "Product design"), ("data", "Data science")):
+        out.append(f'<p class="label">{label}</p>')
+        for q in P:
+            if q["view"] != view:
+                continue
+            here = ' aria-current="page"' if q is cur else ""
+            out.append(f'<a href="../{q["slug"]}/"{here}><span class="dot {view}"></span>{SHORT[q["slug"]]}</a>')
+    out.append(f'<a class="pm-all" href="../../?view={cur["view"]}#work">{LEFT}All work</a>')
+    return "".join(out)
+
+
+def section_menu(body):
+    secs = re.findall(r'<section class="cp-sec" id="([^"]+)" data-rail="([^"]+)">', body)
+    items = [("overview", "Overview")] + secs
+    return "".join(f'<a href="#{i}" data-id="{i}">{t}</a>' for i, t in items)
+
+
+def page(pr, prv, nxt):
     url = f"{SITE}/work/{pr['slug']}/"
     ld = {
         "@context": "https://schema.org", "@type": "CreativeWork", "name": html.unescape(pr["title"]),
@@ -406,13 +436,17 @@ def page(pr, nxt):
 <header class="top">
   <div class="wrap glass">
     <a class="brand" href="../../" aria-label="Katarzyna Stępień, home"><span class="mark" aria-hidden="true"><i></i><i></i></span><span>Katarzyna Stępień</span></a>
-    <nav class="nav" aria-label="Sections"><a href="../../?view={pr['view']}#work">All work</a><a href="../../#about">About</a><a href="#contact">Contact</a></nav>
+    <nav class="crumb" aria-label="Breadcrumb"><a class="crumb-home" href="../../?view={pr['view']}#work">Work</a><span class="sep" aria-hidden="true">/</span>
+      <details class="pmenu"><summary aria-label="Switch project"><span class="dot {pr['view']}"></span><span class="pm-cur">{SHORT[pr['slug']]}</span>{CHEV}</summary><div class="pm-list glass">{project_menu(pr)}</div></details>
+    </nav>
+    <details class="pmenu smenu"><summary aria-label="Jump to a section"><span class="sm-now">Overview</span>{CHEV}</summary><div class="pm-list glass"><p class="label">On this page</p>{section_menu(body)}</div></details>
+    <a class="btn-all" href="../../?view={pr['view']}#work">{LEFT}<span>All work</span></a>
   </div>
 </header>
+<nav class="rail" aria-label="Sections">{section_menu(body).replace('">', '"><i></i><span>').replace('</a>', '</span></a>')}</nav>
 <main id="main">
   <article class="wrap cp-wrap">
-    <a class="back reveal" href="../../?view={pr['view']}#work"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7.5 3.5 3 8l4.5 4.5"/></svg>All work</a>
-    <header class="cp-head">
+    <header class="cp-head" id="overview" data-rail="Overview">
       <p class="label reveal">{pr['kicker']}</p>
       <h1 class="case-title reveal">{pr['title']}</h1>
       <p class="lede reveal d1">{pr['lede']}</p>
@@ -421,7 +455,11 @@ def page(pr, nxt):
     </header>
     <div class="cp-hero">{pr['hero']}</div>
     {body}
-    <a class="next reveal" href="../{nxt['slug']}/"><span class="label">Next project</span><b>{nxt['title']}</b><span class="arrow" aria-hidden="true">→</span></a>
+    <nav class="pn reveal" aria-label="More projects">
+      <a class="next prev" href="../{prv['slug']}/"><span class="label">Previous</span><b>{SHORT[prv['slug']]}</b><span class="arrow" aria-hidden="true">←</span></a>
+      <a class="next" href="../{nxt['slug']}/"><span class="label">Next project</span><b>{SHORT[nxt['slug']]}</b><span class="arrow" aria-hidden="true">→</span></a>
+    </nav>
+    <p class="pn-all reveal"><a class="back" href="../../?view={pr['view']}#work">{LEFT}See all work</a></p>
   </article>
 </main>
 <footer class="end" id="contact">
@@ -447,6 +485,14 @@ def page(pr, nxt):
   var top=document.querySelector('.top'),bar=document.querySelector('.progress');
   function onScroll(){{var h=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?scrollY/h:0)+')';top.classList.toggle('scrolled',scrollY>8)}}
   addEventListener('scroll',onScroll,{{passive:true}});onScroll();
+  var now=document.querySelector('.sm-now'),rail=document.querySelector('.rail'),secs=[].slice.call(document.querySelectorAll('[data-rail]'));
+  if('IntersectionObserver' in window){{var spy=new IntersectionObserver(function(es){{es.forEach(function(e){{if(!e.isIntersecting)return;var id=e.target.id;now.textContent=e.target.dataset.rail;
+    document.querySelectorAll('[data-id]').forEach(function(a){{a.classList.toggle('on',a.dataset.id===id)}})}})}},{{rootMargin:'-40% 0px -55% 0px'}});secs.forEach(function(x){{spy.observe(x)}})}}
+  addEventListener('scroll',function(){{rail.classList.toggle('show',scrollY>innerHeight*.5)}},{{passive:true}});
+  var menus=[].slice.call(document.querySelectorAll('details.pmenu'));
+  menus.forEach(function(d){{d.addEventListener('toggle',function(){{if(d.open)menus.forEach(function(o){{if(o!==d)o.open=false}})}});d.querySelectorAll('a').forEach(function(a){{a.addEventListener('click',function(){{d.open=false}})}})}});
+  document.addEventListener('click',function(e){{menus.forEach(function(d){{if(d.open&&!d.contains(e.target))d.open=false}})}});
+  document.addEventListener('keydown',function(e){{if(e.key==='Escape')menus.forEach(function(d){{if(d.open){{d.open=false;d.querySelector('summary').focus()}}}})}});
   var cb=document.getElementById('copy-email'),em=document.getElementById('email');
   cb.addEventListener('click',function(){{try{{navigator.clipboard.writeText(em.textContent.trim()).then(function(){{cb.textContent='Copied';setTimeout(function(){{cb.textContent='Copy email'}},1800)}})}}catch(e){{}}}});
 }})();
@@ -459,10 +505,11 @@ def page(pr, nxt):
 def main():
     for i, pr in enumerate(P):
         nxt = P[(i + 1) % len(P)]
+        prv = P[i - 1]
         out = os.path.join(ROOT, "work", pr["slug"])
         os.makedirs(out, exist_ok=True)
         with open(os.path.join(out, "index.html"), "w", encoding="utf-8") as fh:
-            fh.write(page(pr, nxt))
+            fh.write(page(pr, prv, nxt))
         print("built", pr["slug"])
 
 

@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="../../assets/site.css?v=202610171718">
+<link rel="stylesheet" href="../../assets/site.css?v=202610171721">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "name": "UX friction detection, in real time", "description": "A real-time data platform by Katarzyna Stępień that detects rage clicks, abandonment and long screen times with Debezium, Kafka, Spark and Delta Lake.", "url": "https://kachastepien.com/work/ux-friction/", "inLanguage": "en", "author": {"@type": "Person", "name": "Katarzyna Stępień", "alternateName": "Kacha", "url": "https://kachastepien.com/"}}</script>
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -30,13 +30,17 @@
 <header class="top">
   <div class="wrap glass">
     <a class="brand" href="../../" aria-label="Katarzyna Stępień, home"><span class="mark" aria-hidden="true"><i></i><i></i></span><span>Katarzyna Stępień</span></a>
-    <nav class="nav" aria-label="Sections"><a href="../../?view=data#work">All work</a><a href="../../#about">About</a><a href="#contact">Contact</a></nav>
+    <nav class="crumb" aria-label="Breadcrumb"><a class="crumb-home" href="../../?view=data#work">Work</a><span class="sep" aria-hidden="true">/</span>
+      <details class="pmenu"><summary aria-label="Switch project"><span class="dot data"></span><span class="pm-cur">UX friction detection</span><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 4.5 6 7.5l3-3"/></svg></summary><div class="pm-list glass"><p class="label">Product design</p><a href="../sidly-health/"><span class="dot design"></span>SiDLY Health</a><a href="../sidly-erp/"><span class="dot design"></span>SiDLY ERP</a><a href="../lemi/"><span class="dot design"></span>Lemi</a><p class="label">Data science</p><a href="../unmasked/"><span class="dot data"></span>Unmasked</a><a href="../healthplatform/"><span class="dot data"></span>HealthPlatform</a><a href="../ux-friction/" aria-current="page"><span class="dot data"></span>UX friction detection</a><a href="../funnel-elt/"><span class="dot data"></span>Funnel ELT</a><a class="pm-all" href="../../?view=data#work"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7.5 3.5 3 8l4.5 4.5"/></svg>All work</a></div></details>
+    </nav>
+    <details class="pmenu smenu"><summary aria-label="Jump to a section"><span class="sm-now">Overview</span><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 4.5 6 7.5l3-3"/></svg></summary><div class="pm-list glass"><p class="label">On this page</p><a href="#overview" data-id="overview">Overview</a><a href="#friction-rules" data-id="friction-rules">Friction rules</a><a href="#data-model" data-id="data-model">Data model</a><a href="#how-it-runs" data-id="how-it-runs">How it runs</a></div></details>
+    <a class="btn-all" href="../../?view=data#work"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7.5 3.5 3 8l4.5 4.5"/></svg><span>All work</span></a>
   </div>
 </header>
+<nav class="rail" aria-label="Sections"><a href="#overview" data-id="overview"><i></i><span>Overview</span></a><a href="#friction-rules" data-id="friction-rules"><i></i><span>Friction rules</span></a><a href="#data-model" data-id="data-model"><i></i><span>Data model</span></a><a href="#how-it-runs" data-id="how-it-runs"><i></i><span>How it runs</span></a></nav>
 <main id="main">
   <article class="wrap cp-wrap">
-    <a class="back reveal" href="../../?view=data#work"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7.5 3.5 3 8l4.5 4.5"/></svg>All work</a>
-    <header class="cp-head">
+    <header class="cp-head" id="overview" data-rail="Overview">
       <p class="label reveal">Data engineering · streaming · CDC</p>
       <h1 class="case-title reveal">UX friction detection, in real time</h1>
       <p class="lede reveal d1">A data platform that watches how people use an app and flags friction as it happens: rage clicks, abandoned sessions, screens people get stuck on. Every interaction is captured from the database with change data capture and processed as a stream.</p>
@@ -62,11 +66,15 @@
         <circle class="pkt" r="4"><animateMotion dur="3.2s" begin="-2.4s" repeatCount="indefinite" path="M120,70 H695"/></circle>
         <circle class="bad" r="3.5"><animateMotion dur="2.4s" begin="-0.4s" repeatCount="indefinite" path="M610,100 V132"/></circle>
       </svg></div></div>
-    <section class="cp-sec"><h2 class="reveal">Friction rules</h2><div class="tbl reveal"><table><thead><tr><th>Signal</th><th>Rule</th><th>Severity</th></tr></thead><tbody><tr><td>Rage click</td><td><code>event_type = 'rage_click'</code> or more than 5 clicks</td><td>High</td></tr><tr><td>Session abandonment</td><td><code>event_type = 'session_abandon'</code></td><td>High</td></tr><tr><td>Long screen time</td><td>more than 120 s on a screen</td><td>Medium</td></tr><tr><td>Form error</td><td><code>event_type = 'form_error'</code></td><td>Medium</td></tr><tr><td>Excessive scrolling</td><td><code>event_type = 'rapid_scroll'</code></td><td>Low</td></tr></tbody></table></div></section>
-<section class="cp-sec"><h2 class="reveal">Data model</h2><div class="tbl reveal"><table><thead><tr><th>Table</th><th>What it holds</th></tr></thead><tbody><tr><td>users</td><td>Profiles: device, OS, browser, country</td></tr><tr><td>screens</td><td>Each screen's category, UX goal, expected time and whether it sits on the critical path</td></tr><tr><td>sessions</td><td>Start and end, device, converted, abandoned, number of events, total friction score</td></tr><tr><td>ux_interactions</td><td>Each event: screen, type, time on screen, clicks, scroll depth, friction flag and score</td></tr></tbody></table></div></section>
-<section class="cp-sec"><h2 class="reveal">How it runs</h2><div class="cards"><div class="card reveal"><p class="label">Capture</p><p>A Python simulator writes realistic sessions to PostgreSQL. Debezium reads the logical replication log and publishes every insert and update to Kafka as JSON.</p></div><div class="card reveal"><p class="label">Process and store</p><p>Spark Structured Streaming reads from Kafka, applies the rules and aggregates per session in time windows. Results land in Delta Lake on MinIO, S3-compatible storage with ACID transactions.</p></div><div class="card reveal"><p class="label">Operate</p><p>One <code>docker-compose up -d</code> starts everything, with health checks, automatic connector registration and named volumes. Kafka UI and Spark UI make it observable.</p></div><div class="card reveal"><p class="label">A reusable template</p><p>The same pattern as a mini data platform: CSV-driven activity, Kafka in KRaft mode without Zookeeper, and bronze, silver and gold layers on MinIO, started with one script.</p></div></div></section>
+    <section class="cp-sec" id="friction-rules" data-rail="Friction rules"><h2 class="reveal">Friction rules</h2><div class="tbl reveal"><table><thead><tr><th>Signal</th><th>Rule</th><th>Severity</th></tr></thead><tbody><tr><td>Rage click</td><td><code>event_type = 'rage_click'</code> or more than 5 clicks</td><td>High</td></tr><tr><td>Session abandonment</td><td><code>event_type = 'session_abandon'</code></td><td>High</td></tr><tr><td>Long screen time</td><td>more than 120 s on a screen</td><td>Medium</td></tr><tr><td>Form error</td><td><code>event_type = 'form_error'</code></td><td>Medium</td></tr><tr><td>Excessive scrolling</td><td><code>event_type = 'rapid_scroll'</code></td><td>Low</td></tr></tbody></table></div></section>
+<section class="cp-sec" id="data-model" data-rail="Data model"><h2 class="reveal">Data model</h2><div class="tbl reveal"><table><thead><tr><th>Table</th><th>What it holds</th></tr></thead><tbody><tr><td>users</td><td>Profiles: device, OS, browser, country</td></tr><tr><td>screens</td><td>Each screen's category, UX goal, expected time and whether it sits on the critical path</td></tr><tr><td>sessions</td><td>Start and end, device, converted, abandoned, number of events, total friction score</td></tr><tr><td>ux_interactions</td><td>Each event: screen, type, time on screen, clicks, scroll depth, friction flag and score</td></tr></tbody></table></div></section>
+<section class="cp-sec" id="how-it-runs" data-rail="How it runs"><h2 class="reveal">How it runs</h2><div class="cards"><div class="card reveal"><p class="label">Capture</p><p>A Python simulator writes realistic sessions to PostgreSQL. Debezium reads the logical replication log and publishes every insert and update to Kafka as JSON.</p></div><div class="card reveal"><p class="label">Process and store</p><p>Spark Structured Streaming reads from Kafka, applies the rules and aggregates per session in time windows. Results land in Delta Lake on MinIO, S3-compatible storage with ACID transactions.</p></div><div class="card reveal"><p class="label">Operate</p><p>One <code>docker-compose up -d</code> starts everything, with health checks, automatic connector registration and named volumes. Kafka UI and Spark UI make it observable.</p></div><div class="card reveal"><p class="label">A reusable template</p><p>The same pattern as a mini data platform: CSV-driven activity, Kafka in KRaft mode without Zookeeper, and bronze, silver and gold layers on MinIO, started with one script.</p></div></div></section>
 <div class="links reveal"><a class="btn solid" href="https://github.com/kachastepien/ux-friction-detection-platform">Friction platform on GitHub</a><a class="btn" href="https://github.com/kachastepien/mini-data-platform">Mini data platform</a></div>
-    <a class="next reveal" href="../funnel-elt/"><span class="label">Next project</span><b>Where do users drop off?</b><span class="arrow" aria-hidden="true">→</span></a>
+    <nav class="pn reveal" aria-label="More projects">
+      <a class="next prev" href="../healthplatform/"><span class="label">Previous</span><b>HealthPlatform</b><span class="arrow" aria-hidden="true">←</span></a>
+      <a class="next" href="../funnel-elt/"><span class="label">Next project</span><b>Funnel ELT</b><span class="arrow" aria-hidden="true">→</span></a>
+    </nav>
+    <p class="pn-all reveal"><a class="back" href="../../?view=data#work"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7.5 3.5 3 8l4.5 4.5"/></svg>See all work</a></p>
   </article>
 </main>
 <footer class="end" id="contact">
@@ -92,6 +100,14 @@
   var top=document.querySelector('.top'),bar=document.querySelector('.progress');
   function onScroll(){var h=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?scrollY/h:0)+')';top.classList.toggle('scrolled',scrollY>8)}
   addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var now=document.querySelector('.sm-now'),rail=document.querySelector('.rail'),secs=[].slice.call(document.querySelectorAll('[data-rail]'));
+  if('IntersectionObserver' in window){var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var id=e.target.id;now.textContent=e.target.dataset.rail;
+    document.querySelectorAll('[data-id]').forEach(function(a){a.classList.toggle('on',a.dataset.id===id)})})},{rootMargin:'-40% 0px -55% 0px'});secs.forEach(function(x){spy.observe(x)})}
+  addEventListener('scroll',function(){rail.classList.toggle('show',scrollY>innerHeight*.5)},{passive:true});
+  var menus=[].slice.call(document.querySelectorAll('details.pmenu'));
+  menus.forEach(function(d){d.addEventListener('toggle',function(){if(d.open)menus.forEach(function(o){if(o!==d)o.open=false})});d.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){d.open=false})})});
+  document.addEventListener('click',function(e){menus.forEach(function(d){if(d.open&&!d.contains(e.target))d.open=false})});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')menus.forEach(function(d){if(d.open){d.open=false;d.querySelector('summary').focus()}})});
   var cb=document.getElementById('copy-email'),em=document.getElementById('email');
   cb.addEventListener('click',function(){try{navigator.clipboard.writeText(em.textContent.trim()).then(function(){cb.textContent='Copied';setTimeout(function(){cb.textContent='Copy email'},1800)})}catch(e){}});
 })();
