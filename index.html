@@ -108,7 +108,6 @@
   "en"
  ],
  "sameAs": [
-  "https://www.instagram.com/kachastepien/",
   "https://www.linkedin.com/in/kachastepien",
   "https://github.com/kachastepien"
  ]
@@ -707,8 +706,8 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
 .intro-ov .iv{position:relative}
 @keyframes introFail{to{visibility:hidden;opacity:0}}
 .intro-ov .iv{width:min(78vw,560px);overflow:visible}
-.intro-ov .ia{fill:#c9a47e;opacity:0}
-.intro-ov .ib{fill:#a6a8ff;opacity:0}
+.intro-ov .ia{fill:#c9a47e;opacity:0;mix-blend-mode:multiply}
+.intro-ov .ib{fill:#a6a8ff;opacity:0;mix-blend-mode:multiply}
 .intro-ov .il{fill:#161718;opacity:0;transform-box:fill-box;transform-origin:center}
 .intro-ov .ia,.intro-ov .ib{transform-box:fill-box;transform-origin:center}
 .intro-ov .it{font:600 24px var(--body);fill:#161718;opacity:0;letter-spacing:-.02em}
@@ -1252,7 +1251,6 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
         <button class="copy" type="button" id="copy-email">Copy email</button>
         <a href="https://www.linkedin.com/in/kachastepien">LinkedIn</a>
         <a href="https://github.com/kachastepien">GitHub</a>
-        <a href="https://www.instagram.com/kachastepien/">Instagram</a>
       </div>
     </div>
     <form class="contact glass reveal d2" id="contact-form" novalidate aria-labelledby="cf-h">
@@ -1304,15 +1302,19 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
     var ov=document.querySelector('.intro-ov');if(!ov)return;
     if(!root.classList.contains('intro')){ov.remove();return}
     var sv=ov.querySelector('.iv'),bg=ov.querySelector('.ibg'),q=function(s){return ov.querySelector(s)},all=function(s){return ov.querySelectorAll(s)},done=false;
-    var OUT='cubic-bezier(.2,.7,.2,1)',SPRING='cubic-bezier(.34,1.45,.5,1)';
+    var OUT='cubic-bezier(.2,.7,.2,1)';
     function anim(el,kf,o){return el.animate(kf,Object.assign({fill:'both',easing:OUT},o))}
-    anim(q('.ia'),[{transform:'translateX(-150px) scale(.08)',opacity:0},{transform:'translateX(-150px) scale(.08)',opacity:.95,offset:.15},{transform:'none',opacity:.92}],{duration:950,easing:SPRING});
-    anim(q('.ib'),[{transform:'translateX(150px) scale(.08)',opacity:0},{transform:'translateX(150px) scale(.08)',opacity:.95,offset:.15},{transform:'none',opacity:.92}],{duration:950,delay:90,easing:SPRING});
-    all('.it').forEach(function(el,k){anim(el,[{opacity:0,transform:'translateX('+(k?-14:14)+'px)'},{opacity:1,transform:'none'}],{duration:520,delay:560+k*70})});
-    anim(sv,[{transform:'scale(1)'},{transform:'scale(1.035)'},{transform:'scale(1)'}],{duration:420,delay:860,easing:'ease-in-out',fill:'none'});
-    anim(q('.il'),[{opacity:1,transform:'scale(0)'},{opacity:1,transform:'none'}],{duration:520,delay:900,easing:SPRING});
-    anim(q('.in1'),[{opacity:0,transform:'translateY(10px)',filter:'blur(6px)'},{opacity:1,transform:'none',filter:'blur(0)'}],{duration:520,delay:1080});
-    anim(q('.in2'),[{opacity:0},{opacity:1}],{duration:420,delay:1260});
+    var GROW='cubic-bezier(.16,1,.3,1)',SPLIT='cubic-bezier(.65,0,.35,1)';
+    [['.ia',80],['.ib',-80]].forEach(function(c){
+      anim(q(c[0]),[
+        {transform:'translateX('+c[1]+'px) scale(.35)',opacity:0},
+        {transform:'translateX('+c[1]+'px) scale(1)',opacity:.92,offset:.45,easing:SPLIT},
+        {transform:'none',opacity:.92}],{duration:1250,easing:GROW});
+    });
+    all('.it').forEach(function(el,k){anim(el,[{opacity:0,transform:'translateX('+(k?-10:10)+'px)'},{opacity:1,transform:'none'}],{duration:500,delay:1000+k*60})});
+    anim(q('.il'),[{opacity:1,transform:'scaleY(0)'},{opacity:1,transform:'none'}],{duration:480,delay:1150,easing:GROW});
+    anim(q('.in1'),[{opacity:0,transform:'translateY(8px)',filter:'blur(6px)'},{opacity:1,transform:'none',filter:'blur(0)'}],{duration:500,delay:1300});
+    anim(q('.in2'),[{opacity:0},{opacity:1}],{duration:400,delay:1450});
     function finish(fast){
       if(done)return;done=true;
       var m=document.querySelector('.mark').getBoundingClientRect(),r=sv.getBoundingClientRect();
@@ -1325,7 +1327,7 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
         root.classList.remove('intro');ov.remove();try{sessionStorage.setItem('ks-intro','1')}catch(e){}
       };
     }
-    var tm=setTimeout(function(){finish(false)},2250);
+    var tm=setTimeout(function(){finish(false)},2500);
     ['pointerdown','keydown','wheel','touchstart'].forEach(function(ev){addEventListener(ev,function h(){removeEventListener(ev,h);clearTimeout(tm);finish(true)},{passive:true,once:true})});
   })();
 
@@ -1462,7 +1464,7 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
     {k:'certificates certificate courses course google stanford code in place certyfikaty kursy',a:"Stanford Code in Place (2026) and the Google UX Design Professional Certificate (7 courses)."},
     {k:'sidlyeu website www rebrand brand vital care packaging identity strona marka opakowania',a:"She designed and built sidly.eu end to end, from information architecture to a React/TypeScript front-end published with Figma Sites, in seven languages. She also led SiDLY's rebrand across the apps, website, the Vital Care smartwatch packaging and event materials.",x:[['More work','design','more'],['sidly.eu','https://www.sidly.eu']]},
     {k:'this site website portfolio built made how bot you assistant venn name who are you work how do you work jak dziala strona chatbot kim jestes',a:"I'm Venn, named after the two overlapping circles in the logo: design and data. The page is hand-built in HTML, CSS and vanilla JavaScript, and I'm a small retrieval bot: your question is matched against short notes about her work with TF-IDF-style scoring, right in your browser. Nothing leaves your browser unless you ask me to send her a message."},
-    {k:'kacha nickname nick why name kachastepien instagram ig social pseudonim ksywka',a:"Most people call her <b>Kacha</b>, hence kachastepien.com. She's @kachastepien on Instagram, GitHub and LinkedIn too.",x:[['Instagram','https://www.instagram.com/kachastepien/'],['LinkedIn','https://www.linkedin.com/in/kachastepien']]},
+    {k:'kacha nickname nick why name kachastepien social pseudonim ksywka',a:"Most people call her <b>Kacha</b>, hence kachastepien.com. She's kachastepien on GitHub and LinkedIn too.",x:[['LinkedIn','https://www.linkedin.com/in/kachastepien'],['GitHub','https://github.com/kachastepien']]},
     {k:'thanks thank you thx dzieki dziekuje super great cool',a:"Any time. If you'd like to talk to her, I can pass a message on.",x:[['Leave her a message','__msg']]}
   ];
   var STOP='a an the is are was of to in on for and or with what which who how where does do did can she her it its me my you your about tell show please czy co jak jest sa to na w z i o mi sie ten ta ja ona jej gdzie'.split(' ');
