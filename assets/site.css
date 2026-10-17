@@ -580,13 +580,14 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
 .intro-ov .ibg{position:absolute;inset:0;background:var(--bg)}
 .intro-ov .icv{position:absolute;inset:0;width:100%;height:100%}
 .intro-ov .ilayer{position:absolute;inset:0;pointer-events:none}
-.ilab{position:absolute;top:var(--cy);transform:translate(-50%,-50%);font:italic 400 clamp(1.6rem,3.4vw,2.6rem)/1 "Instrument Serif",Georgia,serif;color:#161718;opacity:0;transition:opacity .7s var(--ease),transform .9s var(--ease)}
+.ilab{position:absolute;top:var(--cy);transform:translate(-50%,-50%);font:600 clamp(1.05rem,2vw,1.5rem)/1 var(--body);letter-spacing:-.035em;color:#161718;opacity:0;transition:opacity .7s var(--ease),transform .9s var(--ease)}
 .ilab-a{left:calc(var(--cx) - var(--r))}
 .ilab-b{left:calc(var(--cx) + var(--r))}
 .ilab.on{opacity:1;transform:translate(-50%,-50%)}
 .ilab:not(.on){transform:translate(-50%,-30%)}
 .iname{position:absolute;left:var(--cx);top:var(--cy);transform:translate(-50%,-54%);text-align:center;color:#161718}
-.iname b{display:block;font:italic 400 calc(var(--r) * .36)/1 "Instrument Serif",Georgia,serif;letter-spacing:-.02em}
+.iname b{display:block;font:800 calc(var(--r) * .27)/1 var(--body);letter-spacing:-.06em;padding:0 .04em}
+.iname b .l{background:linear-gradient(100deg,#3b2a1d 0%,#3a2f63 55%,#2c2d8c 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .iname b .l{display:inline-block;opacity:0;transform:translateY(.35em) rotate(4deg);filter:blur(6px);transition:opacity .6s var(--ease),transform .8s var(--ease),filter .6s var(--ease)}
 .iname.on b .l{opacity:1;transform:none;filter:none}
 .icap{position:absolute;left:var(--cx);top:calc(var(--cy) + var(--r) + clamp(22px,3.4vh,38px));transform:translateX(-50%);white-space:nowrap;font:500 .85rem/1 var(--body);color:var(--muted);opacity:0;transition:opacity .7s .3s var(--ease)}
@@ -673,8 +674,8 @@ code{font:500 .86em ui-monospace,SFMono-Regular,Menlo,monospace;background:color
 .sv .sa,.sv .sb{transition:fill-opacity .7s var(--ease),stroke-opacity .7s var(--ease),transform .8s var(--ease);transform-box:fill-box;transform-origin:center;stroke-width:1.2}
 .sv .sa{fill:#c9a47e;stroke:#c9a47e}.sv .sb{fill:#a6a8ff;stroke:#a6a8ff}
 .sv .sl{fill:#fff;fill-opacity:0;stroke:#fff;stroke-opacity:0;stroke-width:1.6;transition:fill-opacity .7s var(--ease),stroke-opacity .7s var(--ease);filter:drop-shadow(0 14px 22px rgba(60,40,90,.18))}
-.svt{position:absolute;top:50%;transform:translate(-50%,-50%);font:italic 400 clamp(1.3rem,2.6vw,2.1rem)/1 "Instrument Serif",Georgia,serif;color:var(--fg);transition:opacity .6s var(--ease)}
-.svt-a{left:21%}.svt-b{left:79%}.svt-m{left:50%;font-size:clamp(1.6rem,3.4vw,2.8rem);opacity:0}
+.svt{position:absolute;top:50%;transform:translate(-50%,-50%);font:600 clamp(.95rem,1.7vw,1.3rem)/1 var(--body);letter-spacing:-.035em;color:var(--fg);transition:opacity .6s var(--ease)}
+.svt-a{left:21%}.svt-b{left:79%}.svt-m{left:50%;font-size:clamp(1.5rem,3vw,2.4rem);font-weight:800;letter-spacing:-.06em;opacity:0;background:linear-gradient(100deg,#3b2a1d 0%,#3a2f63 55%,#2c2d8c 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .sv[data-step="1"] .sa,.sv[data-step="2"] .sa{fill-opacity:.42;stroke-opacity:1}
 .sv[data-step="1"] .sb,.sv[data-step="2"] .sb{fill-opacity:.08;stroke-opacity:.35}
 .sv[data-step="2"] .sa{transform:scale(1.04)}
