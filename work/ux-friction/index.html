@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" data-view="data" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>UX friction detection, in real time · Katarzyna Stępień</title>
+<meta name="description" content="A real-time data platform by Katarzyna Stępień that detects rage clicks, abandonment and long screen times with Debezium, Kafka, Spark and Delta Lake.">
+<link rel="canonical" href="https://kachastepien.com/work/ux-friction/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UX friction detection, in real time · Katarzyna Stępień">
+<meta property="og:description" content="A real-time data platform by Katarzyna Stępień that detects rage clicks, abandonment and long screen times with Debezium, Kafka, Spark and Delta Lake.">
+<meta property="og:url" content="https://kachastepien.com/work/ux-friction/">
+<meta property="og:image" content="https://kachastepien.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "name": "UX friction detection, in real time", "description": "A real-time data platform by Katarzyna Stępień that detects rage clicks, abandonment and long screen times with Debezium, Kafka, Spark and Delta Lake.", "url": "https://kachastepien.com/work/ux-friction/", "inLanguage": "en", "author": {"@type": "Person", "name": "Katarzyna Stępień", "alternateName": "Kacha", "url": "https://kachastepien.com/"}}</script>
+</head>
+<body class="cp">
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"></div>
+<header class="top">
+  <div class="wrap glass">
+    <a class="brand" href="../../" aria-label="Katarzyna Stępień, home"><span class="mark" aria-hidden="true"><i></i><i></i></span><span>Katarzyna Stępień</span></a>
+    <nav class="nav" aria-label="Sections"><a href="../../?view=data#work">All work</a><a href="../../#about">About</a><a href="#contact">Contact</a></nav>
+  </div>
+</header>
+<main id="main">
+  <article class="wrap cp-wrap">
+    <a class="back reveal" href="../../?view=data#work"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7.5 3.5 3 8l4.5 4.5"/></svg>All work</a>
+    <header class="cp-head">
+      <p class="label reveal">Data engineering · streaming · CDC</p>
+      <h1 class="case-title reveal">UX friction detection, in real time</h1>
+      <p class="lede reveal d1">A data platform that watches how people use an app and flags friction as it happens: rage clicks, abandoned sessions, screens people get stuck on. Every interaction is captured from the database with change data capture and processed as a stream.</p>
+      <div class="tldr reveal d1"><div><p class="label">Goal</p><p>Detect UX friction signals while sessions are happening.</p></div><div><p class="label">What I built</p><p>A Docker stack: PostgreSQL with Debezium CDC, Kafka, Spark Structured Streaming, Delta Lake on MinIO.</p></div><div><p class="label">Output</p><p>Friction events scored per interaction and per session, stored with ACID guarantees.</p></div></div>
+      <div class="chips reveal"><span class="chip on">Python</span><span class="chip on">PostgreSQL</span><span class="chip">Debezium</span><span class="chip">Kafka</span><span class="chip">Spark</span><span class="chip">Delta Lake</span><span class="chip">MinIO</span><span class="chip">Docker</span></div>
+    </header>
+    <div class="cp-hero"><div class="pipe reveal"><svg viewBox="0 0 900 170" role="img" aria-labelledby="pipe-t">
+        <title id="pipe-t">UX events flow from a Python simulator into PostgreSQL, are captured by Debezium, streamed through Kafka, processed by Spark Structured Streaming, and stored in Delta Lake on MinIO, with friction signals flagged</title>
+        <path id="w" class="wire" d="M120,70 H780"/>
+        <g><rect class="pn" x="10" y="40" width="110" height="60" rx="8"/><text class="pt" x="65" y="66" text-anchor="middle">UX simulator</text><text class="ps" x="65" y="84" text-anchor="middle">python</text></g>
+        <g><rect class="pn" x="145" y="40" width="110" height="60" rx="8"/><text class="pt" x="200" y="66" text-anchor="middle">PostgreSQL</text><text class="ps" x="200" y="84" text-anchor="middle">logical replication</text></g>
+        <g><rect class="pn" x="280" y="40" width="110" height="60" rx="8"/><text class="pt" x="335" y="66" text-anchor="middle">Debezium</text><text class="ps" x="335" y="84" text-anchor="middle">CDC</text></g>
+        <g><rect class="pn" x="415" y="40" width="110" height="60" rx="8"/><text class="pt" x="470" y="66" text-anchor="middle">Kafka</text><text class="ps" x="470" y="84" text-anchor="middle">topics</text></g>
+        <g><rect class="pn hot" x="550" y="40" width="120" height="60" rx="8"/><text class="pt" x="610" y="66" text-anchor="middle">Spark</text><text class="ps" x="610" y="84" text-anchor="middle">streaming</text></g>
+        <g><rect class="pn" x="695" y="40" width="120" height="60" rx="8"/><text class="pt" x="755" y="66" text-anchor="middle">Delta Lake</text><text class="ps" x="755" y="84" text-anchor="middle">on MinIO (S3)</text></g>
+        <path class="wire" d="M610,100 V130"/>
+        <g class="flag"><rect class="tag" x="455" y="132" width="98" height="24" rx="12"/><text class="tt" x="504" y="148" text-anchor="middle">rage clicks</text></g>
+        <g class="flag"><rect class="tag" x="561" y="132" width="98" height="24" rx="12"/><text class="tt" x="610" y="148" text-anchor="middle">abandonment</text></g>
+        <g class="flag"><rect class="tag" x="667" y="132" width="122" height="24" rx="12"/><text class="tt" x="728" y="148" text-anchor="middle">long screen time</text></g>
+        <circle class="pkt" r="4"><animateMotion dur="3.2s" repeatCount="indefinite" path="M120,70 H695"/></circle>
+        <circle class="pkt" r="4"><animateMotion dur="3.2s" begin="-0.8s" repeatCount="indefinite" path="M120,70 H695"/></circle>
+        <circle class="bad" r="4"><animateMotion dur="3.2s" begin="-1.6s" repeatCount="indefinite" path="M120,70 H695"/></circle>
+        <circle class="pkt" r="4"><animateMotion dur="3.2s" begin="-2.4s" repeatCount="indefinite" path="M120,70 H695"/></circle>
+        <circle class="bad" r="3.5"><animateMotion dur="2.4s" begin="-0.4s" repeatCount="indefinite" path="M610,100 V132"/></circle>
+      </svg></div></div>
+    <section class="cp-sec"><h2 class="reveal">Friction rules</h2><div class="tbl reveal"><table><thead><tr><th>Signal</th><th>Rule</th><th>Severity</th></tr></thead><tbody><tr><td>Rage click</td><td><code>event_type = 'rage_click'</code> or more than 5 clicks</td><td>High</td></tr><tr><td>Session abandonment</td><td><code>event_type = 'session_abandon'</code></td><td>High</td></tr><tr><td>Long screen time</td><td>more than 120 s on a screen</td><td>Medium</td></tr><tr><td>Form error</td><td><code>event_type = 'form_error'</code></td><td>Medium</td></tr><tr><td>Excessive scrolling</td><td><code>event_type = 'rapid_scroll'</code></td><td>Low</td></tr></tbody></table></div></section>
+<section class="cp-sec"><h2 class="reveal">Data model</h2><div class="tbl reveal"><table><thead><tr><th>Table</th><th>What it holds</th></tr></thead><tbody><tr><td>users</td><td>Profiles: device, OS, browser, country</td></tr><tr><td>screens</td><td>Each screen's category, UX goal, expected time and whether it sits on the critical path</td></tr><tr><td>sessions</td><td>Start and end, device, converted, abandoned, number of events, total friction score</td></tr><tr><td>ux_interactions</td><td>Each event: screen, type, time on screen, clicks, scroll depth, friction flag and score</td></tr></tbody></table></div></section>
+<section class="cp-sec"><h2 class="reveal">How it runs</h2><div class="cards"><div class="card reveal"><p class="label">Capture</p><p>A Python simulator writes realistic sessions to PostgreSQL. Debezium reads the logical replication log and publishes every insert and update to Kafka as JSON.</p></div><div class="card reveal"><p class="label">Process and store</p><p>Spark Structured Streaming reads from Kafka, applies the rules and aggregates per session in time windows. Results land in Delta Lake on MinIO, S3-compatible storage with ACID transactions.</p></div><div class="card reveal"><p class="label">Operate</p><p>One <code>docker-compose up -d</code> starts everything, with health checks, automatic connector registration and named volumes. Kafka UI and Spark UI make it observable.</p></div><div class="card reveal"><p class="label">A reusable template</p><p>The same pattern as a mini data platform: CSV-driven activity, Kafka in KRaft mode without Zookeeper, and bronze, silver and gold layers on MinIO, started with one script.</p></div></div></section>
+<div class="links reveal"><a class="btn solid" href="https://github.com/kachastepien/ux-friction-detection-platform">Friction platform on GitHub</a><a class="btn" href="https://github.com/kachastepien/mini-data-platform">Mini data platform</a></div>
+    <a class="next reveal" href="../funnel-elt/"><span class="label">Next project</span><b>Where do users drop off?</b><span class="arrow" aria-hidden="true">→</span></a>
+  </article>
+</main>
+<footer class="end" id="contact">
+  <div class="wrap">
+    <h2 class="reveal">Let's build<br>something <em>useful</em>.</h2>
+    <p class="lede reveal d1" style="max-width:30rem">Hiring for product design or data science? Tell me about the role.</p>
+    <div class="row reveal d1">
+      <a class="btn solid" href="../../#contact">Write to me</a>
+      <span id="email">trafficjam027@gmail.com</span>
+      <button class="copy" type="button" id="copy-email">Copy email</button>
+      <a href="https://www.linkedin.com/in/kachastepien">LinkedIn</a>
+      <a href="https://github.com/kachastepien">GitHub</a>
+    </div>
+    <div class="fine"><span>Katarzyna Stępień · Warsaw</span><span>Hand-built. No trackers.</span></div>
+  </div>
+</footer>
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.06}):null;
+  document.querySelectorAll('.reveal,.metrics').forEach(function(el){io?io.observe(el):el.classList.add('in')});
+  var top=document.querySelector('.top'),bar=document.querySelector('.progress');
+  function onScroll(){var h=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?scrollY/h:0)+')';top.classList.toggle('scrolled',scrollY>8)}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var cb=document.getElementById('copy-email'),em=document.getElementById('email');
+  cb.addEventListener('click',function(){try{navigator.clipboard.writeText(em.textContent.trim()).then(function(){cb.textContent='Copied';setTimeout(function(){cb.textContent='Copy email'},1800)})}catch(e){}});
+})();
+</script>
+</body>
+</html>

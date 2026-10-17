@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" data-view="data" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>HealthPlatform: a health summary from a medical wearable · Katarzyna Stępień</title>
+<meta name="description" content="HealthPlatform, Katarzyna Stępień&#x27;s engineering thesis: biometric data from a medical wristband and medical documents turned into health summaries with RAG and voice.">
+<link rel="canonical" href="https://kachastepien.com/work/healthplatform/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HealthPlatform: a health summary from a medical wearable · Katarzyna Stępień">
+<meta property="og:description" content="HealthPlatform, Katarzyna Stępień&#x27;s engineering thesis: biometric data from a medical wristband and medical documents turned into health summaries with RAG and voice.">
+<meta property="og:url" content="https://kachastepien.com/work/healthplatform/">
+<meta property="og:image" content="https://kachastepien.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "name": "HealthPlatform: a health summary from a medical wearable", "description": "HealthPlatform, Katarzyna Stępień's engineering thesis: biometric data from a medical wristband and medical documents turned into health summaries with RAG and voice.", "url": "https://kachastepien.com/work/healthplatform/", "inLanguage": "en", "author": {"@type": "Person", "name": "Katarzyna Stępień", "alternateName": "Kacha", "url": "https://kachastepien.com/"}}</script>
+</head>
+<body class="cp">
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"></div>
+<header class="top">
+  <div class="wrap glass">
+    <a class="brand" href="../../" aria-label="Katarzyna Stępień, home"><span class="mark" aria-hidden="true"><i></i><i></i></span><span>Katarzyna Stępień</span></a>
+    <nav class="nav" aria-label="Sections"><a href="../../?view=data#work">All work</a><a href="../../#about">About</a><a href="#contact">Contact</a></nav>
+  </div>
+</header>
+<main id="main">
+  <article class="wrap cp-wrap">
+    <a class="back reveal" href="../../?view=data#work"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7.5 3.5 3 8l4.5 4.5"/></svg>All work</a>
+    <header class="cp-head">
+      <p class="label reveal">Applied AI · B.Eng. thesis · 2024/25</p>
+      <h1 class="case-title reveal">HealthPlatform: a health summary from a medical wearable</h1>
+      <p class="lede reveal d1">An intelligent system that supports health monitoring: it joins biometric data from a medical IoT wristband with the user's own medical documents, and uses AI to generate personal health recommendations.</p>
+      <div class="tldr reveal d1"><div><p class="label">Goal</p><p>Turn data from a medical wristband into readable, personal health insights.</p></div><div><p class="label">What I built</p><p>A React/TypeScript platform with a RAG assistant over the user's own medical documents.</p></div><div><p class="label">Highlight</p><p>Voice in and out: speech recognition for symptoms, spoken answers back.</p></div></div>
+      <div class="chips reveal"><span class="chip on">React 18</span><span class="chip on">TypeScript</span><span class="chip">Supabase</span><span class="chip">Langflow</span><span class="chip">AstraDB</span><span class="chip">OpenAI</span><span class="chip">Groq</span><span class="chip">ElevenLabs</span></div>
+    </header>
+    <div class="cp-hero"><div class="arch reveal" aria-label="System architecture, simplified">
+      <div><b>SiDLY band</b><span>biometric data from the medical IoT wristband</span></div>
+      <div><b>Supabase</b><span>PostgreSQL, auth and storage for medical documents</span></div>
+      <div><b>RAG in Langflow</b><span>documents embedded in AstraDB, retrieved per question</span></div>
+      <div><b>LLMs</b><span>GPT-4 and Groq for answers and recommendations</span></div>
+      <div><b>Voice</b><span>Whisper to listen, ElevenLabs to speak back</span></div>
+    </div></div>
+    <section class="cp-sec"><h2 class="reveal">Objectives</h2><ul class="feat reveal"><li><b>IoT device integration:</b> connecting the SiDLY medical wristband.</li><li><b>AI assistant with RAG:</b> a chatbot that draws on the user's medical documents.</li><li><b>Recommendation system:</b> machine-learning algorithms that generate personal health advice.</li><li><b>Voice analysis:</b> speech recognition and symptom analysis from audio recordings.</li><li><b>Medical documentation:</b> storing and analysing the user's medical documents.</li></ul></section>
+<section class="cp-sec"><h2 class="reveal">Stack</h2><div class="tbl reveal"><table><thead><tr><th>Layer</th><th>Tools</th></tr></thead><tbody><tr><td>Front-end</td><td>React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui</td></tr><tr><td>Back-end and services</td><td>Supabase (database, auth, storage), Langflow for AI workflows, OpenAI API (GPT-4, Whisper), Groq API, ElevenLabs API</td></tr><tr><td>Data</td><td>AstraDB vector database, PostgreSQL via Supabase, Supabase Storage for documents</td></tr></tbody></table></div></section>
+<p class="note">Engineering thesis in Computer Science, Warsaw School of Computer Science, supervised by Andrzej Ptasznik, M.Sc.Eng. The code is private; happy to show it in an interview.</p>
+    <a class="next reveal" href="../ux-friction/"><span class="label">Next project</span><b>UX friction detection, in real time</b><span class="arrow" aria-hidden="true">→</span></a>
+  </article>
+</main>
+<footer class="end" id="contact">
+  <div class="wrap">
+    <h2 class="reveal">Let's build<br>something <em>useful</em>.</h2>
+    <p class="lede reveal d1" style="max-width:30rem">Hiring for product design or data science? Tell me about the role.</p>
+    <div class="row reveal d1">
+      <a class="btn solid" href="../../#contact">Write to me</a>
+      <span id="email">trafficjam027@gmail.com</span>
+      <button class="copy" type="button" id="copy-email">Copy email</button>
+      <a href="https://www.linkedin.com/in/kachastepien">LinkedIn</a>
+      <a href="https://github.com/kachastepien">GitHub</a>
+    </div>
+    <div class="fine"><span>Katarzyna Stępień · Warsaw</span><span>Hand-built. No trackers.</span></div>
+  </div>
+</footer>
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.06}):null;
+  document.querySelectorAll('.reveal,.metrics').forEach(function(el){io?io.observe(el):el.classList.add('in')});
+  var top=document.querySelector('.top'),bar=document.querySelector('.progress');
+  function onScroll(){var h=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?scrollY/h:0)+')';top.classList.toggle('scrolled',scrollY>8)}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var cb=document.getElementById('copy-email'),em=document.getElementById('email');
+  cb.addEventListener('click',function(){try{navigator.clipboard.writeText(em.textContent.trim()).then(function(){cb.textContent='Copied';setTimeout(function(){cb.textContent='Copy email'},1800)})}catch(e){}});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,464 @@
+"""Builds one page per project at work/<slug>/index.html.
+
+The pages share assets/site.css with the home page. Diagrams that already live on the
+home page (the visit loop, the ERP flow, the streaming pipeline) are copied from
+index.html so there is one source for each. Run from the repo root:
+
+    python3 scripts/build_projects.py
+"""
+import html
+import json
+import os
+import re
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SITE = "https://kachastepien.com"
+INDEX = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+
+
+def snippet(pattern):
+    m = re.search(pattern, INDEX, re.S)
+    assert m, pattern
+    return m.group(0)
+
+
+LOOP_SVG = snippet(r'<svg viewBox="0 0 760 170".*?</svg>')
+FLOW_SVG = snippet(r'<svg viewBox="0 0 700 250".*?</svg>')
+PIPE_SVG = snippet(r'<svg viewBox="0 0 900 170".*?</svg>')
+
+A = "../../assets/"
+
+
+# ---------- building blocks ----------
+def phones(items):
+    figs = "".join(
+        f'<figure class="phone reveal"><div class="device"><img src="{A}{src}" alt="{html.escape(alt)}" loading="lazy" width="393" height="851"></div>'
+        f"<figcaption><b>{t}</b>{c}</figcaption></figure>"
+        for src, alt, t, c in items
+    )
+    return f'<div class="phones">{figs}</div>'
+
+
+def shots(items):
+    figs = "".join(
+        f'<figure class="shot reveal"><div class="browser"><img src="{A}{src}" alt="{html.escape(alt)}" loading="lazy"></div>'
+        f"<figcaption><b>{t}</b>{c}</figcaption></figure>"
+        for src, alt, t, c in items
+    )
+    return f'<div class="shots">{figs}</div>'
+
+
+def decisions(items):
+    lis = "".join(f"<li><details open><summary>{t}</summary><p>{p}</p></details></li>" for t, p in items)
+    return f'<ol class="decisions reveal">{lis}</ol>'
+
+
+def tldr(items):
+    cells = "".join(f'<div><p class="label">{k}</p><p>{v}</p></div>' for k, v in items)
+    return f'<div class="tldr reveal d1">{cells}</div>'
+
+
+def chips(items, on=0):
+    return '<div class="chips reveal">' + "".join(
+        f'<span class="chip{" on" if i < on else ""}">{c}</span>' for i, c in enumerate(items)
+    ) + "</div>"
+
+
+def bullets(items):
+    return '<ul class="feat reveal">' + "".join(f"<li>{i}</li>" for i in items) + "</ul>"
+
+
+def cards(items):
+    return '<div class="cards">' + "".join(
+        f'<div class="card reveal"><p class="label">{k}</p>{"".join(f"<p>{p}</p>" for p in ps)}</div>' for k, ps in items
+    ) + "</div>"
+
+
+def table(head, rows):
+    th = "".join(f"<th>{h}</th>" for h in head)
+    trs = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r) + "</tr>" for r in rows)
+    return f'<div class="tbl reveal"><table><thead><tr>{th}</tr></thead><tbody>{trs}</tbody></table></div>'
+
+
+def facts(items):
+    return '<div class="facts reveal">' + "".join(
+        f'<div class="fact"><b>{n}</b><span>{t} <small>{s}</small></span></div>' for n, t, s in items
+    ) + "</div>"
+
+
+def metrics(items):
+    return '<div class="metrics reveal">' + "".join(
+        f'<div class="metric"><span>{k}</span><span class="bar"><i style="--v:{float(v) * 100:.1f}%"></i></span><b>{v}</b></div>' for k, v in items
+    ) + "</div>"
+
+
+def section(title, *body, lead=None):
+    lead_html = f'<p class="cp-lead reveal">{lead}</p>' if lead else ""
+    return f'<section class="cp-sec"><h2 class="reveal">{title}</h2>{lead_html}{"".join(body)}</section>'
+
+
+def p(*texts):
+    return "".join(f'<p class="cp-p reveal">{t}</p>' for t in texts)
+
+
+def links(items):
+    out = []
+    for i, (label, href) in enumerate(items):
+        cls = "btn solid" if i == 0 else "btn"
+        out.append(f'<a class="{cls}" href="{href}">{label}</a>')
+    return '<div class="links reveal">' + "".join(out) + "</div>"
+
+
+# ---------- projects ----------
+P = []
+
+P.append(dict(
+    slug="sidly-health", view="design", kicker="Case study · SiDLY Healthcare · ongoing",
+    title="SiDLY Health: one record, three people",
+    desc="How Katarzyna Stępień designed SiDLY Health: mobile and web apps that connect care managers, carers and residents around one visit.",
+    lede="SiDLY Health connects the people around a single visit: the care manager who plans it, the carer who makes it and the resident who receives it. I lead its UX/UI across the mobile apps and the web platform.",
+    tldr=[("The challenge", "One visit, three people, three apps that have to agree on the same data."),
+          ("What I did", "Led UX/UI for the mobile apps and the web platform, prototyped in React/TypeScript."),
+          ("Signature move", "Visits start and end with an NFC scan, so hours are settled from real time.")],
+    chips=["Lead UX/UI designer", "Web + mobile", "React/TS prototype", "Medical device · MDR Class IIa"],
+    hero=phones([("health/carer-home.jpg", "Carer's home screen", "Carer", "Today's visits and hours."),
+                 ("health/res-home.jpg", "Resident's home screen", "Resident", "The band, visits and readings."),
+                 ("health/mgr-carers.jpg", "Care manager's carers list", "Care manager", "The team at a glance."),
+                 ("health/res-rate.jpg", "Rating a visit", "After the visit", "Rated by the resident.")]),
+    body=[
+        section("Three accounts on the same data",
+                cards([("Care manager", ["Residents, carers, the visit schedule, alarms, devices and reports."]),
+                       ("Carer", ["The Planner: today's visits, tasks and the care card for each resident."]),
+                       ("Resident", ["Health readings, medication, upcoming visits, visit ratings and SOS."])]),
+                p("A visit belongs to all three. When the carer finishes it, it appears in the resident's history, ready to be rated, and in the manager's record of work. An alarm handled by the manager disappears from every view."),
+                f'<div class="loop reveal">{LOOP_SVG}</div>'),
+        section("The care manager's mobile app", phones([
+            ("health/mgr-carers.jpg", "Carers screen", "Carers", "Who is on the team, who is active and when each person works today."),
+            ("health/mgr-profile.jpg", "Carer profile", "Carer profile", "Residents, today's hours, today's visits and access, on one screen."),
+            ("health/mgr-hours.jpg", "Working hours", "Working hours", "Set per weekday, with several ranges a day for split shifts."),
+            ("health/mgr-visits.jpg", "Today's visits", "Today's visits", "Each visit with its care hours, editable from the list.")]),
+            lead="Care managers run their team from the phone as much as from the desk. This flow covers the carers: who they look after, when they work and what they can access."),
+        section("The carer's Planner", phones([
+            ("health/carer-home.jpg", "Planner home", "Today", "Time worked so far, filled-in care cards and today's visits."),
+            ("health/carer-start.jpg", "Start a visit", "Start a visit", "Scan the resident's QR code or NFC tag. There is no other way in."),
+            ("health/carer-nfc.jpg", "NFC scan", "NFC scan", "Hold the phone to the resident's band or Planner device."),
+            ("health/carer-visit.jpg", "Visit in progress", "Visit in progress", "Tasks from the care card, ticked off on the spot, with a note for the office.")]),
+            lead="Carers use the Planner on their phone during the visit. The flow is built around the scan: a visit starts when the phone touches the resident's tag and ends the same way."),
+        section("The resident's app", phones([
+            ("health/res-home.jpg", "Resident home", "Home", "The band, recent visits and today's readings on one screen."),
+            ("health/res-history.jpg", "Visit history", "Visit history", "Every visit with its carer, tasks done and rating."),
+            ("health/res-rate.jpg", "Rate a visit", "Rate a visit", "Stars for each task and for the visit, plus the carer's note."),
+            ("health/res-health.jpg", "Health readings", "Health readings", "Pulse, saturation and steps from the band, in large type.")]),
+            lead="The resident sees the same visits from the other side: who came, what was done, and a place to say how it went."),
+        section("The web platform", shots([
+            ("health/web-dashboard.jpg", "Manager's dashboard", "Manager's dashboard", "What needs a reaction comes first, then the carers in the field today and the week's visits."),
+            ("health/web-schedule.jpg", "Weekly schedule", "Schedule", "A week per carer, with the residents who have no visit this week listed underneath."),
+            ("health/web-visit.jpg", "Visit in progress", "Visit in progress", "The care card mid-visit. Tasks and notes save as they go; the visit ends in the mobile app."),
+            ("health/web-res-home.jpg", "Resident's home", "Resident's home", "The next visit, a prompt to rate the last one, and who to call.")]),
+            '<p class="note">The product ships in Polish, so the screens are in Polish. All names and data are test data.</p>',
+            lead="At the desk the same data gets more room. The manager plans and settles the team's work, carers follow their visits from a laptop, and residents see their own record."),
+        section("Key design decisions", decisions([
+            ("A visit starts with a scan", "The carer starts and ends each visit by scanning the resident's NFC tag with their phone. Work time is recorded as it happened, not as it was planned, and carers' hours are settled from it."),
+            ("The care card has a lifetime", "Before a visit the care card is the plan. During the visit the carer fills it in. After the visit it becomes the record that the resident and the office read, so it is locked as it was when the visit ended."),
+            ("The resident's home screen answers three questions", "Am I all right, what do I need to do today, and when is someone coming? Large text, large touch targets, few words, and SOS always on top."),
+            ("Urgent first, then the day", "The manager's dashboard opens with what needs a reaction, then today's visits in the field, the week ahead and equipment. Each block leads to the screen where that issue gets solved."),
+            ("Recurring visits stay ordinary visits", "A series is a set of normal visits that share a tag, so any single one can be moved or cancelled without breaking the rest."),
+            ("Prototype in code, not in frames", "The flows are built as a clickable React/TypeScript prototype with realistic test data, so managers and carers test whole visits instead of single screens.")])),
+    ],
+))
+
+P.append(dict(
+    slug="sidly-erp", view="design", kicker="Case study · SiDLY Healthcare · in progress",
+    title="Redesigning the ERP that runs public telecare",
+    desc="How Katarzyna Stępień is redesigning the SiDLY ERP used by 1,000+ municipalities and care providers: the problem, the process and six design decisions.",
+    lede="Municipalities, public institutions and care providers use the SiDLY ERP to order telecare bands, assign them to residents, keep consent documents in order and renew contracts. I am leading its redesign.",
+    tldr=[("The challenge", "Routine tasks where mistakes are easy to make and hard to notice, for very different clients."),
+          ("What I did", "Research with municipal and foreign clients, then a clickable React/TypeScript prototype."),
+          ("Signature move", "An undo instead of a confirm for anything reversible.")],
+    chips=["Lead designer", "1,000+ client organisations", "React/TS prototype", "In progress"],
+    hero='<div class="lock reveal"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg><p>The interface is unreleased and confidential, so this case study describes the process and decisions without screens. I am happy to walk through the prototype in an interview.</p></div>',
+    body=[
+        section("The problem", p(
+            "Most of the work in the ERP is routine: activating a batch of bands, swapping a broken one, attaching a signed consent form. Mistakes in these tasks are easy to make and hard to notice. A band can be activated for the wrong client, or keep sending data under a person who no longer wears it.",
+            "The system also serves two very different clients. A Polish municipality works in złoty, uploads documents from its social-welfare office and tracks coverage of its residents aged 60+. An export client sells across borders, invoices in euro and needs dialling codes per country.")),
+        section("How I worked", p(
+            "Weekly project meetings with stakeholders, plus research with municipal and foreign clients about how they order, assign and renew devices.",
+            "I built the redesign as a clickable prototype in React and TypeScript with realistic test data, so whole flows can be tested instead of static mockups.")),
+        section("Where the decisions sit", f'<div class="flow reveal">{FLOW_SVG}</div>',
+                '<p class="note">The life of an order and its bands, simplified. Numbers match the decisions below.</p>'),
+        section("Key design decisions", decisions([
+            ("Confirm only what is expensive", "Asking twice for everything trains people to click through. A confirmation now appears only for a new paid year or a change to many devices at once. A single suspend or resume is reversible, so it gets an undo instead."),
+            ("Read the file back before acting on it", "Bulk activation comes in as a spreadsheet, with columns in a different order every time. Rows are matched on the device number, and nothing runs until each line has been shown back with what it will do. The template you download is the file you can upload."),
+            ("Keep a rule where it matters", "Health data needs signed consent, but the clerk entering a resident rarely has the scan at hand. Blocking the form only taught people to upload placeholder files. Now the resident can be saved, is flagged \"no consent\" everywhere, and cannot receive a band until the scan arrives."),
+            ("Every number opens its list", "Each count on the dashboard opens exactly the devices it counts, and each bar in the renewals chart renews what it shows. Nothing on the dashboard sends you hunting elsewhere."),
+            ("Show what an action will touch", "With a mixed selection, each action states how many of the selected devices it would change and switches off at zero. The selection bar used to be the one dark element on the screen, which made ticking three rows feel like a warning. It is now calm, with one obvious next step."),
+            ("Never rely on colour alone", "Every status carries an icon and a label as well as a colour, because green and amber are hard to tell apart for colour-blind users.")])),
+    ],
+))
+
+P.append(dict(
+    slug="lemi", view="design", kicker="HackYeah 2026 · Sport &amp; Healthcare challenge",
+    title="Lemi: health care without the stress",
+    desc="Lemi, Katarzyna Stępień's HackYeah 2026 project: a health guide that helps before, during and after a doctor's visit, built on the Claude API and ElevenLabs.",
+    lede="Lemi is a health guide with a friendly lemur. It helps every day and at every doctor's visit: it joins mood, movement, medication, measurements and test results, and turns them into one small step for today.",
+    tldr=[("The problem", "People put off the doctor because of the phone call, the ten minutes and the advice they forget."),
+          ("What I built", "A web app and a Flutter app on the Claude API and ElevenLabs, designed and coded at the hackathon."),
+          ("Signature move", "One recorded visit becomes three summaries: for you, for family, for the doctor.")],
+    chips=["Claude API", "ElevenLabs Scribe", "React + TypeScript PWA", "Flutter (iOS, Android)", "WCAG 2.2 AA"],
+    hero=phones([("lemi/welcome.jpg", "Lemi welcome screen", "Start", "Pick a demo account by age, or start your own."),
+                 ("lemi/today.jpg", "Lemi Today screen", "Today", "Mood, the next visit, and a grandmother whose pulse has been higher for days."),
+                 ("lemi/visits.jpg", "Lemi visit preparation", "Visits", "Before, during, after: questions and a folder for the doctor."),
+                 ("lemi/health.jpg", "Lemi health screen", "Health", "Sleep, resting pulse, HRV, steps and mood over time.")])
+         + '<p class="note">Shown in English for this page; the demo runs in Polish.</p>',
+    body=[
+        section("Where it started", p(
+            "It started with me. I'm a student and I put off calling the doctor, not because I don't know what is wrong, but because I have to call, explain myself, remember everything in ten minutes and then keep track of the advice.",
+            "At the hackathon I asked other people whether they felt the same. It was far more common than I thought, and each conversation added a group the app could help: people for whom Polish is not a first language, people with disabilities, neurodivergent people, seniors and their families, and people with health anxiety."),
+            facts([("47.6%", "of Europeans have trouble understanding health information", "HLS-EU survey, 2015"),
+                   ("40–80%", "of medical advice is forgotten right after the visit", "Kessels, 2003"),
+                   ("81%", "of young adults feel stressed before a phone call", "BankMyCell, 1,200+ people")])),
+        section("A doctor's visit in three steps", cards([
+            ("Before", ["Questions for the doctor are drafted from your own data, and a folder reaches the doctor before the visit. In beta, an AI voice agent can call the reception for you and introduces itself as AI."]),
+            ("During", ["With the doctor's consent, live transcription turns the conversation into text, ticks off your questions and explains difficult words. \"Show instead of tell\" screens help at the reception desk."]),
+            ("After", ["A summary in three versions: for you, for someone close to you and for the doctor. Advice turns into tasks and reminders, including e-prescriptions that are about to expire."])])),
+        section("Every day", bullets([
+            "Mood in one tap, with Lemi the lemur reacting across the app.",
+            "Medication with reminders, and movement that starts from what is realistic, with WHO's 150 minutes a week as the goal.",
+            "Measurements from a photo: blood pressure monitor, glucometer, scale or thermometer. AI reads the display and you confirm the value.",
+            "Health over time: sleep, heart rate, heart-rate variability, steps, mood and measurements by day, week, month or year.",
+            "Connections between data, for example worse sleep, lower mood and a test result worth raising with a doctor.",
+            "Test results from a PDF or a photo, with every parameter explained in plain language."])),
+        section("Mental health, carefully", bullets([
+            "Short mood and anxiety check-ins (PHQ-9 and GAD-7) when a doctor recommends them, every two weeks, with a chart to show a doctor or psychologist.",
+            "A calm mode for health anxiety: no percentages and no red labels.",
+            "When someone circles the same symptoms, Lemi stops adding AI answers and suggests a question for the doctor and a talk with someone close.",
+            "A crisis path, with 112 and a helpline always at hand."])),
+        section("Accessibility and AI that behaves", cards([
+            ("Accessibility", ["Built to WCAG 2.2 level AA; an automated axe-core check on 14 screens found no errors.", "\"My needs\" adapts the app for ADHD, autism, dyslexia, colour blindness, low vision and hearing, limited mobility and eating disorders, for example by hiding weight."]),
+            ("AI rules (AI Act, GDPR)", ["You always know when AI is at work. AI does not diagnose or give doses, and every entry, visit and email waits for your approval.", "Sudden symptoms are caught before the model and lead straight to 112. Without API keys the app runs in a rule-based demo mode."])])),
+        section("How it is built", table(["Part", "What it uses"], [
+            ("Assistant, PDF results, visit summary", "Claude Sonnet (Anthropic)"),
+            ("Reading a measurement from a photo, live mode, tip of the day", "Claude Haiku (Anthropic)"),
+            ("Speech to text", "ElevenLabs Scribe, with the Web Speech API as a fallback"),
+            ("Front-end", "React, TypeScript and Vite, installable as a PWA; a native Flutter app shares the same API"),
+            ("Back-end", "Serverless functions on Vercel"),
+            ("Privacy", "Health data stays on the phone; sharing, the QR code and the doctor's folder are encrypted with AES-GCM; export for doctors in HL7 FHIR")])),
+        section("Try it", p("Open the demo and pick <b>Young adults 18–30</b> (Ola, 20). Other accounts: <b>30–50</b> (Marek, higher blood pressure), <b>50+</b> (Halina, simple mode with large text) and a <b>doctor's view</b>. All characters and data in the demo are fictional."),
+                links([("Open the demo", "https://pekao.vercel.app")])),
+    ],
+))
+
+P.append(dict(
+    slug="unmasked", view="data", kicker="NLP · B.A. thesis · SWPS University · 2026",
+    title="Unmasked: catching manipulative UX copy with NLP",
+    desc="Unmasked, Katarzyna Stępień's NLP project: a classifier for dark patterns in e-commerce copy (F1 0.936) shipped as an offline Chrome extension.",
+    lede="Dark patterns live in the words: \"Only 2 left!\", \"43 people are viewing this\". I trained a classifier to spot them and shipped it as a Chrome extension that warns you before you buy.",
+    tldr=[("The problem", "Manipulative copy is everywhere in e-commerce, and people rarely notice it."),
+          ("What I did", "Trained and compared five classifiers on 2,356 labelled texts, then shipped the best as a Chrome extension."),
+          ("Result", "F1 0.936 and ROC AUC 0.976, running fully offline in the browser.")],
+    chips=["Python", "scikit-learn", "TF-IDF", "JavaScript", "Chrome extension"],
+    hero=metrics([("Binary F1", "0.936"), ("Binary ROC AUC", "0.976"), ("By category, macro F1", "0.891")]),
+    body=[
+        section("Why it matters", p("Dark patterns undermine user autonomy and informed consent. The project supports ethical UX design by making deceptive copy visible at the moment it works on you."),
+                table(["Category", "Example"], [("Scarcity", "\"Only 2 left in stock!\""), ("Urgency", "\"Offer ends in 10:00 minutes\""), ("Social proof", "\"43 people are viewing this\""), ("Misdirection", "Confusing opt-out wording"), ("Obstruction, sneaking, forced action", "Patterns that block, hide or push")])),
+        section("Data", p("2,356 short UX texts from e-commerce sites: the Dark Patterns dataset (Mathur et al., 2019) plus neutral interface texts, balanced 50/50 between dark and non-dark. Each sample has a page id, the text, a label and a pattern category.")),
+        section("Method", cards([
+            ("Preprocessing", ["Lowercasing, whitespace trimming and stop-word removal, then TF-IDF with 1–2-grams and up to 5,000 features."]),
+            ("Models compared", ["Logistic Regression, a linear Support Vector Machine, Random Forest, Naive Bayes and Gradient Boosting, on a binary task (dark or not) and a multiclass task (which pattern)."])])),
+        section("Results", bullets(["Logistic Regression was the best model on the binary task.",
+                         "Dark patterns have their own vocabulary: urgency (\"hurry\", \"limited\"), scarcity (\"only\", \"left\", \"stock\") and social proof (\"people\", \"purchased\").",
+                         "Classical models on TF-IDF did surprisingly well; the rare categories suffered from too little data."])),
+        section("From model to extension", p(
+            "The top lexical features of the trained model, such as <i>left</i>, <i>limited</i>, <i>hurry</i>, <i>people</i> and <i>bought</i>, became explicit rules in a JavaScript classifier. The extension scans the text of any page, highlights flagged copy in place with a severity of critical, warning or info, and a popup explains the psychological mechanism behind each one.",
+            "Classification runs fully offline, with no API calls. AI-written explanations are optional, with your own OpenAI key."),
+            links([("Try the live demo", "../../?view=data#unmasked"), ("Extension on GitHub", "https://github.com/kachastepien/unmasked"), ("Model notebooks", "https://github.com/kachastepien/automated-dark-pattern-detection")])),
+        section("What could come next", bullets(["Transformer models such as BERT or RoBERTa.", "Multimodal analysis of text together with the interface visuals.", "Data augmentation for the under-represented categories."])),
+        '<p class="note">Stępień, K. (2026). <i>NLP-Based Detection of Manipulative UX Patterns in Web Interfaces</i>. SWPS University, Warsaw.</p>',
+    ],
+))
+
+P.append(dict(
+    slug="healthplatform", view="data", kicker="Applied AI · B.Eng. thesis · 2024/25",
+    title="HealthPlatform: a health summary from a medical wearable",
+    desc="HealthPlatform, Katarzyna Stępień's engineering thesis: biometric data from a medical wristband and medical documents turned into health summaries with RAG and voice.",
+    lede="An intelligent system that supports health monitoring: it joins biometric data from a medical IoT wristband with the user's own medical documents, and uses AI to generate personal health recommendations.",
+    tldr=[("Goal", "Turn data from a medical wristband into readable, personal health insights."),
+          ("What I built", "A React/TypeScript platform with a RAG assistant over the user's own medical documents."),
+          ("Highlight", "Voice in and out: speech recognition for symptoms, spoken answers back.")],
+    chips=["React 18", "TypeScript", "Supabase", "Langflow", "AstraDB", "OpenAI", "Groq", "ElevenLabs"],
+    hero=snippet(r'<div class="arch reveal".*?</div>\s*</div>').replace('class="arch reveal"', 'class="arch reveal"'),
+    body=[
+        section("Objectives", bullets([
+            "<b>IoT device integration:</b> connecting the SiDLY medical wristband.",
+            "<b>AI assistant with RAG:</b> a chatbot that draws on the user's medical documents.",
+            "<b>Recommendation system:</b> machine-learning algorithms that generate personal health advice.",
+            "<b>Voice analysis:</b> speech recognition and symptom analysis from audio recordings.",
+            "<b>Medical documentation:</b> storing and analysing the user's medical documents."])),
+        section("Stack", table(["Layer", "Tools"], [
+            ("Front-end", "React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui"),
+            ("Back-end and services", "Supabase (database, auth, storage), Langflow for AI workflows, OpenAI API (GPT-4, Whisper), Groq API, ElevenLabs API"),
+            ("Data", "AstraDB vector database, PostgreSQL via Supabase, Supabase Storage for documents")])),
+        '<p class="note">Engineering thesis in Computer Science, Warsaw School of Computer Science, supervised by Andrzej Ptasznik, M.Sc.Eng. The code is private; happy to show it in an interview.</p>',
+    ],
+))
+
+P.append(dict(
+    slug="ux-friction", view="data", kicker="Data engineering · streaming · CDC",
+    title="UX friction detection, in real time",
+    desc="A real-time data platform by Katarzyna Stępień that detects rage clicks, abandonment and long screen times with Debezium, Kafka, Spark and Delta Lake.",
+    lede="A data platform that watches how people use an app and flags friction as it happens: rage clicks, abandoned sessions, screens people get stuck on. Every interaction is captured from the database with change data capture and processed as a stream.",
+    tldr=[("Goal", "Detect UX friction signals while sessions are happening."),
+          ("What I built", "A Docker stack: PostgreSQL with Debezium CDC, Kafka, Spark Structured Streaming, Delta Lake on MinIO."),
+          ("Output", "Friction events scored per interaction and per session, stored with ACID guarantees.")],
+    chips=["Python", "PostgreSQL", "Debezium", "Kafka", "Spark", "Delta Lake", "MinIO", "Docker"],
+    hero=f'<div class="pipe reveal">{PIPE_SVG}</div>',
+    body=[
+        section("Friction rules", table(["Signal", "Rule", "Severity"], [
+            ("Rage click", "<code>event_type = 'rage_click'</code> or more than 5 clicks", "High"),
+            ("Session abandonment", "<code>event_type = 'session_abandon'</code>", "High"),
+            ("Long screen time", "more than 120 s on a screen", "Medium"),
+            ("Form error", "<code>event_type = 'form_error'</code>", "Medium"),
+            ("Excessive scrolling", "<code>event_type = 'rapid_scroll'</code>", "Low")])),
+        section("Data model", table(["Table", "What it holds"], [
+            ("users", "Profiles: device, OS, browser, country"),
+            ("screens", "Each screen's category, UX goal, expected time and whether it sits on the critical path"),
+            ("sessions", "Start and end, device, converted, abandoned, number of events, total friction score"),
+            ("ux_interactions", "Each event: screen, type, time on screen, clicks, scroll depth, friction flag and score")])),
+        section("How it runs", cards([
+            ("Capture", ["A Python simulator writes realistic sessions to PostgreSQL. Debezium reads the logical replication log and publishes every insert and update to Kafka as JSON."]),
+            ("Process and store", ["Spark Structured Streaming reads from Kafka, applies the rules and aggregates per session in time windows. Results land in Delta Lake on MinIO, S3-compatible storage with ACID transactions."]),
+            ("Operate", ["One <code>docker-compose up -d</code> starts everything, with health checks, automatic connector registration and named volumes. Kafka UI and Spark UI make it observable."]),
+            ("A reusable template", ["The same pattern as a mini data platform: CSV-driven activity, Kafka in KRaft mode without Zookeeper, and bronze, silver and gold layers on MinIO, started with one script."])])),
+        links([("Friction platform on GitHub", "https://github.com/kachastepien/ux-friction-detection-platform"), ("Mini data platform", "https://github.com/kachastepien/mini-data-platform")]),
+    ],
+))
+
+P.append(dict(
+    slug="funnel-elt", view="data", kicker="Analytics engineering · SQL · DuckDB",
+    title="Where do users drop off?",
+    desc="A reproducible SQL ELT by Katarzyna Stępień for product funnel analytics on DuckDB, with a bronze, silver and gold model and six data-quality checks.",
+    lede="A reproducible SQL ELT for product conversion-funnel analytics, built on a bronze, silver and gold model and running on DuckDB.",
+    tldr=[("The questions", "Which funnel step loses the most people, which device converts best, how much traffic is bots."),
+          ("What I built", "One idempotent SQL pipeline: raw tracker JSON in, cleaned tables, then dashboard-ready metrics."),
+          ("Quality", "Six explicit data-quality rules, each run as a live check.")],
+    chips=["SQL", "DuckDB", "Medallion architecture", "Data quality"],
+    hero='<div class="medallion reveal" aria-hidden="true"><span class="b">bronze · raw JSON</span><span class="s">silver · cleaned</span><span class="g">gold · metrics</span></div>',
+    body=[
+        section("The layers", cards([
+            ("Bronze", ["<code>raw_sessions</code> and <code>raw_pages</code>: the tracker JSON loaded as it arrived."]),
+            ("Silver", ["<code>clean_sessions</code> and <code>clean_pages</code>: device names normalised, impossible durations nulled, timestamps parsed, missing countries set to UNKNOWN, sessions under 5 seconds flagged as suspicious, and a load timestamp for audit."]),
+            ("Gold", ["<code>gold_funnel_metrics</code>: sessions, average duration, CTA clicks, conversions and conversion rate per funnel step, from Awareness to Decision.", "<code>gold_device_metrics</code>: click-through and conversion rate per device."])])),
+        section("Data-quality rules", table(["ID", "Risk", "Mitigation"], [
+            ("DQ-1", "Null primary keys", "Drop rows with a null session or user id"),
+            ("DQ-2", "Inconsistent device casing", "<code>lower(trim(device))</code> in Silver"),
+            ("DQ-3", "Unrealistic durations", "Null out values below 0 or above 7,200 s"),
+            ("DQ-4", "Unparseable timestamps", "<code>try_cast</code> to NULL instead of failing"),
+            ("DQ-5", "Sessions with no matching page", "LEFT JOIN and monitor the unmatched rate"),
+            ("DQ-6", "Duplicates on re-runs", "Idempotent rebuild and a load-time audit column")]),
+            '<p class="note">The pipeline is idempotent: every section starts with <code>DROP ... IF EXISTS</code>, so it can run any number of times with the same result.</p>'),
+        links([("Code on GitHub", "https://github.com/kachastepien/ELT-processes")]),
+    ],
+))
+
+
+# ---------- page template ----------
+def page(pr, nxt):
+    url = f"{SITE}/work/{pr['slug']}/"
+    ld = {
+        "@context": "https://schema.org", "@type": "CreativeWork", "name": html.unescape(pr["title"]),
+        "description": pr["desc"], "url": url, "inLanguage": "en",
+        "author": {"@type": "Person", "name": "Katarzyna Stępień", "alternateName": "Kacha", "url": SITE + "/"},
+    }
+    body = "\n".join(pr["body"])
+    return f"""<!doctype html>
+<html lang="en" data-view="{pr['view']}" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>{pr['title']} · Katarzyna Stępień</title>
+<meta name="description" content="{html.escape(pr['desc'])}">
+<link rel="canonical" href="{url}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{pr['title']} · Katarzyna Stępień">
+<meta property="og:description" content="{html.escape(pr['desc'])}">
+<meta property="og:url" content="{url}">
+<meta property="og:image" content="{SITE}/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../../assets/site.css">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
+</head>
+<body class="cp">
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"></div>
+<header class="top">
+  <div class="wrap glass">
+    <a class="brand" href="../../" aria-label="Katarzyna Stępień, home"><span class="mark" aria-hidden="true"><i></i><i></i></span><span>Katarzyna Stępień</span></a>
+    <nav class="nav" aria-label="Sections"><a href="../../?view={pr['view']}#work">All work</a><a href="../../#about">About</a><a href="#contact">Contact</a></nav>
+  </div>
+</header>
+<main id="main">
+  <article class="wrap cp-wrap">
+    <a class="back reveal" href="../../?view={pr['view']}#work"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7.5 3.5 3 8l4.5 4.5"/></svg>All work</a>
+    <header class="cp-head">
+      <p class="label reveal">{pr['kicker']}</p>
+      <h1 class="case-title reveal">{pr['title']}</h1>
+      <p class="lede reveal d1">{pr['lede']}</p>
+      {tldr(pr['tldr'])}
+      {chips(pr['chips'], on=2)}
+    </header>
+    <div class="cp-hero">{pr['hero']}</div>
+    {body}
+    <a class="next reveal" href="../{nxt['slug']}/"><span class="label">Next project</span><b>{nxt['title']}</b><span class="arrow" aria-hidden="true">→</span></a>
+  </article>
+</main>
+<footer class="end" id="contact">
+  <div class="wrap">
+    <h2 class="reveal">Let's build<br>something <em>useful</em>.</h2>
+    <p class="lede reveal d1" style="max-width:30rem">Hiring for product design or data science? Tell me about the role.</p>
+    <div class="row reveal d1">
+      <a class="btn solid" href="../../#contact">Write to me</a>
+      <span id="email">trafficjam027@gmail.com</span>
+      <button class="copy" type="button" id="copy-email">Copy email</button>
+      <a href="https://www.linkedin.com/in/kachastepien">LinkedIn</a>
+      <a href="https://github.com/kachastepien">GitHub</a>
+    </div>
+    <div class="fine"><span>Katarzyna Stępień · Warsaw</span><span>Hand-built. No trackers.</span></div>
+  </div>
+</footer>
+<script>
+(function(){{
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){{es.forEach(function(e){{if(e.isIntersecting){{e.target.classList.add('in');io.unobserve(e.target)}}}})}},{{rootMargin:'0px 0px -8% 0px',threshold:.06}}):null;
+  document.querySelectorAll('.reveal,.metrics').forEach(function(el){{io?io.observe(el):el.classList.add('in')}});
+  var top=document.querySelector('.top'),bar=document.querySelector('.progress');
+  function onScroll(){{var h=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?scrollY/h:0)+')';top.classList.toggle('scrolled',scrollY>8)}}
+  addEventListener('scroll',onScroll,{{passive:true}});onScroll();
+  var cb=document.getElementById('copy-email'),em=document.getElementById('email');
+  cb.addEventListener('click',function(){{try{{navigator.clipboard.writeText(em.textContent.trim()).then(function(){{cb.textContent='Copied';setTimeout(function(){{cb.textContent='Copy email'}},1800)}})}}catch(e){{}}}});
+}})();
+</script>
+</body>
+</html>
+"""
+
+
+def main():
+    for i, pr in enumerate(P):
+        nxt = P[(i + 1) % len(P)]
+        out = os.path.join(ROOT, "work", pr["slug"])
+        os.makedirs(out, exist_ok=True)
+        with open(os.path.join(out, "index.html"), "w", encoding="utf-8") as fh:
+            fh.write(page(pr, nxt))
+        print("built", pr["slug"])
+
+
+if __name__ == "__main__":
+    main()
