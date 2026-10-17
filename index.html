@@ -227,60 +227,6 @@ p{margin:0}
 @keyframes drip{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 @media (max-width:640px){.stats{grid-template-columns:1fr}.stats div + div{padding-left:0;border-left:0;border-top:1px solid var(--line)}.scroll-hint{display:none}}
 
-/* ---- product design hero: editorial type, a 3D phone and floating glass notes ---- */
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.hero.hd{display:block;min-height:auto;padding:2.2rem 0 2.5rem}
-.hd-board{height:clamp(620px,56vw,760px)!important}
-@media (max-width:980px){.hd-board{height:auto!important}}
-.hd-meta{display:flex;justify-content:space-between;gap:1rem;color:var(--fg)}
-.hd-meta u{text-decoration-color:var(--accent);text-underline-offset:4px}
-.hd-board{position:relative;height:clamp(640px,62vw,800px);margin-top:1.5rem}
-.hero .hd-title,.hd-port{position:absolute;margin:0;font:700 clamp(3.6rem,8.4vw,8.2rem)/.9 var(--display);letter-spacing:-.055em}
-.hd-title{left:0;top:4%;z-index:1}
-.hd-title span,.hd-port span{display:block;overflow:hidden;padding-bottom:.04em}
-.hd-port{right:0;top:4%;text-align:left;z-index:1}
-.hd-c{color:color-mix(in srgb,var(--fg) 28%,var(--bg))}
-.hd-photo{position:absolute;left:50%;top:0;transform:translateX(-50%);margin:0;display:flex;gap:.7rem;align-items:flex-start;z-index:2}
-.hd-photo img{width:clamp(78px,7vw,108px);height:auto;aspect-ratio:1;object-fit:cover;border-radius:22px;filter:grayscale(.15);box-shadow:0 18px 40px -22px rgba(0,0,0,.5);transition:transform .6s var(--ease),filter .4s}
-.hd-photo:hover img{transform:rotate(-4deg) scale(1.04);filter:none}
-.hd-photo figcaption{color:var(--muted);line-height:1.25}
-.hd-side{position:absolute;bottom:6%;z-index:2;font-size:.95rem;line-height:1.45}
-.hd-l{left:0;display:grid;grid-template-columns:auto auto;gap:1.6rem;color:var(--fg)}
-.hd-l .label{color:var(--muted)}
-.hd-r{right:0;width:min(23rem,27vw)}
-.hd-r b{font-weight:600}
-.hd-r .cta{margin-top:1.1rem}
-.hd-stats{margin-top:0}
-.stage{position:absolute;left:50%;top:23%;width:clamp(200px,16.5vw,248px);aspect-ratio:300/620;transform:translateX(-50%);perspective:1600px;z-index:3}
-.float{position:absolute;inset:0;animation:floaty 6s ease-in-out infinite}
-@keyframes floaty{50%{transform:translateY(-14px)}}
-.phone3d{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(var(--rx,8deg)) rotateY(var(--ry,-18deg)) rotateZ(var(--rz,0deg));will-change:transform}
-.phone3d .ly{position:absolute;inset:0;border-radius:14%/6.8%;background:linear-gradient(90deg,#3a3b3f,#151617 40%,#232427);transform:translateZ(calc(var(--z) * 1px))}
-.phone3d .face{position:absolute;inset:0;border-radius:14%/6.8%;background:#0c0c0d;transform:translateZ(8px);padding:3.6%;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.14),inset 0 0 0 4px #0c0c0d,inset 0 0 0 5px rgba(255,255,255,.06)}
-.screen{position:relative;width:100%;height:100%;border-radius:11%/5.2%;overflow:hidden;background:#fff}
-.screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transform:scale(1.03);transition:opacity .9s var(--ease),transform 1.2s var(--ease)}
-.screen img.on{opacity:1;transform:none}
-.screen::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.38) 0%,rgba(255,255,255,0) 32%,rgba(255,255,255,0) 70%,rgba(255,255,255,.12));transform:translateX(var(--gx,0%));pointer-events:none}
-.island{position:absolute;top:5.2%;left:50%;width:30%;height:3.4%;border-radius:999px;background:#000;transform:translateX(-50%) translateZ(1px)}
-.gl{position:absolute;z-index:4;display:block;padding:.65rem .85rem;border-radius:16px;font:400 .74rem/1.3 var(--body);color:var(--muted);white-space:nowrap;transform:translateZ(var(--d))}
-.gl b{display:block;font:600 .95rem/1.15 var(--display);color:var(--fg)}
-.gl.g1{left:-66%;top:30%;--d:90px}.gl.g2{right:-70%;top:14%;--d:120px}.gl.g3{left:-58%;top:66%;--d:70px}.gl.g4{right:-62%;top:46%;--d:100px}
-.ground{position:absolute;left:50%;bottom:-9%;width:90%;height:8%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.28),transparent);filter:blur(6px);animation:groundy 6s ease-in-out infinite}
-@keyframes groundy{50%{transform:translateX(-50%) scale(.86);opacity:.7}}
-@media (max-width:980px){
-  .hd-board{height:auto;display:flex;flex-direction:column;gap:1.5rem;margin-top:1rem}
-  .hero .hd-title,.hd-port,.hd-photo,.hd-side,.stage{position:relative;left:auto;right:auto;top:auto;bottom:auto}
-  .hero .hd-title{font-size:clamp(3.2rem,15vw,6rem);order:1}
-  .hd-port{display:none}
-  .hd-photo{order:0;transform:none}
-  .stage{order:2;transform:none;margin:1.5rem auto 2.5rem;width:min(62vw,270px)}
-  .hd-r{order:3;width:auto}.hd-l{order:4}
-  .gl.g1{left:-22%}.gl.g2{right:-24%}.gl.g3{left:-20%}.gl.g4{right:-20%}
-  .gl{font-size:.68rem;padding:.5rem .65rem}.gl b{font-size:.82rem}
-}
-@media (max-width:520px){.hd-meta span:nth-child(2){display:none}.gl.g3,.gl.g4{display:none}}
-@media (prefers-reduced-motion:reduce){.float,.ground{animation:none}}
-
 /* 3D tilt on work tiles */
 .tilt{transform-style:preserve-3d;transition:transform .5s var(--ease),border-color .3s,box-shadow .4s}
 .tilt.tilting{transition:transform .08s linear,border-color .3s,box-shadow .4s}
@@ -704,51 +650,27 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 </header>
 
 <main id="top">
-<!-- ================= HERO: PRODUCT DESIGN ================= -->
-<section class="hero hd" data-for="design" aria-labelledby="name-d">
-  <div class="wrap">
-    <div class="hd-meta label"><span>Portfolio · Warsaw</span><span>URL: <u>kachastepien.com</u></span><span>2026</span></div>
-    <div class="hd-board">
-      <h1 id="name-d" class="hd-title"><span class="hd-a" data-split>Product</span><span class="hd-b" data-split>Designer</span><span class="sr-only">Katarzyna Stępień, product designer and data scientist</span></h1>
-      <p class="hd-port" aria-hidden="true"><span class="hd-c">Port-</span><span class="hd-d">folio</span></p>
-      <figure class="hd-photo"><img src="assets/katarzyna-stepien.jpg" width="320" height="320" alt="Portrait of Katarzyna Stępień"><figcaption class="label">Katarzyna<br>Stępień</figcaption></figure>
-      <div class="hd-side hd-l"><p class="label">UX / UI design</p><p>research / prototyping /<br>design systems /<br>accessible design</p></div>
-      <div class="hd-side hd-r"><p>I design telecare software for <b>the people who wear the devices</b>, the carers who visit them and the municipalities that pay for it. Sole designer at SiDLY Healthcare.</p>
-        <div class="cta"><a class="btn solid" href="#work">See the work
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a><a class="btn" href="#contact">Get in touch</a></div></div>
-      <div class="stage" aria-label="SiDLY Health and Lemi screens on a phone">
-        <div class="float">
-          <div class="phone3d">
-            <i class="ly" style="--z:-8"></i><i class="ly" style="--z:-7"></i><i class="ly" style="--z:-6"></i><i class="ly" style="--z:-5"></i><i class="ly" style="--z:-4"></i><i class="ly" style="--z:-3"></i><i class="ly" style="--z:-2"></i><i class="ly" style="--z:-1"></i><i class="ly" style="--z:0"></i><i class="ly" style="--z:1"></i><i class="ly" style="--z:2"></i><i class="ly" style="--z:3"></i><i class="ly" style="--z:4"></i><i class="ly" style="--z:5"></i><i class="ly" style="--z:6"></i><i class="ly" style="--z:7"></i>
-            <div class="face"><div class="screen"><img src="assets/health/res-home.jpg" alt="Resident's home screen" class="on" loading="eager" width="393" height="851"><img src="assets/health/carer-visit.jpg" alt="Visit in progress" loading="lazy" width="393" height="851"><img src="assets/health/mgr-carers.jpg" alt="Carers list" loading="lazy" width="393" height="851"><img src="assets/health/carer-nfc.jpg" alt="NFC scan" loading="lazy" width="393" height="851"><img src="assets/health/res-rate.jpg" alt="Rating a visit" loading="lazy" width="393" height="851"><img src="assets/lemi/today.jpg" alt="Lemi, Today screen" loading="lazy" width="393" height="851"></div><span class="island"></span></div>
-            <span class="gl g1 glass" aria-hidden="true"><b>NFC scan</b>starts the visit</span>
-            <span class="gl g2 glass" aria-hidden="true"><b>70,000+</b>people use SiDLY</span>
-            <span class="gl g3 glass" aria-hidden="true"><b>1st place</b>AI hackathon</span>
-            <span class="gl g4 glass" aria-hidden="true"><b>MDR IIa</b>medical device</span>
-          </div>
-        </div>
-        <span class="ground" aria-hidden="true"></span>
-      </div>
-    </div>
-    <div class="stats hd-stats">
-      <div><b data-count="70000" data-suffix="+">70,000+</b><span>people using SiDLY technology</span></div>
-      <div><b data-count="16">16</b><span>European countries</span></div>
-      <div><b data-count="1000" data-suffix="+">1,000+</b><span>municipalities and institutions</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= HERO: DATA SCIENCE ================= -->
-<section class="hero" data-for="data" aria-labelledby="name">
+<!-- ================= HERO ================= -->
+<section class="hero" aria-labelledby="name">
   <canvas id="signal" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="hero-id">
       <img src="assets/katarzyna-stepien.jpg" width="320" height="320" alt="Portrait of Katarzyna Stępień">
       <p class="label">Warsaw · Product design × Data science</p>
     </div>
+    <p class="kicker label" data-for="design">Product designer · UX/UI &amp; research</p>
     <p class="kicker label" data-for="data">Data science · NLP, streaming, applied AI</p>
     <h1 id="name"><span class="line" data-split>Katarzyna</span><span class="line" data-split>Stępień</span></h1>
 
+    <div data-for="design">
+      <p class="statement">I design telecare software for <em>the people who wear the devices</em>, the carers who visit them and the municipalities that pay for it.</p>
+      <p class="sub">Sole designer at <b>SiDLY Healthcare</b>. I take products from research to a coded React prototype, with a background in psychology, computer science and data science.</p>
+      <div class="stats">
+        <div><b data-count="70000" data-suffix="+">70,000+</b><span>people using SiDLY technology</span></div>
+        <div><b data-count="16">16</b><span>European countries</span></div>
+        <div><b data-count="1000" data-suffix="+">1,000+</b><span>municipalities and institutions</span></div>
+      </div>
+    </div>
     <div data-for="data">
       <p class="statement">I build models and pipelines for the human side of products: <em>the copy that manipulates</em>, the clicks that show frustration, the health data nobody reads.</p>
       <p class="sub">B.Eng. in Computer Science (Data Science). Now an M.Sc. in Data Science at the Polish-Japanese Academy of IT, alongside managerial studies at SGH. My two theses joined psychology with NLP, and wearables with AI.</p>
@@ -1448,26 +1370,6 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   chat.querySelector('.chat-x').addEventListener('click',function(){toggle(false)});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!chat.hidden)toggle(false)});
   document.getElementById('chat-form').addEventListener('submit',function(e){e.preventDefault();ask(cin.value)});
-
-  /* ---------- 3D phone: follows the pointer, settles back, cycles screens ---------- */
-  (function(){
-    var ph=document.querySelector('.phone3d'),hero=document.querySelector('.hero.hd');if(!ph)return;
-    var imgs=ph.querySelectorAll('.screen img'),k=0,tx=-18,ty=8,cx=-18,cy=8,rz=0,live=true;
-    setInterval(function(){if(document.hidden||root.dataset.view!=='design')return;imgs[k].classList.remove('on');k=(k+1)%imgs.length;imgs[k].classList.add('on')},2800);
-    if(reduce){ph.style.setProperty('--ry','-14deg');return}
-    hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;tx=-14+x*34;ty=6-y*20},{passive:true});
-    hero.addEventListener('pointerleave',function(){tx=-18;ty=8});
-    if('IntersectionObserver' in window)new IntersectionObserver(function(es){live=es[0].isIntersecting}).observe(hero);
-    (function loop(t){
-      if(live&&root.dataset.view==='design'){
-        var s=Math.min(1,Math.max(0,-hero.getBoundingClientRect().top/innerHeight));
-        cx+=(tx-cx)*.07;cy+=(ty+s*28-cy)*.07;rz=Math.sin((t||0)/2400)*2.2;
-        ph.style.setProperty('--ry',cx.toFixed(2)+'deg');ph.style.setProperty('--rx',cy.toFixed(2)+'deg');ph.style.setProperty('--rz',rz.toFixed(2)+'deg');
-        ph.style.setProperty('--gx',(cx*1.6).toFixed(1)+'%');
-      }
-      requestAnimationFrame(loop);
-    })(0);
-  })();
 
   /* ---------- tiles tilt toward the pointer ---------- */
   if(!reduce&&matchMedia('(hover:hover)').matches){
