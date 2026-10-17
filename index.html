@@ -123,7 +123,7 @@
 if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.documentElement.classList.add('js');
 try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610171634">
+<link rel="stylesheet" href="assets/site.css?v=202610171644">
 </head>
 <body>
 <div class="intro-ov" aria-hidden="true">
@@ -145,8 +145,9 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   <div class="wrap glass">
     <a class="brand" href="#top" aria-label="Katarzyna Stępień, back to top"><span class="mark" aria-hidden="true"><i></i><i></i></span><span>Katarzyna Stępień</span></a>
     <nav class="nav" aria-label="Sections">
-      <a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a>
+      <button type="button" class="cmd-btn" aria-haspopup="dialog" aria-controls="cmd"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg>Projects<kbd>⌘K</kbd></button><a href="#about">About</a><a href="#contact">Contact</a>
     </nav>
+    <button type="button" class="chk-btn" aria-expanded="false" aria-controls="chk"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg><span class="chk-n">0/7</span><span class="sr-only"> recruiter checklist</span></button>
     <div class="switch" role="group" aria-label="Perspective">
       <span class="pill" aria-hidden="true"></span>
       <button type="button" data-view="design" aria-pressed="true">Product design</button>
@@ -193,6 +194,8 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
 </section>
 
 
+<div class="kin" aria-hidden="true"><div class="kin-t"><span>Product design</span><em>×</em><span>Data science</span><em>×</em><span>Product design</span><em>×</em><span>Data science</span><em>×</em><span>Product design</span></div></div>
+
 <div id="work"></div>
 
 <!-- ================= PRODUCT DESIGN ================= -->
@@ -217,11 +220,6 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
       <div>
         <h2 class="case-title reveal" id="health-h">SiDLY Health: one record, three people</h2>
         <p class="lede reveal d1">One visit, three people: the manager who plans it, the carer who makes it, the resident who receives it. I lead UX/UI across mobile and web.</p>
-        <div class="tldr reveal d2" style="grid-template-columns:1fr">
-          <div><p class="label">The challenge</p><p>One visit, three people, three apps that have to agree on the same data.</p></div>
-          <div><p class="label">What I did</p><p>Led UX/UI for the mobile apps and the web platform, prototyped in React/TypeScript.</p></div>
-          <div><p class="label">Signature move</p><p>Visits start and end with an NFC scan, so hours are settled from real time.</p></div>
-        </div>
         <div class="facts-line reveal d3"><span class="chip">Lead UX/UI designer</span><span class="chip">Web + mobile</span><span class="chip">React/TS prototype</span><span class="chip">Medical device · MDR IIa</span></div>
       </div>
       <div class="fan reveal" aria-label="Five screens from the SiDLY Health apps">
@@ -234,7 +232,6 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     </div>
 
     <h3 class="sub-h reveal">A visit belongs to all three</h3>
-    <p class="prose reveal muted">When the carer finishes, the resident can rate it and the manager sees it in the record.</p>
     <div class="loop reveal">
       <svg viewBox="0 0 760 170" role="img" aria-labelledby="loop-t">
         <title id="loop-t">A visit moves from the care manager who plans it, to the carer who makes it, to the resident who rates it, and back into the manager's record</title>
@@ -307,11 +304,6 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     <div class="sec-head reveal"><span class="num">02</span><h2>Case study</h2></div>
     <h2 class="case-title reveal" id="erp-h">Redesigning the ERP that runs public telecare</h2>
     <p class="lede reveal d1">The platform municipalities and care providers use to order telecare bands, assign them and keep consent in order. I lead its redesign.</p>
-    <div class="tldr reveal d2">
-      <div><p class="label">The challenge</p><p>Routine tasks where mistakes are easy to make and hard to notice, for very different clients.</p></div>
-      <div><p class="label">What I did</p><p>Research with municipal and foreign clients, then a clickable React/TypeScript prototype.</p></div>
-      <div><p class="label">Signature move</p><p>An undo instead of a confirm for anything reversible.</p></div>
-    </div>
     <div class="facts-line reveal d3"><span class="chip">Lead designer</span><span class="chip">1,000+ client organisations</span><span class="chip">React/TS prototype</span><span class="chip">In progress</span></div>
     <details class="more reveal"><summary><span class="when-closed">The problem and how I worked</span><span class="when-open">Hide</span></summary><div class="more-body">
     <div class="cards">
@@ -362,12 +354,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
         <p class="label reveal">HackYeah 2026 · Sport &amp; Healthcare challenge</p>
         <h2 class="case-title reveal" style="margin-top:.5rem">Lemi: health care without the stress</h2>
         <p class="lede reveal d1">A health guide with a friendly lemur, for before, during and after a doctor's visit.</p>
-        <div class="tldr reveal d2" style="grid-template-columns:1fr">
-          <div><p class="label">The problem</p><p>People put off the doctor because of the phone call, the ten minutes and the advice they forget.</p></div>
-          <div><p class="label">What I built</p><p>A web app and a Flutter app on the Claude API and ElevenLabs, designed and coded at the hackathon.</p></div>
-          <div><p class="label">Signature move</p><p>One recorded visit becomes three summaries: for you, for family, for the doctor.</p></div>
-        </div>
-        <details class="more reveal"><summary><span class="when-closed">Why I built it, and what it does</span><span class="when-open">Hide</span></summary><div class="more-body">
+        <details class="more reveal" hidden><summary><span class="when-closed">Why I built it, and what it does</span><span class="when-open">Hide</span></summary><div class="more-body">
         <p class="prose">It started with me. I'm a student and I put off calling the doctor, not because I don't know what is wrong, but because I have to call, explain myself, remember everything in ten minutes and then keep track of the advice. At the hackathon I asked other people whether they felt the same. It was far more common than I thought, and each conversation added a group the app could help: people for whom Polish is not a first language, people with disabilities, neurodivergent people, seniors and their families, people with health anxiety.</p>
         <div class="facts">
           <div class="fact"><b>47.6%</b><span>of Europeans have trouble understanding health information <small>HLS-EU survey, 2015</small></span></div>
@@ -435,11 +422,6 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
       <div>
         <h2 class="case-title reveal" id="un-h">Unmasked: catching manipulative UX copy with NLP</h2>
         <p class="lede reveal d1">Dark patterns live in the words: "Only 2 left!", "43 people are viewing this". I trained a classifier to spot them and shipped it as a Chrome extension.</p>
-        <div class="tldr reveal d2" style="grid-template-columns:1fr">
-          <div><p class="label">The problem</p><p>Manipulative copy is everywhere in e-commerce, and people rarely notice it.</p></div>
-          <div><p class="label">What I did</p><p>Trained and compared five classifiers on 2,356 labelled texts, then shipped the best as a Chrome extension.</p></div>
-          <div><p class="label">Result</p><p>F1 0.936 and ROC AUC 0.976, running fully offline in the browser.</p></div>
-        </div>
         <div class="metrics reveal" aria-label="Model results">
           <div class="metric"><span>Binary F1</span><span class="bar"><i style="--v:93.6%"></i></span><b>0.936</b></div>
           <div class="metric"><span>Binary ROC AUC</span><span class="bar"><i style="--v:97.6%"></i></span><b>0.976</b></div>
@@ -701,13 +683,35 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
 </footer>
 
 <button class="chat-btn glass" type="button" aria-expanded="false" aria-controls="chat"><span class="venn" aria-hidden="true"><i></i><i></i></span><span class="q" aria-hidden="true">?</span><span class="txt"><b>Have a question?</b><small>Ask Venn, my assistant</small></span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Open Venn, the portfolio assistant</span></button>
+<div class="cmd-ov" id="cmd" role="dialog" aria-modal="true" aria-label="Find a project" hidden>
+  <div class="cmd glass">
+    <div class="cmd-in"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><input id="cmd-q" placeholder="Search projects, skills or sections…" autocomplete="off" spellcheck="false" aria-controls="cmd-list"><kbd>esc</kbd></div>
+    <div class="cmd-f" role="tablist" aria-label="Filter"><button data-f="all" aria-selected="true">All</button><button data-f="design" aria-selected="false"><i class="d"></i>Design</button><button data-f="data" aria-selected="false"><i class="a"></i>Data</button><button data-f="page" aria-selected="false">Pages</button></div>
+    <ul class="cmd-list" id="cmd-list" role="listbox"></ul>
+    <div class="cmd-foot"><span><kbd>↑</kbd><kbd>↓</kbd> move</span><span><kbd>↵</kbd> open</span></div>
+  </div>
+</div>
+<section class="chk glass" id="chk" aria-labelledby="chk-h" hidden>
+  <div class="chk-top"><h2 id="chk-h">Recruiter checklist</h2><span class="chk-s">Due diligence starts here.</span></div>
+  <div class="chk-bar"><i></i></div>
+  <ul class="chk-list">
+    <li data-k="intro">Survived the intro</li>
+    <li data-k="flip">Flipped to the other side</li>
+    <li data-k="case">Opened a full case study</li>
+    <li data-k="win">Saw the hackathon win</li>
+    <li data-k="demo">Tried to fool Unmasked</li>
+    <li data-k="venn">Asked Venn something</li>
+    <li data-k="msg">Wrote to Kacha</li>
+  </ul>
+  <p class="chk-f">Ticks itself as you look around. Nothing leaves your browser.</p>
+</section>
+<div class="chk-toast glass" id="chk-toast" role="status" aria-live="polite" hidden></div>
 <div class="welcome glass" id="welcome" role="dialog" aria-label="Choose a perspective" hidden>
-  <span class="wl-q">Hiring? Pick a view</span>
+  <span class="wl-q"><b>Hi, I'm Kacha.</b> What brings you here?</span>
   <button type="button" data-pick="design"><i class="d"></i>Product design</button>
   <button type="button" data-pick="data"><i class="a"></i>Data science</button>
   <button type="button" class="wl-x" aria-label="Close">×</button>
 </div>
-<div class="chat-teaser glass" id="chat-teaser" hidden><button type="button" class="tz-open">Curious about my work? <b>Venn can tell you</b></button><button type="button" class="tz-x" aria-label="Dismiss">×</button></div>
 <section class="chat glass" id="chat" role="dialog" aria-modal="false" aria-labelledby="chat-h" hidden>
   <div class="chat-head"><span class="venn-av" aria-hidden="true"><i></i><i></i></span><div><b id="chat-h">Venn</b><span>Katarzyna's portfolio assistant</span></div><button type="button" class="chat-x" aria-label="Close assistant">×</button></div>
   <div class="chat-log" id="chat-log" aria-live="polite"></div>
@@ -787,7 +791,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     if(!opts.inner)document.querySelectorAll('.view[data-for="'+v+'"], .hero [data-for="'+v+'"]').forEach(function(el){el.classList.remove('view-enter');void el.offsetWidth;el.classList.add('view-enter')});
     watch(); countUp(document); signal.morph(v); if(typeof buildRail==='function')buildRail();
   }
-  btns.forEach(function(b){b.addEventListener('click',function(){setView(b.dataset.view)})});
+  btns.forEach(function(b){b.addEventListener('click',function(){var same=root.dataset.view===b.dataset.view;setView(b.dataset.view);if(!same)setTimeout(function(){scrollTo({top:0,behavior:reduce?'auto':'smooth'})},60)})});
   btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.view===root.dataset.view?'true':'false')});
   document.querySelectorAll('[data-goto]').forEach(function(b){b.addEventListener('click',function(){
     setView(b.dataset.goto); var t=document.getElementById(b.dataset.target);
@@ -853,7 +857,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     if(!d.name||!d.message||!EMAIL_RE.test(d.email)){st.textContent='Please add your name, a valid email and a message.';st.classList.add('err');(!d.name?cf.name:!EMAIL_RE.test(d.email)?cf.email:cf.message).focus();return}
     if(f.get('_honey'))return;
     var btn=cf.querySelector('.send');btn.disabled=true;st.textContent='Sending…';
-    sendMessage(d).then(function(){cf.classList.add('done');cf.querySelector('.sent').focus();cf.reset()})
+    sendMessage(d).then(function(){CHK.tick('msg');cf.classList.add('done');cf.querySelector('.sent').focus();cf.reset()})
     .catch(function(mailto){btn.disabled=false;st.classList.add('err');st.innerHTML='That didn\'t go through. <a href="'+mailto+'">Send it by email instead</a>.'});
   });
 
@@ -936,11 +940,12 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   function sendFromChat(){
     var d=flow.d;flow.step='sending';sugg.innerHTML='';
     botSay('Sending…',null,function(m){
-      sendMessage(d,'Venn').then(function(){m.innerHTML='Sent. She\'ll reply to <b>'+escH(d.email)+'</b>. Thanks for reaching out!';endFlow()})
+      sendMessage(d,'Venn').then(function(){CHK.tick('msg');m.innerHTML='Sent. She\'ll reply to <b>'+escH(d.email)+'</b>. Thanks for reaching out!';endFlow()})
       .catch(function(mailto){m.innerHTML='That didn\'t go through. <a href="'+mailto+'">Send it by email instead</a>.';endFlow()});
     });
   }
   function ask(q){
+    if(q&&q.trim()&&typeof CHK!=='undefined')CHK.tick('venn');
     q=q.trim();if(!q)return;add(escH(q),'me');cin.value='';
     if(flow&&flow.step!=='sending'){handleFlow(q);return}
     var ty=add('<span class="typing" aria-label="Venn is typing"><i></i><i></i><i></i></span>','bot');ty.style.padding='0';chat.classList.add('busy');
@@ -960,13 +965,13 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   function closeWl(){if(wl.hidden)return;wl.classList.add('bye');setTimeout(function(){wl.hidden=true;wl.classList.remove('bye')},260);try{sessionStorage.setItem('ks-welcome','1')}catch(e){}}
   function openWl(){var seen=false;try{seen=sessionStorage.getItem('ks-welcome')==='1'}catch(e){}if(seen||!chat.hidden)return;wl.hidden=false}
   wl.querySelector('.wl-x').addEventListener('click',closeWl);
+  addEventListener('scroll',function(){if(!wl.hidden&&scrollY>innerHeight*.9){wl.classList.add('bye');setTimeout(function(){wl.hidden=true;wl.classList.remove('bye')},260)}},{passive:true});
   wl.querySelectorAll('[data-pick]').forEach(function(b){b.addEventListener('click',function(){
     var v=b.dataset.pick;closeWl();
     if(v!=='explore'){setView(v);setTimeout(function(){document.getElementById('work').scrollIntoView({behavior:reduce?'auto':'smooth'})},180)}
   })});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeWl()});
-  function armWl(){addEventListener('scroll',function h(){if(scrollY>innerHeight*.45){removeEventListener('scroll',h);setTimeout(openWl,300)}},{passive:true})}
-  if(root.classList.contains('intro'))addEventListener('introdone',armWl,{once:true});else armWl();
+  if(root.classList.contains('intro'))addEventListener('introdone',function(){setTimeout(openWl,700)},{once:true});else setTimeout(openWl,1200);
 
   /* ---------- story: the venn follows the step you are reading ---------- */
   var sv=document.querySelector('.sv'),sts=document.querySelectorAll('.st');
@@ -975,14 +980,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     sts.forEach(function(s){so.observe(s)});
   }else sts.forEach(function(s){s.classList.add('on')});
 
-  var tz=document.getElementById('chat-teaser'),tzT;
-  function hideTz(){tz.hidden=true;clearTimeout(tzT);try{sessionStorage.setItem('venn-tz','1')}catch(e){}}
-  var seen=false;try{seen=sessionStorage.getItem('venn-tz')==='1'}catch(e){}
-  function tryTz(){if(!wl.hidden||root.classList.contains('intro')){setTimeout(tryTz,4000);return}if(chat.hidden&&!started){tz.hidden=false;tzT=setTimeout(hideTz,12000)}}
-  if(!seen)setTimeout(tryTz,7000);
-  tz.querySelector('.tz-open').addEventListener('click',function(){hideTz();toggle(true)});
-  tz.querySelector('.tz-x').addEventListener('click',hideTz);
-  cbtn.addEventListener('click',function(){hideTz();toggle()});
+  cbtn.addEventListener('click',function(){closeWl();toggle()});
   chat.querySelector('.chat-x').addEventListener('click',function(){toggle(false)});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!chat.hidden)toggle(false)});
   document.getElementById('chat-form').addEventListener('submit',function(e){e.preventDefault();ask(cin.value)});
@@ -1013,6 +1011,83 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     var hw=document.querySelector('.hero .wrap'),sg=document.getElementById('signal'),hz=false;
     addEventListener('scroll',function(){if(hz)return;hz=true;requestAnimationFrame(function(){hz=false;var y=Math.min(scrollY,innerHeight);hw.style.transform='translateY('+(y*.18)+'px)';hw.style.opacity=String(1-y/innerHeight*.7);sg.style.transform='translateY('+(y*.32)+'px)'})},{passive:true});
   }
+
+  /* ---------- kinetic line: slides sideways with the scroll ---------- */
+  (function(){var k=document.querySelector('.kin-t');if(!k||reduce)return;var tk=false;
+    function u(){tk=false;var r=k.parentElement.getBoundingClientRect(),p=(innerHeight-r.top)/(innerHeight+r.height);k.style.transform='translateX('+(-p*38)+'%)'}
+    addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(u)}},{passive:true});u();})();
+
+  /* ---------- recruiter checklist: ticks itself as you explore ---------- */
+  var CHK=(function(){
+    var KEYS=['intro','flip','case','win','demo','venn','msg'],done={},panel=document.getElementById('chk'),btn=document.querySelector('.chk-btn'),toast=document.getElementById('chk-toast'),tt;
+    try{done=JSON.parse(localStorage.getItem('ks-checks')||'{}')||{}}catch(e){}
+    var LINES=['Due diligence starts here.','Off to a good start.','Looking thorough.','Halfway to a decision.','This is going well.','Almost there.','One step from a verdict.','Verdict: hire her.'];
+    function n(){return KEYS.filter(function(k){return done[k]}).length}
+    function paint(){var c=n();btn.querySelector('.chk-n').textContent=c+'/7';btn.classList.toggle('full',c===7);
+      panel.querySelectorAll('li').forEach(function(li){li.classList.toggle('on',!!done[li.dataset.k])});
+      panel.querySelector('.chk-bar i').style.width=(c/7*100)+'%';panel.querySelector('.chk-s').textContent=LINES[c]}
+    function confetti(){if(reduce)return;var r=btn.getBoundingClientRect();for(var i=0;i<26;i++){var d=document.createElement('i');d.className='cf';d.style.left=(r.left+r.width/2)+'px';d.style.top=(r.top+r.height/2)+'px';d.style.background=i%2?'#c9a47e':'#a6a8ff';document.body.appendChild(d);
+      var a=Math.random()*Math.PI*2,v=60+Math.random()*120;d.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:'translate('+Math.cos(a)*v+'px,'+(Math.sin(a)*v+120)+'px) scale(.4)',opacity:0}],{duration:1100+Math.random()*500,easing:'cubic-bezier(.2,.7,.2,1)'}).onfinish=function(){this.effect.target.remove()}}}
+    function tick(k){if(done[k])return;done[k]=1;try{localStorage.setItem('ks-checks',JSON.stringify(done))}catch(e){}paint();
+      var c=n(),label=panel.querySelector('[data-k="'+k+'"]').textContent;
+      toast.innerHTML='<b>✓</b> '+label+' <span>'+c+'/7</span>'+(c===7?' · <em>Verdict: hire her.</em>':'');toast.hidden=false;toast.classList.remove('go');void toast.offsetWidth;toast.classList.add('go');
+      clearTimeout(tt);tt=setTimeout(function(){toast.hidden=true},2600);
+      btn.classList.remove('pop');void btn.offsetWidth;btn.classList.add('pop');if(c===7)confetti();}
+    function toggle(o){if(o===undefined)o=panel.hidden;panel.hidden=!o;btn.setAttribute('aria-expanded',o)}
+    btn.addEventListener('click',function(e){e.stopPropagation();toggle()});
+    document.addEventListener('click',function(e){if(!panel.hidden&&!panel.contains(e.target))toggle(false)});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')toggle(false)});
+    paint();return {tick:tick};
+  })();
+  if(root.classList.contains('intro'))addEventListener('introdone',function(){setTimeout(function(){CHK.tick('intro')},1800)},{once:true});else setTimeout(function(){CHK.tick('intro')},2500);
+  document.querySelectorAll('[data-goto],#welcome [data-pick]').forEach(function(b){b.addEventListener('click',function(){setTimeout(function(){if(root.dataset.view!==startView)CHK.tick('flip')},50)})});
+  var startView=root.dataset.view;document.querySelectorAll('.switch button').forEach(function(b){b.addEventListener('click',function(){if(b.dataset.view!==startView)CHK.tick('flip')})});
+  document.querySelectorAll('a[href^="work/"]').forEach(function(a){a.addEventListener('click',function(){CHK.tick('case')})});
+  if('IntersectionObserver' in window){var wo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&e.target.offsetParent!==null){CHK.tick('win');wo.disconnect()}})},{threshold:.5});document.querySelectorAll('.award,#ai-data .card:first-child').forEach(function(el){wo.observe(el)})}
+  document.getElementById('own').addEventListener('input',function h(){if(this.value.trim().length>8){CHK.tick('demo');this.removeEventListener('input',h)}});
+
+  /* ---------- project finder: searchable menu with icons, ⌘K ---------- */
+  (function(){
+    var IC={"pulse": "<path d=\"M3 12h4l2-5 3 10 2-5h7\"/>", "grid": "<rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1.5\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1.5\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1.5\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1.5\"/>", "bubble": "<path d=\"M4 5h16v11H9l-5 4z\"/><path d=\"M9 10h.01M15 10h.01\"/>", "trophy": "<path d=\"M8 4h8v5a4 4 0 0 1-8 0z\"/><path d=\"M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8\"/>", "globe": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18\"/>", "pen": "<path d=\"M4 20l4-1 11-11-3-3L5 16z\"/><path d=\"M14 6l3 3\"/>", "mask": "<path d=\"M3 8c3-2 15-2 18 0 0 6-3 9-9 9S3 14 3 8z\"/><path d=\"M8 11h2M14 11h2\"/>", "watch": "<rect x=\"7\" y=\"7\" width=\"10\" height=\"10\" rx=\"3\"/><path d=\"M9 7V3h6v4M9 17v4h6v-4M10 12h4\"/>", "cursor": "<path d=\"M5 3l13 6-6 2-2 6z\"/><path d=\"M15 15l4 4\"/>", "funnel": "<path d=\"M3 4h18l-7 8v6l-4 2v-8z\"/>", "github": "<path d=\"M9 19c-4 1-4-2-6-3m12 5v-3.5a3 3 0 0 0-1-2.5c3 0 6-1.5 6-6.5a5 5 0 0 0-1.5-3.5 4.5 4.5 0 0 0 0-3.5S17 1.5 14.5 3a12 12 0 0 0-5 0C7 1.5 6 2 6 2a4.5 4.5 0 0 0 0 3.5A5 5 0 0 0 4.5 9c0 5 3 6.5 6 6.5a3 3 0 0 0-1 2.5V21\"/>", "venn": "<circle cx=\"9\" cy=\"12\" r=\"6\"/><circle cx=\"15\" cy=\"12\" r=\"6\"/>", "user": "<circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21a8 8 0 0 1 16 0\"/>", "mail": "<rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2\"/><path d=\"M3 7l9 6 9-6\"/>", "switch": "<path d=\"M7 7h12l-3-3M17 17H5l3 3\"/>", "chat": "<path d=\"M12 3a9 9 0 0 0-8 13l-1 5 5-1a9 9 0 1 0 4-17z\"/>"},IT=[{"t": "SiDLY Health", "m": "Mobile + web apps for managers, carers and residents", "g": "design", "i": "pulse", "go": "work/sidly-health/", "k": "ux ui telecare nfc planner mobile web case study"}, {"t": "SiDLY ERP redesign", "m": "The platform 1,000+ municipalities use", "g": "design", "i": "grid", "go": "work/sidly-erp/", "k": "erp b2b dashboard confidential municipalities"}, {"t": "Lemi", "m": "HackYeah 2026 · health guide on the Claude API", "g": "design", "i": "bubble", "go": "work/lemi/", "k": "hackathon ai health app claude elevenlabs flutter"}, {"t": "GovBot", "m": "1st place · AI Place Challenge 2025", "g": "design", "i": "trophy", "go": "#ai", "v": "design", "k": "hackathon n8n ai agent public services ministry"}, {"t": "sidly.eu", "m": "Company website, designed and coded", "g": "design", "i": "globe", "go": "https://www.sidly.eu", "k": "website react figma sites"}, {"t": "Rebrand & Vital Care", "m": "Identity, packaging, launch", "g": "design", "i": "pen", "go": "#more", "v": "design", "k": "brand identity packaging"}, {"t": "Unmasked", "m": "NLP for dark patterns · F1 0.936 · live demo", "g": "data", "i": "mask", "go": "work/unmasked/", "k": "nlp classifier chrome extension thesis machine learning"}, {"t": "HealthPlatform", "m": "RAG health summaries from a wearable", "g": "data", "i": "watch", "go": "work/healthplatform/", "k": "rag llm wearable thesis langflow"}, {"t": "UX friction detection", "m": "Kafka + Spark, rage clicks in real time", "g": "data", "i": "cursor", "go": "work/ux-friction/", "k": "streaming kafka spark debezium cdc data engineering"}, {"t": "Funnel ELT", "m": "SQL on DuckDB, six data-quality rules", "g": "data", "i": "funnel", "go": "work/funnel-elt/", "k": "sql duckdb analytics medallion"}, {"t": "GitHub repositories", "m": "All the code, live from GitHub", "g": "data", "i": "github", "go": "#github", "v": "data", "k": "code repos"}, {"t": "Where design meets data", "m": "How the two worlds connect", "g": "page", "i": "venn", "go": "#story", "k": "story about approach"}, {"t": "About & experience", "m": "Studies, roles, skills", "g": "page", "i": "user", "go": "#about", "k": "cv education skills experience"}, {"t": "Write to Kacha", "m": "The form lands in her inbox", "g": "page", "i": "mail", "go": "#contact", "k": "contact email hire"}, {"t": "Ask Venn", "m": "The portfolio assistant", "g": "page", "i": "chat", "go": "__venn", "k": "chatbot assistant question"}, {"t": "Switch perspective", "m": "Product design ↔ Data science", "g": "page", "i": "switch", "go": "__switch", "k": "toggle view"}];
+    var ov=document.getElementById('cmd'),q=document.getElementById('cmd-q'),ul=document.getElementById('cmd-list'),f='all',sel=0,shown=[],last=null;
+    function svg(n){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[n]+'</svg>'}
+    var TAG={design:'Design',data:'Data',page:'Page'};
+    function draw(){
+      var s=norm(q.value.trim());
+      shown=IT.filter(function(x){return (f==='all'||x.g===f)&&(!s||s.split(/\s+/).every(function(w){return norm(x.t+' '+x.m+' '+x.k).indexOf(w)>-1}))});
+      sel=Math.min(sel,Math.max(0,shown.length-1));
+      ul.innerHTML=shown.length?shown.map(function(x,k){return '<li role="option" id="cmd-'+k+'" aria-selected="'+(k===sel)+'" data-k="'+k+'" class="g-'+x.g+'"><span class="ci">'+svg(x.i)+'</span><span class="ct"><b>'+x.t+'</b><span>'+x.m+'</span></span><span class="cg">'+TAG[x.g]+'</span></li>'}).join(''):'<li class="cmd-none">Nothing matches. Venn might know: <button type="button" data-ask>Ask Venn</button></li>';
+      q.setAttribute('aria-activedescendant',shown.length?'cmd-'+sel:'');
+      var a=ul.querySelector('[aria-selected="true"]');if(a)a.scrollIntoView({block:'nearest'});
+      var na=ul.querySelector('[data-ask]');if(na)na.addEventListener('click',function(){var v=q.value;close();toggle(true);if(v)setTimeout(function(){ask(v)},300)});
+    }
+    function open(){last=document.activeElement;ov.hidden=false;q.value='';sel=0;draw();setTimeout(function(){q.focus()},20)}
+    function close(){ov.hidden=true;if(last&&last.focus)last.focus()}
+    function go(x){
+      close();
+      if(x.go==='__venn'){toggle(true);return}
+      if(x.go==='__switch'){var v=root.dataset.view==='design'?'data':'design';setView(v);setTimeout(function(){scrollTo({top:0,behavior:reduce?'auto':'smooth'})},60);return}
+      if(x.go.charAt(0)==='#'){if(x.v)setView(x.v);setTimeout(function(){var el=document.querySelector(x.go);if(el)el.scrollIntoView({behavior:reduce?'auto':'smooth'})},120);return}
+      if(/^work\//.test(x.go))CHK.tick('case');
+      location.href=x.go;
+    }
+    document.querySelector('.cmd-btn').addEventListener('click',open);
+    ov.addEventListener('click',function(e){if(e.target===ov)close()});
+    ul.addEventListener('click',function(e){var li=e.target.closest('li[data-k]');if(li)go(shown[+li.dataset.k])});
+    ul.addEventListener('mousemove',function(e){var li=e.target.closest('li[data-k]');if(li&&+li.dataset.k!==sel){sel=+li.dataset.k;ul.querySelectorAll('li[data-k]').forEach(function(l){l.setAttribute('aria-selected',+l.dataset.k===sel)})}});
+    q.addEventListener('input',function(){sel=0;draw()});
+    ov.querySelectorAll('[data-f]').forEach(function(b){b.addEventListener('click',function(){f=b.dataset.f;ov.querySelectorAll('[data-f]').forEach(function(x){x.setAttribute('aria-selected',x===b)});sel=0;draw();q.focus()})});
+    q.addEventListener('keydown',function(e){
+      if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(shown.length-1,sel+1);draw()}
+      else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(0,sel-1);draw()}
+      else if(e.key==='Enter'&&shown[sel]){e.preventDefault();go(shown[sel])}
+    });
+    document.addEventListener('keydown',function(e){
+      if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();ov.hidden?open():close()}
+      else if(e.key==='Escape'&&!ov.hidden)close();
+      else if(e.key==='/'&&ov.hidden&&!/input|textarea/i.test(document.activeElement.tagName)){e.preventDefault();open()}
+    });
+  })();
 
   /* ---------- copy email ---------- */
   var cb=document.getElementById('copy-email'),em=document.getElementById('email');
