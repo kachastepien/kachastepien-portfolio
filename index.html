@@ -10,7 +10,7 @@
 <meta property="og:image" content="https://kachastepien.com/assets/health/showcase.jpg">
 <meta property="og:url" content="https://kachastepien.com/">
 <meta name="theme-color" content="#121413" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#f6efe7" media="(prefers-color-scheme: light)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -37,12 +37,17 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 :root[data-theme="dark"]{--bg:#121413; --surface:#1b1e1c; --surface-2:#242826; --fg:#ecedeb; --muted:#9ba29e; --line:#2e3330;
   --design:#7cc4ad; --data:#a6a8ff; --warn:#f08a70; color-scheme:dark}
 :root[data-view="data"]{--accent:var(--data)}
+/* Design perspective is warm: cream, sand and caramel, taken from the portrait's backdrop. */
+:root[data-view="design"]{--bg:#f6efe7; --surface:#efe5da; --surface-2:#e5d8ca; --fg:#221c18; --muted:#6e6157; --line:#e0d2c2; --design:#93613f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"])[data-view="design"]{
+  --bg:#17130f; --surface:#211b16; --surface-2:#2b241e; --fg:#f1e9df; --muted:#ab9d8f; --line:#3a3029; --design:#e2bf9a}}
+:root[data-theme="dark"][data-view="design"]{--bg:#17130f; --surface:#211b16; --surface-2:#2b241e; --fg:#f1e9df; --muted:#ab9d8f; --line:#3a3029; --design:#e2bf9a}
 :root{--accent-soft:color-mix(in srgb,var(--accent) 13%,transparent);--accent-line:color-mix(in srgb,var(--accent) 40%,var(--line))}
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:5rem}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--bg);color:var(--fg);font:400 1rem/1.65 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color .4s}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 1rem/1.65 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color .5s,color .5s}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration-color:var(--accent-line);text-underline-offset:3px;text-decoration-thickness:1px;transition:text-decoration-color .2s,color .2s}
 a:hover{text-decoration-color:var(--accent)}
@@ -76,6 +81,7 @@ p{margin:0}
 /* ---- hero ---- */
 .hero{position:relative;min-height:min(88vh,860px);display:flex;align-items:center;padding:4rem 0 3rem;overflow:hidden}
 #signal{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.9}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto -10%;height:120%;background:radial-gradient(60% 55% at 18% 30%,var(--accent-soft),transparent 70%);pointer-events:none;transition:background .5s}
 .hero .wrap{position:relative}
 .hero-id{display:flex;align-items:center;gap:1rem;margin-bottom:1.75rem}
 .hero-id img{width:64px;height:64px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--accent-line)}
@@ -110,6 +116,67 @@ p{margin:0}
 :root[data-view="design"] [data-for="data"],:root[data-view="data"] [data-for="design"]{display:none!important}
 .view-enter{animation:viewIn .6s var(--ease) both}
 @keyframes viewIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ---- work index ---- */
+.index{padding-top:clamp(3rem,6vw,4.5rem)}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.9rem}
+.tiles.six{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:980px){.tiles,.tiles.six{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.tiles,.tiles.six{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;overflow:hidden;text-decoration:none;background:var(--bg);transition:border-color .3s,transform .4s var(--ease),box-shadow .4s}
+.tile:hover{border-color:var(--accent-line);transform:translateY(-3px);box-shadow:0 20px 36px -28px rgba(0,0,0,.4)}
+.tile .vis{height:132px;background:var(--surface);position:relative;overflow:hidden;display:grid;place-items:center;border-bottom:1px solid var(--line)}
+.tile .vis img{position:absolute;width:44%;top:14px;left:50%;transform:translateX(-50%);border-radius:12px;box-shadow:0 10px 30px -12px rgba(0,0,0,.35);transition:transform .6s var(--ease)}
+.tile:hover .vis img{transform:translateX(-50%) translateY(-8px)}
+.tile .vis img.l{width:36%;left:24%;top:30px;transform:translateX(-50%) rotate(-8deg)}
+.tile .vis img.r{width:36%;left:76%;top:30px;transform:translateX(-50%) rotate(8deg)}
+.tile:hover .vis img.l{transform:translateX(-50%) rotate(-11deg) translateY(-4px)}
+.tile:hover .vis img.r{transform:translateX(-50%) rotate(11deg) translateY(-4px)}
+.tile .vis .big{font:600 2.6rem/1 var(--mono);letter-spacing:-.04em;color:var(--accent);transition:transform .5s var(--ease)}
+.tile:hover .vis .big{transform:scale(1.06)}
+.tile .vis .big small{display:block;font:500 .66rem/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center;margin-top:.4rem}
+.tile .vis svg{width:46px;height:46px;color:var(--accent)}
+.tile .txt{padding:.95rem 1rem 1.05rem;display:flex;flex-direction:column;gap:.35rem;flex:1}
+.tile .txt b{font:600 1rem/1.25 var(--display)}
+.tile .txt span{font-size:.84rem;line-height:1.45;color:var(--muted)}
+.tile .txt em{margin-top:auto;padding-top:.5rem;font:500 .68rem/1 var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--accent);font-style:normal;display:flex;justify-content:space-between}
+.tile .txt em::after{content:"→";transition:transform .3s}
+.tile:hover .txt em::after{transform:translateX(4px)}
+
+/* ---- at a glance ---- */
+.tldr{margin-top:1.75rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;max-width:62rem}
+.tldr div{background:var(--bg);padding:1rem 1.1rem}
+.tldr p:last-child{margin-top:.35rem;font-size:.95rem;line-height:1.45}
+.tldr .label{color:var(--accent)}
+@media (max-width:760px){.tldr{grid-template-columns:1fr}}
+.facts-line{margin-top:1rem;display:flex;flex-wrap:wrap;gap:.4rem}
+
+/* ---- read more ---- */
+details.more{margin-top:1.25rem;max-width:62rem}
+details.more > summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:.55rem;font:500 .85rem/1 var(--body);padding:.7rem 1rem;border:1px solid var(--line);border-radius:999px;background:var(--bg);transition:border-color .2s}
+details.more > summary::-webkit-details-marker{display:none}
+details.more > summary:hover{border-color:var(--fg)}
+details.more > summary::before{content:"+";font:500 1rem/1 var(--mono);color:var(--accent);transition:transform .3s}
+details.more[open] > summary::before{transform:rotate(45deg)}
+details.more > summary .when-open{display:none}
+details.more[open] > summary .when-open{display:inline}
+details.more[open] > summary .when-closed{display:none}
+details.more[open] > .more-body{animation:viewIn .45s var(--ease) both}
+.more-body{margin-top:1.1rem}
+
+/* ---- chapter rail + back to top ---- */
+.rail{position:fixed;left:clamp(10px,1.6vw,28px);top:50%;transform:translateY(-50%);z-index:40;display:none;flex-direction:column;gap:.15rem}
+@media (min-width:1380px){.rail{display:flex}}
+.rail a{display:flex;align-items:center;gap:.6rem;text-decoration:none;font:500 .68rem/1 var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:.45rem 0}
+.rail a i{width:14px;height:1px;background:var(--line);transition:width .35s var(--ease),background-color .3s}
+.rail a span{opacity:0;transform:translateX(-4px);transition:opacity .3s,transform .3s;white-space:nowrap}
+.rail:hover a span,.rail a.on span{opacity:1;transform:none}
+.rail a.on{color:var(--fg)}
+.rail a.on i{width:28px;background:var(--accent)}
+.totop{position:fixed;right:clamp(14px,2vw,28px);bottom:clamp(14px,2vw,28px);z-index:45;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--fg);display:grid;place-items:center;cursor:pointer;opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .3s,transform .3s,border-color .2s}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
+.totop:hover{border-color:var(--fg)}
+.totop svg{width:16px;height:16px}
 
 /* ---- marquee ---- */
 .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:.9rem 0;background:var(--surface)}
@@ -198,11 +265,16 @@ h3.sub-h{font-size:1.25rem;margin:3rem 0 .8rem}
 
 /* decisions */
 .decisions{list-style:none;margin:1rem 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;counter-reset:d}
-.decisions li{background:var(--bg);padding:1.25rem 1.25rem 1.4rem;counter-increment:d;position:relative;transition:background-color .3s}
+.decisions li{background:var(--bg);counter-increment:d;position:relative;transition:background-color .3s}
 .decisions li:hover{background:var(--surface)}
-.decisions li::before{content:counter(d,decimal-leading-zero);font:500 .72rem/1 var(--mono);color:var(--accent);display:block;margin-bottom:.7rem;transition:color .4s}
-.decisions b{display:block;font:600 1rem/1.3 var(--display);margin-bottom:.4rem}
-.decisions p{font-size:.92rem;color:var(--muted)}
+.decisions summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:2rem minmax(0,1fr) 1rem;gap:.5rem;align-items:baseline;padding:1.1rem 1.2rem;font:600 1rem/1.3 var(--display)}
+.decisions summary::-webkit-details-marker{display:none}
+.decisions summary::before{content:counter(d,decimal-leading-zero);font:500 .72rem/1 var(--mono);color:var(--accent);transition:color .4s}
+.decisions summary::after{content:"+";font:500 1rem/1 var(--mono);color:var(--muted);transition:transform .3s;justify-self:end}
+.decisions details[open] summary::after{transform:rotate(45deg);color:var(--accent)}
+.decisions details p{font-size:.92rem;color:var(--muted);padding:0 1.2rem 1.2rem 3.7rem;margin-top:-.3rem;animation:viewIn .35s var(--ease) both}
+.dec-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;max-width:none}
+.dec-head .copy{white-space:nowrap}
 @media (max-width:700px){.decisions{grid-template-columns:1fr}}
 
 /* ERP flow */
@@ -368,6 +440,8 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 </head>
 <body>
 <a class="skip" href="#work">Skip to work</a>
+<nav class="rail" aria-label="Chapters"></nav>
+<button class="totop" type="button" aria-label="Back to top"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg></button>
 <div class="progress" aria-hidden="true"></div>
 
 <header class="top">
@@ -452,19 +526,31 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 <!-- ================= PRODUCT DESIGN ================= -->
 <div data-for="design" class="view">
 
-<section class="block" id="health" aria-labelledby="health-h">
+<section class="index" aria-labelledby="idx-d">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">↓</span><h2 id="idx-d">Selected work</h2><span class="label">Pick one · about 2 min each</span></div>
+    <div class="tiles">
+      <a class="tile reveal" href="#health"><div class="vis"><img class="l" src="assets/health/carer-home.jpg" alt="" loading="lazy"><img class="r" src="assets/health/res-rate.jpg" alt="" loading="lazy"><img src="assets/health/res-home.jpg" alt="" loading="lazy" style="z-index:1"></div><div class="txt"><b>SiDLY Health</b><span>Mobile and web apps for care managers, carers and residents.</span><em>Case study · 3 min</em></div></a>
+      <a class="tile reveal d1" href="#erp"><div class="vis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></svg></div><div class="txt"><b>SiDLY ERP redesign</b><span>The platform 1,000+ municipalities use to run telecare.</span><em>Confidential · 2 min</em></div></a>
+      <a class="tile reveal d2" href="#ai"><div class="vis"><span class="big">1<sup style="font-size:.45em">st</sup><small>AI Place Challenge</small></span></div><div class="txt"><b>AI products &amp; hackathons</b><span>A winning AI assistant for public services, and Lemi from HackYeah.</span><em>2 projects · 2 min</em></div></a>
+      <a class="tile reveal d3" href="#more"><div class="vis"><span class="big" style="font-size:1.6rem">sidly.eu<small>web · brand · research</small></span></div><div class="txt"><b>More work</b><span>The company website, the rebrand and two theses.</span><em>4 projects · 1 min</em></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="health" data-rail="SiDLY Health" aria-labelledby="health-h">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">01</span><h2>Featured case study</h2><span class="label">SiDLY Healthcare · ongoing</span></div>
     <div class="feature">
       <div>
         <h2 class="case-title reveal" id="health-h">SiDLY Health: one record, three people</h2>
         <p class="lede reveal d1">SiDLY Health connects the people around a single visit: the care manager who plans it, the carer who makes it and the resident who receives it. I lead its UX/UI across the mobile apps and the web platform.</p>
-        <div class="meta reveal d2">
-          <div><p class="label">Role</p><p>Lead UX/UI designer</p></div>
-          <div><p class="label">Platforms</p><p>Web platform, mobile apps</p></div>
-          <div><p class="label">Output</p><p>Clickable React/TypeScript prototype</p></div>
-          <div><p class="label">Context</p><p>Medical devices, MDR Class IIa</p></div>
+        <div class="tldr reveal d2" style="grid-template-columns:1fr">
+          <div><p class="label">The challenge</p><p>One visit, three people, three apps that have to agree on the same data.</p></div>
+          <div><p class="label">What I did</p><p>Led UX/UI for the mobile apps and the web platform, prototyped in React/TypeScript.</p></div>
+          <div><p class="label">Signature move</p><p>Visits start and end with an NFC scan, so hours are settled from real time.</p></div>
         </div>
+        <div class="facts-line reveal d3"><span class="chip">Lead UX/UI designer</span><span class="chip">Web + mobile</span><span class="chip">React/TS prototype</span><span class="chip">Medical device · MDR IIa</span></div>
       </div>
       <div class="fan reveal" aria-label="Five screens from the SiDLY Health apps">
         <div class="device"><img src="assets/health/mgr-carers.jpg" width="405" height="877" alt="Carers list in the care manager app"></div>
@@ -535,45 +621,48 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
     </div>
     <p class="note">The product ships in Polish, so the screens are in Polish. All names and data are test data.</p>
 
-    <h3 class="sub-h reveal">Key design decisions</h3>
+    <div class="dec-head sub-h reveal"><h3 style="font-size:1.25rem">Key design decisions</h3><button class="copy" type="button" data-openall>Open all</button></div>
     <ol class="decisions reveal">
-      <li><b>A visit starts with a scan</b><p>The carer starts and ends each visit by scanning the resident's NFC tag with their phone. Work time is recorded as it happened, not as it was planned, and carers' hours are settled from it.</p></li>
-      <li><b>The care card has a lifetime</b><p>Before a visit the care card is the plan. During the visit the carer fills it in. After the visit it becomes the record that the resident and the office read, so it is locked as it was when the visit ended.</p></li>
-      <li><b>The resident's home screen answers three questions</b><p>Am I all right, what do I need to do today, and when is someone coming? Large text, large touch targets, few words, and SOS always on top.</p></li>
-      <li><b>Urgent first, then the day</b><p>The manager's dashboard opens with what needs a reaction, then today's visits in the field, the week ahead and equipment. Each block leads to the screen where that issue gets solved.</p></li>
-      <li><b>Recurring visits stay ordinary visits</b><p>A series is a set of normal visits that share a tag, so any single one can be moved or cancelled without breaking the rest.</p></li>
-      <li><b>Prototype in code, not in frames</b><p>The flows are built as a clickable React/TypeScript prototype with realistic test data, so managers and carers test whole visits instead of single screens.</p></li>
+      <li><details><summary>A visit starts with a scan</summary><p>The carer starts and ends each visit by scanning the resident's NFC tag with their phone. Work time is recorded as it happened, not as it was planned, and carers' hours are settled from it.</p></details></li>
+      <li><details><summary>The care card has a lifetime</summary><p>Before a visit the care card is the plan. During the visit the carer fills it in. After the visit it becomes the record that the resident and the office read, so it is locked as it was when the visit ended.</p></details></li>
+      <li><details><summary>The resident's home screen answers three questions</summary><p>Am I all right, what do I need to do today, and when is someone coming? Large text, large touch targets, few words, and SOS always on top.</p></details></li>
+      <li><details><summary>Urgent first, then the day</summary><p>The manager's dashboard opens with what needs a reaction, then today's visits in the field, the week ahead and equipment. Each block leads to the screen where that issue gets solved.</p></details></li>
+      <li><details><summary>Recurring visits stay ordinary visits</summary><p>A series is a set of normal visits that share a tag, so any single one can be moved or cancelled without breaking the rest.</p></details></li>
+      <li><details><summary>Prototype in code, not in frames</summary><p>The flows are built as a clickable React/TypeScript prototype with realistic test data, so managers and carers test whole visits instead of single screens.</p></details></li>
     </ol>
   </div>
 </section>
 
-<section class="block" id="erp" aria-labelledby="erp-h">
+<section class="block" id="erp" data-rail="ERP" aria-labelledby="erp-h">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">02</span><h2>Case study</h2><span class="label">SiDLY Healthcare · in progress</span></div>
     <h2 class="case-title reveal" id="erp-h">Redesigning the ERP that runs public telecare</h2>
     <p class="lede reveal d1">Municipalities, public institutions and care providers use the SiDLY ERP to order telecare bands, assign them to residents, keep consent documents in order and renew contracts. I am leading its redesign.</p>
-    <div class="meta reveal d2">
-      <div><p class="label">Role</p><p>Lead designer, research to prototype</p></div>
-      <div><p class="label">Users</p><p>1,000+ municipalities, institutions and care providers</p></div>
-      <div><p class="label">Output</p><p>Clickable React/TypeScript prototype</p></div>
-      <div><p class="label">Status</p><p>In progress</p></div>
+    <div class="tldr reveal d2">
+      <div><p class="label">The challenge</p><p>Routine tasks where mistakes are easy to make and hard to notice, for very different clients.</p></div>
+      <div><p class="label">What I did</p><p>Research with municipal and foreign clients, then a clickable React/TypeScript prototype.</p></div>
+      <div><p class="label">Signature move</p><p>An undo instead of a confirm for anything reversible.</p></div>
     </div>
-    <div class="cards" style="margin-top:2rem">
+    <div class="facts-line reveal d3"><span class="chip">Lead designer</span><span class="chip">1,000+ client organisations</span><span class="chip">React/TS prototype</span><span class="chip">In progress</span></div>
+    <details class="more reveal"><summary><span class="when-closed">The problem and how I worked</span><span class="when-open">Hide</span></summary><div class="more-body">
+    <div class="cards">
       <div class="card reveal"><p class="label">The problem</p><p>Most of the work in the ERP is routine: activating a batch of bands, swapping a broken one, attaching a signed consent form. Mistakes in these tasks are easy to make and hard to notice. A band can be activated for the wrong client, or keep sending data under a person who no longer wears it.</p><p>The system also serves two very different clients. A Polish municipality works in złoty, uploads documents from its social-welfare office and tracks coverage of its residents aged 60+. An export client sells across borders, invoices in euro and needs dialling codes per country.</p></div>
       <div class="card reveal d1"><p class="label">How I worked</p><p>Weekly project meetings with stakeholders, plus research with municipal and foreign clients about how they order, assign and renew devices.</p><p>I built the redesign as a clickable prototype in React and TypeScript with realistic test data, so whole flows can be tested instead of static mockups.</p></div>
     </div>
+    </div></details>
     <h3 class="sub-h reveal">Where the decisions sit</h3>
     <div class="flow reveal">
       <svg viewBox="0 0 700 250" role="img" aria-labelledby="flow-t"><title id="flow-t">How an order becomes active bands in the ERP, with the design decisions marked where they apply</title><defs><marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 z" class="ahp"/></marker></defs><text class="lane" x="0" y="44">ORDER</text><text class="lane" x="0" y="164">BAND</text><rect class="box" x="70" y="20" width="100" height="38" rx="5"/><text class="bt" x="120.0" y="37" text-anchor="middle">Awaiting</text><text class="bs" x="120.0" y="50" text-anchor="middle">signature</text><rect class="box" x="190" y="20" width="100" height="38" rx="5"/><text class="bt" x="240.0" y="44" text-anchor="middle">Signed</text><rect class="box" x="310" y="20" width="100" height="38" rx="5"/><text class="bt" x="360.0" y="44" text-anchor="middle">SIM cards</text><rect class="box" x="430" y="20" width="100" height="38" rx="5"/><text class="bt" x="480.0" y="44" text-anchor="middle">Shipped</text><rect class="box" x="550" y="20" width="100" height="38" rx="5"/><text class="bt" x="600.0" y="44" text-anchor="middle">Delivered</text><line class="ar" x1="170" y1="39" x2="187" y2="39" marker-end="url(#ah)"/><line class="ar" x1="290" y1="39" x2="307" y2="39" marker-end="url(#ah)"/><line class="ar" x1="410" y1="39" x2="427" y2="39" marker-end="url(#ah)"/><line class="ar" x1="530" y1="39" x2="547" y2="39" marker-end="url(#ah)"/><path class="ar" d="M600,58 V92 H120 V137" fill="none" marker-end="url(#ah)"/><text class="bs" x="360" y="86" text-anchor="middle">bands arrive at the municipality or care provider</text><rect class="box" x="70" y="140" width="100" height="38" rx="5"/><text class="bt" x="120.0" y="164" text-anchor="middle">Unassigned</text><rect class="box" x="200" y="140" width="120" height="38" rx="5"/><text class="bt" x="260.0" y="157" text-anchor="middle">Assigned</text><text class="bs" x="260.0" y="170" text-anchor="middle">to a resident</text><rect class="box" x="350" y="140" width="90" height="38" rx="5"/><text class="bt" x="395.0" y="164" text-anchor="middle">Active</text><rect class="box" x="470" y="140" width="100" height="38" rx="5"/><text class="bt" x="520.0" y="164" text-anchor="middle">Suspended</text><rect class="box" x="600" y="140" width="100" height="38" rx="5"/><text class="bt" x="650.0" y="157" text-anchor="middle">Renewed</text><text class="bs" x="650.0" y="170" text-anchor="middle">or ended</text><line class="ar" x1="170" y1="159" x2="197" y2="159" marker-end="url(#ah)"/><line class="ar" x1="320" y1="159" x2="347" y2="159" marker-end="url(#ah)"/><path class="ar" d="M440,152 H467" marker-end="url(#ah)"/><path class="ar" d="M470,166 H443" marker-end="url(#ah)"/><path class="ar" d="M395,178 V214 H650 V181" fill="none" marker-end="url(#ah)"/><circle class="mk" cx="185" cy="128" r="9"/><text class="mt" x="185" y="131.5" text-anchor="middle">03</text><text class="bs" x="185" y="112" text-anchor="middle">consent scan</text><circle class="mk" cx="334" cy="128" r="9"/><text class="mt" x="334" y="131.5" text-anchor="middle">02</text><text class="bs" x="334" y="112" text-anchor="middle">bulk import</text><circle class="mk" cx="455" cy="128" r="9"/><text class="mt" x="455" y="131.5" text-anchor="middle">01</text><text class="bs" x="455" y="112" text-anchor="middle">undo</text><circle class="mk" cx="520" cy="214" r="9"/><text class="mt" x="520" y="217.5" text-anchor="middle">04</text><text class="bs" x="520" y="238" text-anchor="middle">renew from the dashboard</text></svg>
     </div>
     <p class="note">The life of an order and its bands, simplified. Numbers match the decisions below.</p>
+    <div class="dec-head sub-h reveal" style="margin-top:2rem"><h3 style="font-size:1.25rem">Key design decisions</h3><button class="copy" type="button" data-openall>Open all</button></div>
     <ol class="decisions reveal">
-      <li><b>Confirm only what is expensive</b><p>Asking twice for everything trains people to click through. A confirmation now appears only for a new paid year or a change to many devices at once. A single suspend or resume is reversible, so it gets an undo instead.</p></li>
-      <li><b>Read the file back before acting on it</b><p>Bulk activation comes in as a spreadsheet, with columns in a different order every time. Rows are matched on the device number, and nothing runs until each line has been shown back with what it will do. The template you download is the file you can upload.</p></li>
-      <li><b>Keep a rule where it matters</b><p>Health data needs signed consent, but the clerk entering a resident rarely has the scan at hand. Blocking the form only taught people to upload placeholder files. Now the resident can be saved, is flagged "no consent" everywhere, and cannot receive a band until the scan arrives.</p></li>
-      <li><b>Every number opens its list</b><p>Each count on the dashboard opens exactly the devices it counts, and each bar in the renewals chart renews what it shows. Nothing on the dashboard sends you hunting elsewhere.</p></li>
-      <li><b>Show what an action will touch</b><p>With a mixed selection, each action states how many of the selected devices it would change and switches off at zero. The selection bar used to be the one dark element on the screen, which made ticking three rows feel like a warning. It is now calm, with one obvious next step.</p></li>
-      <li><b>Never rely on colour alone</b><p>Every status carries an icon and a label as well as a colour, because green and amber are hard to tell apart for colour-blind users.</p></li>
+      <li><details><summary>Confirm only what is expensive</summary><p>Asking twice for everything trains people to click through. A confirmation now appears only for a new paid year or a change to many devices at once. A single suspend or resume is reversible, so it gets an undo instead.</p></details></li>
+      <li><details><summary>Read the file back before acting on it</summary><p>Bulk activation comes in as a spreadsheet, with columns in a different order every time. Rows are matched on the device number, and nothing runs until each line has been shown back with what it will do. The template you download is the file you can upload.</p></details></li>
+      <li><details><summary>Keep a rule where it matters</summary><p>Health data needs signed consent, but the clerk entering a resident rarely has the scan at hand. Blocking the form only taught people to upload placeholder files. Now the resident can be saved, is flagged "no consent" everywhere, and cannot receive a band until the scan arrives.</p></details></li>
+      <li><details><summary>Every number opens its list</summary><p>Each count on the dashboard opens exactly the devices it counts, and each bar in the renewals chart renews what it shows. Nothing on the dashboard sends you hunting elsewhere.</p></details></li>
+      <li><details><summary>Show what an action will touch</summary><p>With a mixed selection, each action states how many of the selected devices it would change and switches off at zero. The selection bar used to be the one dark element on the screen, which made ticking three rows feel like a warning. It is now calm, with one obvious next step.</p></details></li>
+      <li><details><summary>Never rely on colour alone</summary><p>Every status carries an icon and a label as well as a colour, because green and amber are hard to tell apart for colour-blind users.</p></details></li>
     </ol>
     <div class="lock reveal">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg>
@@ -582,7 +671,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   </div>
 </section>
 
-<section class="block" id="ai" aria-labelledby="ai-h">
+<section class="block" id="ai" data-rail="AI & hackathons" aria-labelledby="ai-h">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">03</span><h2 id="ai-h">AI products &amp; hackathons</h2><span class="label">2025 – 2026</span></div>
 
@@ -603,12 +692,19 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
         <p class="label reveal">HackYeah 2026 · Sport &amp; Healthcare challenge</p>
         <h2 class="case-title reveal" style="margin-top:.5rem">Lemi: health care without the stress</h2>
         <p class="lede reveal d1">A health guide with a friendly lemur. It helps every day and at every doctor's visit: it joins mood, movement, medication, measurements and test results, and turns them into one small step for today.</p>
-        <p class="prose reveal d2" style="margin-top:1rem">It started with me. I'm a student and I put off calling the doctor, not because I don't know what is wrong, but because I have to call, explain myself, remember everything in ten minutes and then keep track of the advice. At the hackathon I asked other people whether they felt the same. It was far more common than I thought, and each conversation added a group the app could help: people for whom Polish is not a first language, people with disabilities, neurodivergent people, seniors and their families, people with health anxiety.</p>
-        <div class="facts reveal">
+        <div class="tldr reveal d2" style="grid-template-columns:1fr">
+          <div><p class="label">The problem</p><p>People put off the doctor because of the phone call, the ten minutes and the advice they forget.</p></div>
+          <div><p class="label">What I built</p><p>A web app and a Flutter app on the Claude API and ElevenLabs, designed and coded at the hackathon.</p></div>
+          <div><p class="label">Signature move</p><p>One recorded visit becomes three summaries: for you, for family, for the doctor.</p></div>
+        </div>
+        <details class="more reveal"><summary><span class="when-closed">Why I built it, and the numbers behind it</span><span class="when-open">Hide</span></summary><div class="more-body">
+        <p class="prose">It started with me. I'm a student and I put off calling the doctor, not because I don't know what is wrong, but because I have to call, explain myself, remember everything in ten minutes and then keep track of the advice. At the hackathon I asked other people whether they felt the same. It was far more common than I thought, and each conversation added a group the app could help: people for whom Polish is not a first language, people with disabilities, neurodivergent people, seniors and their families, people with health anxiety.</p>
+        <div class="facts">
           <div class="fact"><b>47.6%</b><span>of Europeans have trouble understanding health information <small>HLS-EU survey, 2015</small></span></div>
           <div class="fact"><b>40–80%</b><span>of medical advice is forgotten right after the visit <small>Kessels, 2003</small></span></div>
           <div class="fact"><b>81%</b><span>of young adults feel stressed before a phone call <small>BankMyCell, 1,200+ people</small></span></div>
         </div>
+        </div></details>
         <ul class="feat reveal">
           <li>Mood in one tap, with Lemi reacting across the app.</li>
           <li>Measurements from a photo: point the camera at a blood pressure monitor, glucometer or scale, AI reads the display and you confirm the value.</li>
@@ -630,7 +726,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   </div>
 </section>
 
-<section class="block" id="more" aria-labelledby="more-h">
+<section class="block" id="more" data-rail="More work" aria-labelledby="more-h">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">04</span><h2 id="more-h">More work</h2><span class="label">Web · brand · research</span></div>
     <div class="cards">
@@ -646,18 +742,31 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 <!-- ================= DATA SCIENCE ================= -->
 <div data-for="data" class="view">
 
-<section class="block" id="unmasked" aria-labelledby="un-h">
+<section class="index" aria-labelledby="idx-a">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num">↓</span><h2 id="idx-a">Selected projects</h2><span class="label">Pick one · about 1–2 min each</span></div>
+    <div class="tiles six">
+      <a class="tile reveal" href="#unmasked"><div class="vis"><span class="big">0.936<small>F1 · NLP classifier</small></span></div><div class="txt"><b>Unmasked</b><span>Catching manipulative UX copy, with a live demo you can try.</span><em>Thesis · 2 min</em></div></a>
+      <a class="tile reveal d1" href="#healthplatform"><div class="vis"><span class="big">RAG<small>wearable + documents</small></span></div><div class="txt"><b>HealthPlatform</b><span>An AI health summary from a medical wristband.</span><em>Thesis · 1 min</em></div></a>
+      <a class="tile reveal d2" href="#friction"><div class="vis"><span class="big" style="font-size:1.7rem">CDC→Kafka<small>streaming</small></span></div><div class="txt"><b>UX friction detection</b><span>Rage clicks and abandonment, flagged in real time.</span><em>Data engineering · 1 min</em></div></a>
+      <a class="tile reveal" href="#elt"><div class="vis"><span class="big" style="font-size:1.7rem">B · S · G<small>DuckDB medallion</small></span></div><div class="txt"><b>Funnel ELT</b><span>Where users drop off, with explicit data-quality rules.</span><em>Analytics · 1 min</em></div></a>
+      <a class="tile reveal d1" href="#ai-data"><div class="vis"><span class="big">n8n<small>agents · LLM APIs</small></span></div><div class="txt"><b>AI in shipped products</b><span>A winning hackathon agent, Lemi and conversational AI.</span><em>4 projects · 1 min</em></div></a>
+      <a class="tile reveal d2" href="#github"><div class="vis"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></div><div class="txt"><b>On GitHub</b><span>The public repositories, with live update dates.</span><em>Code · repos</em></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="unmasked" data-rail="Unmasked" aria-labelledby="un-h">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">01</span><h2>Featured project</h2><span class="label">NLP · B.A. thesis · 2026</span></div>
     <div class="feature" style="align-items:start">
       <div>
         <h2 class="case-title reveal" id="un-h">Unmasked: catching manipulative UX copy with NLP</h2>
         <p class="lede reveal d1">"Only 2 left!", "43 people are viewing this", "No thanks, I don't like saving money." Dark patterns live in the words. I trained a classifier to spot them and shipped it as a Chrome extension that warns you before you buy.</p>
-        <div class="meta reveal d2" style="grid-template-columns:repeat(2,minmax(0,1fr))">
-          <div><p class="label">Data</p><p>2,356 labelled interface texts, 50/50 balanced (Mathur et al., 2019)</p></div>
-          <div><p class="label">Features</p><p>TF-IDF, 1–2-grams, 5,000 features</p></div>
-          <div><p class="label">Best model</p><p>Logistic Regression, of five compared</p></div>
-          <div><p class="label">Thesis</p><p>SWPS University, Psychology &amp; CS</p></div>
+        <div class="tldr reveal d2" style="grid-template-columns:1fr">
+          <div><p class="label">The problem</p><p>Manipulative copy is everywhere in e-commerce, and people rarely notice it.</p></div>
+          <div><p class="label">What I did</p><p>Trained and compared five classifiers on 2,356 labelled texts, then shipped the best as a Chrome extension.</p></div>
+          <div><p class="label">Result</p><p>F1 0.936 and ROC AUC 0.976, running fully offline in the browser.</p></div>
         </div>
         <div class="metrics reveal" aria-label="Model results">
           <div class="metric"><span>Binary F1</span><span class="bar"><i style="--v:93.6%"></i></span><b>0.936</b></div>
@@ -682,11 +791,13 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
         </div>
       </div>
     </div>
-    <h3 class="sub-h reveal">From model to something people can use</h3>
+    <details class="more reveal"><summary><span class="when-closed">Method: data, features and why rules in the extension</span><span class="when-open">Hide</span></summary><div class="more-body">
+    <div class="chips" style="margin:0 0 1rem"><span class="chip">2,356 texts · 50/50 balanced · Mathur et al., 2019</span><span class="chip">TF-IDF · 1–2-grams · 5,000 features</span><span class="chip">SWPS University · Psychology &amp; CS</span></div>
     <div class="cards">
       <div class="card reveal"><p class="label">What the model learned</p><p>Dark patterns use their own vocabulary: urgency ("hurry", "limited"), scarcity ("only", "left", "stock") and social proof ("people", "purchased"). Classical models on TF-IDF did surprisingly well; the rare categories suffered from too little data.</p></div>
       <div class="card reveal d1"><p class="label">Why rules in the extension</p><p>The top features of the trained model were encoded as explicit rules, so the extension classifies fully offline, with no API calls. It highlights flagged copy on the page by severity and explains the psychological mechanism behind each one.</p></div>
     </div>
+    </div></details>
     <div class="links reveal">
       <a class="btn solid" href="https://github.com/kachastepien/unmasked">Extension on GitHub</a>
       <a class="btn" href="https://github.com/kachastepien/automated-dark-pattern-detection">Model notebooks</a>
@@ -694,7 +805,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   </div>
 </section>
 
-<section class="block" id="healthplatform" aria-labelledby="hp-h">
+<section class="block" id="healthplatform" data-rail="HealthPlatform" aria-labelledby="hp-h">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">02</span><h2>Applied AI</h2><span class="label">B.Eng. thesis · 2024/25</span></div>
     <h2 class="case-title reveal" id="hp-h">HealthPlatform: a health summary from a medical wearable</h2>
@@ -706,19 +817,21 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
       <div><b>LLMs</b><span>GPT-4 and Groq for answers and recommendations</span></div>
       <div><b>Voice</b><span>Whisper to listen, ElevenLabs to speak back</span></div>
     </div>
-    <ul class="feat reveal" style="max-width:var(--col)">
+    <details class="more reveal"><summary><span class="when-closed">What it does and the stack</span><span class="when-open">Hide</span></summary><div class="more-body">
+    <ul class="feat" style="max-width:var(--col);margin-top:0">
       <li>Integration with the SiDLY medical wristband.</li>
       <li>An AI assistant with RAG over the user's medical documents.</li>
       <li>Machine-learning recommendations for personal health advice.</li>
       <li>Voice analysis: speech recognition and symptom analysis from recordings.</li>
       <li>A place to store and analyse medical documentation.</li>
     </ul>
-    <div class="chips reveal"><span class="chip on">React 18</span><span class="chip on">TypeScript</span><span class="chip">Vite</span><span class="chip">Tailwind</span><span class="chip">shadcn/ui</span><span class="chip">Supabase</span><span class="chip">Langflow</span><span class="chip">AstraDB</span><span class="chip">OpenAI</span><span class="chip">Groq</span><span class="chip">ElevenLabs</span></div>
+    <div class="chips"><span class="chip on">React 18</span><span class="chip on">TypeScript</span><span class="chip">Vite</span><span class="chip">Tailwind</span><span class="chip">shadcn/ui</span><span class="chip">Supabase</span><span class="chip">Langflow</span><span class="chip">AstraDB</span><span class="chip">OpenAI</span><span class="chip">Groq</span><span class="chip">ElevenLabs</span></div>
+    </div></details>
     <p class="note">Supervised by Andrzej Ptasznik, M.Sc.Eng., Warsaw School of Computer Science. The code is private; happy to show it in an interview.</p>
   </div>
 </section>
 
-<section class="block" id="friction" aria-labelledby="fr-h">
+<section class="block" id="friction" data-rail="UX friction" aria-labelledby="fr-h">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">03</span><h2>Data engineering</h2><span class="label">Streaming · CDC · lakehouse</span></div>
     <h2 class="case-title reveal" id="fr-h">UX friction detection, in real time</h2>
@@ -753,7 +866,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   </div>
 </section>
 
-<section class="block" id="elt" aria-labelledby="elt-h">
+<section class="block" id="elt" data-rail="Funnel ELT" aria-labelledby="elt-h">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">04</span><h2>Analytics engineering</h2><span class="label">SQL · DuckDB</span></div>
     <div class="feature" style="align-items:start">
@@ -779,7 +892,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   </div>
 </section>
 
-<section class="block" id="ai-data" aria-labelledby="aid-h">
+<section class="block" id="ai-data" data-rail="AI in products" aria-labelledby="aid-h">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">05</span><h2 id="aid-h">AI in shipped products</h2><span class="label">Agents · LLM APIs · speech</span></div>
     <div class="cards">
@@ -791,7 +904,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
   </div>
 </section>
 
-<section class="block" id="github" aria-labelledby="gh-h">
+<section class="block" id="github" data-rail="GitHub" aria-labelledby="gh-h">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">06</span><h2 id="gh-h">On GitHub</h2><span class="label" id="gh-status">github.com/kachastepien</span></div>
     <div class="repos" id="repos">
@@ -807,7 +920,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 </div>
 
 <!-- ================= ABOUT (shared) ================= -->
-<section class="block" id="about" aria-labelledby="about-h">
+<section class="block" id="about" data-rail="About" aria-labelledby="about-h">
   <div class="wrap">
     <div class="sec-head reveal"><span class="num">—</span><h2 id="about-h">About</h2><span class="label">Psychology × CS × data</span></div>
     <div class="about">
@@ -885,7 +998,7 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
     try{localStorage.setItem('ks-view',v)}catch(e){}
     try{var u=new URL(location.href);u.searchParams.set('view',v);u.hash='';history.replaceState(null,'',u)}catch(e){}
     document.querySelectorAll('.view[data-for="'+v+'"], .hero [data-for="'+v+'"]').forEach(function(el){el.classList.remove('view-enter');void el.offsetWidth;el.classList.add('view-enter')});
-    watch(); countUp(document.querySelector('.hero')); signal.morph(v);
+    watch(); countUp(document.querySelector('.hero')); signal.morph(v); if(typeof buildRail==='function')buildRail();
   }
   btns.forEach(function(b){b.addEventListener('click',function(){setView(b.dataset.view)})});
   btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.view===root.dataset.view?'true':'false')});
@@ -909,6 +1022,29 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
     t.addEventListener('click',function(){selectTab(t)});
     t.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;e.preventDefault();var n=tabs[(k+d+tabs.length)%tabs.length];selectTab(n);n.focus()});
   });
+
+  /* ---------- chapter rail follows the visible perspective ---------- */
+  var rail=document.querySelector('.rail'),spy=null;
+  function buildRail(){
+    var secs=Array.from(document.querySelectorAll('section[data-rail]')).filter(function(s){return s.offsetParent!==null});
+    rail.innerHTML=secs.map(function(s,k){return '<a href="#'+s.id+'" data-id="'+s.id+'"><i></i><span>'+(k<secs.length-1?String(k+1).padStart(2,'0')+' · ':'')+s.dataset.rail+'</span></a>'}).join('');
+    if(spy)spy.disconnect();
+    if(!('IntersectionObserver' in window))return;
+    spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){rail.querySelectorAll('a').forEach(function(a){a.classList.toggle('on',a.dataset.id===e.target.id)})}})},{rootMargin:'-45% 0px -50% 0px'});
+    secs.forEach(function(s){spy.observe(s)});
+  }
+  buildRail();
+
+  /* ---------- back to top ---------- */
+  var tt=document.querySelector('.totop');
+  addEventListener('scroll',function(){tt.classList.toggle('show',scrollY>innerHeight*1.4)},{passive:true});
+  tt.addEventListener('click',function(){scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
+
+  /* ---------- open / close all decisions ---------- */
+  document.querySelectorAll('[data-openall]').forEach(function(b){b.addEventListener('click',function(){
+    var list=b.closest('.dec-head').nextElementSibling.querySelectorAll('details'),open=b.textContent==='Open all';
+    list.forEach(function(d){d.open=open});b.textContent=open?'Close all':'Open all';
+  })});
 
   /* ---------- copy email ---------- */
   var cb=document.getElementById('copy-email'),em=document.getElementById('email');
