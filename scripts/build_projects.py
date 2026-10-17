@@ -362,6 +362,10 @@ P.append(dict(
 
 
 # ---------- page template ----------
+import time
+VER = time.strftime("%Y%m%d%H%M")
+
+
 def page(pr, nxt):
     url = f"{SITE}/work/{pr['slug']}/"
     ld = {
@@ -391,7 +395,7 @@ def page(pr, nxt):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/site.css?v={VER}">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
