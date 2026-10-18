@@ -1092,19 +1092,27 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 }
 
 /* the win card and Lemi get clear air between them */
-/* Lemi gets its own panel in the app's colours: mint and sage */
-#ai .lemi{margin-top:clamp(4rem,8vw,6.5rem);padding:clamp(1.6rem,4vw,3.4rem);border-radius:28px;background:radial-gradient(120% 90% at 0% 0%,#e6f5ef 0%,#eef6f2 45%,#f4f8f5 100%);border:1px solid #d5e8df;position:relative;overflow:hidden}
-#ai .lemi::before{content:"";position:absolute;right:-120px;bottom:-140px;width:420px;height:420px;border-radius:50%;background:#ddf3ec;opacity:.8;pointer-events:none}
-#ai .lemi > *{position:relative}
-#ai .lemi .label{display:inline-flex;align-items:center;gap:.45rem;color:#fff;background:#5e7d6a;border-radius:999px;padding:.42rem .8rem;font-weight:600}
-#ai .lemi .case-title{color:#1d2b24}
+/* Lemi gets its own glassy panel in the app's look: violet accent, soft light blobs */
+#ai .lemi{margin-top:clamp(4rem,8vw,6.5rem);padding:clamp(1.6rem,4vw,3.4rem);border-radius:32px;background:#f7f6fb;border:1px solid #e6e3f3;position:relative;overflow:hidden;isolation:isolate}
+#ai .lemi::before,#ai .lemi::after{content:"";position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:-1}
+#ai .lemi::before{width:520px;height:520px;left:-160px;top:-200px;background:#c9c4ff;opacity:.75}
+#ai .lemi::after{width:460px;height:460px;right:-140px;bottom:-180px;background:#ffd6e8;opacity:.7}
+#ai .lemi .label{display:inline-flex;align-items:center;gap:.45rem;color:#fff;background:#5146c9;border-radius:999px;padding:.42rem .8rem;font-weight:600}
+#ai .lemi .case-title{color:#16151f}
 #ai .lemi .lemur img{width:104px}
-#ai .lemi .lm-say{background:#fff;border-color:#d5e8df}
-#ai .lemi .chip{background:#fff;border-color:#d5e8df}
-#ai .lemi .chip.on{background:#5e7d6a;color:#fff;border-color:#5e7d6a}
+#ai .lemi .lm-say{background:rgba(255,255,255,.8);border-color:rgba(81,70,201,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#ai .lemi .chip{background:rgba(255,255,255,.7);border-color:rgba(81,70,201,.16);color:#3a3850}
+#ai .lemi .chip.on{background:#5146c9;color:#fff;border-color:#5146c9}
 @media (min-width:901px){#ai .lemi > div:first-child{top:120px}}
 .award.reveal{transform:translateY(18px)}
 .js .award.reveal.in{transform:none}
-#ai .lemi .btn.solid{background:#5e7d6a;border-color:#5e7d6a;color:#fff}
-#ai .lemi .btn.solid:hover{background:#4d6a58}
+#ai .lemi .btn.solid{background:#5146c9;border-color:#5146c9;color:#fff}
+#ai .lemi .btn.solid:hover{background:#4339b0}
 @media (max-width:520px){#ai .lemi .label{font-size:.72rem;padding:.38rem .65rem}}
+/* descenders (the tail of ę) stay visible inside the masked lines */
+.hero h1 .line{padding-bottom:.2em;margin-bottom:-.14em}
+/* selection frame: fixed breathing room around the name */
+.fs-frame{inset:-20px -40px -18px -22px}
+.fs-dim{bottom:-34px}
+.fc-d{right:-104px;top:-26px}
+.fc-a{right:-112px;bottom:4px}
