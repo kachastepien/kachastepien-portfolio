@@ -1092,6 +1092,19 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 }
 
 /* the win card and Lemi get clear air between them */
-#ai .lemi{margin-top:clamp(4.5rem,9vw,7.5rem);padding-top:clamp(3rem,6vw,4.5rem);border-top:1px solid var(--line)}
+/* Lemi gets its own panel in the app's colours: mint and sage */
+#ai .lemi{margin-top:clamp(4rem,8vw,6.5rem);padding:clamp(1.6rem,4vw,3.4rem);border-radius:28px;background:radial-gradient(120% 90% at 0% 0%,#e6f5ef 0%,#eef6f2 45%,#f4f8f5 100%);border:1px solid #d5e8df;position:relative;overflow:hidden}
+#ai .lemi::before{content:"";position:absolute;right:-120px;bottom:-140px;width:420px;height:420px;border-radius:50%;background:#ddf3ec;opacity:.8;pointer-events:none}
+#ai .lemi > *{position:relative}
+#ai .lemi .label{display:inline-flex;align-items:center;gap:.45rem;color:#fff;background:#5e7d6a;border-radius:999px;padding:.42rem .8rem;font-weight:600}
+#ai .lemi .case-title{color:#1d2b24}
+#ai .lemi .lemur img{width:104px}
+#ai .lemi .lm-say{background:#fff;border-color:#d5e8df}
+#ai .lemi .chip{background:#fff;border-color:#d5e8df}
+#ai .lemi .chip.on{background:#5e7d6a;color:#fff;border-color:#5e7d6a}
+@media (min-width:901px){#ai .lemi > div:first-child{top:120px}}
 .award.reveal{transform:translateY(18px)}
 .js .award.reveal.in{transform:none}
+#ai .lemi .btn.solid{background:#5e7d6a;border-color:#5e7d6a;color:#fff}
+#ai .lemi .btn.solid:hover{background:#4d6a58}
+@media (max-width:520px){#ai .lemi .label{font-size:.72rem;padding:.38rem .65rem}}
