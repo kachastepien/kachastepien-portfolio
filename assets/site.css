@@ -1025,15 +1025,15 @@ body:has(#tour:not([hidden])) .welcome.mini{display:none}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(circle,color-mix(in srgb,var(--fg) 12%,transparent) 1px,transparent 1.3px);background-size:22px 22px;-webkit-mask-image:radial-gradient(70% 70% at 30% 45%,#000,transparent 75%);mask-image:radial-gradient(70% 70% at 30% 45%,#000,transparent 75%)}
 .hero{isolation:isolate}
 .figsel{position:relative;display:inline-block;margin-bottom:1.7rem}
-.fs-frame{position:absolute;inset:-.14em -.22em -.08em -.16em;border:1.5px solid #0d99ff;pointer-events:none;opacity:0;transform:scale(.985);transition:opacity .5s var(--ease),transform .6s var(--ease)}
+.fs-frame{position:absolute;inset:-.24em -.5em -.42em -.26em;border:1.5px solid #0d99ff;pointer-events:none;opacity:0;transform:scale(.985);transition:opacity .5s var(--ease),transform .6s var(--ease)}
 .fs-frame i{position:absolute;width:9px;height:9px;background:var(--bg);border:1.5px solid #0d99ff}
 .fs-frame .tl{left:-5px;top:-5px}.fs-frame .tr{right:-5px;top:-5px}.fs-frame .bl{left:-5px;bottom:-5px}.fs-frame .br{right:-5px;bottom:-5px}
-.fs-dim{position:absolute;left:50%;bottom:-30px;transform:translateX(-50%);white-space:nowrap;font:500 11.5px/1 var(--mono,ui-monospace);font-family:ui-monospace,"SF Mono",Menlo,monospace;color:#fff;background:#0d99ff;border-radius:5px;padding:5px 8px}
+.fs-dim{position:absolute;left:50%;bottom:-34px;transform:translateX(-50%);white-space:nowrap;font:500 11.5px/1 var(--mono,ui-monospace);font-family:ui-monospace,"SF Mono",Menlo,monospace;color:#fff;background:#0d99ff;border-radius:5px;padding:5px 8px}
 .fcur{position:absolute;display:flex;align-items:flex-start;pointer-events:none;opacity:0;transition:opacity .6s var(--ease)}
 .fcur svg{width:17px;height:23px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.18))}
 .fcur em{font-style:normal;margin:15px 0 0 -2px;font:600 12.5px/1 var(--body);color:#fff;padding:5px 9px;border-radius:9px 7px 7px 7px}
-.fc-d{right:-2.9em;top:-.45em}.fc-d em{background:#c9a47e}
-.fc-a{right:-3.6em;bottom:.15em}.fc-a em{background:#8587e6}
+.fc-d{right:-3.3em;top:-.5em}.fc-d em{background:#c9a47e}
+.fc-a{right:-4em;bottom:0}.fc-a em{background:#8587e6}
 html.figon .fs-frame{opacity:1;transform:none}
 html.figon .fcur{opacity:1}
 :root[data-view="design"] .fc-a,:root[data-view="data"] .fc-d{opacity:.35}
@@ -1057,6 +1057,37 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 .hero .stats{margin-top:2.6rem}
 .hero .cta{margin-top:2.6rem}
 .hero-id{margin-bottom:2.4rem}
-.hero .figsel{margin-bottom:3.4rem}
+.hero .figsel{margin-bottom:4.2rem}
 /* phones stay minimal: no canvas, no selection, no cursors */
 @media (max-width:640px){.hero::after,.fs-frame,.fcur{display:none!important}.hero .figsel{margin-bottom:1.6rem}}
+
+/* Lemi, the lemur from the app, says hi */
+.lemur{display:flex;align-items:flex-end;gap:.6rem;margin-bottom:1rem}
+.lemur img{width:84px;height:auto;transform-origin:50% 100%}
+.lm-say{position:relative;margin-bottom:3.2rem;font-size:.86rem;font-weight:600;background:var(--surface);border:1px solid var(--line);border-radius:14px 14px 14px 4px;padding:.45rem .75rem;white-space:nowrap}
+@media (prefers-reduced-motion:no-preference){
+  .js .lemur.in img{animation:lmHop .9s cubic-bezier(.3,1.6,.5,1) .2s both,lmBob 4s ease-in-out 1.2s infinite}
+  .js .lemur .lm-say{opacity:0;transform:translateY(6px) scale(.9);transform-origin:0 100%;transition:opacity .4s var(--ease) .8s,transform .5s cubic-bezier(.3,1.6,.5,1) .8s}
+  .js .lemur.in .lm-say{opacity:1;transform:none}
+  .lemur:hover img{animation:lmWiggle .6s ease-in-out}
+}
+@keyframes lmHop{from{transform:translateY(24px) scale(.8);opacity:0}to{transform:none;opacity:1}}
+@keyframes lmBob{0%,100%{transform:none}50%{transform:translateY(-4px) rotate(-2deg)}}
+@keyframes lmWiggle{25%{transform:rotate(-8deg)}75%{transform:rotate(6deg)}}
+/* desktop: the whole hero, buttons included, fits the first screen on short laptop displays */
+@media (min-width:641px){
+  .hero{min-height:0;padding-top:clamp(1.5rem,7vh,6rem);padding-bottom:clamp(1.5rem,4vh,3rem)}
+  .hero-id{margin-bottom:clamp(.9rem,3vh,2.4rem)}
+  .hero h1{font-size:clamp(2.6rem,min(8.4vw,12vh),6.2rem)}
+  .hero .figsel{margin-bottom:clamp(2.6rem,6vh,4.2rem)}
+  .hero .stats{margin-top:clamp(1.1rem,3.4vh,2.6rem)}
+  .hero .cta{margin-top:clamp(1.1rem,3.4vh,2.6rem)}
+}
+@media (min-width:641px) and (max-height:780px){
+  .hero .pf{width:52px;height:52px}
+  .hero-id{margin-bottom:.8rem}
+  .hero h1{font-size:clamp(2.6rem,min(8.4vw,11vh),6.2rem)}
+  .hero .figsel{margin-bottom:2.6rem}
+  .hero .statement{font-size:1.06rem;line-height:1.5}
+  .hero .stats b{font-size:1.2rem}
+}
