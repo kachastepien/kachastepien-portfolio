@@ -923,3 +923,13 @@ section[id],footer[id],[data-rail]{scroll-margin-top:84px}
 .aw-flow i{flex:1;min-width:24px;max-width:90px;background:rgba(201,164,126,.6)}
 .aw-flow i::after{background:#161718}
 @media (max-width:760px){.award{grid-template-columns:1fr}.aw-big{display:none}.aw-flow i{display:none}}
+.award{box-shadow:0 40px 90px -40px rgba(120,90,50,.55),inset 0 0 0 1px rgba(201,164,126,.28)}
+.award::after{content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;background:linear-gradient(100deg,transparent,rgba(255,240,220,.10),transparent);transform:skewX(-18deg);pointer-events:none;opacity:0}
+.js .award.in::after{animation:awShine 1.6s .4s var(--ease) both}
+@keyframes awShine{0%{opacity:1;left:-40%}100%{opacity:1;left:130%}}
+.aw-big{position:relative;transition:color 1.2s var(--ease) .5s}
+.js .award.in .aw-big,.no-js .aw-big{color:#c9a47e}
+.aw-big sup{transition:color 1.2s var(--ease) .7s}
+.aw-w{position:absolute;top:-1.4rem;left:.1em;font:600 .8rem/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:#e8d6c1;-webkit-text-stroke:0}
+.aw-facts{gap:1.2rem 2rem}
+@media (prefers-reduced-motion:reduce){.award::after{display:none}}
