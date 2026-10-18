@@ -759,7 +759,6 @@ code{font:500 .86em ui-monospace,SFMono-Regular,Menlo,monospace;background:color
 @supports (animation-timeline:view()){
   @media (prefers-reduced-motion:no-preference){
     .phones .phone,.shots .shot{animation:sv-rise linear both;animation-timeline:view();animation-range:entry 0% entry 75%}
-    .award{animation:sv-curtain linear both;animation-timeline:view();animation-range:entry 0% cover 20%}
     .loop,.flow,.pipe,.demo{animation:sv-wipe linear both;animation-timeline:view();animation-range:entry 0% cover 22%}
     .decisions li{animation:sv-slide linear both;animation-timeline:view();animation-range:entry 0% cover 25%}
     .case-title{animation:sv-title linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
@@ -1091,3 +1090,8 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
   .hero .statement{font-size:1.06rem;line-height:1.5}
   .hero .stats b{font-size:1.2rem}
 }
+
+/* the win card and Lemi get clear air between them */
+#ai .lemi{margin-top:clamp(4.5rem,9vw,7.5rem);padding-top:clamp(3rem,6vw,4.5rem);border-top:1px solid var(--line)}
+.award.reveal{transform:translateY(18px)}
+.js .award.reveal.in{transform:none}
