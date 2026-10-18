@@ -418,7 +418,7 @@ def page(pr, prv, nxt):
 <meta property="og:title" content="{pr['title']} · Katarzyna Stępień">
 <meta property="og:description" content="{html.escape(pr['desc'])}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{SITE}/assets/og-2026.png">
+<meta property="og:image" content="{SITE}/assets/og-figma.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
