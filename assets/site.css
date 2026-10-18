@@ -350,7 +350,7 @@ h3.sub-h{font-size:1.25rem;margin:3rem 0 .8rem}
 .feat li{padding-left:1.4rem;position:relative;font-size:.95rem}
 .feat li::before{content:"";position:absolute;left:0;top:.62em;width:.55rem;height:.55rem;border-radius:2px;background:var(--accent);transition:background-color .4s}
 .lemi-phones{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
-.lemi-phones .phone:nth-child(even){transform:translateY(2.5rem)}
+.lemi-phones .phone:nth-child(even){translate:0 2.5rem}
 .lemi-phones{padding-bottom:2.5rem}
 
 /* ---- data: unmasked demo ---- */
@@ -758,17 +758,15 @@ code{font:500 .86em ui-monospace,SFMono-Regular,Menlo,monospace;background:color
 /* ---- scroll-driven reveals where the browser supports them ---- */
 @supports (animation-timeline:view()){
   @media (prefers-reduced-motion:no-preference){
-    .phones .phone{animation:sv-deal linear both;animation-timeline:view();animation-range:entry 0% cover 22%}
-    .phones .phone:nth-child(even){animation-name:sv-deal-r}
-    .shots .shot,.award{animation:sv-curtain linear both;animation-timeline:view();animation-range:entry 0% cover 20%}
+    .phones .phone,.shots .shot{animation:sv-rise linear both;animation-timeline:view();animation-range:entry 0% entry 75%}
+    .award{animation:sv-curtain linear both;animation-timeline:view();animation-range:entry 0% cover 20%}
     .loop,.flow,.pipe,.demo{animation:sv-wipe linear both;animation-timeline:view();animation-range:entry 0% cover 22%}
     .decisions li{animation:sv-slide linear both;animation-timeline:view();animation-range:entry 0% cover 25%}
     .case-title{animation:sv-title linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
     .fan{animation:sv-fan linear both;animation-timeline:view();animation-range:entry 0% cover 50%}
   }
 }
-@keyframes sv-deal{from{transform:translate(-30px,120px) rotate(-9deg)}to{transform:none}}
-@keyframes sv-deal-r{from{transform:translate(30px,140px) rotate(9deg)}to{transform:none}}
+@keyframes sv-rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 @keyframes sv-curtain{from{clip-path:inset(0 0 100% 0 round 24px);transform:translateY(40px)}to{clip-path:inset(-20% -20% -20% -20% round 0);transform:none}}
 @keyframes sv-wipe{from{clip-path:inset(-20% 100% -20% -20%)}to{clip-path:inset(-20% -20% -20% -20%)}}
 @keyframes sv-slide{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
