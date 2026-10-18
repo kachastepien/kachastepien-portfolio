@@ -730,7 +730,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
   </div>
 </footer>
 
-<button class="chat-btn glass" type="button" aria-expanded="false" aria-controls="chat"><span class="cb-av" aria-hidden="true"><span class="venn-av"><i></i><i></i></span><span class="q">?</span></span><span class="txt"><b>Have a question?</b><small>Ask Venn, my assistant</small></span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Open Venn, the portfolio assistant</span></button>
+<button class="chat-btn glass" type="button" aria-expanded="false" aria-controls="chat"><span class="cb-av" aria-hidden="true"><span class="venn-av"><i></i><i></i></span><span class="q">?</span></span><span class="txt"><b>Yes, it's a chatbot 🙃</b><small>but this one actually knows stuff</small></span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Open Venn, the portfolio assistant</span></button>
 <div class="cmd-ov" id="cmd" role="dialog" aria-modal="true" aria-label="Find a project" hidden>
   <div class="cmd glass">
     <div class="cmd-in"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><input id="cmd-q" placeholder="Search projects, skills or sections…" autocomplete="off" spellcheck="false" aria-controls="cmd-list"><kbd>esc</kbd></div>
@@ -762,7 +762,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
   </div>
 </div>
 <section class="chat glass" id="chat" role="dialog" aria-modal="false" aria-labelledby="chat-h" hidden>
-  <div class="chat-head"><span class="venn-av" aria-hidden="true"><i></i><i></i></span><div><b id="chat-h">Venn</b><span>Katarzyna's portfolio assistant</span></div><button type="button" class="chat-x" aria-label="Close assistant">×</button></div>
+  <div class="chat-head"><span class="venn-av" aria-hidden="true"><i></i><i></i></span><div><b id="chat-h">Venn</b><span>the obligatory portfolio chatbot</span></div><button type="button" class="chat-x" aria-label="Close assistant">×</button></div>
   <div class="chat-log" id="chat-log" aria-live="polite"></div>
   <div class="chat-sugg" id="chat-sugg"></div>
   <form class="chat-form" id="chat-form" autocomplete="off" novalidate><label for="chat-in" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Your question</label><input id="chat-in" placeholder="Ask about projects, skills, contact…" maxlength="300"><button type="submit" aria-label="Send"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></button></form>
@@ -918,7 +918,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
 
   /* ---------- portfolio assistant: TF-IDF style retrieval over notes about my work, all in the browser ---------- */
   var KB=[
-    {k:'hi hello hey hej czesc siema dzien dobry witam yo good morning venn',a:"Hi, I'm Venn, the assistant on Katarzyna's portfolio. Ask me about her work, skills or how to reach her.",s:1},
+    {k:'hi hello hey hej czesc siema dzien dobry witam yo good morning venn',a:"Hi! I'm Venn, the obligatory portfolio chatbot. Ask me about her work, skills or how to reach her.",s:1},
     {k:'who is katarzyna kasia about her summary introduce job zajmuje robi kim jest o niej opowiedz przedstaw',a:"Katarzyna Stępień is a product designer (UX/UI) and data scientist in Warsaw. She is the sole designer at <b>SiDLY Healthcare</b>, taking telecare products from research to coded prototypes, and she builds NLP models and data pipelines too. She studied psychology and computer science in parallel, and is now doing a master's in data science alongside managerial studies at SGH.",x:[['About her','design','about']]},
     {k:'sidly job work current role company employer position praca firma obecnie stanowisko healthcare telecare teleopieka sole designer',a:"She is the sole designer at <b>SiDLY Healthcare</b>, a telecare company whose technology is used by 70,000+ people in 16 European countries and 1,000+ municipalities and institutions. She leads UX/UI for SiDLY Health (mobile apps and a web platform), is redesigning the ERP that runs public telecare, designed and coded sidly.eu, and led the rebrand.",x:[['SiDLY Health case','work/sidly-health/'],['ERP case','work/sidly-erp/']]},
     {k:'sidly health planner app carer manager resident visit nfc scan care card opiekun podopieczny wizyta aplikacja mobile web platform screens ekrany',a:"SiDLY Health connects the care manager who plans a visit, the carer who makes it and the resident who receives it. A few signature decisions: a visit starts and ends with an <b>NFC scan</b>, so hours are settled from real time; the care card is the plan before a visit and a locked record after it; the resident's home screen answers <i>am I all right, what do I do today, when is someone coming</i>.",x:[['Full case study','work/sidly-health/'],['See the screens','design','health']]},
@@ -941,6 +941,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
     {k:'psychology psychologia why background behaviour behavior people both two dwa kierunki',a:"She studied psychology and computer science at the same time. It shapes how she works: start from what people actually do, test it with them, and build prototypes real enough to argue with. Her NLP thesis on dark patterns sits right where the two meet."},
     {k:'certificates certificate courses course google stanford code in place certyfikaty kursy',a:"Stanford Code in Place (2026) and the Google UX Design Professional Certificate (7 courses)."},
     {k:'sidlyeu website www rebrand brand vital care packaging identity strona marka opakowania',a:"She designed and built sidly.eu end to end, from information architecture to a React/TypeScript front-end published with Figma Sites, in seven languages. She also led SiDLY's rebrand across the apps, website, the Vital Care smartwatch packaging and event materials.",x:[['More work','design','more'],['sidly.eu','https://www.sidly.eu']]},
+    {k:'why chatbot chatbots bot cringe annoying everyone every portfolio again another obligatory ai hype seriously really need do you need czemu po co wkurza wkurzajacy kazdy znowu',a:"Fair question. Everyone puts a chatbot on their site now, and most of them are useless. Katarzyna designs AI products, so a portfolio about AI without one felt a bit off. So she built a small, honest one: I run in your browser, I only answer from what's on this page, and I'll tell you when I don't know. Also: there's a × in the corner. No hard feelings.",x:[['Fine, show me her work','#work'],['Leave her a message','__msg']]},
     {k:'this site website portfolio built made how bot you assistant venn name who are you work how do you work jak dziala strona chatbot kim jestes',a:"I'm Venn, named after the two overlapping circles in the logo: design and data. The page is hand-built in HTML, CSS and vanilla JavaScript, and I'm a small retrieval bot: your question is matched against short notes about her work with TF-IDF-style scoring, right in your browser. Nothing leaves your browser unless you ask me to send her a message."},
     {k:'kacha nickname nick why name kachastepien social pseudonim ksywka',a:"Most people call her <b>Kacha</b>, hence kachastepien.com. She's kachastepien on GitHub and LinkedIn too.",x:[['LinkedIn','https://www.linkedin.com/in/kachastepien'],['GitHub','https://github.com/kachastepien']]},
     {k:'thanks thank you thx dzieki dziekuje super great cool',a:"Any time. If you'd like to talk to her, I can pass a message on.",x:[['Leave her a message','__msg']]}
@@ -964,7 +965,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
   }
   var chat=document.getElementById('chat'),cbtn=document.querySelector('.chat-btn'),log=document.getElementById('chat-log'),sugg=document.getElementById('chat-sugg'),cin=document.getElementById('chat-in'),started=false;
   var MSG="Leave her a message",flow=null;
-  var SUG=[MSG,"What does she do at SiDLY?","Show data science projects","Tell me about the hackathon win","What's her tech stack?"];
+  var SUG=[MSG,"What does she do at SiDLY?","Show data science projects","Tell me about the hackathon win","Why is there a chatbot?"];
   function escH(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function add(html,who,acts){
     var m=document.createElement('div');m.className='msg '+who;m.innerHTML=html;
@@ -1009,7 +1010,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
     setTimeout(function(){
       ty.remove();chat.classList.remove('busy');var e=answer(q);
       if(e){add(e.a,'bot',e.x);chips(SUG.filter(function(s){return s!==q}).slice(0,4))}
-      else{add("I don't know that one yet; I only know what's on this page. Try one of these, or leave her a message.",'bot',[['Leave her a message','__msg']]);chips(SUG)}
+      else{add("No idea, honestly. Unlike most chatbots, I'd rather say that than make something up. I only know what's on this page. Try one of these, or leave her a message.",'bot',[['Leave her a message','__msg']]);chips(SUG)}
     },reduce?0:550+Math.random()*450);
   }
   /* phones: the chat is a full-height sheet that follows the visible viewport, so the keyboard never covers it and the page never scrolls underneath */
@@ -1031,7 +1032,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
   cin.addEventListener('focus',function(){setTimeout(function(){fitChat();log.scrollTop=log.scrollHeight},300)});
   function toggle(open){
     if(open===undefined)open=chat.hidden;chat.hidden=!open;cbtn.setAttribute('aria-expanded',open);
-    if(open){track('venn-open');if(!started){started=true;add("Hi, I'm Venn. I know Katarzyna's work inside out: projects, skills, studies, and how to reach her. What would you like to know?",'bot');chips(SUG)}
+    if(open){track('venn-open');if(!started){started=true;add("Hi, I'm Venn. Yes, every portfolio has a chatbot now. Sorry. In my defence, I actually know Katarzyna's work: projects, skills, studies, how to reach her. And when I don't know something, I say so instead of making it up.",'bot');chips(SUG)}
       if(!phone())setTimeout(function(){cin.focus({preventScroll:true})},250)}
     else if(!phone())cbtn.focus({preventScroll:true});else cin.blur();
     lockPage(open&&phone());
