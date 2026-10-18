@@ -579,16 +579,20 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
 @keyframes vt-in{from{clip-path:circle(0 at var(--vx,50%) var(--vy,60px))}to{clip-path:circle(150vmax at var(--vx,50%) var(--vy,60px))}}
 @media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
 
-/* ---- intro: design and data slide together, Kacha in the overlap, then it lands in the logo ---- */
+/* ---- intro: design and data draw in and overlap above the name, then land in the logo ---- */
 .intro-ov{display:none}
-.intro .intro-ov{display:grid;place-items:center;position:fixed;inset:0;z-index:200;background:var(--bg);animation:introFail .01s 4.5s forwards}
+.intro .intro-ov{display:grid;place-items:center;position:fixed;inset:0;z-index:200;background:var(--bg);animation:introFail .01s 5s forwards}
 @keyframes introFail{to{visibility:hidden;opacity:0}}
-.intro-ov .iv{width:min(80vw,560px);overflow:visible}
-.intro-ov .ia{fill:#c9a47e;opacity:0}
-.intro-ov .ib{fill:#a6a8ff;opacity:0}
-.intro-ov .il{fill:#161718;opacity:0}
-.intro-ov .it{font:600 25px var(--body);letter-spacing:-.035em;fill:#161718;opacity:0}
-.intro-ov .in{font:800 38px var(--body);letter-spacing:-.06em;fill:#fff;opacity:0}
+.intro-ov .iw{display:flex;flex-direction:column;align-items:center;text-align:center}
+.intro-ov .iv{width:min(62vw,340px);overflow:visible}
+.intro-ov .ia,.intro-ov .ib{fill-opacity:0;stroke-width:1.6;stroke-dasharray:1;stroke-dashoffset:1;vector-effect:non-scaling-stroke}
+.intro-ov .ia{fill:#c9a47e;stroke:#b08a62}
+.intro-ov .ib{fill:#a6a8ff;stroke:#8587e6;mix-blend-mode:multiply}
+.intro-ov .it{font:500 26px var(--body);letter-spacing:-.02em;fill:#161718;opacity:0}
+.intro-ov .iname{margin:clamp(1.6rem,4vh,2.4rem) 0 0;overflow:hidden;font:600 clamp(1.5rem,3.4vw,2.3rem)/1.15 var(--body);letter-spacing:-.035em;color:var(--fg);padding-bottom:.08em}
+.intro-ov .iname span{display:block;transform:translateY(105%)}
+.intro-ov .irole{margin:.55rem 0 0;font-size:.9rem;color:var(--muted);opacity:0}
+.intro-ov .irole em{font-style:normal;color:var(--accent);margin:0 .2rem}
 .intro .mark{opacity:0}
 .intro .hero h1 .ch{animation-play-state:paused}
 
