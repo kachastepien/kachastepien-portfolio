@@ -124,7 +124,7 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610181430">
+<link rel="stylesheet" href="assets/site.css?v=202610181500">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -343,20 +343,33 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     <div class="sec-head reveal"><span class="num">03</span><h2 id="ai-h">AI products &amp; hackathons</h2></div>
 
     <div class="award reveal">
+      <figure class="aw-medal" aria-hidden="true">
+        <svg viewBox="0 0 240 330">
+          <defs><path id="awRim" d="M120,137 a68,68 0 1,1 -0.01,0"/></defs>
+          <g class="aw-swing">
+            <polygon class="rb-a" points="62,0 112,0 136,150 96,160"/>
+            <polygon class="rb-b" points="178,0 128,0 104,150 144,160"/>
+            <circle class="md" cx="120" cy="205" r="80"/>
+            <circle class="md-ring" cx="120" cy="205" r="60"/>
+            <text class="md-rim"><textPath href="#awRim" startOffset="0" textLength="420" lengthAdjust="spacing">AI PLACE CHALLENGE · 2025 · AI PLACE CHALLENGE · 2025 ·</textPath></text>
+            <text class="md-n" x="114" y="232" text-anchor="middle">1<tspan class="md-st" dy="-34">st</tspan></text>
+            <path class="md-shine" d="M66,170 a62,62 0 0,1 40,-42"/>
+          </g>
+        </svg>
+      </figure>
       <div class="aw-main">
-        <p class="aw-kicker"><span class="aw-dot" aria-hidden="true"></span>1st place · AI Place Challenge · Mar 2025</p>
-        <h3>First place in a challenge set by the Polish Ministry of Digital Affairs</h3>
+        <p class="aw-kicker"><span class="aw-dot" aria-hidden="true"></span>Hackathon win · Mar 2025</p>
+        <h3>1st place, AI Place Challenge</h3>
+        <p class="aw-sub">A challenge set by the Polish Ministry of Digital Affairs at the Econverse Smart Cities Hackathon.</p>
         <p>I led the team and owned everything AI in <b>GovBot</b>: the assistant's logic, the prompts and the n8n workflows behind it. It helps citizens reach local public services without the bureaucracy.</p>
         <dl class="aw-facts">
           <div><dt>My role</dt><dd>Team lead · AI lead</dd></div>
           <div><dt>I owned</dt><dd>Everything AI</dd></div>
           <div><dt>Built with</dt><dd>n8n · LLM</dd></div>
-          <div><dt>Set by</dt><dd>Ministry of Digital Affairs</dd></div>
         </dl>
-      </div>
-      <div class="aw-big" aria-hidden="true"><span class="aw-w">Winner</span>1<sup>st</sup></div>
-      <div class="agent aw-flow" aria-label="How the assistant works, simplified">
-        <span>Citizen's question</span><i></i><span>AI assistant · n8n</span><i></i><span>The right local service</span>
+        <div class="agent aw-flow" aria-label="How the assistant works, simplified">
+          <span>Citizen's question</span><i></i><span>AI assistant · n8n</span><i></i><span>The right local service</span>
+        </div>
       </div>
     </div>
 
