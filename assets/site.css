@@ -535,7 +535,17 @@ mark.dp[data-sev="critical"]{--sev:#e5484d}mark.dp[data-sev="warning"]{--sev:#f5
 .chat-form button{appearance:none;border:0;width:42px;height:42px;border-radius:50%;background:var(--fg);color:var(--bg);cursor:pointer;display:grid;place-items:center}
 .chat-form button svg{width:16px;height:16px}
 .chat-note{font-size:.7rem;color:var(--muted);text-align:center;padding:0 1rem .7rem}
-@media (max-width:520px){.chat{right:8px;left:8px;width:auto;bottom:76px;height:min(78vh,620px);border-radius:22px}}
+@media (max-width:520px){
+  .chat{left:0;right:0;top:var(--vvt,0px);bottom:auto;width:100%;height:var(--vvh,100dvh);max-height:none;border-radius:0;transform-origin:bottom center;padding-bottom:env(safe-area-inset-bottom)}
+  .chat[hidden]{transform:translateY(24px)}
+  .chat-head{padding-top:max(.9rem,env(safe-area-inset-top))}
+  .chat-x{width:40px;height:40px;font-size:1.4rem}
+  .chat-note{display:none}
+  .chat-sugg{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .chat-sugg::-webkit-scrollbar{display:none}
+  .chat-sugg button{flex:none}
+  html.chat-open .chat-btn,html.chat-open .totop,html.chat-open .welcome{opacity:0;pointer-events:none}
+}
 
 /* footer */
 .end{margin-top:clamp(5rem,10vw,8rem);border-top:1px solid var(--line);padding:clamp(3rem,7vw,5rem) 0 2.5rem}
@@ -1000,3 +1010,13 @@ body:has(#tour:not([hidden])) .welcome.mini{display:none}
   .cb-av .venn-av i{width:18px;height:18px;top:9px}.cb-av .venn-av i:first-child{left:5px}.cb-av .venn-av i+i{left:13px}
   .chat-btn .q{top:-9px;right:-9px;box-shadow:0 0 0 2.5px var(--bg)}
 }
+
+/* iOS zooms into any field under 16px: keep every input at 16px on phones */
+@media (max-width:760px){input,textarea,select,.chat-form input,.demo textarea,.cmd input{font-size:16px!important}}
+.chat-log{-webkit-overflow-scrolling:touch}
+/* close buttons: always on top and finger-sized */
+.welcome .wl-x{z-index:5;width:44px;height:44px;top:.5rem;right:.5rem}
+.welcome .wl-k,.welcome h2{padding-right:2.6rem}
+.welcome.mini .wl-x{width:40px;height:40px;margin-right:3px}
+.tr-act .tr-x{width:44px;height:44px}
+.chk .chk-x,.chat-x{min-width:44px;min-height:44px}

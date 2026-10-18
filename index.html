@@ -124,7 +124,7 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610181930">
+<link rel="stylesheet" href="assets/site.css?v=202610182100">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -151,7 +151,6 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
     <a class="brand" href="#top" aria-label="Katarzyna Stępień, back to top"><span class="mark" aria-hidden="true"><i></i><i></i></span><span>Katarzyna Stępień</span></a>
     <nav class="nav" aria-label="Sections"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a><a href="assets/katarzyna-stepien-cv.pdf" target="_blank" rel="noopener" data-goatcounter-click="cv-open-nav">CV</a></nav>
     <button type="button" class="cmd-btn" aria-haspopup="dialog" aria-controls="cmd"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><span class="cmd-l">Search projects</span><kbd>⌘K</kbd></button>
-    <button type="button" class="chk-btn" aria-expanded="false" aria-controls="chk" title="Recruiter checklist"><svg class="ring" viewBox="0 0 20 20" aria-hidden="true"><circle class="tr" cx="10" cy="10" r="8"/><circle class="pr" cx="10" cy="10" r="8" pathLength="7"/><path class="ok" d="M6.5 10.3l2.3 2.3 4.7-4.9"/></svg><span class="chk-n">0/7</span><span class="sr-only"> recruiter checklist</span></button>
     <div class="switch" role="group" aria-label="Perspective">
       <span class="pill" aria-hidden="true"></span>
       <button type="button" data-view="design" aria-pressed="true">Product design</button>
@@ -740,21 +739,6 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
     <div class="cmd-foot"><span><kbd>↑</kbd><kbd>↓</kbd> move</span><span><kbd>↵</kbd> open</span></div>
   </div>
 </div>
-<section class="chk glass" id="chk" aria-labelledby="chk-h" hidden>
-  <div class="chk-top"><h2 id="chk-h">Recruiter checklist</h2><span class="chk-s">Due diligence starts here.</span></div>
-  <div class="chk-bar"><i></i></div>
-  <ul class="chk-list">
-    <li data-k="intro">Survived the intro</li>
-    <li data-k="flip">Flipped to the other side</li>
-    <li data-k="case">Opened a full case study</li>
-    <li data-k="win">Saw the hackathon win</li>
-    <li data-k="demo">Tried to fool Unmasked</li>
-    <li data-k="venn">Asked Venn something</li>
-    <li data-k="msg">Wrote to Kacha</li>
-  </ul>
-  <p class="chk-f">Ticks itself as you look around. Nothing leaves your browser.</p>
-</section>
-<div class="chk-toast glass" id="chk-toast" role="status" aria-live="polite" hidden></div>
 <section class="welcome glass" id="welcome" role="dialog" aria-labelledby="wl-h" aria-modal="false" hidden>
   <button type="button" class="wl-mini" aria-label="Open: what brings you here?"><span class="wl-dots" aria-hidden="true"><i></i><i></i></span>What brings you here?</button>
   <button type="button" class="wl-x" aria-label="Close">×</button>
@@ -996,7 +980,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
     var ty=add('<span class="typing" aria-label="Venn is typing"><i></i><i></i><i></i></span>','bot');ty.style.padding='0';chat.classList.add('busy');
     setTimeout(function(){ty.remove();chat.classList.remove('busy');var m=add(html,'bot',acts);if(after)after(m)},reduce?0:420+Math.random()*300);
   }
-  function setInput(ph,type){cin.placeholder=ph;cin.type=type||'text';cin.focus()}
+  function setInput(ph,type){cin.placeholder=ph;cin.type=type||'text';cin.focus({preventScroll:true})}
   function startFlow(){flow={step:'name',d:{}};chips(['Cancel']);botSay("Happy to pass it on. What's your name?",null,function(){setInput('Your name')})}
   function endFlow(){flow=null;setInput('Ask about projects, skills, contact…');chips(SUG)}
   function handleFlow(q){
@@ -1027,10 +1011,29 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
       else{add("I don't know that one yet; I only know what's on this page. Try one of these, or leave her a message.",'bot',[['Leave her a message','__msg']]);chips(SUG)}
     },reduce?0:550+Math.random()*450);
   }
+  /* phones: the chat is a full-height sheet that follows the visible viewport, so the keyboard never covers it and the page never scrolls underneath */
+  function phone(){return matchMedia('(max-width:520px)').matches}
+  var lockedY=0,locked=false;
+  function lockPage(on){
+    if(on===locked)return;locked=on;var b=document.body;
+    if(on){lockedY=scrollY;b.style.position='fixed';b.style.top=-lockedY+'px';b.style.left='0';b.style.right='0';b.style.width='100%';root.classList.add('chat-open')}
+    else{b.style.position='';b.style.top='';b.style.left='';b.style.right='';b.style.width='';root.classList.remove('chat-open');root.style.scrollBehavior='auto';scrollTo(0,lockedY);root.style.scrollBehavior=''}
+  }
+  function fitChat(){
+    var vv=window.visualViewport;
+    if(!phone()||!vv){chat.style.removeProperty('--vvh');chat.style.removeProperty('--vvt');return}
+    chat.style.setProperty('--vvh',vv.height+'px');chat.style.setProperty('--vvt',vv.offsetTop+'px');
+    if(!chat.hidden)log.scrollTop=log.scrollHeight;
+  }
+  if(window.visualViewport){visualViewport.addEventListener('resize',fitChat);visualViewport.addEventListener('scroll',fitChat)}
+  addEventListener('resize',function(){fitChat();if(!phone())lockPage(false)});fitChat();
+  cin.addEventListener('focus',function(){setTimeout(function(){fitChat();log.scrollTop=log.scrollHeight},300)});
   function toggle(open){
     if(open===undefined)open=chat.hidden;chat.hidden=!open;cbtn.setAttribute('aria-expanded',open);
-    if(open){track('venn-open');if(!started){started=true;add("Hi, I'm Venn. I know Katarzyna's work inside out: projects, skills, studies, and how to reach her. What would you like to know?",'bot');chips(SUG)}setTimeout(function(){cin.focus()},250)}
-    else cbtn.focus();
+    if(open){track('venn-open');if(!started){started=true;add("Hi, I'm Venn. I know Katarzyna's work inside out: projects, skills, studies, and how to reach her. What would you like to know?",'bot');chips(SUG)}
+      if(!phone())setTimeout(function(){cin.focus({preventScroll:true})},250)}
+    else if(!phone())cbtn.focus({preventScroll:true});else cin.blur();
+    lockPage(open&&phone());
   }
   /* ---------- welcome: one question that routes each visitor to their perspective ---------- */
   var wl=document.getElementById('welcome');
@@ -1043,7 +1046,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
   wl.querySelector('.wl-mini').addEventListener('click',function(){wlOpenedByHand=true;wl.classList.remove('mini')});
   wl.querySelectorAll('[data-pick]').forEach(function(b){b.addEventListener('click',function(){
     var v=b.dataset.pick;closeWl();
-    startTour(v==='explore'?'mix':v);
+    if(v!=='explore')startTour(v);
   })});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeWl()});
 
@@ -1150,34 +1153,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
     function u(){tk=false;var r=k.parentElement.getBoundingClientRect(),p=(innerHeight-r.top)/(innerHeight+r.height);k.style.transform='translateX('+(-p*38)+'%)'}
     addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(u)}},{passive:true});u();})();
 
-  /* ---------- recruiter checklist: ticks itself as you explore ---------- */
-  var CHK=(function(){
-    var KEYS=['intro','flip','case','win','demo','venn','msg'],done={},panel=document.getElementById('chk'),btn=document.querySelector('.chk-btn'),toast=document.getElementById('chk-toast'),tt;
-    try{done=JSON.parse(localStorage.getItem('ks-checks')||'{}')||{}}catch(e){}
-    var LINES=['Due diligence starts here.','Off to a good start.','Looking thorough.','Halfway to a decision.','This is going well.','Almost there.','One step from a verdict.','Verdict: hire her.'];
-    function n(){return KEYS.filter(function(k){return done[k]}).length}
-    function paint(){var c=n();btn.querySelector('.chk-n').textContent=c+'/7';btn.style.setProperty('--c',c);btn.classList.toggle('full',c===7);
-      panel.querySelectorAll('li').forEach(function(li){li.classList.toggle('on',!!done[li.dataset.k])});
-      panel.querySelector('.chk-bar i').style.width=(c/7*100)+'%';panel.querySelector('.chk-s').textContent=LINES[c]}
-    function confetti(){if(reduce)return;var r=btn.getBoundingClientRect();for(var i=0;i<26;i++){var d=document.createElement('i');d.className='cf';d.style.left=(r.left+r.width/2)+'px';d.style.top=(r.top+r.height/2)+'px';d.style.background=i%2?'#c9a47e':'#a6a8ff';document.body.appendChild(d);
-      var a=Math.random()*Math.PI*2,v=60+Math.random()*120;d.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:'translate('+Math.cos(a)*v+'px,'+(Math.sin(a)*v+120)+'px) scale(.4)',opacity:0}],{duration:1100+Math.random()*500,easing:'cubic-bezier(.2,.7,.2,1)'}).onfinish=function(){this.effect.target.remove()}}}
-    function tick(k,quiet){if(done[k])return;done[k]=1;try{localStorage.setItem('ks-checks',JSON.stringify(done))}catch(e){}paint();if(quiet)return;
-      var c=n();if(c===7)track('checklist-complete');var label=panel.querySelector('[data-k="'+k+'"]').textContent;
-      toast.innerHTML='<b>✓</b> '+label+' <span>'+c+'/7</span>'+(c===7?' · <em>Verdict: hire her.</em>':'');toast.hidden=false;toast.classList.remove('go');void toast.offsetWidth;toast.classList.add('go');
-      clearTimeout(tt);tt=setTimeout(function(){toast.hidden=true},2200);
-      btn.classList.remove('pop');void btn.offsetWidth;btn.classList.add('pop');if(c===7)confetti();}
-    function toggle(o){if(o===undefined)o=panel.hidden;panel.hidden=!o;btn.setAttribute('aria-expanded',o)}
-    btn.addEventListener('click',function(e){e.stopPropagation();toggle()});
-    document.addEventListener('click',function(e){if(!panel.hidden&&!panel.contains(e.target))toggle(false)});
-    document.addEventListener('keydown',function(e){if(e.key==='Escape')toggle(false)});
-    paint();return {tick:tick};
-  })();
-  if(root.classList.contains('intro'))addEventListener('introdone',function(){setTimeout(function(){CHK.tick('intro',true)},1800)},{once:true});else setTimeout(function(){CHK.tick('intro',true)},2500);
-  document.querySelectorAll('[data-goto],#welcome [data-pick]').forEach(function(b){b.addEventListener('click',function(){setTimeout(function(){if(root.dataset.view!==startView)CHK.tick('flip')},50)})});
-  var startView=root.dataset.view;document.querySelectorAll('.switch button').forEach(function(b){b.addEventListener('click',function(){if(b.dataset.view!==startView)CHK.tick('flip')})});
-  document.querySelectorAll('a[href^="work/"]').forEach(function(a){a.addEventListener('click',function(){CHK.tick('case')})});
-  if('IntersectionObserver' in window){var wo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&e.target.offsetParent!==null){CHK.tick('win');wo.disconnect()}})},{threshold:.5});document.querySelectorAll('.award').forEach(function(el){wo.observe(el)})}
-  document.getElementById('own').addEventListener('input',function h(){if(this.value.trim().length>8){CHK.tick('demo');this.removeEventListener('input',h)}});
+  var CHK={tick:function(){}};
 
   /* ---------- project finder: searchable menu with icons, ⌘K ---------- */
   (function(){
