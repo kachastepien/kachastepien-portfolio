@@ -1045,3 +1045,18 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 @keyframes fcDrift1{0%,100%{translate:0 0}30%{translate:22px 12px}60%{translate:8px -14px}}
 @keyframes fcDrift2{0%,100%{translate:0 0}35%{translate:26px 10px}70%{translate:12px -18px}}
 @media (max-width:640px){.fcur{display:none}.fs-dim{font-size:10px;bottom:-26px}}
+
+/* hackathon photos inside the award card */
+.aw-photos{grid-column:1/-1;margin:.6rem 0 0;display:grid;grid-template-columns:1.6fr 1fr;gap:.7rem}
+.aw-photos img{width:100%;height:100%;aspect-ratio:3/2;object-fit:cover;border-radius:14px;display:block}
+.aw-photos figcaption{grid-column:1/-1;font-size:.82rem;color:rgba(244,242,238,.55)}
+@media (max-width:760px){.aw-photos{grid-template-columns:1fr}.aw-photos img+img{display:none}}
+/* hero: more air between the name, the statement and the stats */
+.hero .figsel{margin-bottom:2.6rem}
+.hero .statement{margin-top:0}
+.hero .stats{margin-top:2.6rem}
+.hero .cta{margin-top:2.6rem}
+.hero-id{margin-bottom:2.4rem}
+.hero .figsel{margin-bottom:3.4rem}
+/* phones stay minimal: no canvas, no selection, no cursors */
+@media (max-width:640px){.hero::after,.fs-frame,.fcur{display:none!important}.hero .figsel{margin-bottom:1.6rem}}
