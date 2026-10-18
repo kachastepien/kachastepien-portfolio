@@ -124,7 +124,7 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610182100">
+<link rel="stylesheet" href="assets/site.css?v=202610181530">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -975,6 +975,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
       a.appendChild(b)});m.appendChild(a)}
     log.appendChild(m);log.scrollTop=log.scrollHeight;return m;
   }
+  sugg.addEventListener('wheel',function(e){if(sugg.scrollWidth>sugg.clientWidth&&Math.abs(e.deltaY)>Math.abs(e.deltaX)){sugg.scrollLeft+=e.deltaY;e.preventDefault()}},{passive:false});
   function chips(list){sugg.innerHTML='';list.forEach(function(s){var b=document.createElement('button');b.type='button';b.textContent=s;b.addEventListener('click',function(){s===MSG&&!flow?startFlow():ask(s)});sugg.appendChild(b)})}
   function botSay(html,acts,after){
     var ty=add('<span class="typing" aria-label="Venn is typing"><i></i><i></i><i></i></span>','bot');ty.style.padding='0';chat.classList.add('busy');

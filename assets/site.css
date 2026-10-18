@@ -1020,3 +1020,5 @@ body:has(#tour:not([hidden])) .welcome.mini{display:none}
 .welcome.mini .wl-x{width:40px;height:40px;margin-right:3px}
 .tr-act .tr-x{width:44px;height:44px}
 .chk .chk-x,.chat-x{min-width:44px;min-height:44px}
+/* desktop: suggestions wrap so every chip is reachable without a sideways scroll */
+@media (min-width:521px){.chat-sugg{flex-wrap:wrap;overflow:visible;padding-bottom:.7rem}.chat-sugg button{flex:none}}
