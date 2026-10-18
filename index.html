@@ -12,7 +12,7 @@
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="Katarzyna Stępień">
 <meta property="og:locale" content="en_GB">
-<meta property="og:title" content="Katarzyna Stępień · Product design × Data science">
+<meta property="og:title" content="Katarzyna Stępień · Product Designer &amp; Data Scientist">
 <meta property="og:description" content="Telecare apps at SiDLY Healthcare, NLP for dark patterns, streaming data platforms and award-winning AI projects.">
 <meta property="og:url" content="https://kachastepien.com/">
 <meta property="og:image" content="https://kachastepien.com/assets/og.png">
@@ -22,7 +22,7 @@
 <meta property="profile:first_name" content="Katarzyna">
 <meta property="profile:last_name" content="Stępień">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Katarzyna Stępień · Product design × Data science">
+<meta name="twitter:title" content="Katarzyna Stępień · Product Designer &amp; Data Scientist">
 <meta name="twitter:description" content="Telecare apps, NLP for dark patterns, streaming data and AI projects.">
 <meta name="twitter:image" content="https://kachastepien.com/assets/og.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -124,7 +124,7 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610181330">
+<link rel="stylesheet" href="assets/site.css?v=202610181430">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -199,7 +199,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
 </section>
 
 
-<div class="kin" aria-hidden="true"><div class="kin-t"><span>Product design</span><em>×</em><span>Data science</span></div></div>
+<div class="kin" aria-hidden="true"><div class="kin-t"><span>Product design</span><em>×</em><span>Data science</span><em>×</em><span>Product design</span><em>×</em><span>Data science</span><em>×</em><span>Product design</span></div></div>
 
 <div id="work"></div>
 
@@ -688,7 +688,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   </div>
 </footer>
 
-<button class="chat-btn glass" type="button" aria-expanded="false" aria-controls="chat"><span class="q" aria-hidden="true">?</span><span class="txt"><b>Have a question?</b><small>Ask Venn, my assistant</small></span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Open Venn, the portfolio assistant</span></button>
+<button class="chat-btn glass" type="button" aria-expanded="false" aria-controls="chat"><span class="cb-av" aria-hidden="true"><span class="venn-av"><i></i><i></i></span><span class="q">?</span></span><span class="txt"><b>Have a question?</b><small>Ask Venn, my assistant</small></span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Open Venn, the portfolio assistant</span></button>
 <div class="cmd-ov" id="cmd" role="dialog" aria-modal="true" aria-label="Find a project" hidden>
   <div class="cmd glass">
     <div class="cmd-in"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg><input id="cmd-q" placeholder="Search projects, skills or sections…" autocomplete="off" spellcheck="false" aria-controls="cmd-list"><kbd>esc</kbd></div>
@@ -1096,9 +1096,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
 
   /* ---------- kinetic line: slides sideways with the scroll ---------- */
   (function(){var k=document.querySelector('.kin-t');if(!k||reduce)return;var tk=false;
-    var a=k.children[0],b=k.children[2];
-    function u(){tk=false;var r=k.parentElement.getBoundingClientRect(),t=Math.max(0,Math.min(1,(innerHeight-r.top)/(innerHeight*.6))),e=1-Math.pow(1-t,3),d=(1-e)*8;
-      a.style.transform='translateX('+(-d)+'vw)';b.style.transform='translateX('+d+'vw)';k.style.opacity=String(.25+e*.75)}
+    function u(){tk=false;var r=k.parentElement.getBoundingClientRect(),p=(innerHeight-r.top)/(innerHeight+r.height);k.style.transform='translateX('+(-p*38)+'%)'}
     addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(u)}},{passive:true});u();})();
 
   /* ---------- recruiter checklist: ticks itself as you explore ---------- */
