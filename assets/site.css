@@ -1155,3 +1155,11 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 .award .app-meta,.award .aw-photos figcaption{color:var(--muted)!important}
 .award .gb-word{color:var(--fg)!important}
 .gb-ic rect{fill:#161718}.gb-ic path{fill:#fff}
+/* screen tabs: quiet underline tabs instead of heavy pills */
+.tabs{gap:1.6rem;border-bottom:1px solid var(--line);margin:1.4rem 0 1.6rem;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{border:0!important;background:none!important;border-radius:0;padding:.7rem 0;font-size:.9rem;color:var(--muted);position:relative;white-space:nowrap;flex:none}
+.tabs button::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--fg);transform:scaleX(0);transition:transform .3s var(--ease)}
+.tabs button:hover{color:var(--fg)}
+.tabs button[aria-selected="true"]{color:var(--fg)!important;font-weight:600}
+.tabs button[aria-selected="true"]::after{transform:none}
