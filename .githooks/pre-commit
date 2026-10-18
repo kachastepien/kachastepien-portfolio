@@ -3,4 +3,8 @@
 H=$(shasum assets/site.css | cut -c1-10)
 sed -i '' "s/site\.css?v=[0-9a-z]*/site.css?v=$H/" index.html 404.html
 python3 scripts/build_projects.py >/dev/null
-git add index.html 404.html work
+# stamp a build id; pages compare it with version.txt and reload once when a newer build is live
+B=$(date +%s)
+echo "$B" > version.txt
+sed -i '' "s/<meta name=\"build\" content=\"[0-9]*\">/<meta name=\"build\" content=\"$B\">/" index.html 404.html work/*/index.html
+git add index.html 404.html work version.txt

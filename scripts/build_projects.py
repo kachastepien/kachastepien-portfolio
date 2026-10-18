@@ -410,6 +410,12 @@ def page(pr, prv, nxt):
 <html lang="en" data-view="{pr['view']}" data-theme="light">
 <head>
 <meta charset="utf-8">
+<meta name="build" content="0">
+<script>
+/* GitHub Pages lets browsers keep the page for 10 minutes; if a newer build is live, reload once to get it. */
+(function(){{try{{var b=document.querySelector('meta[name="build"]').content;fetch('/version.txt?'+Date.now(),{{cache:'no-store'}}).then(function(r){{return r.ok?r.text():''}}).then(function(v){{v=(v||'').trim();if(v&&v!==b&&!sessionStorage.getItem('ks-rl-'+v)){{sessionStorage.setItem('ks-rl-'+v,'1');location.reload()}}}}).catch(function(){{}})}}catch(e){{}}}})();
+</script>
+
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{pr['title']} · Katarzyna Stępień</title>
 <meta name="description" content="{html.escape(pr['desc'])}">
