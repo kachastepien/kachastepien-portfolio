@@ -124,7 +124,7 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610181900">
+<link rel="stylesheet" href="assets/site.css?v=202610181930">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -756,6 +756,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
 </section>
 <div class="chk-toast glass" id="chk-toast" role="status" aria-live="polite" hidden></div>
 <section class="welcome glass" id="welcome" role="dialog" aria-labelledby="wl-h" aria-modal="false" hidden>
+  <button type="button" class="wl-mini" aria-label="Open: what brings you here?"><span class="wl-dots" aria-hidden="true"><i></i><i></i></span>What brings you here?</button>
   <button type="button" class="wl-x" aria-label="Close">×</button>
   <p class="wl-k">Hi, I'm Kacha.</p>
   <h2 id="wl-h">What brings you here?</h2>
@@ -1036,7 +1037,10 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
   function closeWl(){if(wl.hidden)return;wl.classList.add('bye');setTimeout(function(){wl.hidden=true;wl.classList.remove('bye')},260);try{sessionStorage.setItem('ks-welcome','1')}catch(e){}}
   function openWl(){var seen=false;try{seen=sessionStorage.getItem('ks-welcome')==='1'}catch(e){}if(seen||!chat.hidden)return;wl.hidden=false}
   wl.querySelector('.wl-x').addEventListener('click',closeWl);
-  addEventListener('scroll',function(){if(!wl.hidden&&scrollY>innerHeight*.9){wl.classList.add('bye');setTimeout(function(){wl.hidden=true;wl.classList.remove('bye')},260)}},{passive:true});
+  /* past the hero the card folds into a small pill bottom left; a tap opens it again */
+  var wlOpenedByHand=false;
+  addEventListener('scroll',function(){if(wl.hidden)return;var past=scrollY>innerHeight*.6;if(past&&!wlOpenedByHand)wl.classList.add('mini');if(!past){wl.classList.remove('mini');wlOpenedByHand=false}},{passive:true});
+  wl.querySelector('.wl-mini').addEventListener('click',function(){wlOpenedByHand=true;wl.classList.remove('mini')});
   wl.querySelectorAll('[data-pick]').forEach(function(b){b.addEventListener('click',function(){
     var v=b.dataset.pick;closeWl();
     startTour(v==='explore'?'mix':v);

@@ -887,7 +887,7 @@ main,footer.end{overflow-x:clip}
 @media (max-width:980px){.smenu{display:none}}
 @media (max-width:640px){.cp .brand>span:not(.mark){display:none}.crumb{margin-left:.3rem}.btn-all span{display:none}.btn-all{width:36px;padding:0;justify-content:center}
   .crumb .pm-list{position:fixed;left:12px;right:12px;top:72px;min-width:0}.pn{grid-template-columns:1fr}}
-@media (max-width:600px){body:has(#welcome:not([hidden])) .chat-btn{opacity:0;pointer-events:none;transform:scale(.8)}}
+@media (max-width:600px){body:has(#welcome:not([hidden]):not(.mini)) .chat-btn{opacity:0;pointer-events:none;transform:scale(.8)}}
 
 /* ---- guided tour ---- */
 .tour{position:fixed;left:50%;bottom:clamp(14px,3vh,28px);transform:translateX(-50%);z-index:68;width:min(640px,calc(100vw - 24px));border-radius:22px;padding:.75rem .7rem .75rem 1.1rem;--glass:color-mix(in srgb,var(--bg) 92%,transparent);box-shadow:0 26px 60px -20px rgba(20,20,30,.28),0 0 0 1px var(--line);animation:wlIn .5s var(--ease) both}
@@ -978,3 +978,25 @@ html{scrollbar-gutter:stable}
 @media (max-width:760px){.swipe-hint{display:block}.loop,.flow,.pipe{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent)}}
 /* quieter checklist toast */
 .chk-toast{top:72px;padding:.45rem .85rem;font-size:.78rem}
+
+/* welcome folds into a pill */
+.wl-mini{display:none}
+.welcome.mini{left:clamp(14px,2vw,28px);bottom:clamp(14px,2vw,28px);transform:none;width:auto;padding:0;border-radius:999px;animation:wlMini .45s var(--ease) both}
+.welcome.mini > *:not(.wl-mini):not(.wl-x){display:none}
+.welcome.mini .wl-mini{appearance:none;border:0;background:none;display:inline-flex;align-items:center;gap:.6rem;height:46px;padding:0 .4rem 0 .9rem;font:600 .86rem/1 var(--body);color:var(--fg);cursor:pointer;white-space:nowrap}
+.welcome.mini .wl-x{position:static;width:34px;height:34px;margin-right:6px;font-size:1.1rem}
+.welcome.mini{display:flex;align-items:center}
+.welcome.mini[hidden]{display:none}
+.wl-dots{position:relative;width:24px;height:16px;flex:none}
+.wl-dots i{position:absolute;top:0;width:16px;height:16px;border-radius:50%}
+.wl-dots i:first-child{left:0;background:#c9a47e}.wl-dots i+i{left:8px;background:#a6a8ff;mix-blend-mode:multiply}
+@keyframes wlMini{from{opacity:0;transform:translateY(10px) scale(.94)}}
+@media (max-width:600px){.welcome.mini .wl-mini{font-size:.8rem;padding-left:.75rem}}
+body:has(#tour:not([hidden])) .welcome.mini{display:none}
+/* phone: the whole chat button is the dark avatar */
+@media (max-width:520px){
+  .chat-btn{background:#161718!important;box-shadow:0 12px 30px -10px rgba(20,20,30,.45)!important;width:56px;height:56px}
+  .cb-av .venn-av{background:none;width:36px;height:36px}
+  .cb-av .venn-av i{width:18px;height:18px;top:9px}.cb-av .venn-av i:first-child{left:5px}.cb-av .venn-av i+i{left:13px}
+  .chat-btn .q{top:-9px;right:-9px;box-shadow:0 0 0 2.5px var(--bg)}
+}
