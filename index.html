@@ -124,7 +124,7 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610181230">
+<link rel="stylesheet" href="assets/site.css?v=202610181300">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -762,7 +762,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     function finish(fast){
       if(done)return;done=true;
       var m=document.querySelector('.mark').getBoundingClientRect(),r=sv.getBoundingClientRect();
-      var s=m.width/(r.width*500/600),dx=(m.left+m.width/2)-(r.left+r.width/2),dy=(m.top+m.height/2)-(r.top+r.height/2);
+      var s=23.5/(r.width*500/600),dx=(m.left+11.75)-(r.left+r.width/2),dy=(m.top+9)-(r.top+r.height/2);
       all('.it,.in').forEach(function(el){anim(el,[{opacity:1},{opacity:0}],{duration:fast?120:220})});
       anim(q('.il'),[{opacity:1},{opacity:0}],{duration:fast?200:420,delay:fast?0:200});
       anim(q('.iname'),[{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-8px)'}],{duration:fast?150:350});

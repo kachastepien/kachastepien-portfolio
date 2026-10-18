@@ -62,8 +62,6 @@ p{margin:0}
 .mark i{position:absolute;top:1px;width:16px;height:16px;border-radius:50%;transition:transform .6s var(--ease),opacity .6s var(--ease)}
 .mark i:first-child{left:0;background:#c9a47e}
 .mark i+i{left:7.5px;background:#a6a8ff;mix-blend-mode:multiply}
-:root[data-view="design"] .mark i+i{opacity:.45;transform:scale(.8)}
-:root[data-view="data"] .mark i:first-child{opacity:.45;transform:scale(.8)}
 .brand:hover .mark i:first-child{transform:translateX(-2px)}.brand:hover .mark i+i{transform:translateX(2px)}
 .switch{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;background:color-mix(in srgb,var(--surface) 70%,transparent);border:1px solid color-mix(in srgb,var(--line) 70%,transparent);border-radius:999px;padding:3px}
 .switch button{position:relative;z-index:1;appearance:none;border:0;background:none;color:var(--muted);font:500 .8rem/1 var(--body);padding:.6rem 1rem;border-radius:999px;cursor:pointer;white-space:nowrap;transition:color .3s}
@@ -586,7 +584,7 @@ h1,h2,h3,h4{font-weight:600;letter-spacing:-.03em}
 .intro-ov .iw{display:flex;flex-direction:column;align-items:center;text-align:center}
 .intro-ov .iv{width:min(78vw,520px);overflow:visible}
 .intro-ov .ia{fill:#c9a47e;opacity:0}
-.intro-ov .ib{fill:#a6a8ff;opacity:0}
+.intro-ov .ib{fill:#a6a8ff;opacity:0;mix-blend-mode:multiply}
 .intro-ov .il{fill:#161718;opacity:0}
 .intro-ov .it{font:600 27px var(--body);letter-spacing:-.03em;fill:#161718;opacity:0}
 .intro-ov .in{font:600 22px var(--body);letter-spacing:-.02em;fill:#fff;opacity:0}
