@@ -124,7 +124,7 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610181630">
+<link rel="stylesheet" href="assets/site.css?v=202610181700">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -1200,38 +1200,45 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     function g(x,m,s,a){return a*Math.exp(-((x-m)*(x-m))/(2*s*s))}
     function ecg(p){return g(p,.16,.03,.12)+g(p,.285,.008,-.14)+g(p,.31,.01,1)+g(p,.335,.009,-.3)+g(p,.55,.05,.26)}
     for(var k=0;k<N;k++){var x=k/(N-1);pts.push({x:x,ey:ecg((x*3.2)%1),sx:Math.min(1,Math.max(0,x+(rnd()-.5)*.03)),sy:.18+.62*x+(rnd()-.5)*.34,ph:rnd()*6.28})}
-    function colors(){var cs=getComputedStyle(root);col=cs.getPropertyValue('--accent').trim()||col;line=cs.getPropertyValue('--line').trim()||line}
+    var CA=[201,164,126],CB=[68,70,201];
+    function colors(){var cs=getComputedStyle(root);line=cs.getPropertyValue('--line').trim()||line}
     function size(){var r=cv.getBoundingClientRect();dpr=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
+    function ease(x){return x<=0?0:x>=1?1:x*x*(3-2*x)}
+    function mixc(e){return 'rgb('+[0,1,2].map(function(i){return Math.round(CA[i]+(CB[i]-CA[i])*e)}).join(',')+')'}
     function draw(){
       cx.clearRect(0,0,W,H);
-      var narrow=W<1000,x0=narrow?W*.04:W*.6,x1=W*.97,y0=H*(narrow?.06:.18),y1=H*(narrow?.36:.78),bw=x1-x0,bh=y1-y0,e=mix*mix*(3-2*mix);
-      cx.globalAlpha=narrow?.2:1;
-      var P=pts.map(function(p,k){
-        var wob=reduce?0:Math.sin(t*1.2+p.ph)*.006;
+      var narrow=W<1000,x0=narrow?W*.04:W*.6,x1=W*.97,y0=H*(narrow?.06:.18),y1=H*(narrow?.36:.78),bw=x1-x0,bh=y1-y0,A=narrow?.2:1,S=.7;
+      var em=ease(mix);col=mixc(em);
+      var P=pts.map(function(p){
+        var l=ease(mix*(1+S)-p.x*S);
+        var wob=reduce?0:Math.sin(t*1.2+p.ph)*.006*l;
         var ex=x0+p.x*bw, ey=y0+bh*(.62-p.ey*.5);
         var sx=x0+p.sx*bw, sy=y1-(p.sy+wob)*bh;
-        return [ex+(sx-ex)*e, ey+(sy-ey)*e];
+        var lift=Math.sin(Math.PI*l)*bh*(.16+.12*Math.sin(p.ph));
+        return [ex+(sx-ex)*l, ey+(sy-ey)*l-lift, l];
       });
-      // ECG trace fades out, fit line fades in
-      if(e<1){cx.beginPath();P.forEach(function(q,k){k?cx.lineTo(q[0],q[1]):cx.moveTo(q[0],q[1])});cx.strokeStyle=col;cx.globalAlpha=(narrow?.2:1)*(1-e)*.55;cx.lineWidth=1.5;cx.stroke()}
-      if(e>0){cx.beginPath();cx.moveTo(x0,y1-.18*bh);cx.lineTo(x1,y1-.80*bh);cx.strokeStyle=col;cx.globalAlpha=(narrow?.2:1)*e*.6;cx.lineWidth=1.5;cx.setLineDash([5,6]);cx.stroke();cx.setLineDash([])}
+      // ECG trace thins out point by point, fit line draws in from the left
+      if(em<1){cx.beginPath();P.forEach(function(q,k){k?cx.lineTo(q[0],q[1]):cx.moveTo(q[0],q[1])});cx.strokeStyle=col;cx.globalAlpha=A*(1-em)*.55;cx.lineWidth=1.5;cx.stroke()}
+      if(em>0){var fx=x0+bw*em;cx.beginPath();cx.moveTo(x0,y1-.18*bh);cx.lineTo(fx,y1-(.18+.62*em)*bh);cx.strokeStyle=col;cx.globalAlpha=A*em*.6;cx.lineWidth=1.5;cx.setLineDash([5,6]);cx.stroke();cx.setLineDash([])}
       // travelling pulse on the trace
       var head=reduce?-1:(t*.22)%1;
       P.forEach(function(q,k){
-        var near=head<0?0:Math.max(0,1-Math.abs(pts[k].x-head)*14);
-        var r=1.6+e*1.4+near*2.2*(1-e);
-        cx.beginPath();cx.arc(q[0],q[1],r,0,6.283);cx.fillStyle=col;cx.globalAlpha=(narrow?.2:1)*(.28+.5*e+near*.7*(1-e));cx.fill();
+        var l=q[2],near=head<0?0:Math.max(0,1-Math.abs(pts[k].x-head)*14)*(1-l);
+        var fly=Math.sin(Math.PI*l);
+        var r=1.6+l*1.4+near*2.2+fly*1.2;
+        cx.beginPath();cx.arc(q[0],q[1],r,0,6.283);cx.fillStyle=col;cx.globalAlpha=A*(.28+.5*l+near*.7+fly*.2);cx.fill();
       });
       cx.globalAlpha=1;
     }
-    function loop(){t+=.016;mix+=(target-mix)*.06;if(Math.abs(target-mix)<.001)mix=target;draw();raf=requestAnimationFrame(loop)}
+    var last=0;
+    function loop(now){var dt=last?Math.min(.05,(now-last)/1000):.016;last=now;t+=dt;var d=target-mix,stp=dt/1.25;mix=Math.abs(d)<=stp?target:mix+Math.sign(d)*stp;draw();raf=requestAnimationFrame(loop)}
     function start(){if(raf)return;if(reduce){draw();return}raf=requestAnimationFrame(loop)}
-    function stop(){if(raf)cancelAnimationFrame(raf);raf=null}
+    function stop(){if(raf)cancelAnimationFrame(raf);raf=null;last=0}
     colors();size();start();
     addEventListener('resize',function(){size();draw()});
     if('IntersectionObserver' in window)new IntersectionObserver(function(es){es[0].isIntersecting?start():stop()}).observe(cv);
     matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){colors();draw()});
-    return {morph:function(v){setTimeout(function(){size();draw()},30);target=v==='data'?1:0;setTimeout(colors,20);setTimeout(colors,450);if(reduce){mix=target;colors();draw()}}};
+    return {morph:function(v){setTimeout(function(){size();draw()},30);target=v==='data'?1:0;start();if(reduce){mix=target;draw()}}};
   })();
 
   /* ---------- Unmasked demo ---------- */
