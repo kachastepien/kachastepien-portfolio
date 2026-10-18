@@ -1147,14 +1147,6 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 .sidly-word .hw{height:15px;width:auto;margin-left:.15rem}
 .app-icon{box-shadow:0 0 0 1px var(--line)}
 .app-id{gap:.9rem}
-/* win card: light, like the other cards on the page */
-.award{background:var(--surface)!important;color:var(--fg)!important;border:1px solid var(--line)!important;box-shadow:none!important}
-.award h3{color:var(--fg)!important}
-.award .aw-sub{color:var(--muted)!important}
-.award p{color:var(--fg)!important}
-.award .app-meta,.award .aw-photos figcaption{color:var(--muted)!important}
-.award .gb-word{color:var(--fg)!important}
-.gb-ic rect{fill:#161718}.gb-ic path{fill:#fff}
 /* screen tabs: quiet underline tabs instead of heavy pills */
 .tabs{gap:1.6rem;border-bottom:1px solid var(--line);margin:1.4rem 0 1.6rem;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
@@ -1163,3 +1155,47 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 .tabs button:hover{color:var(--fg)}
 .tabs button[aria-selected="true"]{color:var(--fg)!important;font-weight:600}
 .tabs button[aria-selected="true"]::after{transform:none}
+
+/* win card: dark, minimal, photos as a clean pair */
+.aw-lead{margin-top:1.1rem!important;font-size:clamp(1.35rem,2.4vw,1.9rem)!important;line-height:1.3!important;letter-spacing:-.025em;font-weight:500;color:#fff!important;max-width:30ch!important}
+.aw-lead b{color:#d8b47f!important;font-weight:600}
+.award .aw-sub{margin-top:1rem!important;font-size:.92rem!important;color:rgba(244,242,238,.55)!important}
+.aw-photos{grid-column:1/-1;margin:1.4rem 0 0!important;display:grid;grid-template-columns:2fr 1fr;gap:.6rem;height:clamp(220px,30vw,380px)}
+.aw-photos figure{position:relative;margin:0;overflow:hidden;border-radius:16px;height:100%}
+.aw-photos img{width:100%!important;height:100%!important;aspect-ratio:auto!important;object-fit:cover;border-radius:0!important;transition:transform .8s var(--ease)}
+.aw-photos figure:hover img{transform:scale(1.03)}
+.aw-photos figcaption{position:absolute;left:12px;bottom:12px;font-size:.78rem;font-weight:500;color:#fff!important;background:rgba(10,10,12,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-radius:999px;padding:.4rem .75rem}
+@media (max-width:760px){.aw-photos{grid-template-columns:1fr;height:auto}.aw-photos figure{height:220px}.aw-photos .ph-b{display:none}}
+/* medal: drop and swing when the card comes into view, then a slow idle sway */
+@media (prefers-reduced-motion:no-preference){
+  .js .award.in .aw-swing{animation:awDrop .55s var(--ease) both,awSwing 2.8s .4s cubic-bezier(.3,.6,.3,1) both,awIdle 6s 3.4s ease-in-out infinite}
+}
+@keyframes awIdle{0%,100%{transform:rotate(0)}50%{transform:rotate(2.2deg)}}
+
+/* Lemi: the wordmark is the logo, the lemur is a friend */
+.lemi-word{margin:0;font:800 clamp(2.4rem,4vw,3.2rem)/1 var(--body);letter-spacing:-.065em;color:var(--fg)}
+#ai .lemi .app-meta{margin:.5rem 0 0;font-size:.88rem;color:var(--muted)}
+.tagline{margin:1.2rem 0 0;font-size:.88rem;color:var(--muted);line-height:1.7}
+.tagline i{font-style:normal;color:var(--line);margin:0 .35rem}
+.lemur-friend{display:flex;align-items:flex-end;gap:1rem;margin:2rem 0 .6rem}
+.lemur-big{width:clamp(130px,14vw,170px);height:auto;overflow:visible;flex:none}
+.lf-say{margin-bottom:5.4rem;font-size:.92rem;line-height:1.4;font-weight:500;background:var(--surface);border:1px solid var(--line);border-radius:16px 16px 16px 4px;padding:.65rem .9rem;max-width:15rem}
+.lm-body,.lm-tail,.lm-ear-l,.lm-ear-r{transform-box:fill-box}
+.lm-body{transform-origin:50% 100%}
+.lm-tail{transform-origin:0% 100%}
+.lm-ear-l{transform-origin:100% 100%}.lm-ear-r{transform-origin:0% 100%}
+@media (prefers-reduced-motion:no-preference){
+  .lemur-friend.in .lm-body{animation:lmHop .9s cubic-bezier(.3,1.6,.5,1) both,lmBreath 4.5s 1s ease-in-out infinite}
+  .lemur-friend.in .lm-tail{animation:lmTail 2.6s ease-in-out infinite}
+  .lemur-friend.in .lm-ear-l{animation:lmEarL 5s 1.5s ease-in-out infinite}
+  .lemur-friend.in .lm-ear-r{animation:lmEarR 5s 1.7s ease-in-out infinite}
+  .js .lemur-friend .lf-say{opacity:0;transform:translateY(8px) scale(.92);transform-origin:0 100%;transition:opacity .4s var(--ease) .7s,transform .5s cubic-bezier(.3,1.6,.5,1) .7s}
+  .js .lemur-friend.in .lf-say{opacity:1;transform:none}
+  .lemur-friend:hover .lm-body{animation:lmWiggle .7s ease-in-out}
+}
+@keyframes lmBreath{0%,100%{transform:none}50%{transform:translateY(-3px) scaleY(1.02)}}
+@keyframes lmTail{0%,100%{transform:rotate(0)}50%{transform:rotate(-10deg)}}
+@keyframes lmEarL{0%,88%,100%{transform:rotate(0)}92%{transform:rotate(-12deg)}96%{transform:rotate(4deg)}}
+@keyframes lmEarR{0%,88%,100%{transform:rotate(0)}92%{transform:rotate(12deg)}96%{transform:rotate(-4deg)}}
+/* win card kicker: plain text, no pill */
+.award .aw-kicker{border:0!important;padding:0!important;font-size:.85rem;letter-spacing:.01em}

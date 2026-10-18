@@ -124,7 +124,7 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=52b49a43d3">
+<link rel="stylesheet" href="assets/site.css?v=038bdf31bb">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -370,28 +370,21 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
         </svg>
       </figure>
       <div class="aw-main">
-        <div class="app-id gb-id">
-          <svg class="app-icon gb-ic" viewBox="0 0 72 72" role="img" aria-label="GovBot icon"><rect width="72" height="72" rx="16" fill="#f4f2ee"/><path d="M20 24a6 6 0 0 1 6-6h20a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H33l-8 7v-7h1a6 6 0 0 1-6-6z" fill="#161718"/><circle cx="30" cy="31" r="2.6" fill="#d8b47f"/><circle cx="42" cy="31" r="2.6" fill="#d8b47f"/></svg>
-          <div><p class="gb-word">GovBot</p><p class="app-meta">AI assistant for local government</p></div>
-        </div>
-        <h3>Winner of the AI Place Challenge</h3>
-        <p class="aw-sub">Set by the Polish Ministry of Digital Affairs · Econverse Smart Cities Hackathon, Warsaw 2025</p>
-        <p>I led the team and owned everything AI: the assistant's logic, the prompts and the n8n workflows that get citizens to the right local service without the bureaucracy.</p>
+        <p class="aw-kicker"><span class="aw-dot" aria-hidden="true"></span>1st place · AI Place Challenge 2025</p>
+        <p class="aw-lead">I led the team and owned everything AI in <b>GovBot</b>, an assistant that gets citizens to the right local service.</p>
+        <p class="aw-sub">Set by the Polish Ministry of Digital Affairs · Econverse Smart Cities Hackathon, Warsaw</p>
       </div>
-      <figure class="aw-photos">
-        <img decoding="async" loading="lazy" src="assets/govbot/stage.webp" width="1600" height="1067" alt="Katarzyna presenting GovBot with her team on the AI Place stage at Econverse Fuse 2025">
-        <img decoding="async" loading="lazy" src="assets/govbot/hall.webp" width="1200" height="800" alt="The hackathon hall at Econverse Fuse 2025 in Warsaw">
-        <figcaption>Presenting GovBot on stage at Econverse Fuse 2025, Warsaw · 26–27 March 2025</figcaption>
-      </figure>
+      <div class="aw-photos">
+        <figure class="ph-a"><img decoding="async" loading="lazy" src="assets/govbot/stage.webp" width="1600" height="1067" alt="Katarzyna presenting GovBot with her team on the AI Place stage at Econverse Fuse 2025"><figcaption>On stage at Econverse Fuse 2025</figcaption></figure>
+        <figure class="ph-b"><img decoding="async" loading="lazy" src="assets/govbot/hall.webp" width="1200" height="800" alt="The hackathon hall at Econverse Fuse 2025 in Warsaw"></figure>
+      </div>
     </div>
 
     <div class="lemi">
       <div>
-        <div class="app-id reveal">
-          <img class="app-icon" src="assets/lemi/icon.webp" width="256" height="256" alt="Lemi app icon">
-          <div><p class="lemi-word">lemi</p><p class="app-meta">Health guide · demo · iOS, Android, web</p></div>
-        </div>
-        <h2 class="case-title reveal">Lemi: health care without the stress</h2>
+        <p class="lemi-word reveal">lemi</p>
+        <p class="app-meta reveal">Health guide · demo · iOS, Android, web</p>
+        <h2 class="case-title reveal" style="margin-top:1.4rem">Health care without the stress</h2>
         <p class="lede reveal d1">A friendly lemur for before, during and after a doctor's visit. Built at HackYeah 2026.</p>
         <details class="more reveal" hidden><summary><span class="when-closed">Why I built it, and what it does</span><span class="when-open">Hide</span></summary><div class="more-body">
         <p class="prose">It started with me. I'm a student and I put off calling the doctor, not because I don't know what is wrong, but because I have to call, explain myself, remember everything in ten minutes and then keep track of the advice. At the hackathon I asked other people whether they felt the same. It was far more common than I thought, and each conversation added a group the app could help: people for whom Polish is not a first language, people with disabilities, neurodivergent people, seniors and their families, people with health anxiety.</p>
@@ -408,7 +401,8 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
           <li>"Call for me" with AI, a simple mode with large text for people 50+, and a calm mode.</li>
         </ul>
         </div></details>
-        <div class="chips reveal"><span class="chip on">Claude API</span><span class="chip on">ElevenLabs Scribe</span><span class="chip">TypeScript web app</span><span class="chip">Flutter (iOS, Android)</span><span class="chip">Health data stays on the phone</span></div>
+        <p class="tagline reveal">Claude API <i>/</i> ElevenLabs Scribe <i>/</i> TypeScript <i>/</i> Flutter <i>/</i> health data stays on the phone</p>
+        <div class="lemur-friend reveal"><svg class="lemur-big" viewBox="0 0 120 110" aria-hidden="true"><g class="lm-body"><ellipse cx="60" cy="105" rx="30" ry="3.5" fill="rgba(0,0,0,.07)"></ellipse><g class="lm-tail"><path d="M80 96 q30 -2 26 -34 q-2 -12 -12 -14" fill="none" stroke="#D2D1D4" stroke-width="9" stroke-linecap="round"></path><path d="M80 96 q30 -2 26 -34 q-2 -12 -12 -14" fill="none" stroke="#26262A" stroke-width="9" stroke-dasharray="5 6" stroke-linecap="butt"></path></g><ellipse cx="60" cy="90" rx="23" ry="14" fill="#DCDBDE"></ellipse><g class="lm-ear-l"><path d="M33 44 L15 9 Q36 12 46 30 Z" fill="#F6F5F4" stroke="#E3E2E4" stroke-width="1.5" stroke-linejoin="round"></path><path d="M31 37 L21 17 Q33 20 39 30 Z" fill="#26262A"></path></g><g class="lm-ear-r"><path d="M87 44 L105 9 Q84 12 74 30 Z" fill="#F6F5F4" stroke="#E3E2E4" stroke-width="1.5" stroke-linejoin="round"></path><path d="M89 37 L99 17 Q87 20 81 30 Z" fill="#26262A"></path></g><path d="M55 25 q3 -15 13 -18 q-5 9 -2 18 z" fill="#F6F5F4" stroke="#E3E2E4" stroke-width="1.5" stroke-linejoin="round"></path><ellipse cx="60" cy="53" rx="30" ry="28" fill="#F6F5F4" stroke="#E3E2E4" stroke-width="1.5"></ellipse><ellipse cx="47" cy="52" rx="11" ry="12.5" fill="#26262A"></ellipse><ellipse cx="73" cy="52" rx="11" ry="12.5" fill="#26262A"></ellipse><circle cx="37" cy="68" r="4.5" fill="#D98C8C" opacity=".16"></circle><circle cx="83" cy="68" r="4.5" fill="#D98C8C" opacity=".16"></circle><g ><path d="M41 54 q6 -8 12 0" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"></path></g><g ><path d="M67 54 q6 -8 12 0" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"></path></g><ellipse cx="60" cy="69" rx="8" ry="6.5" fill="#26262A"></ellipse><ellipse cx="60" cy="66.5" rx="3" ry="1.6" fill="#4A4A50"></ellipse><path d="M53 78 q7 7 14 0" stroke="#26262A" stroke-width="2.4" fill="none" stroke-linecap="round"></path><path d="M100 30 c-3 -5 -9 -2 -6 3 l6 5 6 -5 c3 -5 -3 -8 -6 -3 z" fill="#D98C8C"></path></g></svg><span class="lf-say">Hi! I'm Lemi.<br>I'll keep you company at the doctor's.</span></div>
         <div class="links reveal"><a class="btn solid" href="https://pekao.vercel.app">Try the demo
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a></div>
       </div>
@@ -608,19 +602,14 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
         </svg>
       </figure>
       <div class="aw-main">
-        <div class="app-id gb-id">
-          <svg class="app-icon gb-ic" viewBox="0 0 72 72" role="img" aria-label="GovBot icon"><rect width="72" height="72" rx="16" fill="#f4f2ee"/><path d="M20 24a6 6 0 0 1 6-6h20a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H33l-8 7v-7h1a6 6 0 0 1-6-6z" fill="#161718"/><circle cx="30" cy="31" r="2.6" fill="#d8b47f"/><circle cx="42" cy="31" r="2.6" fill="#d8b47f"/></svg>
-          <div><p class="gb-word">GovBot</p><p class="app-meta">AI assistant for local government</p></div>
-        </div>
-        <h3>Winner of the AI Place Challenge</h3>
-        <p class="aw-sub">Set by the Polish Ministry of Digital Affairs · Econverse Smart Cities Hackathon, Warsaw 2025</p>
-        <p>I led the team and owned everything AI: the assistant's logic, the prompts and the n8n workflows that get citizens to the right local service without the bureaucracy.</p>
+        <p class="aw-kicker"><span class="aw-dot" aria-hidden="true"></span>1st place · AI Place Challenge 2025</p>
+        <p class="aw-lead">I led the team and owned everything AI in <b>GovBot</b>, an assistant that gets citizens to the right local service.</p>
+        <p class="aw-sub">Set by the Polish Ministry of Digital Affairs · Econverse Smart Cities Hackathon, Warsaw</p>
       </div>
-      <figure class="aw-photos">
-        <img decoding="async" loading="lazy" src="assets/govbot/stage.webp" width="1600" height="1067" alt="Katarzyna presenting GovBot with her team on the AI Place stage at Econverse Fuse 2025">
-        <img decoding="async" loading="lazy" src="assets/govbot/hall.webp" width="1200" height="800" alt="The hackathon hall at Econverse Fuse 2025 in Warsaw">
-        <figcaption>Presenting GovBot on stage at Econverse Fuse 2025, Warsaw · 26–27 March 2025</figcaption>
-      </figure>
+      <div class="aw-photos">
+        <figure class="ph-a"><img decoding="async" loading="lazy" src="assets/govbot/stage.webp" width="1600" height="1067" alt="Katarzyna presenting GovBot with her team on the AI Place stage at Econverse Fuse 2025"><figcaption>On stage at Econverse Fuse 2025</figcaption></figure>
+        <figure class="ph-b"><img decoding="async" loading="lazy" src="assets/govbot/hall.webp" width="1200" height="800" alt="The hackathon hall at Econverse Fuse 2025 in Warsaw"></figure>
+      </div>
     </div>
 
     <div class="cards">
