@@ -643,26 +643,24 @@ code{font:500 .86em ui-monospace,SFMono-Regular,Menlo,monospace;background:color
 .case-more{margin-top:1.4rem}
 
 /* ---- welcome bar: bottom centre, one question ---- */
-.welcome{position:fixed;left:50%;bottom:clamp(16px,3vh,30px);transform:translateX(-50%);z-index:68;display:flex;align-items:center;gap:.45rem;padding:.4rem .4rem .4rem 1rem;border-radius:999px;animation:wlIn .7s var(--ease) both;max-width:calc(100vw - 20px)}
+.welcome{position:fixed;left:50%;bottom:clamp(14px,3vh,28px);transform:translateX(-50%);z-index:68;width:min(640px,calc(100vw - 24px));border-radius:26px;padding:1.3rem 1.3rem 1.2rem;--glass:color-mix(in srgb,var(--bg) 90%,transparent);box-shadow:0 30px 70px -20px rgba(20,20,30,.28),0 0 0 1px var(--line);animation:wlIn .7s var(--ease) both}
 .welcome[hidden]{display:none}
 .welcome > *{position:relative;z-index:1}
 .welcome.bye{animation:wlOut .25s var(--ease) both}
-@keyframes wlIn{from{opacity:0;transform:translate(-50%,24px) scale(.96)}}
-@keyframes wlOut{to{opacity:0;transform:translate(-50%,12px)}}
-.welcome .venn-av{width:34px;height:34px;border-radius:50%}
-.welcome .venn-av i{width:15px;height:15px;top:9.5px}
-.welcome .venn-av i:first-child{left:6px}.welcome .venn-av i+i{left:13px}
-.wl-q{font-size:.92rem;color:var(--muted);margin:0 .35rem 0 .2rem;white-space:nowrap}
-.wl-q b{color:var(--fg);font-weight:600}
-.welcome [data-pick]{appearance:none;display:inline-flex;align-items:center;gap:.45rem;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:500 .88rem/1 var(--body);padding:.7rem 1rem;border-radius:999px;cursor:pointer;white-space:nowrap;transition:border-color .2s,background-color .2s,transform .3s var(--ease)}
-.welcome [data-pick]:hover{border-color:var(--fg);transform:translateY(-1px)}
-.welcome [data-pick="design"]:hover{background:color-mix(in srgb,#c9a47e 16%,var(--bg))}
-.welcome [data-pick="data"]:hover{background:color-mix(in srgb,#a6a8ff 18%,var(--bg))}
-.welcome [data-pick] i{width:9px;height:9px;border-radius:50%}
-.welcome i.d{background:#c9a47e}.welcome i.a{background:#a6a8ff}
-.wl-x{appearance:none;border:0;background:none;width:34px;height:34px;border-radius:50%;font-size:1.1rem;color:var(--muted);cursor:pointer}
+.wl-k{margin:0;font-size:.9rem;color:var(--muted)}
+.welcome h2{margin:.15rem 0 0;font-size:clamp(1.35rem,3vw,1.7rem);font-weight:700;letter-spacing:-.035em;line-height:1.15}
+.wl-x{position:absolute;top:.75rem;right:.75rem;appearance:none;border:0;background:none;width:36px;height:36px;border-radius:50%;font-size:1.25rem;color:var(--muted);cursor:pointer}
 .wl-x:hover{background:color-mix(in srgb,var(--fg) 7%,transparent);color:var(--fg)}
-@media (max-width:640px){.wl-q{display:none}.welcome .venn-av{display:none}.welcome [data-pick]{padding:.65rem .8rem;font-size:.82rem}}
+.wl-opts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem;margin-top:1rem}
+.wl-opts button{appearance:none;text-align:left;border:1px solid var(--line);background:var(--bg);border-radius:16px;padding:.85rem .9rem .9rem;cursor:pointer;color:var(--fg);display:grid;gap:.25rem;align-content:start;transition:border-color .2s,transform .3s var(--ease),background-color .2s}
+.wl-opts button:hover{border-color:var(--fg);transform:translateY(-2px)}
+.wl-opts i{width:10px;height:10px;border-radius:50%;margin-bottom:.35rem}
+.wl-opts i.d{background:#c9a47e}.wl-opts i.a{background:#a6a8ff}.wl-opts i.e{background:none;border:1.5px solid var(--muted)}
+.wl-opts b{font-size:.92rem;font-weight:600;line-height:1.25}
+.wl-opts span{font-size:.78rem;color:var(--muted)}
+.wl-opts [data-pick="design"]:hover{background:color-mix(in srgb,#c9a47e 14%,var(--bg))}
+.wl-opts [data-pick="data"]:hover{background:color-mix(in srgb,#a6a8ff 16%,var(--bg))}
+@media (max-width:600px){.welcome{padding:1.1rem 1rem 1rem;border-radius:22px}.wl-opts{grid-template-columns:1fr;gap:.4rem}.wl-opts button{grid-template-columns:auto 1fr;align-items:center;column-gap:.6rem;padding:.75rem .85rem}.wl-opts i{grid-row:1/3;margin:0}.wl-opts span{grid-column:2}}
 
 /* ---- story: sticky venn that follows the steps ---- */
 .story-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1.5rem,5vw,4.5rem);align-items:start}
@@ -874,3 +872,4 @@ main,footer.end{overflow-x:clip}
 @media (max-width:980px){.smenu{display:none}}
 @media (max-width:640px){.cp .brand>span:not(.mark){display:none}.crumb{margin-left:.3rem}.btn-all span{display:none}.btn-all{width:36px;padding:0;justify-content:center}
   .crumb .pm-list{position:fixed;left:12px;right:12px;top:72px;min-width:0}.pn{grid-template-columns:1fr}}
+@media (max-width:600px){body:has(#welcome:not([hidden])) .chat-btn{opacity:0;pointer-events:none;transform:scale(.8)}}

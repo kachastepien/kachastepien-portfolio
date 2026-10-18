@@ -123,7 +123,7 @@
 if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.documentElement.classList.add('js');
 try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610171900">
+<link rel="stylesheet" href="assets/site.css?v=202610181000">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -702,12 +702,16 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   <p class="chk-f">Ticks itself as you look around. Nothing leaves your browser.</p>
 </section>
 <div class="chk-toast glass" id="chk-toast" role="status" aria-live="polite" hidden></div>
-<div class="welcome glass" id="welcome" role="dialog" aria-label="Choose a perspective" hidden>
-  <span class="wl-q"><b>Hi, I'm Kacha.</b> What brings you here?</span>
-  <button type="button" data-pick="design"><i class="d"></i>Product design</button>
-  <button type="button" data-pick="data"><i class="a"></i>Data science</button>
+<section class="welcome glass" id="welcome" role="dialog" aria-labelledby="wl-h" aria-modal="false" hidden>
   <button type="button" class="wl-x" aria-label="Close">×</button>
-</div>
+  <p class="wl-k">Hi, I'm Kacha.</p>
+  <h2 id="wl-h">What brings you here?</h2>
+  <div class="wl-opts">
+    <button type="button" data-pick="design"><i class="d"></i><b>Hiring for product design</b><span>UX/UI, research, prototypes</span></button>
+    <button type="button" data-pick="data"><i class="a"></i><b>Hiring for data science</b><span>NLP, pipelines, applied AI</span></button>
+    <button type="button" data-pick="explore"><i class="e"></i><b>Just exploring</b><span>Show me around</span></button>
+  </div>
+</section>
 <section class="chat glass" id="chat" role="dialog" aria-modal="false" aria-labelledby="chat-h" hidden>
   <div class="chat-head"><span class="venn-av" aria-hidden="true"><i></i><i></i></span><div><b id="chat-h">Venn</b><span>Katarzyna's portfolio assistant</span></div><button type="button" class="chat-x" aria-label="Close assistant">×</button></div>
   <div class="chat-log" id="chat-log" aria-live="polite"></div>
