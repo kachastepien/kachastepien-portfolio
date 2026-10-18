@@ -1247,4 +1247,21 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 .soc:hover,.btn.soft:hover{box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgba(20,20,30,.16)!important}
 .mailchip{box-shadow:none}.mailchip:hover{box-shadow:none}
 /* the Figma canvas belongs to the design view only */
-:root[data-view="data"] .hero::after,:root[data-view="data"] .fs-frame,:root[data-view="data"] .fcur{display:none!important}
+:root[data-view="data"] .fs-frame,:root[data-view="data"] .fcur{opacity:0!important;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
+.hero::after{transition:opacity .6s var(--ease)}
+:root[data-view="data"] .hero::after{opacity:0}
+/* the selection draws itself in whenever the design view opens */
+@media (prefers-reduced-motion:no-preference){
+  html.figin .fs-frame{animation:fsDraw .75s cubic-bezier(.65,0,.25,1) both}
+  html.figin .fs-frame i{animation:fsPop .45s cubic-bezier(.3,1.7,.5,1) both}
+  html.figin .fs-frame .tl{animation-delay:.05s}html.figin .fs-frame .tr{animation-delay:.3s}html.figin .fs-frame .br{animation-delay:.5s}html.figin .fs-frame .bl{animation-delay:.65s}
+  html.figin .fs-dim{animation:fsDim .5s cubic-bezier(.3,1.5,.5,1) .75s both}
+  html.figin .fc-d{animation:fcIn1 .9s cubic-bezier(.2,.9,.3,1) .5s both,fcDrift1 9s ease-in-out 1.4s infinite}
+  html.figin .fc-a{animation:fcIn2 .9s cubic-bezier(.2,.9,.3,1) .8s both,fcDrift2 11s ease-in-out 1.7s infinite}
+}
+@keyframes fsDraw{from{clip-path:inset(-12px 100% 100% -12px);opacity:1;transform:none}to{clip-path:inset(-12px -12px -12px -12px);opacity:1;transform:none}}
+@keyframes fsPop{from{transform:scale(0)}to{transform:none}}
+@keyframes fsDim{from{opacity:0;transform:translate(-50%,8px) scale(.85)}to{opacity:1;transform:translateX(-50%)}}
+@keyframes fcIn1{from{opacity:0;translate:90px -40px}to{translate:0 0}}
+@keyframes fcIn2{from{opacity:0;translate:110px 50px}to{translate:0 0}}
+html.figon:not(.figin) .fs-frame,html.figon:not(.figin) .fcur{opacity:0}

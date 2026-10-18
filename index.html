@@ -2,7 +2,7 @@
 <html lang="en" data-view="design" data-theme="light">
 <head>
 <meta charset="utf-8">
-<meta name="build" content="1792354385">
+<meta name="build" content="1792354674">
 <script>
 /* GitHub Pages lets browsers keep the page for 10 minutes; if a newer build is live, reload once to get it. */
 (function(){try{var b=document.querySelector('meta[name="build"]').content;fetch('/version.txt?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(v){v=(v||'').trim();if(v&&v!==b&&!sessionStorage.getItem('ks-rl-'+v)){sessionStorage.setItem('ks-rl-'+v,'1');location.reload()}}).catch(function(){})}catch(e){}})();
@@ -149,7 +149,7 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=a49c8f3e5f">
+<link rel="stylesheet" href="assets/site.css?v=0a4d34d24f">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -832,7 +832,8 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
   })();
 
   /* ---------- the name gets selected like a layer in Figma once it has landed ---------- */
-  (function(){function on(){setTimeout(function(){root.classList.add('figon')},1100)}
+  function figIn(){if(root.dataset.view!=='design')return;root.classList.remove('figin');void root.offsetWidth;root.classList.add('figin')}
+  (function(){function on(){setTimeout(function(){root.classList.add('figon');figIn()},1100)}
     if(root.classList.contains('intro'))addEventListener('introdone',on,{once:true});else on()})();
 
   /* ---------- split hero name into letters ---------- */
@@ -874,6 +875,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
     try{localStorage.setItem('ks-view',v)}catch(e){}
     try{var u=new URL(location.href);u.searchParams.set('view',v);u.hash='';history.replaceState(null,'',u)}catch(e){}
     if(!opts.inner)document.querySelectorAll('.view[data-for="'+v+'"], .hero [data-for="'+v+'"]').forEach(function(el){el.classList.remove('view-enter');void el.offsetWidth;el.classList.add('view-enter')});
+    if(v==='design'&&root.classList.contains('figon')){root.classList.remove('figin');setTimeout(figIn,opts.inner?820:60)}
     if(!opts.inner){var pf=document.querySelector('.hero .pf');if(pf){pf.classList.remove('pop');void pf.offsetWidth;pf.classList.add('pop')}}
     watch(); countUp(document); signal.morph(v); if(typeof buildRail==='function')buildRail();
   }
