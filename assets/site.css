@@ -1200,3 +1200,6 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 /* win card kicker: plain text, no pill */
 .award .aw-kicker{border:0!important;padding:0!important;font-size:.85rem;letter-spacing:.01em}
 .device:has(img[src*="lemi/"]){aspect-ratio:420/1000}.device:has(img[src*="lemi/"]) img{object-fit:contain}
+/* room between the portrait row and the top of the selection frame */
+@media (min-width:641px){.hero-id{margin-bottom:calc(clamp(.9rem,3vh,2.4rem) + 30px)}}
+@media (min-width:641px) and (max-height:780px){.hero-id{margin-bottom:calc(.8rem + 26px)}}
