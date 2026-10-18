@@ -86,9 +86,15 @@ p{margin:0}
 .hero-id{display:flex;align-items:center;gap:1rem;margin-bottom:1.75rem}
 .pf{position:relative;flex:none;width:64px;height:64px;border-radius:50%;box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--accent-line);transition:box-shadow .5s var(--ease)}
 .pf img{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;object-fit:cover;transition:opacity .7s var(--ease),transform .7s var(--ease)}
-.pf .pf-a{opacity:0;transform:scale(1.06)}
-:root[data-view="data"] .pf .pf-a{opacity:1;transform:none}
-:root[data-view="data"] .pf .pf-d{opacity:0;transform:scale(.96)}
+.pf{view-transition-name:portrait}
+.pf .pf-a{clip-path:circle(0% at 105% 50%);transition:clip-path .95s cubic-bezier(.65,0,.25,1)}
+:root[data-view="data"] .pf .pf-a{clip-path:circle(150% at 105% 50%)}
+.pf .pf-d{transition:transform .95s cubic-bezier(.65,0,.25,1)}
+:root[data-view="data"] .pf .pf-d{transform:scale(1.04)}
+.pf.pop{animation:pfPop .7s cubic-bezier(.3,1.5,.5,1)}
+@keyframes pfPop{40%{transform:scale(1.08)}}
+::view-transition-group(portrait),::view-transition-new(portrait){animation:none}
+::view-transition-old(portrait){display:none}
 .hero h1{font-size:clamp(2.6rem,8.4vw,6.2rem);font-weight:700;letter-spacing:-.035em;line-height:.98}
 .hero h1 .ch{display:inline-block;transform:translateY(105%);opacity:0;animation:rise .9s var(--ease) forwards;animation-delay:calc(var(--i) * 28ms + 120ms)}
 .hero h1 .line{display:block;overflow:hidden;padding-bottom:.06em}

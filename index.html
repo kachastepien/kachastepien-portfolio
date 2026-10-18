@@ -124,7 +124,7 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610181700">
+<link rel="stylesheet" href="assets/site.css?v=202610181730">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -828,6 +828,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     try{localStorage.setItem('ks-view',v)}catch(e){}
     try{var u=new URL(location.href);u.searchParams.set('view',v);u.hash='';history.replaceState(null,'',u)}catch(e){}
     if(!opts.inner)document.querySelectorAll('.view[data-for="'+v+'"], .hero [data-for="'+v+'"]').forEach(function(el){el.classList.remove('view-enter');void el.offsetWidth;el.classList.add('view-enter')});
+    if(!opts.inner){var pf=document.querySelector('.hero .pf');if(pf){pf.classList.remove('pop');void pf.offsetWidth;pf.classList.add('pop')}}
     watch(); countUp(document); signal.morph(v); if(typeof buildRail==='function')buildRail();
   }
   btns.forEach(function(b){b.addEventListener('click',function(){var same=root.dataset.view===b.dataset.view;setView(b.dataset.view);if(!same)setTimeout(function(){scrollTo({top:0,behavior:reduce?'auto':'smooth'})},60)})});
