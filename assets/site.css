@@ -59,9 +59,12 @@ p{margin:0}
 @media (max-width:420px){.top .wrap{padding-left:.9rem}}
 .brand{font:700 1rem/1 var(--display);letter-spacing:-.01em;text-decoration:none;display:flex;align-items:center;gap:.55rem;white-space:nowrap}
 .mark{position:relative;display:inline-block;width:24px;height:18px;flex:none}
-.mark i{position:absolute;top:1px;width:16px;height:16px;border-radius:50%;transition:transform .6s var(--ease),opacity .6s var(--ease)}
+.mark i{position:absolute;top:1px;width:16px;height:16px;border-radius:50%;transition:transform .6s var(--ease),opacity .8s var(--ease) .15s}
 .mark i:first-child{left:0;background:#c9a47e}
 .mark i+i{left:7.5px;background:#a6a8ff;mix-blend-mode:multiply}
+:root[data-view="design"] .mark i+i{opacity:.32}
+:root[data-view="data"] .mark i:first-child{opacity:.32}
+.intro .mark i{opacity:1!important}
 .brand:hover .mark i:first-child{transform:translateX(-2px)}.brand:hover .mark i+i{transform:translateX(2px)}
 .switch{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;background:color-mix(in srgb,var(--surface) 70%,transparent);border:1px solid color-mix(in srgb,var(--line) 70%,transparent);border-radius:999px;padding:3px}
 .switch button{position:relative;z-index:1;appearance:none;border:0;background:none;color:var(--muted);font:500 .8rem/1 var(--body);padding:.6rem 1rem;border-radius:999px;cursor:pointer;white-space:nowrap;transition:color .3s}
