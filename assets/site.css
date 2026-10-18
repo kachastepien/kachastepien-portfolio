@@ -1207,3 +1207,11 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 /* secondary button that pairs with the solid one */
 .btn.soft{background:color-mix(in srgb,var(--fg) 7%,var(--bg));border-color:transparent;color:var(--fg)}
 .btn.soft:hover{background:color-mix(in srgb,var(--fg) 12%,var(--bg))}
+
+/* lighter store buttons */
+.store{height:40px;padding:0 .9rem 0 .7rem;border-radius:10px}
+.store svg{width:18px;height:18px}
+.store span{font-size:.88rem}
+.store small{font-size:.58rem}
+.stores{margin:1.2rem 0 .4rem}
+#health .app-id{margin-bottom:1.1rem}
