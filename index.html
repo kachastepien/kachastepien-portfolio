@@ -124,20 +124,21 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610181100">
+<link rel="stylesheet" href="assets/site.css?v=202610181200">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 <div class="intro-ov" aria-hidden="true">
   <div class="iw">
     <svg class="iv" viewBox="0 0 600 360">
-      <circle class="ia" cx="220" cy="180" r="170" pathLength="1"/>
-      <circle class="ib" cx="380" cy="180" r="170" pathLength="1"/>
-      <text class="it" x="140" y="188" text-anchor="middle">Design</text>
-      <text class="it" x="460" y="188" text-anchor="middle">Data</text>
+      <circle class="ia" cx="220" cy="180" r="170"/>
+      <circle class="ib" cx="380" cy="180" r="170"/>
+      <path class="il" d="M300,30 A170,170 0 0,1 300,330 A170,170 0 0,1 300,30 Z"/>
+      <text class="it" x="125" y="189" text-anchor="middle">Design</text>
+      <text class="it" x="475" y="189" text-anchor="middle">Data</text>
+      <text class="in" x="300" text-anchor="middle"><tspan x="300" y="174">where</tspan><tspan x="300" y="204">they meet</tspan></text>
     </svg>
     <p class="iname"><span>Katarzyna Stępień</span></p>
-    <p class="irole">Product design <em>×</em> Data science</p>
   </div>
 </div>
 <a class="skip" href="#work">Skip to work</a>
@@ -741,28 +742,25 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   function track(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:n,title:n,event:true})}catch(e){}}
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- intro: design and data draw in and overlap above the name, then land in the logo ---------- */
+  /* ---------- intro: design and data slide together, the overlap is where they meet, then it lands in the logo ---------- */
   (function(){
     var ov=document.querySelector('.intro-ov');if(!ov)return;
     if(!root.classList.contains('intro')){ov.remove();return}
     var sv=ov.querySelector('.iv'),q=function(s){return ov.querySelector(s)},all=function(s){return ov.querySelectorAll(s)},E='cubic-bezier(.2,.7,.2,1)',done=false;
     function anim(el,kf,o){return el.animate(kf,Object.assign({fill:'both',easing:E},o))}
-    var draw=[{strokeDashoffset:1},{strokeDashoffset:0}];
-    anim(q('.ia'),draw,{duration:700});anim(q('.ib'),draw,{duration:700,delay:80});
-    anim(q('.ia'),[{transform:'translateX(-120px)'},{transform:'none'}],{duration:900,delay:350,easing:'cubic-bezier(.65,0,.25,1)'});
-    anim(q('.ib'),[{transform:'translateX(120px)'},{transform:'none'}],{duration:900,delay:350,easing:'cubic-bezier(.65,0,.25,1)'});
-    all('.ia,.ib').forEach(function(el){anim(el,[{fillOpacity:0,strokeOpacity:1},{fillOpacity:.92,strokeOpacity:0}],{duration:600,delay:750})});
-    all('.it').forEach(function(el,k){anim(el,[{opacity:0},{opacity:.85}],{duration:500,delay:1050+k*60})});
-    anim(q('.iname span'),[{transform:'translateY(105%)'},{transform:'none'}],{duration:800,delay:700});
-    anim(q('.irole'),[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:600,delay:1000});
+    anim(q('.ia'),[{transform:'translateX(-200px)',opacity:0},{transform:'none',opacity:1}],{duration:900});
+    anim(q('.ib'),[{transform:'translateX(200px)',opacity:0},{transform:'none',opacity:1}],{duration:900});
+    all('.it').forEach(function(el,k){anim(el,[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:500,delay:420+k*80})});
+    anim(q('.il'),[{opacity:0},{opacity:1}],{duration:420,delay:860});
+    anim(q('.in'),[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:450,delay:1000});
+    anim(q('.iname span'),[{transform:'translateY(105%)'},{transform:'none'}],{duration:800,delay:1050});
     function finish(fast){
       if(done)return;done=true;
       var m=document.querySelector('.mark').getBoundingClientRect(),r=sv.getBoundingClientRect();
       var s=m.width/(r.width*500/600),dx=(m.left+m.width/2)-(r.left+r.width/2),dy=(m.top+m.height/2)-(r.top+r.height/2);
-      all('.it').forEach(function(el){anim(el,[{opacity:.85},{opacity:0}],{duration:fast?120:220})});
-      all('.ia,.ib').forEach(function(el){anim(el,[{fillOpacity:.92,strokeOpacity:0},{fillOpacity:.92,strokeOpacity:0}],{duration:1})});
+      all('.it,.in').forEach(function(el){anim(el,[{opacity:1},{opacity:0}],{duration:fast?120:220})});
+      anim(q('.il'),[{opacity:1},{opacity:0}],{duration:fast?200:420,delay:fast?0:200});
       anim(q('.iname'),[{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-8px)'}],{duration:fast?150:350});
-      anim(q('.irole'),[{opacity:1},{opacity:0}],{duration:fast?120:300});
       anim(sv,[{transform:'none'},{transform:'translate('+dx+'px,'+dy+'px) scale('+s+')'}],{duration:fast?320:750,delay:fast?0:120,easing:'cubic-bezier(.7,0,.2,1)'});
       anim(ov,[{backgroundColor:getComputedStyle(ov).backgroundColor},{backgroundColor:'rgba(0,0,0,0)'}],{duration:fast?320:620,delay:fast?0:320}).onfinish=function(){
         root.classList.remove('intro');ov.remove();try{sessionStorage.setItem('ks-intro','1')}catch(e){}dispatchEvent(new Event('introdone'));
