@@ -368,7 +368,9 @@ P.append(dict(
 
 # ---------- page template ----------
 import time
-VER = time.strftime("%Y%m%d%H%M")
+import hashlib
+# the stylesheet URL carries a hash of its content, so a changed file always gets a new URL
+VER = hashlib.sha1(open(os.path.join(ROOT, "assets", "site.css"), "rb").read()).hexdigest()[:10]
 
 
 SHORT = {"sidly-health": "SiDLY Health", "sidly-erp": "SiDLY ERP", "lemi": "Lemi", "unmasked": "Unmasked",
