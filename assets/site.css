@@ -904,3 +904,24 @@ main,footer.end{overflow-x:clip}
 @media (max-width:600px){.tour{padding:.7rem .6rem .7rem .9rem}.tr-t{font-size:.92rem}.tr-h{font-size:.76rem}.tr-next{padding:0 .8rem}
   body:has(#tour:not([hidden])) .chat-btn{opacity:0;pointer-events:none;transform:scale(.8)}}
 section[id],footer[id],[data-rail]{scroll-margin-top:84px}
+
+/* ---- award: dark trophy card ---- */
+.award{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:1.2rem 2rem;align-items:center;background:#161718;color:#f4f2ee;border:0;border-radius:24px;padding:clamp(1.6rem,4vw,3rem);position:relative;overflow:hidden}
+.award::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 85% 40%,rgba(201,164,126,.16),transparent 70%);pointer-events:none}
+.award > *{position:relative}
+.aw-kicker{display:inline-flex;align-items:center;gap:.55rem;margin:0;font-size:.8rem;font-weight:500;color:#e8d6c1;padding:.45rem .8rem;border:1px solid rgba(201,164,126,.35);border-radius:999px}
+.aw-dot{width:7px;height:7px;border-radius:50%;background:#c9a47e;box-shadow:0 0 0 4px rgba(201,164,126,.18);animation:awPulse 2.4s ease-in-out infinite}
+@keyframes awPulse{50%{box-shadow:0 0 0 8px rgba(201,164,126,0)}}
+.award h3{margin-top:1rem;font-size:clamp(1.5rem,3.2vw,2.3rem);line-height:1.12;letter-spacing:-.035em;color:#fff;max-width:22ch}
+.award p{color:rgba(244,242,238,.72);max-width:36rem;margin-top:.9rem}
+.award p b{color:#fff}
+.aw-facts{display:flex;flex-wrap:wrap;gap:1.6rem;margin:1.5rem 0 0;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.12)}
+.aw-facts dt{font-size:.72rem;color:rgba(244,242,238,.5)}
+.aw-facts dd{margin:.25rem 0 0;font-size:.92rem;font-weight:600;color:#fff}
+.aw-big{justify-self:center;font:800 clamp(7rem,17vw,14rem)/.8 var(--body);letter-spacing:-.07em;color:transparent;-webkit-text-stroke:1.5px #c9a47e;user-select:none}
+.aw-big sup{font-size:.32em;vertical-align:top;letter-spacing:-.03em;margin-left:.04em;-webkit-text-stroke:1px #c9a47e;position:relative;top:.35em}
+.aw-flow{grid-column:1/-1;margin-top:.6rem;color:rgba(244,242,238,.7)}
+.aw-flow span{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14);border-radius:999px;padding:.55rem .85rem}
+.aw-flow i{flex:1;min-width:24px;max-width:90px;background:rgba(201,164,126,.6)}
+.aw-flow i::after{background:#161718}
+@media (max-width:760px){.award{grid-template-columns:1fr}.aw-big{display:none}.aw-flow i{display:none}}

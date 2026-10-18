@@ -124,7 +124,7 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610181200">
+<link rel="stylesheet" href="assets/site.css?v=202610181230">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -343,14 +343,19 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     <div class="sec-head reveal"><span class="num">03</span><h2 id="ai-h">AI products &amp; hackathons</h2></div>
 
     <div class="award reveal">
-      <div class="medal" aria-hidden="true"><b>1<sup>st</sup></b></div>
-      <div>
-        <p class="label">AI Place Challenge · Econverse Smart Cities Hackathon · Mar 2025</p>
-        <h3>First place, in a challenge set by the Polish Ministry of Digital Affairs</h3>
-        <p>I led our team and built the core of <b>GovBot</b> in n8n: an AI assistant that helps citizens reach local public services without unnecessary bureaucracy.</p>
-        <div class="agent" aria-label="How the assistant works, simplified">
-          <span>Citizen's question</span><i></i><span>AI assistant · n8n</span><i></i><span>The right local service</span>
-        </div>
+      <div class="aw-main">
+        <p class="aw-kicker"><span class="aw-dot" aria-hidden="true"></span>1st place · AI Place Challenge · Mar 2025</p>
+        <h3>First place in a challenge set by the Polish Ministry of Digital Affairs</h3>
+        <p>I led our team and built the core of <b>GovBot</b> in n8n: an AI assistant that helps citizens reach local public services without the bureaucracy.</p>
+        <dl class="aw-facts">
+          <div><dt>Role</dt><dd>Team lead</dd></div>
+          <div><dt>Built with</dt><dd>n8n · LLM</dd></div>
+          <div><dt>Event</dt><dd>Econverse Smart Cities</dd></div>
+        </dl>
+      </div>
+      <div class="aw-big" aria-hidden="true">1<sup>st</sup></div>
+      <div class="agent aw-flow" aria-label="How the assistant works, simplified">
+        <span>Citizen's question</span><i></i><span>AI assistant · n8n</span><i></i><span>The right local service</span>
       </div>
     </div>
 
