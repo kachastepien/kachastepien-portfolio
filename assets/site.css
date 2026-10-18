@@ -942,3 +942,10 @@ section[id],footer[id],[data-rail]{scroll-margin-top:84px}
 .aw-flow i::after{background:#161718}
 @media (max-width:760px){.award{grid-template-columns:1fr;text-align:left}.aw-medal{width:150px;margin:-2.2rem auto 0}.aw-flow i{display:none}}
 @media (prefers-reduced-motion:reduce){.js .award .aw-swing{opacity:1;animation:none!important}}
+
+/* floating panels sit over dark sections too: solid fills, no see-through */
+.chat,.welcome,.tour,.chk,.chk-toast,.chat-btn,.totop,.cmd{background:var(--bg)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.chat,.welcome,.tour,.chk,.cmd{box-shadow:0 24px 60px -18px rgba(20,20,30,.3),0 0 0 1px var(--line)!important}
+.chat-btn,.totop,.chk-toast{box-shadow:0 10px 30px -10px rgba(20,20,30,.28),0 0 0 1px var(--line)!important}
+.chat .chat-head{background:var(--bg)}
+.msg.bot{background:var(--surface);border-color:var(--line)}
