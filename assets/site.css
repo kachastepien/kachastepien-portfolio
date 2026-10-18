@@ -1203,3 +1203,7 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 /* room between the portrait row and the top of the selection frame */
 @media (min-width:641px){.hero-id{margin-bottom:calc(clamp(.9rem,3vh,2.4rem) + 30px)}}
 @media (min-width:641px) and (max-height:780px){.hero-id{margin-bottom:calc(.8rem + 26px)}}
+
+/* secondary button that pairs with the solid one */
+.btn.soft{background:color-mix(in srgb,var(--fg) 7%,var(--bg));border-color:transparent;color:var(--fg)}
+.btn.soft:hover{background:color-mix(in srgb,var(--fg) 12%,var(--bg))}
