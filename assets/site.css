@@ -908,8 +908,7 @@ main,footer.end{overflow-x:clip}
 section[id],footer[id],[data-rail]{scroll-margin-top:84px}
 
 /* ---- award: dark card with a swinging medal ---- */
-.award{grid-template-columns:clamp(170px,22vw,250px) minmax(0,1fr);gap:1.5rem clamp(2rem,5vw,4rem);align-items:center;background:#161718;color:#f4f2ee;border:0;border-radius:24px;padding:clamp(1.6rem,4vw,3rem) clamp(1.6rem,4vw,3.2rem);position:relative;overflow:hidden;box-shadow:0 40px 90px -40px rgba(120,90,50,.55),inset 0 0 0 1px rgba(201,164,126,.28)}
-.award::before{content:"";position:absolute;inset:0;background:radial-gradient(45% 80% at 14% 55%,rgba(216,180,127,.18),transparent 70%);pointer-events:none}
+.award{grid-template-columns:clamp(170px,22vw,250px) minmax(0,1fr);gap:1.5rem clamp(2rem,5vw,4rem);align-items:center;background:#161718;color:#f4f2ee;border:0;border-radius:24px;padding:clamp(1.6rem,4vw,3rem) clamp(1.6rem,4vw,3.2rem);position:relative;overflow:hidden;box-shadow:0 30px 70px -40px rgba(0,0,0,.45)}
 .award > *{position:relative}
 .aw-medal{margin:-3.2rem 0 0;align-self:start}
 .aw-medal svg{width:100%;height:auto;overflow:visible;display:block}
