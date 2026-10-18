@@ -121,6 +121,7 @@
 /* Pick the perspective before first paint so the page never flashes the wrong one. */
 (function(){var v=null;try{var q=new URLSearchParams(location.search).get('view');if(q==='data'||q==='design')v=q;else if(location.hash==='#data')v='data';else v=localStorage.getItem('ks-view')}catch(e){}
 if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.documentElement.classList.add('js');
+try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
 <link rel="stylesheet" href="assets/site.css?v=202610181100">
