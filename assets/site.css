@@ -1020,3 +1020,28 @@ body:has(#tour:not([hidden])) .welcome.mini{display:none}
 .chk .chk-x,.chat-x{min-width:44px;min-height:44px}
 /* desktop: suggestions wrap so every chip is reachable without a sideways scroll */
 @media (min-width:521px){.chat-sugg{flex-wrap:wrap;overflow:visible;padding-bottom:.7rem}.chat-sugg button{flex:none}}
+
+/* ---- hero as a Figma canvas: selection on the name, two multiplayer cursors ---- */
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(circle,color-mix(in srgb,var(--fg) 12%,transparent) 1px,transparent 1.3px);background-size:22px 22px;-webkit-mask-image:radial-gradient(70% 70% at 30% 45%,#000,transparent 75%);mask-image:radial-gradient(70% 70% at 30% 45%,#000,transparent 75%)}
+.hero{isolation:isolate}
+.figsel{position:relative;display:inline-block;margin-bottom:1.7rem}
+.fs-frame{position:absolute;inset:-.14em -.22em -.08em -.16em;border:1.5px solid #0d99ff;pointer-events:none;opacity:0;transform:scale(.985);transition:opacity .5s var(--ease),transform .6s var(--ease)}
+.fs-frame i{position:absolute;width:9px;height:9px;background:var(--bg);border:1.5px solid #0d99ff}
+.fs-frame .tl{left:-5px;top:-5px}.fs-frame .tr{right:-5px;top:-5px}.fs-frame .bl{left:-5px;bottom:-5px}.fs-frame .br{right:-5px;bottom:-5px}
+.fs-dim{position:absolute;left:50%;bottom:-30px;transform:translateX(-50%);white-space:nowrap;font:500 11.5px/1 var(--mono,ui-monospace);font-family:ui-monospace,"SF Mono",Menlo,monospace;color:#fff;background:#0d99ff;border-radius:5px;padding:5px 8px}
+.fcur{position:absolute;display:flex;align-items:flex-start;pointer-events:none;opacity:0;transition:opacity .6s var(--ease)}
+.fcur svg{width:17px;height:23px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.18))}
+.fcur em{font-style:normal;margin:15px 0 0 -2px;font:600 12.5px/1 var(--body);color:#fff;padding:5px 9px;border-radius:9px 7px 7px 7px}
+.fc-d{right:-2.9em;top:-.45em}.fc-d em{background:#c9a47e}
+.fc-a{right:-3.6em;bottom:.15em}.fc-a em{background:#8587e6}
+html.figon .fs-frame{opacity:1;transform:none}
+html.figon .fcur{opacity:1}
+:root[data-view="design"] .fc-a,:root[data-view="data"] .fc-d{opacity:.35}
+html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
+@media (prefers-reduced-motion:no-preference){
+  html.figon .fc-d{animation:fcDrift1 9s ease-in-out infinite}
+  html.figon .fc-a{animation:fcDrift2 11s ease-in-out infinite}
+}
+@keyframes fcDrift1{0%,100%{translate:0 0}30%{translate:22px 12px}60%{translate:8px -14px}}
+@keyframes fcDrift2{0%,100%{translate:0 0}35%{translate:26px 10px}70%{translate:12px -18px}}
+@media (max-width:640px){.fcur{display:none}.fs-dim{font-size:10px;bottom:-26px}}

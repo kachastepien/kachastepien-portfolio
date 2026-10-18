@@ -124,7 +124,7 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=5c7d05eb62">
+<link rel="stylesheet" href="assets/site.css?v=37547872f5">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -168,7 +168,12 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
       <span class="pf"><img decoding="async" fetchpriority="high" class="pf-d" src="assets/katarzyna-stepien.webp" width="320" height="320" alt="Portrait of Katarzyna Stępień"><img decoding="async" class="pf-a" src="assets/katarzyna-stepien-data.webp" width="320" height="320" alt="" aria-hidden="true"></span>
       <p class="muted" style="font-size:.95rem">Kacha · Warsaw</p>
     </div>
-    <h1 id="name"><span class="line" data-split>Katarzyna</span><span class="line" data-split>Stępień</span></h1>
+    <div class="figsel">
+      <h1 id="name"><span class="line" data-split>Katarzyna</span><span class="line" data-split>Stępień</span></h1>
+      <span class="fs-frame" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><b class="fs-dim">Hug × Hug</b></span>
+      <span class="fcur fc-d" aria-hidden="true"><svg viewBox="0 0 12 16" aria-hidden="true"><path d="M1 1 L1 13 L4.3 10 L6.6 15 L8.6 14.1 L6.3 9.2 L10.8 9.2 Z" fill="#c9a47e" stroke="#fff" stroke-width="1" stroke-linejoin="round"/></svg><em>design</em></span>
+      <span class="fcur fc-a" aria-hidden="true"><svg viewBox="0 0 12 16" aria-hidden="true"><path d="M1 1 L1 13 L4.3 10 L6.6 15 L8.6 14.1 L6.3 9.2 L10.8 9.2 Z" fill="#8587e6" stroke="#fff" stroke-width="1" stroke-linejoin="round"/></svg><em>data</em></span>
+    </div>
 
     <div data-for="design">
       <p class="statement">I design telecare software for <em>the people who wear the devices</em>, the carers who visit them and the municipalities that pay for it.</p>
@@ -803,6 +808,10 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
     var tm=setTimeout(function(){finish(false)},1600);
     ['pointerdown','keydown','wheel','touchstart'].forEach(function(ev){addEventListener(ev,function h(){removeEventListener(ev,h);clearTimeout(tm);finish(true)},{passive:true,once:true})});
   })();
+
+  /* ---------- the name gets selected like a layer in Figma once it has landed ---------- */
+  (function(){function on(){setTimeout(function(){root.classList.add('figon')},1100)}
+    if(root.classList.contains('intro'))addEventListener('introdone',on,{once:true});else on()})();
 
   /* ---------- split hero name into letters ---------- */
   var i=0,lastH=null;
