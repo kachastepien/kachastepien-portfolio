@@ -493,6 +493,7 @@ def page(pr, prv, nxt):
   menus.forEach(function(d){{d.addEventListener('toggle',function(){{if(d.open)menus.forEach(function(o){{if(o!==d)o.open=false}})}});d.querySelectorAll('a').forEach(function(a){{a.addEventListener('click',function(){{d.open=false}})}})}});
   document.addEventListener('click',function(e){{menus.forEach(function(d){{if(d.open&&!d.contains(e.target))d.open=false}})}});
   document.addEventListener('keydown',function(e){{if(e.key==='Escape')menus.forEach(function(d){{if(d.open){{d.open=false;d.querySelector('summary').focus()}}}})}});
+  document.querySelectorAll('.loop,.flow,.pipe').forEach(function(d){{var h=document.createElement('p');h.className='swipe-hint';h.textContent='Swipe to see the whole flow →';d.parentNode.insertBefore(h,d.nextSibling)}});
   var cb=document.getElementById('copy-email'),em=document.getElementById('email');
   cb.addEventListener('click',function(){{try{{navigator.clipboard.writeText(em.textContent.trim()).then(function(){{cb.textContent='Copied';setTimeout(function(){{cb.textContent='Copy email'}},1800)}})}}catch(e){{}}}});
 }})();

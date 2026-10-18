@@ -122,9 +122,9 @@
 (function(){var v=null;try{var q=new URLSearchParams(location.search).get('view');if(q==='data'||q==='design')v=q;else if(location.hash==='#data')v='data';else v=localStorage.getItem('ks-view')}catch(e){}
 if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.documentElement.classList.add('js');
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
-try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
+try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610181800">
+<link rel="stylesheet" href="assets/site.css?v=202610181900">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -174,9 +174,9 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     <div data-for="design">
       <p class="statement">I design telecare software for <em>the people who wear the devices</em>, the carers who visit them and the municipalities that pay for it.</p>
       <div class="stats">
-        <div><b data-count="70000" data-suffix="+">70,000+</b><span>people using SiDLY technology</span></div>
-        <div><b data-count="16">16</b><span>European countries</span></div>
-        <div><b data-count="1000" data-suffix="+">1,000+</b><span>municipalities and institutions</span></div>
+        <div><b data-count="3">3</b><span>years designing in digital health</span></div>
+        <div><b data-count="50" data-suffix="+">50+</b><span>user interviews and usability tests</span></div>
+        <div><b data-count="18000" data-suffix="+">18,000+</b><span>lines of coded React/TS prototypes</span></div>
       </div>
     </div>
     <div data-for="data">
@@ -433,7 +433,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
       <a class="tile reveal d1" href="#healthplatform"><div class="vis"><span class="big">RAG<small>wearable + documents</small></span></div><div class="txt"><b>HealthPlatform</b><span>An AI health summary from a medical wristband.</span><em>Thesis · 1 min</em></div></a>
       <a class="tile reveal d2" href="#friction"><div class="vis"><span class="big" style="font-size:1.7rem">CDC→Kafka<small>streaming</small></span></div><div class="txt"><b>UX friction detection</b><span>Rage clicks and abandonment, flagged in real time.</span><em>Data engineering · 1 min</em></div></a>
       <a class="tile reveal" href="#elt"><div class="vis"><span class="big" style="font-size:1.7rem">B · S · G<small>DuckDB medallion</small></span></div><div class="txt"><b>Funnel ELT</b><span>Where users drop off, with explicit data-quality rules.</span><em>Analytics · 1 min</em></div></a>
-      <a class="tile reveal d1" href="#ai-data"><div class="vis"><span class="big">n8n<small>agents · LLM APIs</small></span></div><div class="txt"><b>AI in shipped products</b><span>A winning hackathon agent, Lemi and conversational AI.</span><em>4 projects · 1 min</em></div></a>
+      <a class="tile reveal d1" href="#ai-data"><div class="vis"><span class="big">1<sup>st</sup><small>AI Place Challenge</small></span></div><div class="txt"><b>AI products &amp; hackathons</b><span>A winning hackathon agent, Lemi and conversational AI.</span><em>4 projects · 1 min</em></div></a>
       <a class="tile reveal d2" href="#github"><div class="vis"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></div><div class="txt"><b>On GitHub</b><span>The public repositories, with live update dates.</span><em>Code · repos</em></div></a>
     </div>
   </div>
@@ -665,9 +665,9 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
         <p class="big reveal">Psychology and computer science, studied in parallel; now data science alongside management. I start from what people actually do and build prototypes real enough to argue with.</p>
         <h4 class="label reveal" style="margin:2rem 0 .4rem">Experience</h4>
         <ul class="edu reveal d1">
-          <li><span class="when">2023 – now</span><div><b>UX/UI Designer &amp; Researcher</b><span>SiDLY Healthcare · sole designer</span></div></li>
-          <li><span class="when">2025</span><div><b>Chatbot Developer Intern</b><span>PerfectBot · IKEA, LPP, x-kom</span></div></li>
-          <li><span class="when">2023</span><div><b>UX/UI Design Intern</b><span>SiDLY Healthcare</span></div></li>
+          <li><span class="when">Dec 2023 – now</span><div><b>UX/UI Designer &amp; Researcher</b><span>SiDLY Healthcare · sole designer</span><span class="imp">Leads UX/UI of SiDLY Health and the ERP redesign for 1,000+ municipalities; 50+ interviews and tests; the rebrand and sidly.eu in 7 languages.</span></div></li>
+          <li><span class="when">Mar – Jun 2025</span><div><b>Chatbot Developer Intern</b><span>PerfectBot · IKEA, LPP, x-kom</span><span class="imp">Analysed real customer conversations to close knowledge gaps in production chatbots.</span></div></li>
+          <li><span class="when">Oct – Dec 2023</span><div><b>UX/UI Design Intern</b><span>SiDLY Healthcare</span><span class="imp">Sole designer on the team: concepts, rapid prototypes and Vital Care smartwatch visuals.</span></div></li>
         </ul>
       </div>
       <div><h4 class="label reveal" style="margin:0 0 .4rem">Education</h4>
@@ -797,12 +797,12 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     if(!root.classList.contains('intro')){ov.remove();return}
     var sv=ov.querySelector('.iv'),q=function(s){return ov.querySelector(s)},all=function(s){return ov.querySelectorAll(s)},E='cubic-bezier(.2,.7,.2,1)',done=false;
     function anim(el,kf,o){return el.animate(kf,Object.assign({fill:'both',easing:E},o))}
-    anim(q('.ia'),[{transform:'translateX(-200px)',opacity:0},{transform:'none',opacity:1}],{duration:900});
-    anim(q('.ib'),[{transform:'translateX(200px)',opacity:0},{transform:'none',opacity:1}],{duration:900});
-    all('.it').forEach(function(el,k){anim(el,[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:500,delay:420+k*80})});
-    anim(q('.il'),[{opacity:0},{opacity:1}],{duration:420,delay:860});
-    anim(q('.in'),[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:450,delay:1000});
-    anim(q('.iname span'),[{transform:'translateY(105%)'},{transform:'none'}],{duration:800,delay:1050});
+    anim(q('.ia'),[{transform:'translateX(-200px)',opacity:0},{transform:'none',opacity:1}],{duration:700});
+    anim(q('.ib'),[{transform:'translateX(200px)',opacity:0},{transform:'none',opacity:1}],{duration:700});
+    all('.it').forEach(function(el,k){anim(el,[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:400,delay:300+k*60})});
+    anim(q('.il'),[{opacity:0},{opacity:1}],{duration:350,delay:620});
+    anim(q('.in'),[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:350,delay:720});
+    anim(q('.iname span'),[{transform:'translateY(105%)'},{transform:'none'}],{duration:650,delay:600});
     function finish(fast){
       if(done)return;done=true;
       var m=document.querySelector('.mark').getBoundingClientRect(),r=sv.getBoundingClientRect();
@@ -810,12 +810,12 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
       all('.it,.in').forEach(function(el){anim(el,[{opacity:1},{opacity:0}],{duration:fast?120:220})});
       anim(q('.il'),[{opacity:1},{opacity:0}],{duration:fast?200:420,delay:fast?0:200});
       anim(q('.iname'),[{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-8px)'}],{duration:fast?150:350});
-      anim(sv,[{transform:'none'},{transform:'translate('+dx+'px,'+dy+'px) scale('+s+')'}],{duration:fast?320:750,delay:fast?0:120,easing:'cubic-bezier(.7,0,.2,1)'});
+      anim(sv,[{transform:'none'},{transform:'translate('+dx+'px,'+dy+'px) scale('+s+')'}],{duration:fast?320:620,delay:fast?0:120,easing:'cubic-bezier(.7,0,.2,1)'});
       anim(ov,[{backgroundColor:getComputedStyle(ov).backgroundColor},{backgroundColor:'rgba(0,0,0,0)'}],{duration:fast?320:620,delay:fast?0:320}).onfinish=function(){
         root.classList.remove('intro');ov.remove();try{sessionStorage.setItem('ks-intro','1')}catch(e){}dispatchEvent(new Event('introdone'));
       };
     }
-    var tm=setTimeout(function(){finish(false)},2300);
+    var tm=setTimeout(function(){finish(false)},1600);
     ['pointerdown','keydown','wheel','touchstart'].forEach(function(ev){addEventListener(ev,function h(){removeEventListener(ev,h);clearTimeout(tm);finish(true)},{passive:true,once:true})});
   })();
 
@@ -1043,6 +1043,8 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   })});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeWl()});
 
+  document.querySelectorAll('.loop,.flow,.pipe').forEach(function(d){var h=document.createElement('p');h.className='swipe-hint';h.textContent='Swipe to see the whole flow →';d.parentNode.insertBefore(h,d.nextSibling)});
+
   /* ---------- guided tour: checkpoints through the page for the path the visitor picked ---------- */
   var TOURS={
     design:[
@@ -1155,10 +1157,10 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
       panel.querySelector('.chk-bar i').style.width=(c/7*100)+'%';panel.querySelector('.chk-s').textContent=LINES[c]}
     function confetti(){if(reduce)return;var r=btn.getBoundingClientRect();for(var i=0;i<26;i++){var d=document.createElement('i');d.className='cf';d.style.left=(r.left+r.width/2)+'px';d.style.top=(r.top+r.height/2)+'px';d.style.background=i%2?'#c9a47e':'#a6a8ff';document.body.appendChild(d);
       var a=Math.random()*Math.PI*2,v=60+Math.random()*120;d.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:'translate('+Math.cos(a)*v+'px,'+(Math.sin(a)*v+120)+'px) scale(.4)',opacity:0}],{duration:1100+Math.random()*500,easing:'cubic-bezier(.2,.7,.2,1)'}).onfinish=function(){this.effect.target.remove()}}}
-    function tick(k){if(done[k])return;done[k]=1;try{localStorage.setItem('ks-checks',JSON.stringify(done))}catch(e){}paint();
+    function tick(k,quiet){if(done[k])return;done[k]=1;try{localStorage.setItem('ks-checks',JSON.stringify(done))}catch(e){}paint();if(quiet)return;
       var c=n();if(c===7)track('checklist-complete');var label=panel.querySelector('[data-k="'+k+'"]').textContent;
       toast.innerHTML='<b>✓</b> '+label+' <span>'+c+'/7</span>'+(c===7?' · <em>Verdict: hire her.</em>':'');toast.hidden=false;toast.classList.remove('go');void toast.offsetWidth;toast.classList.add('go');
-      clearTimeout(tt);tt=setTimeout(function(){toast.hidden=true},2600);
+      clearTimeout(tt);tt=setTimeout(function(){toast.hidden=true},2200);
       btn.classList.remove('pop');void btn.offsetWidth;btn.classList.add('pop');if(c===7)confetti();}
     function toggle(o){if(o===undefined)o=panel.hidden;panel.hidden=!o;btn.setAttribute('aria-expanded',o)}
     btn.addEventListener('click',function(e){e.stopPropagation();toggle()});
@@ -1166,7 +1168,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     document.addEventListener('keydown',function(e){if(e.key==='Escape')toggle(false)});
     paint();return {tick:tick};
   })();
-  if(root.classList.contains('intro'))addEventListener('introdone',function(){setTimeout(function(){CHK.tick('intro')},1800)},{once:true});else setTimeout(function(){CHK.tick('intro')},2500);
+  if(root.classList.contains('intro'))addEventListener('introdone',function(){setTimeout(function(){CHK.tick('intro',true)},1800)},{once:true});else setTimeout(function(){CHK.tick('intro',true)},2500);
   document.querySelectorAll('[data-goto],#welcome [data-pick]').forEach(function(b){b.addEventListener('click',function(){setTimeout(function(){if(root.dataset.view!==startView)CHK.tick('flip')},50)})});
   var startView=root.dataset.view;document.querySelectorAll('.switch button').forEach(function(b){b.addEventListener('click',function(){if(b.dataset.view!==startView)CHK.tick('flip')})});
   document.querySelectorAll('a[href^="work/"]').forEach(function(a){a.addEventListener('click',function(){CHK.tick('case')})});
