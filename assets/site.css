@@ -1252,26 +1252,40 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 :root[data-view="data"] .hero::after{opacity:0}
 /* the selection draws itself in whenever the design view opens */
 @media (prefers-reduced-motion:no-preference){
-  html.figin .fs-frame{animation:fsDraw .75s cubic-bezier(.65,0,.25,1) both}
+  html.figin .fs-frame{animation:fsDraw .75s cubic-bezier(.65,0,.25,1) backwards}
   html.figin .fs-frame i{animation:fsPop .45s cubic-bezier(.3,1.7,.5,1) both}
   html.figin .fs-frame .tl{animation-delay:.05s}html.figin .fs-frame .tr{animation-delay:.3s}html.figin .fs-frame .br{animation-delay:.5s}html.figin .fs-frame .bl{animation-delay:.65s}
   html.figin .fs-dim{animation:fsDim .5s cubic-bezier(.3,1.5,.5,1) .75s both}
   html.figin .fc-d{animation:fcIn1 .9s cubic-bezier(.2,.9,.3,1) .5s both,fcDrift1 9s ease-in-out 1.4s infinite}
   html.figin .fc-a{animation:fcIn2 .9s cubic-bezier(.2,.9,.3,1) .8s both,fcDrift2 11s ease-in-out 1.7s infinite}
 }
-@keyframes fsDraw{from{clip-path:inset(-12px 100% 100% -12px);opacity:1;transform:none}to{clip-path:inset(-12px -12px -12px -12px);opacity:1;transform:none}}
+@keyframes fsDraw{from{clip-path:inset(-12px 100% 100% -12px);opacity:1}to{clip-path:inset(-12px -12px -12px -12px);opacity:1}}
 @keyframes fsPop{from{transform:scale(0)}to{transform:none}}
 @keyframes fsDim{from{opacity:0;transform:translate(-50%,8px) scale(.85)}to{opacity:1;transform:translateX(-50%)}}
 @keyframes fcIn1{from{opacity:0;translate:90px -40px}to{translate:0 0}}
 @keyframes fcIn2{from{opacity:0;translate:110px 50px}to{translate:0 0}}
 html.figon:not(.figin) .fs-frame,html.figon:not(.figin) .fcur{opacity:0}
-/* data view has no selection frame, so it doesn't need the extra air around the name */
-@media (min-width:641px){
-  :root[data-view="data"] .hero-id{margin-bottom:clamp(.9rem,3vh,2rem)}
-  :root[data-view="data"] .hero .figsel{margin-bottom:clamp(1rem,2.6vh,1.8rem)}
-  .hero .figsel,.hero-id{transition:margin .5s var(--ease)}
-}
-:root[data-view="data"] .hero .statement{max-width:40rem}
 
 /* data-view portrait is a background, so search engines pick the warm portrait */
 .pf span.pf-a{position:absolute;inset:0;border-radius:50%;background:url(katarzyna-stepien-data.webp) center/cover}
+
+/* one layout for both views, so nothing jumps when switching */
+.hero .statement{max-width:40rem}
+@media (min-width:641px){
+  .hero-id{margin-bottom:calc(clamp(.9rem,3vh,2.4rem) + 18px)}
+  .hero .figsel{margin-bottom:clamp(2.2rem,5vh,3.4rem)}
+}
+@media (min-width:641px) and (max-height:780px){.hero-id{margin-bottom:calc(.8rem + 18px)}.hero .figsel{margin-bottom:2.3rem}}
+@media (min-width:641px) and (max-height:780px){.hero .statement{min-height:4.5em}}
+
+/* leaving the design view: the selection wipes away and the cursors drift off, above the circular reveal */
+@media (min-width:641px){.fs-frame{view-transition-name:figframe}.fc-d{view-transition-name:fcd}.fc-a{view-transition-name:fca}}
+::view-transition-group(figframe),::view-transition-group(fcd),::view-transition-group(fca){animation:none}
+::view-transition-new(figframe),::view-transition-new(fcd),::view-transition-new(fca){animation:none;opacity:0}
+::view-transition-old(figframe){animation:fsOut .5s cubic-bezier(.65,0,.35,1) both}
+::view-transition-old(fcd){animation:fcOut1 .5s cubic-bezier(.4,0,.2,1) both}
+::view-transition-old(fca){animation:fcOut2 .5s cubic-bezier(.4,0,.2,1) .05s both}
+@keyframes fsOut{to{clip-path:inset(0 0 0 100%);opacity:.2}}
+@keyframes fcOut1{to{transform:translate(90px,-40px);opacity:0}}
+@keyframes fcOut2{to{transform:translate(110px,40px);opacity:0}}
+html.figin .fs-frame.drawn{animation:none!important;clip-path:none!important}

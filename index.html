@@ -2,7 +2,7 @@
 <html lang="en" data-view="design" data-theme="light">
 <head>
 <meta charset="utf-8">
-<meta name="build" content="1792354880">
+<meta name="build" content="1792355931">
 <script>
 /* GitHub Pages lets browsers keep the page for 10 minutes; if a newer build is live, reload once to get it. */
 (function(){try{var b=document.querySelector('meta[name="build"]').content;fetch('/version.txt?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(v){v=(v||'').trim();if(v&&v!==b&&!sessionStorage.getItem('ks-rl-'+v)){sessionStorage.setItem('ks-rl-'+v,'1');location.reload()}}).catch(function(){})}catch(e){}})();
@@ -150,7 +150,7 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=49b99ebd5a">
+<link rel="stylesheet" href="assets/site.css?v=2f3ddec4ce">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -397,7 +397,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
       </figure>
       <div class="aw-main">
         <p class="aw-kicker"><span class="aw-dot" aria-hidden="true"></span>1st place · AI Place Challenge 2025</p>
-        <p class="aw-lead">Our team built <b>GovBot</b>, an assistant that helps people find the right local office or service. I led the team and built the AI part in n8n.</p>
+        <p class="aw-lead">We built <b>GovBot</b>, an AI chatbot for mObywatel that cuts through the bureaucracy and helps people get official matters done. I led the team and built the AI part in n8n.</p>
         <p class="aw-sub">Set by the Polish Ministry of Digital Affairs · Econverse Smart Cities Hackathon, Warsaw</p>
       </div>
       <div class="aw-photos">
@@ -629,7 +629,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
       </figure>
       <div class="aw-main">
         <p class="aw-kicker"><span class="aw-dot" aria-hidden="true"></span>1st place · AI Place Challenge 2025</p>
-        <p class="aw-lead">Our team built <b>GovBot</b>, an assistant that helps people find the right local office or service. I led the team and built the AI part in n8n.</p>
+        <p class="aw-lead">We built <b>GovBot</b>, an AI chatbot for mObywatel that cuts through the bureaucracy and helps people get official matters done. I led the team and built the AI part in n8n.</p>
         <p class="aw-sub">Set by the Polish Ministry of Digital Affairs · Econverse Smart Cities Hackathon, Warsaw</p>
       </div>
       <div class="aw-photos">
@@ -833,7 +833,10 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
   })();
 
   /* ---------- the name gets selected like a layer in Figma once it has landed ---------- */
-  function figIn(){if(root.dataset.view!=='design')return;root.classList.remove('figin');void root.offsetWidth;root.classList.add('figin')}
+  var fsf=document.querySelector('.fs-frame');
+  function figIn(){if(root.dataset.view!=='design')return;if(fsf)fsf.classList.remove('drawn');root.classList.remove('figin');void root.offsetWidth;root.classList.add('figin')}
+  /* once drawn, drop the animation so no clip is left behind on the frame or its size badge */
+  if(fsf)fsf.addEventListener('animationend',function(e){if(e.target===fsf&&e.animationName==='fsDraw')fsf.classList.add('drawn')});
   (function(){function on(){setTimeout(function(){root.classList.add('figon');figIn()},1100)}
     if(root.classList.contains('intro'))addEventListener('introdone',on,{once:true});else on()})();
 
@@ -961,7 +964,7 @@ try{if(!location.hash&&!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefer
     {k:'unmasked dark patterns manipulative copy manipulacja classifier klasyfikator chrome extension rozszerzenie f1 auc tfidf tf-idf logistic regression bachelor licencjat thesis',a:"Unmasked is her B.A. thesis at SWPS: she compared five classifiers on 2,356 labelled interface texts, and Logistic Regression on TF-IDF won with <b>F1 0.936</b> and <b>ROC AUC 0.976</b>. The model's top features became rules in a Chrome extension that flags manipulative copy offline. There's a live demo on the page.",x:[['Try the demo','data','unmasked'],['Code on GitHub','https://github.com/kachastepien/unmasked']]},
     {k:'healthplatform wearable wristband opaska rag ai assistant langflow astradb whisper elevenlabs engineering thesis inzynierka inzynierska health summary supabase',a:"HealthPlatform is her B.Eng. thesis: it takes biometric data from the SiDLY medical wristband and the user's medical documents and turns them into a readable health summary and recommendations. It uses RAG in Langflow with AstraDB, GPT-4 and Groq, Whisper to listen and ElevenLabs to speak, on React, TypeScript and Supabase.",x:[['Full project','work/healthplatform/']]},
     {k:'kafka spark debezium cdc streaming delta lake minio data engineering pipeline friction rage clicks abandonment duckdb elt sql medallion bronze silver gold inzynieria danych',a:"She builds data platforms too: a <b>UX friction detection</b> stack (PostgreSQL, Debezium CDC, Kafka, Spark Structured Streaming, Delta Lake on MinIO) that flags rage clicks and abandonment in real time, a reusable mini data platform with bronze, silver and gold layers, and a SQL ELT in DuckDB with explicit data-quality rules.",x:[['UX friction','data','friction'],['Funnel ELT','data','elt']]},
-    {k:'hackathon hackaton govbot gov bot win won winner award prize first place 1st ai place challenge ministry ministerstwo cyfryzacji econverse smart cities n8n agent wygrala nagroda wygrana',a:"She won <b>1st place</b> in the AI Place Challenge at the Econverse Smart Cities Hackathon in Warsaw (26–27 March 2025), a challenge set by the Polish Ministry of Digital Affairs; the team presented it on stage at Econverse Fuse 2025. She led the team behind <b>GovBot</b> and built its AI part in n8n: an assistant that helps citizens reach local public services without unnecessary bureaucracy.",x:[['See it','design','ai']]},
+    {k:'hackathon hackaton govbot gov bot win won winner award prize first place 1st ai place challenge ministry ministerstwo cyfryzacji econverse smart cities n8n agent wygrala nagroda wygrana',a:"She won <b>1st place</b> in the AI Place Challenge at the Econverse Smart Cities Hackathon in Warsaw (26–27 March 2025), a challenge set by the Polish Ministry of Digital Affairs; the team presented it on stage at Econverse Fuse 2025. She led the team behind <b>GovBot</b>, an AI chatbot for the mObywatel app, and built its AI part in n8n: an assistant that helps citizens reach local public services without unnecessary bureaucracy.",x:[['See it','design','ai']]},
     {k:'lemi hackyeah lemur doctor lekarz visit app claude elevenlabs flutter health guide pekao',a:"Lemi is her HackYeah 2026 project: a health guide with a friendly lemur. It reads blood pressure monitors from a photo, explains test results in plain language, and turns a recorded visit into three summaries: for you, for family and for the doctor. Built on the Claude API with ElevenLabs, as a web app and a Flutter app.",x:[['Lemi story','work/lemi/'],['Try the demo','https://pekao.vercel.app']]},
     {k:'ai llm agents automation chatbot gpt claude genai generative artificial intelligence sztuczna inteligencja perfectbot conversational',a:"AI runs through her work: an n8n AI assistant that won the AI Place Challenge, Lemi on the Claude API, a RAG assistant over medical documents in her engineering thesis, and an internship at PerfectBot improving conversational AI chatbots for IKEA, LPP, x-kom and US creator stores.",x:[['AI in products','data','ai-data']]},
     {k:'design skills figma ux ui research usability testing prototyping accessibility tools umiejetnosci projektowanie badania dostepnosc',a:"Design and research: product and UX/UI design, interaction design, prototyping, information architecture, accessible design for older adults, conversational UX, user research, usability testing, behavioural psychology, brand identity and packaging.",x:[['All skills','design','about']]},
