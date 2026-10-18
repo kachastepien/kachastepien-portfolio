@@ -123,7 +123,7 @@
 if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.documentElement.classList.add('js');
 try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610181030">
+<link rel="stylesheet" href="assets/site.css?v=202610181100">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -714,6 +714,17 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
     <button type="button" data-pick="explore"><i class="e"></i><b>Just exploring</b><span>Show me around</span></button>
   </div>
 </section>
+<div class="tour glass" id="tour" role="region" aria-label="Guided tour" aria-live="polite" hidden>
+  <div class="tr-seg" aria-hidden="true"></div>
+  <div class="tr-row">
+    <div class="tr-body"><p class="tr-n"></p><b class="tr-t"></b><span class="tr-h"></span></div>
+    <div class="tr-act">
+      <button type="button" class="tr-prev" aria-label="Previous checkpoint"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7.5 3.5 3 8l4.5 4.5"/></svg></button>
+      <button type="button" class="tr-next">Next<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg></button>
+      <button type="button" class="tr-x" aria-label="End the tour">×</button>
+    </div>
+  </div>
+</div>
 <section class="chat glass" id="chat" role="dialog" aria-modal="false" aria-labelledby="chat-h" hidden>
   <div class="chat-head"><span class="venn-av" aria-hidden="true"><i></i><i></i></span><div><b id="chat-h">Venn</b><span>Katarzyna's portfolio assistant</span></div><button type="button" class="chat-x" aria-label="Close assistant">×</button></div>
   <div class="chat-log" id="chat-log" aria-live="polite"></div>
@@ -979,9 +990,69 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   addEventListener('scroll',function(){if(!wl.hidden&&scrollY>innerHeight*.9){wl.classList.add('bye');setTimeout(function(){wl.hidden=true;wl.classList.remove('bye')},260)}},{passive:true});
   wl.querySelectorAll('[data-pick]').forEach(function(b){b.addEventListener('click',function(){
     var v=b.dataset.pick;closeWl();
-    if(v!=='explore'){setView(v);setTimeout(function(){document.getElementById('work').scrollIntoView({behavior:reduce?'auto':'smooth'})},180)}
+    startTour(v==='explore'?'mix':v);
   })});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeWl()});
+
+  /* ---------- guided tour: checkpoints through the page for the path the visitor picked ---------- */
+  var TOURS={
+    design:[
+      {id:'health',t:'SiDLY Health',h:'The main case study: one visit, three people, three apps.',a:['Open the case study','work/sidly-health/']},
+      {id:'erp',t:'SiDLY ERP redesign',h:'The platform 1,000+ municipalities use to run telecare.'},
+      {id:'ai',t:'1st place, AI Place Challenge',h:'GovBot in n8n, and Lemi from HackYeah.'},
+      {id:'story',t:'Where design meets data',h:'Why the two halves belong together.'},
+      {id:'about',t:'Experience and skills',h:'Roles, studies and the toolbox.',a:['Download CV','assets/katarzyna-stepien-cv.pdf']},
+      {id:'contact',t:"Let's talk",h:'Tell me about the role, or ask Venn first.',a:['Ask Venn','__venn']}],
+    data:[
+      {id:'unmasked',t:'Unmasked',h:'NLP that flags manipulative UX copy. Try to fool the live demo.'},
+      {id:'healthplatform',t:'HealthPlatform',h:'A RAG health summary from a medical wearable.',a:['Read the project','work/healthplatform/']},
+      {id:'friction',t:'UX friction detection',h:'Kafka and Spark catch rage clicks in real time.'},
+      {id:'github',t:'The code',h:'Every repository, live from GitHub.'},
+      {id:'about',t:'Experience and skills',h:'Roles, studies and the toolbox.',a:['Download CV','assets/katarzyna-stepien-cv.pdf']},
+      {id:'contact',t:"Let's talk",h:'Tell me about the role, or ask Venn first.',a:['Ask Venn','__venn']}],
+    mix:[
+      {v:'design',id:'health',t:'Design: SiDLY Health',h:'Telecare apps for managers, carers and residents.'},
+      {v:'design',id:'ai',t:'Design: the hackathon win',h:'1st place, AI Place Challenge 2025.'},
+      {v:'data',id:'unmasked',t:'Data: Unmasked',h:'NLP for dark patterns, with a live demo.'},
+      {v:'data',id:'friction',t:'Data: real-time pipelines',h:'Kafka and Spark on product events.'},
+      {id:'story',t:'Where they meet',h:'AI products designed for real people.'},
+      {id:'contact',t:"Let's talk",h:'Write to me, or ask Venn anything.',a:['Ask Venn','__venn']}]
+  };
+  var tour=document.getElementById('tour'),TS=[],tcur=0,tseen={},tspy=null;
+  function tourRender(){
+    var st=TS[tcur];
+    tour.querySelector('.tr-seg').innerHTML=TS.map(function(x,k){return '<i class="'+(k===tcur?'cur':tseen[k]?'done':'')+'"></i>'}).join('');
+    tour.querySelector('.tr-n').textContent='Checkpoint '+(tcur+1)+' of '+TS.length;
+    tour.querySelector('.tr-t').textContent=st.t;
+    var h=tour.querySelector('.tr-h');h.textContent=st.h+' ';
+    if(st.a){var a=document.createElement('a');a.textContent=st.a[0]+' →';a.href=st.a[1].indexOf('__')===0?'#':st.a[1];
+      if(/\.pdf$/.test(st.a[1])){a.target='_blank';a.rel='noopener';a.setAttribute('data-goatcounter-click','cv-open-tour')}
+      a.addEventListener('click',function(e){if(st.a[1]==='__venn'){e.preventDefault();toggle(true)}else if(/^work\//.test(st.a[1]))CHK.tick('case')});h.appendChild(a)}
+    tour.querySelector('.tr-prev').disabled=tcur===0;
+    var last=tcur===TS.length-1,nb=tour.querySelector('.tr-next');nb.firstChild.textContent=last?'Finish':'Next';nb.classList.toggle('fin',last);
+  }
+  function tourGo(k){
+    tcur=k;tseen[k]=1;var st=TS[k];tourRender();
+    var go=function(){var el=document.getElementById(st.id);if(el)el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});if(st.id==='ai')CHK.tick('win')};
+    if(st.v&&root.dataset.view!==st.v){setView(st.v);setTimeout(go,260)}else go();
+  }
+  function startTour(mode){
+    TS=TOURS[mode];tseen={};track('tour-'+mode);
+    if(TS[0].v===undefined&&mode!=='mix')setView(mode);
+    tour.hidden=false;tour.classList.remove('bye');
+    if(tspy)tspy.disconnect();
+    if('IntersectionObserver' in window){tspy=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;
+      TS.forEach(function(x,k){if(x.id===e.target.id&&(!x.v||x.v===root.dataset.view)&&k!==tcur){tcur=k;tseen[k]=1;tourRender()}})})},{rootMargin:'-35% 0px -60% 0px'});
+      TS.forEach(function(x){var el=document.getElementById(x.id);if(el)tspy.observe(el)})}
+    setTimeout(function(){tourGo(0)},mode==='mix'?60:220);
+  }
+  function endTour(done){
+    if(tour.hidden)return;if(tspy)tspy.disconnect();if(done)track('tour-finish');
+    tour.classList.add('bye');setTimeout(function(){tour.hidden=true;tour.classList.remove('bye')},260);
+  }
+  tour.querySelector('.tr-next').addEventListener('click',function(){if(tcur<TS.length-1)tourGo(tcur+1);else endTour(true)});
+  tour.querySelector('.tr-prev').addEventListener('click',function(){if(tcur>0)tourGo(tcur-1)});
+  tour.querySelector('.tr-x').addEventListener('click',function(){endTour(false)});
   if(root.classList.contains('intro'))addEventListener('introdone',function(){setTimeout(openWl,700)},{once:true});else setTimeout(openWl,1200);
 
   /* ---------- story: the venn follows the step you are reading ---------- */
