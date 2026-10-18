@@ -476,11 +476,8 @@ def page(pr, prv, nxt):
     <p class="lede reveal d1" style="max-width:30rem">Hiring for product design or data science? Tell me about the role.</p>
     <div class="row reveal d1">
       <a class="btn solid" href="../../#contact">Write to me</a>
-      <span id="email">hello@kachastepien.com</span>
-      <button class="copy" type="button" id="copy-email">Copy email</button>
-      <a href="https://www.linkedin.com/in/kachastepien">LinkedIn</a>
-      <a href="https://github.com/kachastepien">GitHub</a>
-      <a href="{A}katarzyna-stepien-cv.pdf" download="Katarzyna-Stepien-CV.pdf" data-goatcounter-click="cv-download-project">CV (PDF)</a>
+      <button class="mailchip" type="button" id="copy-email" aria-label="Copy email address hello@kachastepien.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg><span id="email">hello@kachastepien.com</span><span class="mc"><svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg><b>Copy</b></span></button>
+        <div class="socials"><a class="soc" href="https://www.linkedin.com/in/kachastepien" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM3.3 9h3.4v11H3.3zM9 9h3.3v1.5h.1c.5-.9 1.6-1.8 3.3-1.8 3.5 0 4.1 2.3 4.1 5.3V20h-3.4v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V20H9z"/></svg>LinkedIn</a><a class="soc" href="https://github.com/kachastepien" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.2-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.5.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg>GitHub</a><a class="soc" href="{A}katarzyna-stepien-cv.pdf" download="Katarzyna-Stepien-CV.pdf" data-goatcounter-click="cv-download-footer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 4v11M7 10.5 12 15l5-4.5M5 20h14"/></svg>CV</a></div>
     </div>
     <div class="fine"><span>Katarzyna Stępień · Warsaw</span><span>Hand-built. No cookies.</span></div>
   </div>
@@ -503,7 +500,7 @@ def page(pr, prv, nxt):
   document.addEventListener('keydown',function(e){{if(e.key==='Escape')menus.forEach(function(d){{if(d.open){{d.open=false;d.querySelector('summary').focus()}}}})}});
   document.querySelectorAll('.loop,.flow,.pipe').forEach(function(d){{var h=document.createElement('p');h.className='swipe-hint';h.textContent='Swipe to see the whole flow →';d.parentNode.insertBefore(h,d.nextSibling)}});
   var cb=document.getElementById('copy-email'),em=document.getElementById('email');
-  cb.addEventListener('click',function(){{try{{navigator.clipboard.writeText(em.textContent.trim()).then(function(){{cb.textContent='Copied';setTimeout(function(){{cb.textContent='Copy email'}},1800)}})}}catch(e){{}}}});
+  cb.addEventListener('click',function(){{try{{navigator.clipboard.writeText(em.textContent.trim()).then(function(){{cb.classList.add('ok');cb.querySelector('b').textContent='Copied';setTimeout(function(){{cb.classList.remove('ok');cb.querySelector('b').textContent='Copy'}},1800)}})}}catch(e){{}}}});
 }})();
 </script>
 </body>
