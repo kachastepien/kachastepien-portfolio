@@ -1199,3 +1199,4 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 @keyframes lmEarR{0%,88%,100%{transform:rotate(0)}92%{transform:rotate(12deg)}96%{transform:rotate(-4deg)}}
 /* win card kicker: plain text, no pill */
 .award .aw-kicker{border:0!important;padding:0!important;font-size:.85rem;letter-spacing:.01em}
+.device:has(img[src*="lemi/"]){aspect-ratio:420/1000}.device:has(img[src*="lemi/"]) img{object-fit:contain}
