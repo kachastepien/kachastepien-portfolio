@@ -404,7 +404,7 @@ def page(pr, prv, nxt):
         "@context": "https://schema.org", "@type": "CreativeWork", "name": html.unescape(pr["title"]),
         "description": pr["desc"], "url": url, "inLanguage": "en",
         "author": {"@type": "Person", "@id": SITE + "/#person", "name": "Katarzyna Stępień", "alternateName": "Kacha", "url": SITE + "/"},
-        "image": SITE + "/assets/og-figma.png",
+        "image": SITE + "/assets/og-portrait.png",
     }
     ld = [ld, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Katarzyna Stępień", "item": SITE + "/"},
@@ -429,7 +429,7 @@ def page(pr, prv, nxt):
 <meta property="og:title" content="{pr['title']} · Katarzyna Stępień">
 <meta property="og:description" content="{html.escape(pr['desc'])}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{SITE}/assets/og-figma.png">
+<meta property="og:image" content="{SITE}/assets/og-portrait.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">

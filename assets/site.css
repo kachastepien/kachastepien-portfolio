@@ -1265,3 +1265,13 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 @keyframes fcIn1{from{opacity:0;translate:90px -40px}to{translate:0 0}}
 @keyframes fcIn2{from{opacity:0;translate:110px 50px}to{translate:0 0}}
 html.figon:not(.figin) .fs-frame,html.figon:not(.figin) .fcur{opacity:0}
+/* data view has no selection frame, so it doesn't need the extra air around the name */
+@media (min-width:641px){
+  :root[data-view="data"] .hero-id{margin-bottom:clamp(.9rem,3vh,2rem)}
+  :root[data-view="data"] .hero .figsel{margin-bottom:clamp(1rem,2.6vh,1.8rem)}
+  .hero .figsel,.hero-id{transition:margin .5s var(--ease)}
+}
+:root[data-view="data"] .hero .statement{max-width:40rem}
+
+/* data-view portrait is a background, so search engines pick the warm portrait */
+.pf span.pf-a{position:absolute;inset:0;border-radius:50%;background:url(katarzyna-stepien-data.webp) center/cover}
