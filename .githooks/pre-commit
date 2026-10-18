@@ -8,3 +8,8 @@ B=$(date +%s)
 echo "$B" > version.txt
 sed -i '' "s/<meta name=\"build\" content=\"[0-9]*\">/<meta name=\"build\" content=\"$B\">/" index.html 404.html work/*/index.html
 git add index.html 404.html work version.txt
+# keep sitemap lastmod current
+D=$(date +%Y-%m-%d)
+sed -i '' "s#<lastmod>[0-9-]*</lastmod>#<lastmod>$D</lastmod>#g" sitemap.xml
+sed -i '' "s#\"dateModified\": \"[0-9-]*\"#\"dateModified\": \"$D\"#" index.html
+git add sitemap.xml index.html

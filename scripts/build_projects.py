@@ -403,8 +403,13 @@ def page(pr, prv, nxt):
     ld = {
         "@context": "https://schema.org", "@type": "CreativeWork", "name": html.unescape(pr["title"]),
         "description": pr["desc"], "url": url, "inLanguage": "en",
-        "author": {"@type": "Person", "name": "Katarzyna Stępień", "alternateName": "Kacha", "url": SITE + "/"},
+        "author": {"@type": "Person", "@id": SITE + "/#person", "name": "Katarzyna Stępień", "alternateName": "Kacha", "url": SITE + "/"},
+        "image": SITE + "/assets/og-figma.png",
     }
+    ld = [ld, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Katarzyna Stępień", "item": SITE + "/"},
+        {"@type": "ListItem", "position": 2, "name": "Work", "item": SITE + "/#work"},
+        {"@type": "ListItem", "position": 3, "name": SHORT[pr["slug"]], "item": url}]}]
     body = "\n".join(pr["body"])
     return f"""<!doctype html>
 <html lang="en" data-view="{pr['view']}" data-theme="light">
