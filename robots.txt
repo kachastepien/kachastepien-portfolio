@@ -3,3 +3,9 @@ Allow: /
 Disallow: /tools/
 
 Sitemap: https://kachastepien.com/sitemap.xml
+
+# keep the purple data-view portrait out of image search; the warm portrait is the main photo
+User-agent: Googlebot-Image
+Disallow: /assets/katarzyna-stepien-data.jpg
+Disallow: /assets/katarzyna-stepien-data.webp
+Disallow: /tools/

@@ -1289,3 +1289,18 @@ html.figon:not(.figin) .fs-frame,html.figon:not(.figin) .fcur{opacity:0}
 @keyframes fcOut1{to{transform:translate(90px,-40px);opacity:0}}
 @keyframes fcOut2{to{transform:translate(110px,40px);opacity:0}}
 html.figin .fs-frame.drawn{animation:none!important;clip-path:none!important}
+
+/* ---- motion budget: one-time entrances stay, endless loops are cut back to the few that carry meaning ---- */
+.aw-dot{animation:none}
+@media (prefers-reduced-motion:no-preference){
+  .js .award.in .aw-swing{animation:awDrop .55s var(--ease) both,awSwing 2.8s .4s cubic-bezier(.3,.6,.3,1) both}
+  .lemur-friend.in .lm-ear-l,.lemur-friend.in .lm-ear-r{animation:none}
+  .lemur-friend.in .lm-tail{animation:lmTail 4s ease-in-out infinite}
+  html.figin .fc-d{animation:fcIn1 .9s cubic-bezier(.2,.9,.3,1) .5s both,fcDrift1 16s ease-in-out 1.4s infinite}
+  html.figin .fc-a{animation:fcIn2 .9s cubic-bezier(.2,.9,.3,1) .8s both,fcDrift2 19s ease-in-out 1.7s infinite}
+  .chat-btn .q{animation:nudge 9s var(--ease) 6s infinite}
+}
+.scroll-hint{display:none}
+.hid-t{display:grid;gap:.35rem}
+.avail{display:inline-flex;align-items:center;gap:.45rem;font-size:.82rem;font-weight:500;color:var(--fg)}
+.avail i{width:7px;height:7px;border-radius:50%;background:#2fbf71;box-shadow:0 0 0 3px rgba(47,191,113,.18)}
