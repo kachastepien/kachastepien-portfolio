@@ -1116,3 +1116,42 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 .fs-dim{bottom:-34px}
 .fc-d{right:-104px;top:-26px}
 .fc-a{right:-112px;bottom:4px}
+
+/* Lemi as a product with its own brand */
+.app-id{display:flex;align-items:center;gap:1rem;margin-bottom:1.6rem}
+.app-icon{width:72px;height:72px;border-radius:22%;box-shadow:0 10px 24px -10px rgba(40,30,90,.35),0 0 0 1px rgba(0,0,0,.05)}
+.lemi-word{margin:0;font:800 2rem/1 var(--body);letter-spacing:-.06em;color:#16151f}
+.app-meta{margin:.3rem 0 0;font-size:.82rem;color:#5e6070}
+.app-badge{margin-left:auto;align-self:flex-start;font:600 .72rem/1 var(--body);letter-spacing:.06em;text-transform:uppercase;color:#5146c9;background:rgba(81,70,201,.1);border:1px solid rgba(81,70,201,.25);border-radius:999px;padding:.42rem .7rem}
+#ai .lemi .lemi-title{font-size:clamp(2.2rem,4.6vw,3.6rem);line-height:1;letter-spacing:-.05em}
+#ai .lemi .lemi-title .l2{display:block;color:#5146c9}#ai .lemi .lemi-title .l2 .w{color:inherit}
+.lemur-peek{display:inline-flex;align-items:flex-end;gap:.4rem;margin-right:.4rem}
+.lemur-peek img{width:52px;height:auto}
+.lemur-peek .lm-say{margin-bottom:1.6rem;font-size:.78rem;padding:.35rem .6rem}
+#ai .lemi .links{align-items:flex-end}
+@media (prefers-reduced-motion:no-preference){.js .reveal.in .lemur-peek img{animation:lmBob 4s ease-in-out infinite}}
+
+/* SiDLY Health as a shipped app */
+.sidly-ic{width:72px;height:72px}
+.sidly-word{margin:0;display:flex;align-items:center;gap:.5rem}
+.sidly-word img{height:24px;width:auto}
+.sidly-word span{font:300 1.5rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#212121}
+.app-badge.live{color:#1f7a4d;background:rgba(47,191,113,.1);border-color:rgba(47,191,113,.35);display:inline-flex;align-items:center;gap:.4rem}
+.app-badge.live::before{content:"";width:6px;height:6px;border-radius:50%;background:#2fbf71}
+.stores{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.4rem 0 1.2rem}
+.store{display:inline-flex;align-items:center;gap:.6rem;height:48px;padding:0 1.05rem 0 .85rem;border-radius:12px;background:#161718;color:#fff;text-decoration:none;transition:transform .2s var(--ease),background-color .2s}
+.store:hover{transform:translateY(-2px);background:#000}
+.store svg{width:22px;height:22px;flex:none}
+.store span{display:flex;flex-direction:column;font:600 1.02rem/1.05 var(--body);letter-spacing:-.01em}
+.store small{font:500 .64rem/1 var(--body);letter-spacing:.02em;opacity:.8;margin-bottom:2px}
+
+/* GovBot as a product inside the win card */
+.gb-id{margin-bottom:1.4rem}
+.gb-ic{width:64px;height:64px}
+.gb-word{margin:0;font:700 1.7rem/1 var(--body);letter-spacing:-.04em;color:#fff}
+.award .app-meta{color:rgba(244,242,238,.6)}
+.app-badge.gold{color:#161718;background:#d8b47f;border-color:#d8b47f}
+.award h3{margin-top:0}
+.award .gb-word{color:#fff}
+.app-badge{white-space:nowrap}
+.award .app-meta{margin-top:.3rem}
