@@ -964,3 +964,4 @@ html{scrollbar-gutter:stable}
 .hero .view-enter{animation-name:viewFade}
 @keyframes viewFade{from{opacity:0}to{opacity:1}}
 .hero .stats span{display:block;min-height:3em}
+#ai-data .award{margin-bottom:clamp(1rem,2vw,1.4rem)}

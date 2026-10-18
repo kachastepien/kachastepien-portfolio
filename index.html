@@ -124,7 +124,7 @@ if(v==='data'||v==='design')document.documentElement.dataset.view=v;document.doc
 try{if(/[?&]fresh\b/.test(location.search)){sessionStorage.removeItem('ks-intro');sessionStorage.removeItem('ks-welcome')}}catch(e){}
 try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!/bot|crawl|spider|slurp|lighthouse|google/i.test(navigator.userAgent))document.documentElement.classList.add('intro')}catch(e){}})();
 </script>
-<link rel="stylesheet" href="assets/site.css?v=202610181730">
+<link rel="stylesheet" href="assets/site.css?v=202610181800">
 <script data-goatcounter="https://kachastepien.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -574,11 +574,41 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   </div>
 </section>
 
-<section class="block" id="ai-data" data-rail="AI in products" aria-labelledby="aid-h">
+<section class="block" id="ai-data" data-rail="AI &amp; hackathons" aria-labelledby="aid-h">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num">05</span><h2 id="aid-h">AI in shipped products</h2></div>
+    <div class="sec-head reveal"><span class="num">05</span><h2 id="aid-h">AI products &amp; hackathons</h2></div>
+    <div class="award reveal">
+      <figure class="aw-medal" aria-hidden="true">
+        <svg viewBox="0 0 240 330">
+          <defs><path id="awRim2" d="M120,137 a68,68 0 1,1 -0.01,0"/></defs>
+          <g class="aw-swing">
+            <polygon class="rb-a" points="62,0 112,0 136,150 96,160"/>
+            <polygon class="rb-b" points="178,0 128,0 104,150 144,160"/>
+            <circle class="md" cx="120" cy="205" r="80"/>
+            <circle class="md-ring" cx="120" cy="205" r="60"/>
+            <text class="md-rim"><textPath href="#awRim2" startOffset="0" textLength="420" lengthAdjust="spacing">AI PLACE CHALLENGE · 2025 · AI PLACE CHALLENGE · 2025 ·</textPath></text>
+            <text class="md-n" x="114" y="232" text-anchor="middle">1<tspan class="md-st" dy="-34">st</tspan></text>
+            <path class="md-shine" d="M66,170 a62,62 0 0,1 40,-42"/>
+          </g>
+        </svg>
+      </figure>
+      <div class="aw-main">
+        <p class="aw-kicker"><span class="aw-dot" aria-hidden="true"></span>Hackathon win · Mar 2025</p>
+        <h3>1st place, AI Place Challenge</h3>
+        <p class="aw-sub">A challenge set by the Polish Ministry of Digital Affairs at the Econverse Smart Cities Hackathon.</p>
+        <p>I led the team and owned everything AI in <b>GovBot</b>: the assistant's logic, the prompts and the n8n workflows behind it. It helps citizens reach local public services without the bureaucracy.</p>
+        <dl class="aw-facts">
+          <div><dt>My role</dt><dd>Team lead · AI lead</dd></div>
+          <div><dt>I owned</dt><dd>Everything AI</dd></div>
+          <div><dt>Built with</dt><dd>n8n · LLM</dd></div>
+        </dl>
+        <div class="agent aw-flow" aria-label="How the assistant works, simplified">
+          <span>Citizen's question</span><i></i><span>AI assistant · n8n</span><i></i><span>The right local service</span>
+        </div>
+      </div>
+    </div>
+
     <div class="cards">
-      <article class="card reveal"><p class="label">1st place · AI Place Challenge · Mar 2025</p><h3>GovBot</h3><p>Led the team and built the core in n8n: an AI assistant that helps citizens reach local public services.</p><div class="chips"><span class="chip on">n8n</span><span class="chip">AI agents</span><span class="chip">LLM APIs</span></div></article>
       <article class="card reveal d1"><p class="label">HackYeah 2026</p><h3>Lemi</h3><p>Reads health devices from a photo and turns a recorded visit into three summaries. Claude API and ElevenLabs.</p><div class="links"><button class="btn" type="button" data-goto="design" data-target="ai">See the product</button><a class="btn" href="https://pekao.vercel.app">Demo</a></div></article>
       <article class="card reveal"><p class="label">Internship · 2025</p><h3>Conversational AI at PerfectBot</h3><p>Improving conversational AI chatbots for IKEA, LPP, x-kom and US creator stores.</p></article>
       <article class="card reveal d1"><p class="label">Product design side</p><h3>SiDLY Health</h3><p>70,000+ people across 16 countries. The apps are in the design view.</p><div class="links"><button class="btn" type="button" data-goto="design" data-target="health">See the case study</button></div></article>
@@ -1026,6 +1056,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
       {id:'unmasked',t:'Unmasked',h:'NLP that flags manipulative UX copy. Try to fool the live demo.'},
       {id:'healthplatform',t:'HealthPlatform',h:'A RAG health summary from a medical wearable.',a:['Read the project','work/healthplatform/']},
       {id:'friction',t:'UX friction detection',h:'Kafka and Spark catch rage clicks in real time.'},
+      {id:'ai-data',t:'1st place, AI Place Challenge',h:'Team lead and AI lead on GovBot, built in n8n.'},
       {id:'github',t:'The code',h:'Every repository, live from GitHub.'},
       {id:'about',t:'Experience and skills',h:'Roles, studies and the toolbox.',a:['Download CV','assets/katarzyna-stepien-cv.pdf']},
       {id:'contact',t:"Let's talk",h:'Tell me about the role, or ask Venn first.',a:['Ask Venn','__venn']}],
@@ -1052,7 +1083,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   }
   function tourGo(k){
     tcur=k;tseen[k]=1;var st=TS[k];tourRender();
-    var go=function(){var el=document.getElementById(st.id);if(el)el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});if(st.id==='ai')CHK.tick('win')};
+    var go=function(){var el=document.getElementById(st.id);if(el)el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});if(st.id==='ai'||st.id==='ai-data')CHK.tick('win')};
     if(st.v&&root.dataset.view!==st.v){setView(st.v);setTimeout(go,260)}else go();
   }
   function startTour(mode){
@@ -1139,7 +1170,7 @@ try{if(!sessionStorage.getItem('ks-intro')&&!matchMedia('(prefers-reduced-motion
   document.querySelectorAll('[data-goto],#welcome [data-pick]').forEach(function(b){b.addEventListener('click',function(){setTimeout(function(){if(root.dataset.view!==startView)CHK.tick('flip')},50)})});
   var startView=root.dataset.view;document.querySelectorAll('.switch button').forEach(function(b){b.addEventListener('click',function(){if(b.dataset.view!==startView)CHK.tick('flip')})});
   document.querySelectorAll('a[href^="work/"]').forEach(function(a){a.addEventListener('click',function(){CHK.tick('case')})});
-  if('IntersectionObserver' in window){var wo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&e.target.offsetParent!==null){CHK.tick('win');wo.disconnect()}})},{threshold:.5});document.querySelectorAll('.award,#ai-data .card:first-child').forEach(function(el){wo.observe(el)})}
+  if('IntersectionObserver' in window){var wo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&e.target.offsetParent!==null){CHK.tick('win');wo.disconnect()}})},{threshold:.5});document.querySelectorAll('.award').forEach(function(el){wo.observe(el)})}
   document.getElementById('own').addEventListener('input',function h(){if(this.value.trim().length>8){CHK.tick('demo');this.removeEventListener('input',h)}});
 
   /* ---------- project finder: searchable menu with icons, ⌘K ---------- */
