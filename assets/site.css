@@ -1379,3 +1379,5 @@ html.figin .fs-frame.drawn{animation:none!important;clip-path:none!important}
 .gb-photo img{aspect-ratio:4/5;object-position:38% center}
 .gb-hero{grid-template-columns:minmax(0,280px) minmax(0,1fr);align-items:center}
 .gb-photo img{aspect-ratio:3/2;object-position:center}
+@media (max-width:760px){.gb-hero{grid-template-columns:1fr;gap:1.4rem}.phone.vid{max-width:260px;margin:0 auto;width:100%}.gb-photo img{aspect-ratio:3/2}}
+.gb-photo img{aspect-ratio:3/2!important;height:auto!important;object-position:center 35%!important}

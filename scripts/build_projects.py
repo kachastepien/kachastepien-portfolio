@@ -391,14 +391,14 @@ P.append(dict(
 ))
 
 P.append(dict(
-    slug="govbot", view="design", kicker="1st place · AI Place Challenge 2025 · Team lead",
+    slug="govbot", view="design", kicker="1st place · AI Place Challenge 2025 · Team lead &amp; AI lead",
     title="GovBot: an AI chatbot for mObywatel",
     desc="GovBot, the AI chatbot for mObywatel that won 1st place in the AI Place Challenge set by the Polish Ministry of Digital Affairs. Katarzyna Stępień was team lead.",
     lede="GovBot lives inside mObywatel, the Polish government app, and answers questions about official matters for your own municipality: what to prepare, where to go and when the office is open. Our team won 1st place in the AI Place Challenge, set by the Ministry of Digital Affairs.",
     tldr=[("The challenge", "Official procedures are spread across portals, and every municipality works a little differently."),
           ("What we built", "An AI assistant inside mObywatel that combines national rules with the user's own office, built in n8n."),
           ("Signature move", "Every answer ends where you live: the right office, address, room and opening hours.")],
-    chips=["Team lead", "1st place", "n8n", "LLM", "Figma prototype"],
+    chips=["Team lead", "AI lead", "1st place", "n8n", "LLM", "Figma prototype"],
     hero='<div class="gb-hero"><figure class="phone vid reveal"><div class="device"><video src="' + A + 'govbot/govbot-prototype.mp4" poster="' + A + 'govbot/govbot-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Screen recording of the GovBot prototype: from the mObywatel home screen to an answer about a child\'s ID card and the local office"></video></div>'
          '<figcaption><b>The prototype</b>From mObywatel to an answer about a child\'s ID card, and then the local office.</figcaption></figure>'
          '<div class="gb-photo reveal"><img decoding="async" loading="lazy" src="' + A + 'govbot/stage.webp" width="1600" height="1067" alt="The team presenting GovBot on the AI Place stage at Econverse Fuse 2025"><p>On stage at Econverse Fuse 2025, Warsaw</p></div></div>'
@@ -465,7 +465,7 @@ P.append(dict(
             ("Assistant logic", "n8n workflows on an LLM"),
             ("Knowledge", "National procedures plus the chosen municipality's own data"),
             ("Prototype", "Figma, clickable, in mObywatel's visual language"),
-            ("My role", "Team lead")]),
+            ("My role", "Team lead and AI lead")]),
             links([("Open the clickable prototype", "https://www.figma.com/proto/EOTTWQdoZ3btnTGtyjaXaP?node-id=0-1&t=qHPOiibk2nObztgy-6")])),
     ],
 ))
