@@ -1304,3 +1304,4 @@ html.figin .fs-frame.drawn{animation:none!important;clip-path:none!important}
 .hid-t{display:grid;gap:.35rem}
 .avail{display:inline-flex;align-items:center;gap:.45rem;font-size:.82rem;font-weight:500;color:var(--fg)}
 .avail i{width:7px;height:7px;border-radius:50%;background:#2fbf71;box-shadow:0 0 0 3px rgba(47,191,113,.18)}
+.end .avail{margin:1.4rem 0 -.4rem}
