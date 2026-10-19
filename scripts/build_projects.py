@@ -160,7 +160,7 @@ P.append(dict(
             ("health/web-schedule.jpg", "Weekly schedule", "Schedule", "A week per carer, with the residents who have no visit this week listed underneath."),
             ("health/web-visit.jpg", "Visit in progress", "Visit in progress", "The care card mid-visit. Tasks and notes save as they go; the visit ends in the mobile app."),
             ("health/web-res-home.jpg", "Resident's home", "Resident's home", "The next visit, a prompt to rate the last one, and who to call.")]),
-            '<p class="note">Mobile screens shown in English for this page; the product ships in Polish. All names and data are test data.</p>',
+            '<p class="note">Screens shown in English for this page; the product ships in Polish. All names and data are test data.</p>',
             lead="At the desk the same data gets more room. The manager plans and settles the team's work, carers follow their visits from a laptop, and residents see their own record."),
         section("Key design decisions", decisions([
             ("A visit starts with a scan", "The carer starts and ends each visit by scanning the resident's NFC tag with their phone. Work time is recorded as it happened, not as it was planned, and carers' hours are settled from it."),
