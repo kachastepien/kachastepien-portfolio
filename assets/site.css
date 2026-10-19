@@ -1267,7 +1267,7 @@ html:not(.figon) .fc-a,html:not(.figon) .fc-d{opacity:0}
 html.figon:not(.figin) .fs-frame,html.figon:not(.figin) .fcur{opacity:0}
 
 /* data-view portrait is a background, so search engines pick the warm portrait */
-.pf span.pf-a{position:absolute;inset:0;border-radius:50%;background:url(katarzyna-stepien-data.webp) center/cover}
+.pf span.pf-a{position:absolute;inset:0;border-radius:50%;background:url(pf-tint.webp) center/cover}
 
 /* one layout for both views, so nothing jumps when switching */
 .hero .statement{max-width:40rem}
@@ -1381,3 +1381,5 @@ html.figin .fs-frame.drawn{animation:none!important;clip-path:none!important}
 .gb-photo img{aspect-ratio:3/2;object-position:center}
 @media (max-width:760px){.gb-hero{grid-template-columns:1fr;gap:1.4rem}.phone.vid{max-width:260px;margin:0 auto;width:100%}.gb-photo img{aspect-ratio:3/2}}
 .gb-photo img{aspect-ratio:3/2!important;height:auto!important;object-position:center 35%!important}
+.phone.vid .device{aspect-ratio:340/746;padding:6px;border-radius:30px}
+.phone.vid .device video{border-radius:25px}
