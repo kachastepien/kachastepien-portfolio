@@ -1365,3 +1365,17 @@ html.figin .fs-frame.drawn{animation:none!important;clip-path:none!important}
 .persona header .pa{display:grid;margin:0;font-size:.85rem;color:#161718}
 .vpc-map{aspect-ratio:auto;align-self:stretch}
 .vpc-prof{align-self:center}
+
+/* GovBot case study hero: recorded prototype next to the stage photo */
+.gb-hero{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:clamp(1.2rem,3vw,2.4rem);align-items:center}
+.device video{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:17px;display:block;background:#fff}
+.phone.vid .device{aspect-ratio:344/704}
+.gb-photo img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:20px;display:block}
+.gb-photo p{margin:.6rem 0 0;font-size:.85rem;color:var(--muted)}
+@media (max-width:760px){.gb-hero{grid-template-columns:1fr}.phone.vid{max-width:300px;margin:0 auto}}
+.aw-main .links{margin-top:1.4rem}
+.award .links .btn.solid{background:#fff;color:#161718;border-color:#fff}
+.gb-hero{grid-template-columns:minmax(0,300px) minmax(0,460px);justify-content:start;align-items:start}
+.gb-photo img{aspect-ratio:4/5;object-position:38% center}
+.gb-hero{grid-template-columns:minmax(0,280px) minmax(0,1fr);align-items:center}
+.gb-photo img{aspect-ratio:3/2;object-position:center}

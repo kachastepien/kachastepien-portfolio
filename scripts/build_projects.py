@@ -391,6 +391,86 @@ P.append(dict(
 ))
 
 P.append(dict(
+    slug="govbot", view="design", kicker="1st place · AI Place Challenge 2025 · Team lead",
+    title="GovBot: an AI chatbot for mObywatel",
+    desc="GovBot, the AI chatbot for mObywatel that won 1st place in the AI Place Challenge set by the Polish Ministry of Digital Affairs. Katarzyna Stępień was team lead.",
+    lede="GovBot lives inside mObywatel, the Polish government app, and answers questions about official matters for your own municipality: what to prepare, where to go and when the office is open. Our team won 1st place in the AI Place Challenge, set by the Ministry of Digital Affairs.",
+    tldr=[("The challenge", "Official procedures are spread across portals, and every municipality works a little differently."),
+          ("What we built", "An AI assistant inside mObywatel that combines national rules with the user's own office, built in n8n."),
+          ("Signature move", "Every answer ends where you live: the right office, address, room and opening hours.")],
+    chips=["Team lead", "1st place", "n8n", "LLM", "Figma prototype"],
+    hero='<div class="gb-hero"><figure class="phone vid reveal"><div class="device"><video src="' + A + 'govbot/govbot-prototype.mp4" poster="' + A + 'govbot/govbot-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="Screen recording of the GovBot prototype: from the mObywatel home screen to an answer about a child\'s ID card and the local office"></video></div>'
+         '<figcaption><b>The prototype</b>From mObywatel to an answer about a child\'s ID card, and then the local office.</figcaption></figure>'
+         '<div class="gb-photo reveal"><img decoding="async" loading="lazy" src="' + A + 'govbot/stage.webp" width="1600" height="1067" alt="The team presenting GovBot on the AI Place stage at Econverse Fuse 2025"><p>On stage at Econverse Fuse 2025, Warsaw</p></div></div>'
+         + '<p class="note">Concept prototype for the AI Place Challenge, not an official mObywatel feature. Screens are in Polish, as in the app.</p>',
+    body=[
+        section("How we worked", process([
+            ("Empathise", "Started from the brief set by the Ministry of Digital Affairs and the questions residents actually bring to a municipal office: removing a tree, an ID card for a child, the waste schedule, rules for old boilers."),
+            ("Define", "People don't lack information. They lack the right piece of it, for their own office, at the moment they need it."),
+            ("Ideate", "Put the assistant where people already are, inside mObywatel's Support and contact, and make it local by default."),
+            ("Prototype", "A clickable Figma prototype in mObywatel's visual language, with the assistant's logic built as n8n workflows on an LLM."),
+            ("Test", "Walked the jury through real questions on stage at Econverse Fuse 2025. The jury gave it 1st place.")]),
+            lead="A hackathon-sized design-thinking loop, from the brief to a working demo."),
+        section("Who it is for", personas([
+            ("EW", "#c9a47e", "Ewa, 36", "Parent, needs an ID card for her child", "I just want to know what to bring, so I go to the office once.",
+             ["Know the steps before leaving home", "Find the right office and hours", "Do it online if she can"],
+             ["Contradicting answers online", "Phone lines that are always busy", "A wasted trip for a missing document"]),
+            ("ST", "#a6a8ff", "Stanisław, 71", "Retired, prefers talking to typing", "I'd rather ask someone than click through forms.",
+             ["Ask in his own words", "Hear the answer, not read it", "Reach a real official when needed"],
+             ["Small text and long pages", "Official jargon", "Not knowing which office handles what"]),
+            ("TO", "#9bd3c0", "Tomek, 28", "Just moved to a new municipality", "Where do I even register, and when is the bin collected?",
+             ["Sort out registration fast", "Learn local rules once", "Keep it on the phone"],
+             ["Every municipality has its own rules", "Information scattered across sites", "Office hours that don't fit work"])],
+            "Proto-personas built for the challenge from typical questions residents bring to a municipal office. They describe patterns, not real people."),
+            lead="Three residents, one shared problem: the answer exists, but not for their own office."),
+        section("Point of view", pov("A resident dealing with an official matter needs one clear answer for their own municipality, because general information sends them to the wrong office or back home for a missing document."),
+            hmw(["give people an answer for their own office, not for Poland in general?",
+                 "make official answers as easy to scan as a checklist?",
+                 "help people who would rather speak than type?"])),
+        section("Value proposition", vpc("resident",
+            ["Find out what a procedure needs", "Get to the right office", "Get it done in one visit"],
+            ["Searching several sites", "Busy phone lines", "Missing a document and coming back"],
+            ["Feeling prepared", "Less time off work", "Confidence the answer is current"],
+            ["GovBot inside mObywatel", "Topic shortcuts and chat history", "Voice messages"],
+            ["Answers tied to the user's own municipality", "Office, room, phone and hours in the answer", "Structured answers: who, where, what to bring, fees"],
+            ["Date of the last data update on screen", "A route to the office on the map", "Hand-off to an official or a booked visit"]),
+            lead="Value Proposition Canvas for the resident."),
+        section("An official matter, mapped", journey("Ewa", [
+            ("Notice", "Her child needs an ID card", 3, "How does this work for kids?", "Ask in mObywatel, where her documents already are"),
+            ("Search", "Looks through several websites", 2, "Every site says something else.", "One answer from official sources"),
+            ("Call", "Tries the office phone line", 1, "Nobody picks up.", "Chat that answers at any hour"),
+            ("Prepare", "Collects the documents", 3, "Do I have everything?", "A checklist: what to bring, does the child come"),
+            ("Go", "Finds the right office", 2, "Which building, which room?", "Address, room and hours of her own office"),
+            ("Done", "Submits the application", 5, "One visit, done.", "Route on the map and a booked visit")]),
+            lead="The lowest points of the journey are where GovBot answers."),
+        section("The flow, in the app", phones([
+            ("govbot/home.jpg", "mObywatel home screen with the GovBot entry", "Entry", "GovBot starts from the home screen of mObywatel."),
+            ("govbot/support.jpg", "Support and contact screen for the municipal office", "Support &amp; contact", "Chats sit next to contacting an official, booking a visit and FAQ, for the chosen office."),
+            ("govbot/chats.jpg", "Chats screen with suggestions and history", "Chats", "Suggested topics and earlier conversations grouped by day."),
+            ("govbot/hello.jpg", "GovBot greeting with topic shortcuts", "Start", "Topic shortcuts and the date of the last data update.")]),
+            phones([
+            ("govbot/answer.jpg", "Structured answer about a child's ID card", "A structured answer", "Who can apply, where, what to bring, does the child come, how long, how much."),
+            ("govbot/local.jpg", "Answer with the local office details", "Your own office", "The same question, answered for the user's municipality: office, room, phone, hours."),
+            ("govbot/voice.jpg", "Conversation with voice messages", "Voice", "Ask and listen with voice messages, for people who don't want to type."),
+            ("govbot/map.jpg", "Map with the route to the municipal office", "The way there", "A route to the office, so the answer ends at the door.")]),
+            lead="From the mObywatel home screen to the door of the right office."),
+        section("Key design decisions", decisions([
+            ("Live where people already are", "GovBot sits in mObywatel's Support and contact, next to contacting an official and booking a visit, instead of being one more app to install."),
+            ("Local by default", "The chosen municipality sits at the top of Support and contact, and answers use its own office, room, phone and opening hours."),
+            ("Answers shaped like a checklist", "Official answers follow the same headings every time: who can apply, where, what to bring, waiting time and fees, so they can be scanned in seconds."),
+            ("Show how fresh the data is", "The greeting shows when the data was last updated, because an outdated official answer is worse than none."),
+            ("Voice in and out", "Voice messages let people ask and listen instead of typing and reading."),
+            ("Always a way to a person", "Contacting an official or booking a visit stays one tap away from the chat.")])),
+        section("How it is built", table(["Part", "What it uses"], [
+            ("Assistant logic", "n8n workflows on an LLM"),
+            ("Knowledge", "National procedures plus the chosen municipality's own data"),
+            ("Prototype", "Figma, clickable, in mObywatel's visual language"),
+            ("My role", "Team lead")]),
+            links([("Open the clickable prototype", "https://www.figma.com/proto/EOTTWQdoZ3btnTGtyjaXaP?node-id=0-1&t=qHPOiibk2nObztgy-6")])),
+    ],
+))
+
+P.append(dict(
     slug="unmasked", view="data", kicker="NLP · B.A. thesis · SWPS University · 2026",
     title="Unmasked: catching manipulative UX copy with NLP",
     desc="Unmasked, Katarzyna Stępień's NLP project: a classifier for dark patterns in e-commerce copy (F1 0.936) shipped as an offline Chrome extension.",
@@ -510,7 +590,7 @@ import hashlib
 VER = hashlib.sha1(open(os.path.join(ROOT, "assets", "site.css"), "rb").read()).hexdigest()[:10]
 
 
-SHORT = {"sidly-health": "SiDLY Health", "sidly-erp": "SiDLY ERP", "lemi": "Lemi", "unmasked": "Unmasked",
+SHORT = {"sidly-health": "SiDLY Health", "sidly-erp": "SiDLY ERP", "lemi": "Lemi", "govbot": "GovBot", "unmasked": "Unmasked",
          "healthplatform": "HealthPlatform", "ux-friction": "UX friction detection", "funnel-elt": "Funnel ELT"}
 CHEV = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 4.5 6 7.5l3-3"/></svg>'
 LEFT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7.5 3.5 3 8l4.5 4.5"/></svg>'

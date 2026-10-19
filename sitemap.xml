@@ -22,6 +22,13 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://kachastepien.com/work/govbot/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://kachastepien.com/assets/govbot/stage.webp</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://kachastepien.com/work/lemi/</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>monthly</changefreq>
