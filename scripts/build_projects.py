@@ -92,6 +92,59 @@ def metrics(items):
     ) + "</div>"
 
 
+# ---------- UX method blocks ----------
+def process(steps):
+    """Design-thinking stepper: (stage, what happened)."""
+    lis = "".join(f'<li><span class="pr-n">{i+1:02d}</span><b>{t}</b><p>{d}</p></li>' for i, (t, d) in enumerate(steps))
+    return f'<ol class="process reveal">{lis}</ol>'
+
+
+def personas(items, note):
+    """Proto-persona cards: (initials, colour, name, line, quote, goals, pains)."""
+    out = []
+    for ini, col, name, line, quote, goals, pains in items:
+        g = "".join(f"<li>{x}</li>" for x in goals)
+        pn = "".join(f"<li>{x}</li>" for x in pains)
+        out.append(f'<article class="persona reveal"><header><span class="pa" style="--c:{col}">{ini}</span><div><b>{name}</b><span>{line}</span></div></header>'
+                   f'<p class="pq">“{quote}”</p><div class="pgp"><div><p class="label">Goals</p><ul>{g}</ul></div><div><p class="label">Frustrations</p><ul>{pn}</ul></div></div></article>')
+    return f'<div class="personas">{"".join(out)}</div><p class="note reveal">{note}</p>'
+
+
+def vpc(who, jobs, pains, gains, products, relievers, creators):
+    """Value Proposition Canvas: value map (square) on the left, customer profile (circle) on the right."""
+    ul = lambda xs: "<ul>" + "".join(f"<li>{x}</li>" for x in xs) + "</ul>"
+    return (f'<div class="vpc reveal"><div class="vpc-map"><p class="vpc-h">Value map</p>'
+            f'<div class="vq vq-p"><p class="label">Products &amp; services</p>{ul(products)}</div>'
+            f'<div class="vq vq-r"><p class="label">Pain relievers</p>{ul(relievers)}</div>'
+            f'<div class="vq vq-c"><p class="label">Gain creators</p>{ul(creators)}</div></div>'
+            f'<span class="vpc-fit" aria-hidden="true">fit</span>'
+            f'<div class="vpc-prof"><p class="vpc-h">Customer profile · {who}</p>'
+            f'<div class="vq vq-j"><p class="label">Jobs to be done</p>{ul(jobs)}</div>'
+            f'<div class="vq vq-pa"><p class="label">Pains</p>{ul(pains)}</div>'
+            f'<div class="vq vq-g"><p class="label">Gains</p>{ul(gains)}</div></div></div>')
+
+
+def journey(who, stages):
+    """Journey map: (stage, doing, feeling 1-5, thought, opportunity) with an emotion curve."""
+    n = len(stages); w = 1000; h = 120
+    xs = [w * (i + .5) / n for i in range(n)]
+    ys = [h - 14 - (f - 1) / 4 * (h - 28) for _, _, f, _, _ in stages]
+    d = "M" + " L".join(f"{x:.0f},{y:.0f}" for x, y in zip(xs, ys))
+    dots = "".join(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="7" class="{"lo" if f <= 2 else "hi" if f >= 4 else "mid"}"/>' for x, y, (_, _, f, _, _) in zip(xs, ys, stages))
+    cols = "".join(f'<div class="jc"><p class="js">{st}</p><p class="jd">{do}</p><p class="jt">“{th}”</p><p class="jo"><span>Opportunity</span>{op}</p></div>' for st, do, f, th, op in stages)
+    return (f'<div class="journey reveal" style="--n:{n}"><p class="label">Journey · {who}</p>'
+            f'<svg class="jcurve" viewBox="0 0 {w} {h}" preserveAspectRatio="none" aria-hidden="true"><line x1="0" x2="{w}" y1="{h/2}" y2="{h/2}" class="mid-l"/><path d="{d}"/>{dots}</svg>'
+            f'<div class="jcols">{cols}</div></div>')
+
+
+def hmw(items):
+    return '<ul class="hmw reveal">' + "".join(f"<li><span>How might we</span> {x}</li>" for x in items) + "</ul>"
+
+
+def pov(text):
+    return f'<blockquote class="pov reveal"><span class="label">Point of view</span>{text}</blockquote>'
+
+
 def slugify(t):
     return re.sub(r"[^a-z0-9]+", "-", html.unescape(re.sub(r"<[^>]+>", "", t)).lower()).strip("-")
 
@@ -131,6 +184,45 @@ P.append(dict(
                  ("health/mgr-carers.jpg", "Care manager's carers list", "Care manager", "The team at a glance."),
                  ("health/res-rate.jpg", "Rating a visit", "After the visit", "Rated by the resident.")]),
     body=[
+        section("How I worked", process([
+            ("Empathise", "50+ interviews and usability tests across the value chain: municipalities, foreign partners, care managers, carers and seniors, plus weekly meetings with stakeholders."),
+            ("Define", "One visit seen by three people who never sit together. The same data has to mean the same thing to all of them."),
+            ("Ideate", "Flows mapped per role around a single shared object, the visit, and its care card."),
+            ("Prototype", "A clickable React/TypeScript prototype with realistic test data, so people test whole visits, not single screens."),
+            ("Test &amp; iterate", "Sessions with managers, carers and residents on the prototype; decisions below came out of those rounds.")]),
+            lead="A classic design-thinking loop, run continuously next to development rather than once."),
+        section("Who it is for", personas([
+            ("AN", "#c9a47e", "Anna, care manager", "Runs a team of carers for a municipality", "I need to know who is where, and react before a family calls me.",
+             ["See today's visits and gaps at a glance", "Settle carers' hours without chasing paper", "Handle alarms fast"],
+             ["Hours reconstructed after the fact", "Problems surface only when someone complains", "The same data kept in several places"]),
+            ("IA", "#a6a8ff", "Igor, carer", "Visits several residents a day on foot and by car", "Tell me where to go and what to do, then let me get on with it.",
+             ["A clear plan for the day", "Tick off tasks on the spot", "Get paid for the time actually worked"],
+             ["Paperwork after a long day", "Access details scattered across calls and notes", "Disputes about when a visit really happened"]),
+            ("KW", "#9bd3c0", "Krystyna, resident, 84", "Lives alone, wears a SiDLY band", "I want to know who is coming and that someone will answer if I press the button.",
+             ["Know when the next visit is", "Feel safe at home", "Have a say in how care goes"],
+             ["Small text and crowded screens", "Not knowing who will come", "Feeling care happens to her, not with her"])],
+            "Proto-personas: built from interviews and stakeholder sessions, using the names from the test data. They describe patterns, not real people."),
+            lead="Three roles around one visit. Each persona maps to one of the apps."),
+        section("Value proposition", vpc("care manager",
+            ["Plan and staff every visit", "Prove care was delivered", "Settle hours and billing", "React to alarms"],
+            ["Hours rebuilt from memory", "No live view of the field", "Late, second-hand feedback from residents"],
+            ["Fewer phone calls", "Trustworthy records for the municipality", "A calm, predictable day"],
+            ["Manager app and web dashboard", "Carer Planner with NFC check-in", "Resident app with ratings"],
+            ["Visits start and end with a scan, so time is recorded as it happens", "Urgent-first dashboard", "One care card from plan to record"],
+            ["Residents rate visits directly", "Weekly schedule with gaps flagged", "Recurring visits that stay editable one by one"]),
+            lead="Value Proposition Canvas for the care manager, the role that buys and runs the system day to day."),
+        section("A visit, end to end", journey("carer and resident", [
+            ("Plan", "Manager assigns the visit; the carer sees it in the Planner", 3, "Where am I going today?", "Today view with hours and residents"),
+            ("Arrive", "Carer finds the flat and gets in", 2, "Which intercom, who has the key?", "Access notes on the care card"),
+            ("Check in", "Scans the resident's NFC tag", 4, "Done, the clock is running.", "Scan as the only way in"),
+            ("Care", "Does the tasks and writes a note", 3, "Did I forget anything?", "Tasks from the care card, ticked on the spot"),
+            ("Check out", "Scans again to end the visit", 4, "My hours are right.", "Locked record of the visit"),
+            ("Rate", "Resident rates tasks and the visit", 5, "They listen to me.", "Simple star rating in large type")]),
+            lead="The emotional low points of the old process became the places the design focuses on."),
+        section("Design questions", hmw([
+            "make the time a carer actually worked the record, instead of what was planned?",
+            "show a manager what needs attention before anyone has to call?",
+            "give an 84-year-old resident a voice in her own care, on a phone, without help?"])),
         section("Three accounts on the same data",
                 cards([("Care manager", ["Residents, carers, the visit schedule, alarms, devices and reports."]),
                        ("Carer", ["The Planner: today's visits, tasks and the care card for each resident."]),
@@ -169,6 +261,12 @@ P.append(dict(
             ("Urgent first, then the day", "The manager's dashboard opens with what needs a reaction, then today's visits in the field, the week ahead and equipment. Each block leads to the screen where that issue gets solved."),
             ("Recurring visits stay ordinary visits", "A series is a set of normal visits that share a tag, so any single one can be moved or cancelled without breaking the rest."),
             ("Prototype in code, not in frames", "The flows are built as a clickable React/TypeScript prototype with realistic test data, so managers and carers test whole visits instead of single screens.")])),
+        section("How success is measured", table(["Goal", "Signal the design is built to move"], [
+            ("Hours are settled from real time", "Share of visits started and ended with a scan"),
+            ("Managers react before families call", "Time from an alarm or missed visit to a reaction"),
+            ("Residents have a voice", "Share of visits rated by residents"),
+            ("Less admin for carers", "Notes and tasks completed during the visit, not after")]),
+            '<p class="note">Product metrics defined with the team; the product is live and in active development.</p>'),
     ],
 ))
 
@@ -216,12 +314,51 @@ P.append(dict(
                  ("lemi/health.jpg", "Lemi health screen", "Health", "Sleep, resting pulse, HRV, steps and mood over time.")])
          + '<p class="note">Shown in English for this page; the demo runs in Polish.</p>',
     body=[
+        section("How I worked", process([
+            ("Empathise", "Started from my own habit of putting off the doctor, then talked to people at the hackathon and checked the research below."),
+            ("Define", "The hard part is not knowing what is wrong. It is the phone call, the ten minutes and the advice you forget."),
+            ("Ideate", "One idea held the rest together: split the visit into before, during and after, and give each moment one job."),
+            ("Prototype", "A working web app and a Flutter app on the Claude API and ElevenLabs, with demo accounts for each persona."),
+            ("Test", "Walkthroughs with the demo accounts and an automated accessibility check (axe-core) on 14 screens, with no errors.")]),
+            lead="Design thinking, compressed into a hackathon."),
         section("Where it started", p(
             "It started with me. I'm a student and I put off calling the doctor, not because I don't know what is wrong, but because I have to call, explain myself, remember everything in ten minutes and then keep track of the advice.",
             "At the hackathon I asked other people whether they felt the same. It was far more common than I thought, and each conversation added a group the app could help: people for whom Polish is not a first language, people with disabilities, neurodivergent people, seniors and their families, and people with health anxiety."),
             facts([("47.6%", "of Europeans have trouble understanding health information", "HLS-EU survey, 2015"),
                    ("40–80%", "of medical advice is forgotten right after the visit", "Kessels, 2003"),
                    ("81%", "of young adults feel stressed before a phone call", "BankMyCell, 1,200+ people")])),
+        section("Who it is for", personas([
+            ("OL", "#a6a8ff", "Ola, 20", "Student, avoids phone calls", "I know something is off, I just can't make myself call.",
+             ["Book a visit without a phone call", "Remember what the doctor said", "Feel in control, not judged"],
+             ["Phone anxiety", "Forgetting questions in the room", "Medical words she can't follow"]),
+            ("MA", "#c9a47e", "Marek, 42", "Busy parent, higher blood pressure", "I measure it when I remember. I never know if it matters.",
+             ["Track pressure without effort", "Know when a result is worth a visit", "Spend less time on admin"],
+             ["Numbers without meaning", "No time to prepare for visits", "Paper results he can't find"]),
+            ("HA", "#9bd3c0", "Halina, 68", "Retired, shares her pulse with her daughter", "I want to manage on my own, but my daughter worries.",
+             ["Large, simple screens", "Clear next steps after a visit", "Let family see what matters"],
+             ["Small text and crowded apps", "Leaflets and advice she forgets", "Feeling like a burden"])],
+            "Proto-personas behind the demo accounts (18–30, 30–50, 50+). Built from my own experience, conversations at the hackathon and the research above."),
+            lead="Three people, one shared fear: the visit itself."),
+        section("Point of view", pov("A young adult who keeps putting off the doctor needs a way to prepare, follow and remember a visit without a phone call, because the stress of the call, not the illness, is what stops her."),
+            hmw(["make the first contact with a doctor feel as easy as sending a message?",
+                 "turn ten rushed minutes in the room into something you can read again later?",
+                 "let family help without taking over?"])),
+        section("Value proposition", vpc("Ola",
+            ["Get an appointment", "Explain symptoms clearly", "Remember and follow the advice"],
+            ["Stress before the call", "Forgotten questions", "Jargon in results and summaries"],
+            ["Feeling prepared", "Advice she can reread", "Someone close kept in the loop"],
+            ["Lemi app (web + Flutter)", "AI assistant on the Claude API", "Live transcription with ElevenLabs"],
+            ["Questions drafted from her own data", "An AI voice agent that can call for her (beta)", "Plain-language summaries"],
+            ["Three summaries: for her, family and the doctor", "Advice turned into tasks and reminders", "Calm mode for health anxiety"]),
+            lead="Value Proposition Canvas for the main persona."),
+        section("A doctor's visit, mapped", journey("Ola", [
+            ("Notice", "Feels unwell for a few days", 3, "It'll probably pass.", "Gentle nudge from her own data"),
+            ("Book", "Has to call the clinic", 1, "I'll do it tomorrow.", "AI call agent, or a folder sent ahead"),
+            ("Prepare", "Tries to remember what to say", 2, "What if I forget something?", "Questions drafted for her"),
+            ("Visit", "Ten minutes with the doctor", 2, "Too fast, too many words.", "Live transcript and word explanations"),
+            ("After", "Has to follow the advice", 3, "What did she say about the dose?", "Three summaries and reminders"),
+            ("Follow up", "Feels better, keeps tracking", 5, "I've got this.", "Tasks, reminders and progress")]),
+            lead="The lowest points of the journey are exactly where Lemi steps in."),
         section("A doctor's visit in three steps", cards([
             ("Before", ["Questions for the doctor are drafted from your own data, and a folder reaches the doctor before the visit. In beta, an AI voice agent can call the reception for you and introduces itself as AI."]),
             ("During", ["With the doctor's consent, live transcription turns the conversation into text, ticks off your questions and explains difficult words. \"Show instead of tell\" screens help at the reception desk."]),
